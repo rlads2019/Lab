@@ -3,7 +3,7 @@ dist: xenial
 script:
     - bash build.sh
     - mkdir deploy
-    - mv README.md src notes deploy
+    - mv index.md src notes deploy
 
 deploy:
     provider: pages

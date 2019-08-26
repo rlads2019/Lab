@@ -11,7 +11,7 @@
 [s1]: https://example.com
 
 [note0]: ./notes/00.html
-[note0]: ./notes/01.html
+[note1]: ./notes/01.html
 
 [src0]: ./src/00.zip
 [src1]: ./src/01.zip
