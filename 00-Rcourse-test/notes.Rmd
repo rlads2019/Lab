@@ -1,0 +1,32 @@
+---
+title: "W0 Test"
+date: "2019-08-26"
+output:
+  html_document:
+    number_sections: no
+    theme: united
+    highlight: tango
+    toc: yes
+    toc_float:
+      collapsed: no
+    css: style.css
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      comment = '#>',
+                      message = F)
+```
+
+
+## Printing
+
+```{r code=readLines('R/foo.R'), results='hold'}
+```
+
+### Printing 2
+
+```{r code=readLines('R/foo2.R'), results='hold'}
+```
+
+

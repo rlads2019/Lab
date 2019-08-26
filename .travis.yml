@@ -1,0 +1,15 @@
+dist: xenial
+
+script:
+    - bash build.sh
+    - mkdir deploy
+    - mv README.md src notes deploy
+
+deploy:
+    provider: pages
+    local-dir: deploy
+    skip-cleanup: true
+    github-token: $GH_TOKEN
+    keep-history: false
+    on:
+        branch: master
