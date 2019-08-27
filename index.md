@@ -15,9 +15,9 @@
 
 [s1]: https://example.com
 
-[note3]: ./notes/01.html
+[note3]: ./notes/03.html
 
-[src3]: ./src/01.zip
+[src3]: ./src/03.zip
 
 [hw1]: https://github.com/rlads2019/_hw-demo
 
