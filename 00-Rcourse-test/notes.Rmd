@@ -21,12 +21,22 @@ knitr::opts_chunk$set(echo = TRUE,
 
 ## Printing
 
-```{r code=readLines('R/foo.R'), results='hold'}
+```{r print1}
+# some code here
+print('Hello world!')
 ```
 
 ### Printing 2
 
-```{r code=readLines('R/foo2.R'), results='hold'}
+```{r print2, results='hold'}
+x = 1
+print(paste0('x is ', x))
+
+x = c(1, 2)
+print(paste0('x is ', x))
 ```
 
 
+```{r folder/print3, results='hold'}
+# some code
+```

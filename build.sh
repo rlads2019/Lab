@@ -9,4 +9,5 @@ do
     [[ ${dir} == 'src' || ${dir} == 'notes' ]] && continue
     zip -r src/${dir:0:2}.zip ${dir}
     cp ${dir}/notes.html notes/${dir:0:2}.html
+    rm ${dir}/rmd2scripts.R
 done
