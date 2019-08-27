@@ -1,0 +1,181 @@
+---
+title: "Vectors, Data types, if-else (W3)"
+date: "2019-09-26"
+output:
+  html_document:
+    number_sections: no
+    theme: united
+    highlight: tango
+    toc: yes
+    toc_float:
+      collapsed: no
+    css: style.css
+    md_extensions: +implicit_figures
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      comment = '#>',
+                      message = F,
+                      results = 'hold')
+```
+
+
+## vector
+
+- `c()`: concatenate
+  - flat stucture
+
+- built-in functions: `sum(1:10)`, `mean(1:10)`, `sample(1:10)`, `rep()`
+
+- `?typeof()`: integer, double, character, logical
+
+### integer vector
+
+#### recycling
+
+- element-wise comparison
+
+    ```{r}
+    x <- c(1, 1, 2, 2)
+    
+    x + 2  # equivalent to...
+    x + c(2, 2, 2, 2)
+    ```
+
+### double vector
+
+### character vector
+
+### logical vector
+
+- logical operators: `==`, `!=`, `&`, `|`, `%in%`
+
+#### recycling
+
+```{r}
+x <- c(1, 1, 2, 2)
+
+x == c(2, 2, 2, 2)  # equivalent to...
+x == 2
+```
+
+- `paste0()`
+
+## Coercion
+
+![Rules of Coercion](https://rstudio-education.github.io/hopr/images/hopr_0301.png){.half}
+
+- if coercion failed, throw error
+
+- manual coercion: `as.character()`, `as.logical()`, `as.numeric()`
+
+```{r}
+sum(c(T, T, T, F))
+
+x <- c("male", "male", "female", "female", "female")
+sum(x == "male")
+```
+
+## subsetting a vector
+
+### index subsetting
+
+```{r}
+# z[<integer or integer_vector>]
+z <- LETTERS
+z[1]
+z[1:5]
+```
+
+### Logical subsetting
+
+```{r}
+# z[<logical_vector>]
+x <- c(1, 2, 3, 2)
+x[c(FALSE, TRUE, FALSE, TRUE)]
+
+## Creating logical vectors
+x[1] == 2  # return logical vector of length 1
+x == 2     # return logical vector of length(x)
+# Subset vector
+x[x == 2]
+```
+
+
+## Modifying Values in vector
+
+- assignment: `x[1] <- 10`
+
+
+## Vectorization
+
+```{r}
+# weighted mean
+prob <- c(1/6, 1/6, 1/6, 1/6, 1/6)
+```
+
+
+```{r}
+vec1 <- c(1, 2, 3)
+vec2 <- c(-1, -1, 1)
+vec1 * vec2
+
+inner_product <- sum(vec1 * vec2)
+```
+
+-----------
+<!-- 
+Conceptually new topic:
+Add if-else concept and then wrap up
+-->
+
+## if else 
+
+```{r}
+x <- 1
+
+if (x > 0) {
+    print('x is positive')
+} else {
+    print('x is not positive')
+}
+```
+      
+```{r}
+x <- -1
+
+if (x > 0) {
+    print('x is positive')
+} else if (x < 0) {
+    print('x is negative')
+} else {
+    print('x is zero')
+}
+```  
+Note: can use multiple `else if`.
+      
+- template
+
+```r
+if (<condition 1>) {
+    < do something >
+} else if ( < condition 2 > ) {
+    < do something >
+} else {
+    < do something >
+}
+```
+
+## Wrap up (build upon if-else):
+
+- ToDo: 想出一個 program 會用到前面的東西
+  - `%in%`: combine if-else and vector
+
+
+## 參考資料
+
+Hands-on programming with R
+- [R Objects](https://rstudio-education.github.io/hopr/r-objects.html)
+
+- [Modifying Values](https://rstudio-education.github.io/hopr/modify.html)

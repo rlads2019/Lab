@@ -10,12 +10,14 @@ output:
     toc_float:
       collapsed: no
     css: style.css
+    md_extensions: +implicit_figures
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE,
                       comment = '#>',
-                      message = F)
+                      message = F,
+                      results = 'hold')
 ```
 
 
