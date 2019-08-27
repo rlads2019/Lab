@@ -157,15 +157,15 @@ Note: can use multiple `else if`.
       
 - template
 
-```r
-if (<condition 1>) {
-    < do something >
-} else if ( < condition 2 > ) {
-    < do something >
-} else {
-    < do something >
-}
-```
+    ```r
+    if (<condition 1>) {
+        < do something >
+    } else if ( < condition 2 > ) {
+        < do something >
+    } else {
+        < do something >
+    }
+    ```
 
 ## Wrap up (build upon if-else):
 
