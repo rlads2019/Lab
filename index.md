@@ -22,9 +22,8 @@
 [hw1]: https://github.com/rlads2019/_hw-demo
 
 
-## GitHub Issues 使用說明 {:
-d= "QA-qaide"}
-
+## 提問注意事項
+{: id=#guide"}
 每份個人作業在 <https://github.com/rlads2019> 皆會有一個公開的 repo。在做作業時，若遇到問題需要協助，請至每份作業的**公開 repo** 當中的 **Issues** 提問 (而非自己用於上傳作業的 private repo)。提問前請確認自己遵守下列事項：
 
 - 檢查想問的問題是否已被問過
