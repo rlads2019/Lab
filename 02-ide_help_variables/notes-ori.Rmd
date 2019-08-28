@@ -1,0 +1,26 @@
+
+- Self Help
+
+  - `help()`
+  
+  - error messages
+
+    - Different kinds of resources (the problem is there are **too many** resources)
+  
+      - stackoverflow (general), github issues (mostly for error message), package website
+      
+        <img style="width:65%" src="https://img.yongfu.name/coding/seek_help.png">
+      
+      
+      
+        - rule of thumb:
+          - check out unfamiliar functions: R help page
+          - error messages: stackoverflow --> github issues (if package)
+          - explore new package: github repo --> package website (find *tutorials*, or *getting started*) --> CRAN vignettes
+          
+          - studying or working?
+          - expert or novice
+          
+          - if you want to **get things done quickly**: stackoverflow
+            - alert: don't get addicted to stackoverflow
+          - if you want to **learn** new things: package website (find *tutorials*, or *getting started*)

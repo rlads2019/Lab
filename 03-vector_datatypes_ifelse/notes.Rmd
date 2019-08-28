@@ -175,7 +175,6 @@ Note: can use multiple `else if`.
 
 ## 參考資料
 
-Hands-on programming with R
-- [R Objects](https://rstudio-education.github.io/hopr/r-objects.html)
-
-- [Modifying Values](https://rstudio-education.github.io/hopr/modify.html)
+- Hands-on programming with R
+  - [R Objects](https://rstudio-education.github.io/hopr/r-objects.html)
+  - [Modifying Values](https://rstudio-education.github.io/hopr/modify.html)

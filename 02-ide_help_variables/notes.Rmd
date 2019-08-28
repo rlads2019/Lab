@@ -1,0 +1,118 @@
+---
+title: "熟悉 RStudio、尋求幫助、Very Basic R (W2)"
+date: "2019-09-26"
+output: 
+    html_document:
+        number_sections: no
+        theme: united
+        highlight: tango
+        toc: yes
+        toc_float:
+            collapse: no
+        css: style.css
+        md_extensions: +implicit_figures
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,comment = '#>',message = F)
+```
+
+
+<!-- Part 1: RStudio config -->
+
+
+## 自訂樣式
+
+- RStudio 預設有 3 個區塊 (Pane)，最多可設置 4 個區塊。你可以自行決定這 4 個區塊的位置
+    - `Tools` --> `Global Options...` --> (在左欄選擇) `Pane Layout`
+    - Source, Console, 及 2 個自訂區塊
+
+- 除了區塊的相對位置，也可以設定 RStudio 整體的風格以及程式碼 Syntax Highlighting 的樣式:
+    - `Tools` --> `Global Options...` --> (在左欄選擇) `Appearance`
+
+
+## 編輯器設定
+
+- Source Pane 是撰寫程式碼的地方 (文字編輯器)
+    - 縮排間距：建議使用 space (而非 tab) 作為縮排字元
+        `Tools` --> `Global Options...` --> (在左欄選擇) `Code` --> (在上方選擇) `Editing` --> 勾選 `Inset spaces for tab`
+    - 文字編碼：由於中文字在各作業系統上會有編碼不一致的問題，請**務必**將編碼設定為 `UTF-8`
+        `Tools` --> `Global Options...` --> (在左欄選擇) `Code` --> (在上方選擇) `Saving` --> `Default text encoding`
+
+
+<!-- Part 2: Working Directory -->
+
+## 工作目錄 (Working Directory, a.k.a. Current Directory)
+
+- 打開 RStudio 的第一步就是要設置「工作目錄」的位置。「工作目錄」是當前 R 語言「工作」的資料夾。亦即，若 R 執行時需要讀取外部檔案，或是執行後產出檔案，都會以這個資料夾為準。例如，只要將外部資料 (`foo.txt`) 放在「工作目錄」內，R 就可以直接使用這個資料的檔名當作路徑去存取這個檔案。
+
+- RStudio 所在的「工作目錄」顯示於 Console Pane 的標籤下方 (e.g. `~/Desktop/`)
+
+- 工作目錄的設置方式
+    - RStudio 功能選單
+    
+        `Sessions` --> `Set Working Directory...`
+
+    - Console   <!-- 課程省略 -->
+        - Console 是執行 R 語言的地方，我們可以透過 R 的指令去設置「工作目錄」
+        
+            ```r
+            setwd('~/Desktop/week2')
+            # setwd('<path/to/new_working_dir>')
+            ```
+
+<!-- Part 3: Very Basic R -->
+
+## R Console
+
+- Console 是 RStudio 裡面用來和 R 語言溝通的地方，換言之，就是使用者輸入與執行 R 語言的地方
+
+- 一些簡單的 R 指令
+
+    ```{r arithmetic}
+    2 * 3 + 4
+    2 * (3 + 4)
+    
+    3 / 2
+    3 ^ 2
+    ```
+
+## 變數與回傳值
+
+- 要將 R 執行的結果儲存起來，需要使用 `<-` (assignment operator) 指派變數 ，將 `<-` 右邊的程式碼**執行後所回傳的數值**儲存於 `<-` 左邊的變數
+
+<!-- First explain with slide, then execute code -->
+
+```{r variables}
+x <- 2 * 3 + 4
+x
+```
+
+
+## R 內建函數
+
+```{r}
+sqrt(9)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### 作業: Basic R
+
+- sequence of numbers: `:`, `c()`, `sum()`, `mean()`
