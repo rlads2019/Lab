@@ -5,6 +5,13 @@ script:
     - mkdir deploy
     - mv _config.yml index.md src notes deploy
 
+# Make it convenient to navigate notes on netlify
+before_deploy:
+    - mkdir deploy/Lab
+    - cp -r deploy/notes deploy/Lab/
+
+
+
 deploy:
     provider: pages
     local-dir: deploy
