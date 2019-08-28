@@ -22,7 +22,7 @@ var baseurl = window.location.origin
 window.onload = () => {
     if (baseurl == 'https://rlads2019.netlify.com') {
         document.querySelectorAll('.hide').forEach(ele => {
-            ele.className = '';
+            ele.className = 'note';
         })
     }
 }
@@ -30,7 +30,7 @@ window.onload = () => {
 
 
 <!-- Part 1: RStudio config -->
-[note: ## Part 1: RStudio]{.hide}
+[PART 1: RStudio]{.hide}
 
 ## 自訂樣式
 
@@ -67,7 +67,7 @@ window.onload = () => {
     
         `Sessions` --> `Set Working Directory...`  
         
-        [note: **執行後，提到 Console 裡會出現一串指令**]{.hide}
+        [執行後，提到 Console 裡會出現一串指令: `setwd()`]{.hide}
 
     - Console   <!-- 課程省略 -->
         - Console 是執行 R 語言的地方，我們可以透過 R 的指令去設置「工作目錄」
@@ -78,7 +78,7 @@ window.onload = () => {
             ```
 
 <!-- Part 2: Very Basic R -->
-[note: ## Part 2: R 四則運算、指派、內建函數]{.hide}
+[PART 2: R 四則運算、指派、內建函數]{.hide}
 
 ## R Console
 
@@ -99,7 +99,7 @@ window.onload = () => {
 - 要將 R 執行的結果儲存起來，需要使用 `<-` (assignment operator) 指派變數 ，將 `<-` 右邊的程式碼**執行後所回傳的數值**儲存於 `<-` 左邊的變數
 
 <!-- First explain with slide, then execute code -->
-[note: **先用 slide 講解再執行程式碼**]{.hide}
+[先用 slide 講解再執行程式碼]{.hide}
 
 ```{r variables}
 x <- 2 * 3 + 4
@@ -115,8 +115,8 @@ x
 - `sqrt()` 是一個函數，它會將輸入值 (在圓括號內) 開根號後回傳
 
 <!--  -->
-[note: **使用 assignment 儲存函數回傳值 (呼應前面)，
-藉此引到函數內部可以放入函數**]{.hide}
+[使用 assignment 儲存函數回傳值 (呼應前面)，
+藉此引到函數內部可以放入函數]{.hide}
 
 - 函數裡面可以放入另一個函數 (e.g. `sqrt(sqrt(16))`)，其運算的次序是**由內而外**，先執行最內部的函數，取得回傳值後，再將此回傳值作為外面的函數的輸入值
 

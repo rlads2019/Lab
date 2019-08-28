@@ -1468,13 +1468,31 @@ text-align: center;
 .hide {
 display: none !important;
 }
+.note::before {
+display: block;
+content: "Note: ";
+color: red;
+font-weight: bold;
+}
+.note {
+display: block;
+padding-left: 7px;
+border-radius: 5px;
+border: 1px solid black;
+font-size: 1.15em;
+}
 @media print {
 html, body {
 width: 210mm !important;
 height: 297mm !important;
-font-size: 12pt !important;
 }
-#TOC, h1.title, h4.date {
+p, li, span, a {
+font-size: 18px;
+}
+code * {
+font-size: 16px !important;
+}
+#TOC, h1.title, h4.date, .sourceCode + pre {
 display: none !important;
 }
 }
@@ -1704,13 +1722,13 @@ var baseurl = window.location.origin
 window.onload = () => {
     if (baseurl == 'https://rlads2019.netlify.com') {
         document.querySelectorAll('.hide').forEach(ele => {
-            ele.className = '';
+            ele.className = 'note';
         })
     }
 }
 </script>
 <!-- Part 1: RStudio config -->
-<p><span class="hide">note: ## Part 1: RStudio</span></p>
+<p><span class="hide">PART 1: RStudio</span></p>
 <div class="section level2">
 <h2>自訂樣式</h2>
 <ul>
@@ -1750,7 +1768,7 @@ window.onload = () => {
 <ul>
 <li><p>RStudio 功能選單</p>
 <p><code>Sessions</code> –&gt; <code>Set Working Directory...</code></p>
-<p><span class="hide">note: <strong>執行後，提到 Console 裡會出現一串指令</strong></span></p></li>
+<p><span class="hide">執行後，提到 Console 裡會出現一串指令: <code>setwd()</code></span></p></li>
 <li>Console <!-- 課程省略 -->
 <ul>
 <li><p>Console 是執行 R 語言的地方，我們可以透過 R 的指令去設置「工作目錄」</p>
@@ -1760,7 +1778,7 @@ window.onload = () => {
 </ul></li>
 </ul>
 <!-- Part 2: Very Basic R -->
-<p><span class="hide">note: ## Part 2: R 四則運算、指派、內建函數</span></p>
+<p><span class="hide">PART 2: R 四則運算、指派、內建函數</span></p>
 </div>
 <div id="r-console" class="section level2">
 <h2>R Console</h2>
@@ -1783,7 +1801,7 @@ window.onload = () => {
 <li>要將 R 執行的結果儲存起來，需要使用 <code>&lt;-</code> (assignment operator) 指派變數 ，將 <code>&lt;-</code> 右邊的程式碼<strong>執行後所回傳的數值</strong>儲存於 <code>&lt;-</code> 左邊的變數</li>
 </ul>
 <!-- First explain with slide, then execute code -->
-<p><span class="hide">note: <strong>先用 slide 講解再執行程式碼</strong></span></p>
+<p><span class="hide">先用 slide 講解再執行程式碼</span></p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="dv">3</span> <span class="op">+</span><span class="st"> </span><span class="dv">4</span></a>
 <a class="sourceLine" id="cb10-2" data-line-number="2">x</a></code></pre></div>
 <pre><code>#&gt; [1] 10</code></pre>
@@ -1798,7 +1816,7 @@ window.onload = () => {
 <li><code>sqrt()</code> 是一個函數，它會將輸入值 (在圓括號內) 開根號後回傳</li>
 </ul>
 <!--  -->
-<p><span class="hide">note: <strong>使用 assignment 儲存函數回傳值 (呼應前面)， 藉此引到函數內部可以放入函數</strong></span></p>
+<p><span class="hide">使用 assignment 儲存函數回傳值 (呼應前面)， 藉此引到函數內部可以放入函數</span></p>
 <ul>
 <li>函數裡面可以放入另一個函數 (e.g. <code>sqrt(sqrt(16))</code>)，其運算的次序是<strong>由內而外</strong>，先執行最內部的函數，取得回傳值後，再將此回傳值作為外面的函數的輸入值</li>
 </ul>

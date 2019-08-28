@@ -1465,6 +1465,37 @@ padding: 0 auto;
 .caption {
 text-align: center;
 }
+.hide {
+display: none !important;
+}
+.note::before {
+display: block;
+content: "Note: ";
+color: red;
+font-weight: bold;
+}
+.note {
+display: block;
+padding-left: 7px;
+border-radius: 5px;
+border: 1px solid black;
+font-size: 1.15em;
+}
+@media print {
+html, body {
+width: 210mm !important;
+height: 297mm !important;
+}
+p, li, span, a {
+font-size: 18px;
+}
+code * {
+font-size: 16px !important;
+}
+#TOC, h1.title, h4.date, .sourceCode + pre {
+display: none !important;
+}
+}
 </style>
 
 
@@ -1692,6 +1723,16 @@ div.tocify {
 </div>
 
 
+<script type="text/javascript">
+var baseurl = window.location.origin
+window.onload = () => {
+    if (baseurl == 'https://rlads2019.netlify.com') {
+        document.querySelectorAll('.hide').forEach(ele => {
+            ele.className = 'note';
+        })
+    }
+}
+</script>
 <div id="vector" class="section level2">
 <h2>vector</h2>
 <ul>
