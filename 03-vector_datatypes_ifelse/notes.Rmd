@@ -21,6 +21,17 @@ knitr::opts_chunk$set(echo = TRUE,
 ```
 
 
+```{js echo=FALSE}
+var baseurl = window.location.origin
+window.onload = () => {
+    if (baseurl == 'https://rlads2019.netlify.com') {
+        document.querySelectorAll('.hide').forEach(ele => {
+            ele.className = '';
+        })
+    }
+}
+```
+
 ## vector
 
 - `c()`: concatenate

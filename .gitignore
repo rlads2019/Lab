@@ -1,3 +1,7 @@
 notes
 src
-
+*.tex
+*.log
+*.pdf
+*.otf
+*.ttf

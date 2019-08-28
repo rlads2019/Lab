@@ -1465,6 +1465,19 @@ padding: 0 auto;
 .caption {
 text-align: center;
 }
+.hide {
+display: none !important;
+}
+@media print {
+html, body {
+width: 210mm !important;
+height: 297mm !important;
+font-size: 12pt !important;
+}
+#TOC, h1.title, h4.date {
+display: none !important;
+}
+}
 </style>
 
 
@@ -1686,7 +1699,18 @@ div.tocify {
 </div>
 
 
+<script type="text/javascript">
+var baseurl = window.location.origin
+window.onload = () => {
+    if (baseurl == 'https://rlads2019.netlify.com') {
+        document.querySelectorAll('.hide').forEach(ele => {
+            ele.className = '';
+        })
+    }
+}
+</script>
 <!-- Part 1: RStudio config -->
+<p><span class="hide">note: ## Part 1: RStudio</span></p>
 <div class="section level2">
 <h2>自訂樣式</h2>
 <ul>
@@ -1706,21 +1730,27 @@ div.tocify {
 <ul>
 <li>Source Pane 是撰寫程式碼的地方 (文字編輯器)
 <ul>
-<li>縮排間距：建議使用 space (而非 tab) 作為縮排字元 <code>Tools</code> –&gt; <code>Global Options...</code> –&gt; (在左欄選擇) <code>Code</code> –&gt; (在上方選擇) <code>Editing</code> –&gt; 勾選 <code>Inset spaces for tab</code></li>
-<li>文字編碼：由於中文字在各作業系統上會有編碼不一致的問題，請<strong>務必</strong>將編碼設定為 <code>UTF-8</code> <code>Tools</code> –&gt; <code>Global Options...</code> –&gt; (在左欄選擇) <code>Code</code> –&gt; (在上方選擇) <code>Saving</code> –&gt; <code>Default text encoding</code></li>
+<li><p>縮排間距：建議使用 space (而非 tab) 作為縮排字元</p>
+<ul>
+<li><code>Tools</code> –&gt; <code>Global Options...</code> –&gt; (在左欄選擇) <code>Code</code> –&gt; (在上方選擇) <code>Editing</code> –&gt; 勾選 <code>Inset spaces for tab</code></li>
+</ul></li>
+<li><p>文字編碼：由於中文字在各作業系統上會有編碼不一致的問題，請<strong>務必</strong>將編碼設定為 <code>UTF-8</code></p>
+<ul>
+<li><code>Tools</code> –&gt; <code>Global Options...</code> –&gt; (在左欄選擇) <code>Code</code> –&gt; (在上方選擇) <code>Saving</code> –&gt; <code>Default text encoding</code></li>
+</ul></li>
 </ul></li>
 </ul>
-<!-- Part 2: Working Directory -->
 </div>
 <div id="-working-directory-a.k.a.-current-directory" class="section level2">
 <h2>工作目錄 (Working Directory, a.k.a. Current Directory)</h2>
 <ul>
 <li><p>打開 RStudio 的第一步就是要設置「工作目錄」的位置。「工作目錄」是當前 R 語言「工作」的資料夾。亦即，若 R 執行時需要讀取外部檔案，或是執行後產出檔案，都會以這個資料夾為準。例如，只要將外部資料 (<code>foo.txt</code>) 放在「工作目錄」內，R 就可以直接使用這個資料的檔名當作路徑去存取這個檔案。</p></li>
-<li><p>RStudio 所在的「工作目錄」顯示於 Console Pane 的標籤下方 (e.g. <code>~/Desktop/</code>)</p></li>
+<li><p>RStudio 所在的「工作目錄」顯示於 Console Pane 的標籤下方 (e.g. <code>~/</code>)</p></li>
 <li>工作目錄的設置方式
 <ul>
 <li><p>RStudio 功能選單</p>
-<p><code>Sessions</code> –&gt; <code>Set Working Directory...</code></p></li>
+<p><code>Sessions</code> –&gt; <code>Set Working Directory...</code></p>
+<p><span class="hide">note: <strong>執行後，提到 Console 裡會出現一串指令</strong></span></p></li>
 <li>Console <!-- 課程省略 -->
 <ul>
 <li><p>Console 是執行 R 語言的地方，我們可以透過 R 的指令去設置「工作目錄」</p>
@@ -1729,7 +1759,8 @@ div.tocify {
 </ul></li>
 </ul></li>
 </ul>
-<!-- Part 3: Very Basic R -->
+<!-- Part 2: Very Basic R -->
+<p><span class="hide">note: ## Part 2: R 四則運算、指派、內建函數</span></p>
 </div>
 <div id="r-console" class="section level2">
 <h2>R Console</h2>
@@ -1751,14 +1782,41 @@ div.tocify {
 <ul>
 <li>要將 R 執行的結果儲存起來，需要使用 <code>&lt;-</code> (assignment operator) 指派變數 ，將 <code>&lt;-</code> 右邊的程式碼<strong>執行後所回傳的數值</strong>儲存於 <code>&lt;-</code> 左邊的變數</li>
 </ul>
+<!-- First explain with slide, then execute code -->
+<p><span class="hide">note: <strong>先用 slide 講解再執行程式碼</strong></span></p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="dv">3</span> <span class="op">+</span><span class="st"> </span><span class="dv">4</span></a>
 <a class="sourceLine" id="cb10-2" data-line-number="2">x</a></code></pre></div>
 <pre><code>#&gt; [1] 10</code></pre>
 </div>
 <div id="r-" class="section level2">
 <h2>R 內建函數</h2>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw">sqrt</span>(<span class="dv">9</span>)</a></code></pre></div>
-<pre><code>#&gt; [1] 3</code></pre>
+<ul>
+<li>R 裡面的函數就像是我們國高中數學課學到的「函數」。
+<ul>
+<li>R 的函數 (通常) 會有一個或多個「輸入值」，稱為「引數 (argument)」；並且在運算完成後，一定會丟出一個「回傳值」</li>
+</ul></li>
+<li><code>sqrt()</code> 是一個函數，它會將輸入值 (在圓括號內) 開根號後回傳</li>
+</ul>
+<!--  -->
+<p><span class="hide">note: <strong>使用 assignment 儲存函數回傳值 (呼應前面)， 藉此引到函數內部可以放入函數</strong></span></p>
+<ul>
+<li>函數裡面可以放入另一個函數 (e.g. <code>sqrt(sqrt(16))</code>)，其運算的次序是<strong>由內而外</strong>，先執行最內部的函數，取得回傳值後，再將此回傳值作為外面的函數的輸入值</li>
+</ul>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw">sqrt</span>(<span class="dv">16</span>)</a></code></pre></div>
+<pre><code>#&gt; [1] 4</code></pre>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1">inner &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="dv">16</span>)</a>
+<a class="sourceLine" id="cb14-2" data-line-number="2"><span class="kw">sqrt</span>(inner)</a></code></pre></div>
+<pre><code>#&gt; [1] 2</code></pre>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw">sqrt</span>(<span class="kw">sqrt</span>(<span class="dv">16</span>))</a></code></pre></div>
+<pre><code>#&gt; [1] 2</code></pre>
+</div>
+<div id="-r-documentation" class="section level2">
+<h2>說明文件 (R Documentation)</h2>
+<ul>
+<li><p>不確定如何使用函數時，可以閱讀該函數的說明文件：</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1">?sqrt</a>
+<a class="sourceLine" id="cb18-2" data-line-number="2"><span class="co"># ?&lt;function_name&gt;</span></a></code></pre></div></li>
+</ul>
 <div id="-basic-r" class="section level3">
 <h3>作業: Basic R</h3>
 <ul>

@@ -78,3 +78,17 @@ img.half {
 .caption {
   text-align: center;
 }
+.hide {
+  display: none !important;
+}
+
+@media print {
+  html, body {
+    width: 210mm !important;
+    height: 297mm !important;
+    font-size: 12pt !important;
+  }
+  #TOC, h1.title, h4.date {
+    display: none !important;
+  }
+}
