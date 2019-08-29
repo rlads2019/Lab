@@ -166,86 +166,39 @@ sqrt(sqrt(16))
 ## Function Arguments
 
 - Argument names (Parameter)
-- default value
 - argument position
 
 
 ```{r multiple-arguments, error=TRUE}
-log(100)
-log(100, 10)
-log(x = 100, base = 10)  # Be explicit
+log(4)
+log(4, 2)
+log(x = 4, base = 2)  # Be explicit
 
-# With names, order doesn't matter
-log(base = 10, x = 100)
+# If all args are named, order doesn't matter
+log(base = 2, x = 4)
 
-# Mix order and names:
-# argument will be passed first by name,
-# then by order
-log(100, x = 10)
-log()
-log(base = 10)    # throw error
+# Mix named and unnamed args:
+# named args will be assigned first, then
+# unnamed args will be assigned 
+# based on their positions
+log(base = 2, 4)
 ```
 
 
+## 作業說明：R Markdown 使用
+
+- 使用前需先安裝 `rmarkdown`:
+
+    ```r
+    install.packages('rmarkdown')
+    ```
+
+- R Markdown (`.Rmd`) 就像上週同學用來寫自我介紹的 Markdown 文件 (`.md`) 一樣是一種**純文字格式**。撰寫 R Markdown 的語法事實上是 Markdown 的一種擴充： 它新增了一些特殊的語法，讓使用者可以直接在 R Markdown 裡面撰寫程式碼，並透過 R 將這些程式碼的運算結果插入 R Markdown 的輸出文件當中。
 
 
+(在 RStudio 使用 R Markdown)
+- 使用 RStudio 開啟 R Markdown (`.Rmd`) 時，Rmd 檔會出現在 Source Pane 讓使用者編輯
 
+- 將 R Markdown (`.Rmd`) 輸出 (`knit` )成 HTML 檔 (`.html`):
 
-
-
-
-
-
-
-
-
-
-### 作業: Basic R
-
-#### Named Arguments and Argument positions:
-
-```{r}
-order_s <- function(p1, p2, p3) {paste(p1, p2, p3)}
-
-order_s(1, 2, 3)
-order_s(p2 = 2, p1 = 1, p3 = 3)
-
-order_s(1, 2, p3 = 3)
-order_s(1, 2, p2 = 3)
-order_s(1, 2, p1 = 3)
-```
-
-# order(<p1>, <p2>, <p3>) returns
-# "<p1> <p2> <p3>"
-
-題目: 在 `order_s(1, 2, 3)` 的其中一個 argument 前面加上名稱 (`p1`, `p2`, or `p3`)，但**不能修改 argument 的次序**，使印出的結果符合要求
-
-
-#### Q1-0 (範例，不計分)
-
-請在下方程式碼的 3 個 argument 中，選擇其中一個為其加入 argument name，使函數能印出 "1 2 3"
-
-```{r example1}
-order_s(1, 2, 3)
-```
-
-
-答案：
-
-```{r example1}
-order_s(1, 2, p3=3)  # 正確答案
-#order_s(1, p2=2, 3)  # 另一種正確答案
-#order_s(1, p3=3, 2)  # 印出結果正確，但不符要求
-```
-
-#### Q1-1
-
-請在下方程式碼的 3 個 argument 中，選擇其中一個為其加入 argument name，使函數能印出 "1 3 2"
-
-```{r q1-1}
-order_s(1, 2, 3)
-```
-
-
-
-- sequence of numbers: `:`, `c()`, `sum()`, `mean()`
+![R Markdown document in RStudio.](https://bookdown.org/yihui/rmarkdown/images/hello-rmd.png){.half}
