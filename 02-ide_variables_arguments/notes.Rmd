@@ -1,5 +1,5 @@
 ---
-title: "熟悉 RStudio、尋求幫助、Very Basic R (W2)"
+title: "熟悉 RStudio、Very Basic R (W2)"
 date: '2019-09-26'
 output:
   html_document:
@@ -80,8 +80,8 @@ window.onload = () => {
         
         - Windows 電腦的檔案路徑分隔符號預設使用**反斜線** (`\`)[^backslash]。在 R 裡面，檔案路徑使用的是**斜線** (`/`)[^slash]，而反斜線有其它意義。
           - 在 Windows 電腦上使用 R 時，
-            1. 可使用 **2 個反斜線 (`\\`)**作為檔案路徑分隔 (e.g. `C:\\Users\\Desktop`) (直接複製貼上 Windows 的檔案路徑會無效)
-            2. 或使用 R 預設的 **1 個斜線 (`/`)** (e.g. `C:/Users/Desktop`)
+            1. 可使用 **2 個反斜線** (`\\`) 作為檔案路徑分隔 (e.g. `C:\\Users\\Desktop`) (直接複製貼上 Windows 的檔案路徑會無效)
+            2. 或使用 R 預設的 **1 個斜線** (`/`) (e.g. `C:/Users/Desktop`)
 
 [^backslash]: 「反斜線鍵」位置位於 `Enter 鍵`上方。
 [^slash]: 「斜線鍵」與「問號鍵」為同個按鍵。
@@ -184,6 +184,12 @@ log(base = 2, x = 4)
 log(base = 2, 4)
 ```
 
+
+## 作業內容
+
+- Play with R
+    1. Use **help page** to find: <code>?`:`</code>
+    1. Play with sequence, use `sum()`, `mean()`
 
 ## 作業說明：R Markdown 使用
 
