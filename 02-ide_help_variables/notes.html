@@ -1470,7 +1470,7 @@ display: none !important;
 }
 .note::before {
 display: block;
-content: "Note: ";
+content: attr(data-tag);
 color: red;
 font-weight: bold;
 }
@@ -1492,8 +1492,38 @@ font-size: 18px;
 code * {
 font-size: 16px !important;
 }
-#TOC, h1.title, h4.date, .sourceCode + pre {
+#TOC, .sourceCode + pre {
 display: none !important;
+}
+h1 {
+font-size: 1.8em !important;
+}
+h2 {
+font-size: 1.6em !important;
+}
+h3 {
+font-size: 1.4em !important;
+}
+h1.title {
+margin-top: 0;
+padding-top: 0;
+padding-bottom: 5px;
+font-size: 1.4em !important;
+text-align: center !important;
+}
+h4.date {
+display: inline !important;
+position: fixed !important;
+padding: 0;
+margin: 0;
+top: 0 !important;
+right: 0 !important;
+font-size: 0.9em !important;
+color: grey !important;
+z-index: 0 !important;
+}
+a[href]:after {
+content: "" !important;
 }
 }
 </style>
@@ -1718,17 +1748,18 @@ div.tocify {
 
 
 <script type="text/javascript">
-var baseurl = window.location.origin
 window.onload = () => {
-    if (baseurl == 'https://rlads2019.netlify.com') {
+    if (window.location.href.startsWith('https://rlads2019.netlify.com/lab/') ||
+        window.location.href.startsWith('file:///home/liao/Desktop/Lab/')) {
         document.querySelectorAll('.hide').forEach(ele => {
             ele.className = 'note';
         })
     }
 }
 </script>
+<p><span class="hide" data-tag="Oppenning">今天…</span></p>
 <!-- Part 1: RStudio config -->
-<p><span class="hide">PART 1: RStudio</span></p>
+<p><span class="hide" data-tag="First Topic: RStudio">blah blah blah</span></p>
 <div class="section level2">
 <h2>自訂樣式</h2>
 <ul>
@@ -1762,23 +1793,32 @@ window.onload = () => {
 <div id="-working-directory-a.k.a.-current-directory" class="section level2">
 <h2>工作目錄 (Working Directory, a.k.a. Current Directory)</h2>
 <ul>
-<li><p>打開 RStudio 的第一步就是要設置「工作目錄」的位置。「工作目錄」是當前 R 語言「工作」的資料夾。亦即，若 R 執行時需要讀取外部檔案，或是執行後產出檔案，都會以這個資料夾為準。例如，只要將外部資料 (<code>foo.txt</code>) 放在「工作目錄」內，R 就可以直接使用這個資料的檔名當作路徑去存取這個檔案。</p></li>
+<li><p>打開 RStudio 的第一步就是要設置「工作目錄」的位置。「工作目錄」是當前 R 語言「工作」的資料夾。亦即，若 R 執行時需要讀取外部檔案，或是執行後產出檔案，都會以這個資料夾為準。例如，只要將外部資料 (<code>foo.txt</code>) 放在「工作目錄」內，R 就可以直接使用這個資料的檔名當作路徑去存取這個檔案 (i.e. 可使用<a href="https://zh.wikipedia.org/wiki/%E8%B7%AF%E5%BE%84_(%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6)#%E7%BB%9D%E5%AF%B9%E4%B8%8E%E7%9B%B8%E5%AF%B9%E8%B7%AF%E5%BE%84">相對路徑</a>，之後課程會詳細介紹)。</p></li>
 <li><p>RStudio 所在的「工作目錄」顯示於 Console Pane 的標籤下方 (e.g. <code>~/</code>)</p></li>
 <li>工作目錄的設置方式
 <ul>
 <li><p>RStudio 功能選單</p>
 <p><code>Sessions</code> –&gt; <code>Set Working Directory...</code></p>
 <p><span class="hide">執行後，提到 Console 裡會出現一串指令: <code>setwd()</code></span></p></li>
-<li>Console <!-- 課程省略 -->
+<li>Console
 <ul>
 <li><p>Console 是執行 R 語言的地方，我們可以透過 R 的指令去設置「工作目錄」</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">setwd</span>(<span class="st">'~/Desktop/week2'</span>)</a>
 <a class="sourceLine" id="cb1-2" data-line-number="2"><span class="co"># setwd('&lt;path/to/new_working_dir&gt;')</span></a></code></pre></div></li>
+<li>Windows 電腦的檔案路徑分隔符號預設使用<strong>反斜線</strong> (<code>\</code>)<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>。在 R 裡面，檔案路徑使用的是<strong>斜線</strong> (<code>/</code>)<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>，而反斜線有其它意義。
+<ul>
+<li>在 Windows 電腦上使用 R 時，
+<ol style="list-style-type: decimal">
+<li>可使用 <strong>2 個反斜線 (<code>\\</code>)</strong>作為檔案路徑分隔 (e.g. <code>C:\\Users\\Desktop</code>) (直接複製貼上 Windows 的檔案路徑會無效)</li>
+<li>或使用 R 預設的 <strong>1 個斜線 (<code>/</code>)</strong> (e.g. <code>C:/Users/Desktop</code>)</li>
+</ol></li>
+</ul></li>
 </ul></li>
 </ul></li>
 </ul>
 <!-- Part 2: Very Basic R -->
-<p><span class="hide">PART 2: R 四則運算、指派、內建函數</span></p>
+<p><span class="hide" data-tag="Second Topic: Very Basic R">(R 四則運算、指派、內建函數)<br />
+</span></p>
 </div>
 <div id="r-console" class="section level2">
 <h2>R Console</h2>
@@ -1808,6 +1848,9 @@ window.onload = () => {
 </div>
 <div id="r-" class="section level2">
 <h2>R 內建函數</h2>
+<p><span class="hide" data-tag="Flow: ">1. R 函數類比<strong>數學函數</strong>: 輸入值、輸出值<br />
+2. <strong>Demo</strong><br />
+</span></p>
 <ul>
 <li>R 裡面的函數就像是我們國高中數學課學到的「函數」。
 <ul>
@@ -1816,7 +1859,14 @@ window.onload = () => {
 <li><code>sqrt()</code> 是一個函數，它會將輸入值 (在圓括號內) 開根號後回傳</li>
 </ul>
 <!--  -->
-<p><span class="hide">使用 assignment 儲存函數回傳值 (呼應前面)， 藉此引到函數內部可以放入函數</span></p>
+<p><span class="hide" data-tag="Demo Flow:">使用 assignment 儲存函數回傳值 (呼應前面)， 藉此引到函數內部可以放入函數<br />
+—<br />
+1. <code>sqrt(16)</code>: 括號內是「輸入值」<br />
+2. (想開兩次根號) <code>inner &lt;- sqrt(16); inner</code><br />
+3. 提到 Environment Pane 有新變數: <code>inner</code><br />
+4. 有時你不想儲存每個函數的結果…<br />
+5. <code>sqrt(sqrt(16))</code><br />
+6. Explain: 由<strong>內而外</strong>執行</span></p>
 <ul>
 <li>函數裡面可以放入另一個函數 (e.g. <code>sqrt(sqrt(16))</code>)，其運算的次序是<strong>由內而外</strong>，先執行最內部的函數，取得回傳值後，再將此回傳值作為外面的函數的輸入值</li>
 </ul>
@@ -1832,15 +1882,40 @@ window.onload = () => {
 <h2>說明文件 (R Documentation)</h2>
 <ul>
 <li><p>不確定如何使用函數時，可以閱讀該函數的說明文件：</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1">?sqrt</a>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1">?round</a>
 <a class="sourceLine" id="cb18-2" data-line-number="2"><span class="co"># ?&lt;function_name&gt;</span></a></code></pre></div></li>
 </ul>
+</div>
+<div id="function-arguments" class="section level2">
+<h2>Function Arguments</h2>
+<ul>
+<li>Argument names (Parameter)</li>
+<li>default value</li>
+<li>argument position</li>
+</ul>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="kw">round</span>(<span class="fl">0.123</span>)</a></code></pre></div>
+<pre><code>#&gt; [1] 0</code></pre>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="kw">round</span>(<span class="fl">0.123</span>, <span class="dv">2</span>)</a></code></pre></div>
+<pre><code>#&gt; [1] 0.12</code></pre>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1"><span class="kw">round</span>(<span class="fl">0.123</span>, <span class="dt">digits =</span> <span class="dv">2</span>)</a></code></pre></div>
+<pre><code>#&gt; [1] 0.12</code></pre>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1"><span class="kw">round</span>(<span class="dt">digits =</span> <span class="dv">2</span>, <span class="dt">x =</span> <span class="fl">0.123</span>)</a></code></pre></div>
+<pre><code>#&gt; [1] 0.12</code></pre>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1"><span class="kw">round</span>(<span class="dt">digits =</span> <span class="dv">2</span>)</a></code></pre></div>
+<pre><code>#&gt; [1] 2</code></pre>
 <div id="-basic-r" class="section level3">
 <h3>作業: Basic R</h3>
 <ul>
 <li>sequence of numbers: <code>:</code>, <code>c()</code>, <code>sum()</code>, <code>mean()</code></li>
 </ul>
 </div>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>「反斜線鍵」位置位於 <code>Enter 鍵</code>上方。<a href="#fnref1" class="footnote-back">↩</a></p></li>
+<li id="fn2"><p>「斜線鍵」與「問號鍵」為同個按鍵。<a href="#fnref2" class="footnote-back">↩</a></p></li>
+</ol>
 </div>
 
 

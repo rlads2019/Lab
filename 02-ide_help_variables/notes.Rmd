@@ -18,9 +18,9 @@ knitr::opts_chunk$set(echo = TRUE,comment = '#>',message = F)
 ```
 
 ```{js echo=FALSE}
-var baseurl = window.location.origin
 window.onload = () => {
-    if (baseurl == 'https://rlads2019.netlify.com') {
+    if (window.location.href.startsWith('https://rlads2019.netlify.com/lab/') ||
+        window.location.href.startsWith('file:///home/liao/Desktop/Lab/')) {
         document.querySelectorAll('.hide').forEach(ele => {
             ele.className = 'note';
         })
@@ -28,9 +28,10 @@ window.onload = () => {
 }
 ```
 
+[今天...]{.hide data-tag="Oppenning"}
 
 <!-- Part 1: RStudio config -->
-[PART 1: RStudio]{.hide}
+[blah blah blah]{.hide data-tag="First Topic: RStudio"}
 
 ## 自訂樣式
 
@@ -58,7 +59,7 @@ window.onload = () => {
 
 ## 工作目錄 (Working Directory, a.k.a. Current Directory)
 
-- 打開 RStudio 的第一步就是要設置「工作目錄」的位置。「工作目錄」是當前 R 語言「工作」的資料夾。亦即，若 R 執行時需要讀取外部檔案，或是執行後產出檔案，都會以這個資料夾為準。例如，只要將外部資料 (`foo.txt`) 放在「工作目錄」內，R 就可以直接使用這個資料的檔名當作路徑去存取這個檔案。
+- 打開 RStudio 的第一步就是要設置「工作目錄」的位置。「工作目錄」是當前 R 語言「工作」的資料夾。亦即，若 R 執行時需要讀取外部檔案，或是執行後產出檔案，都會以這個資料夾為準。例如，只要將外部資料 (`foo.txt`) 放在「工作目錄」內，R 就可以直接使用這個資料的檔名當作路徑去存取這個檔案 (i.e. 可使用[相對路徑](https://zh.wikipedia.org/wiki/%E8%B7%AF%E5%BE%84_(%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6)#%E7%BB%9D%E5%AF%B9%E4%B8%8E%E7%9B%B8%E5%AF%B9%E8%B7%AF%E5%BE%84)，之後課程會詳細介紹)。
 
 - RStudio 所在的「工作目錄」顯示於 Console Pane 的標籤下方 (e.g. `~/`)
 
@@ -69,16 +70,25 @@ window.onload = () => {
         
         [執行後，提到 Console 裡會出現一串指令: `setwd()`]{.hide}
 
-    - Console   <!-- 課程省略 -->
+    - Console
         - Console 是執行 R 語言的地方，我們可以透過 R 的指令去設置「工作目錄」
 
             ```r
             setwd('~/Desktop/week2')
             # setwd('<path/to/new_working_dir>')
             ```
+        
+        - Windows 電腦的檔案路徑分隔符號預設使用**反斜線** (`\`)[^backslash]。在 R 裡面，檔案路徑使用的是**斜線** (`/`)[^slash]，而反斜線有其它意義。
+          - 在 Windows 電腦上使用 R 時，
+            1. 可使用 **2 個反斜線 (`\\`)**作為檔案路徑分隔 (e.g. `C:\\Users\\Desktop`) (直接複製貼上 Windows 的檔案路徑會無效)
+            2. 或使用 R 預設的 **1 個斜線 (`/`)** (e.g. `C:/Users/Desktop`)
+
+[^backslash]: 「反斜線鍵」位置位於 `Enter 鍵`上方。
+[^slash]: 「斜線鍵」與「問號鍵」為同個按鍵。
 
 <!-- Part 2: Very Basic R -->
-[PART 2: R 四則運算、指派、內建函數]{.hide}
+[(R 四則運算、指派、內建函數)  
+]{.hide data-tag="Second Topic: Very Basic R"}
 
 ## R Console
 
@@ -109,6 +119,11 @@ x
 
 ## R 內建函數
 
+[
+1. R 函數類比**數學函數**: 輸入值、輸出值  
+2. **Demo**  
+]{.hide data-tag="Flow: "}
+
 - R 裡面的函數就像是我們國高中數學課學到的「函數」。
     - R 的函數 (通常) 會有一個或多個「輸入值」，稱為「引數 (argument)」；並且在運算完成後，一定會丟出一個「回傳值」
 
@@ -116,7 +131,15 @@ x
 
 <!--  -->
 [使用 assignment 儲存函數回傳值 (呼應前面)，
-藉此引到函數內部可以放入函數]{.hide}
+藉此引到函數內部可以放入函數  
+---  
+1. `sqrt(16)`: 括號內是「輸入值」  
+2. (想開兩次根號) `inner <- sqrt(16); inner`  
+3. 提到 Environment Pane 有新變數: `inner`  
+4. 有時你不想儲存每個函數的結果...  
+5. `sqrt(sqrt(16))`  
+6. Explain: 由**內而外**執行
+]{.hide data-tag="Demo Flow:"}
 
 - 函數裡面可以放入另一個函數 (e.g. `sqrt(sqrt(16))`)，其運算的次序是**由內而外**，先執行最內部的函數，取得回傳值後，再將此回傳值作為外面的函數的輸入值
 
@@ -135,12 +158,33 @@ sqrt(sqrt(16))
 - 不確定如何使用函數時，可以閱讀該函數的說明文件：
 
     ```{r help}
-    ?sqrt
+    ?log
     # ?<function_name>
     ```
+    
+
+## Function Arguments
+
+- Argument names (Parameter)
+- default value
+- argument position
 
 
+```{r multiple-arguments, error=TRUE}
+log(100)
+log(100, 10)
+log(x = 100, base = 10)  # Be explicit
 
+# With names, order doesn't matter
+log(base = 10, x = 100)
+
+# Mix order and names:
+# argument will be passed first by name,
+# then by order
+log(100, x = 10)
+log()
+log(base = 10)    # throw error
+```
 
 
 
@@ -157,5 +201,51 @@ sqrt(sqrt(16))
 
 
 ### 作業: Basic R
+
+#### Named Arguments and Argument positions:
+
+```{r}
+order_s <- function(p1, p2, p3) {paste(p1, p2, p3)}
+
+order_s(1, 2, 3)
+order_s(p2 = 2, p1 = 1, p3 = 3)
+
+order_s(1, 2, p3 = 3)
+order_s(1, 2, p2 = 3)
+order_s(1, 2, p1 = 3)
+```
+
+# order(<p1>, <p2>, <p3>) returns
+# "<p1> <p2> <p3>"
+
+題目: 在 `order_s(1, 2, 3)` 的其中一個 argument 前面加上名稱 (`p1`, `p2`, or `p3`)，但**不能修改 argument 的次序**，使印出的結果符合要求
+
+
+#### Q1-0 (範例，不計分)
+
+請在下方程式碼的 3 個 argument 中，選擇其中一個為其加入 argument name，使函數能印出 "1 2 3"
+
+```{r example1}
+order_s(1, 2, 3)
+```
+
+
+答案：
+
+```{r example1}
+order_s(1, 2, p3=3)  # 正確答案
+#order_s(1, p2=2, 3)  # 另一種正確答案
+#order_s(1, p3=3, 2)  # 印出結果正確，但不符要求
+```
+
+#### Q1-1
+
+請在下方程式碼的 3 個 argument 中，選擇其中一個為其加入 argument name，使函數能印出 "1 3 2"
+
+```{r q1-1}
+order_s(1, 2, 3)
+```
+
+
 
 - sequence of numbers: `:`, `c()`, `sum()`, `mean()`

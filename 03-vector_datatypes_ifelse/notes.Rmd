@@ -22,9 +22,9 @@ knitr::opts_chunk$set(echo = TRUE,
 
 
 ```{js echo=FALSE}
-var baseurl = window.location.origin
 window.onload = () => {
-    if (baseurl == 'https://rlads2019.netlify.com') {
+    if (window.location.href.startsWith('https://rlads2019.netlify.com/lab/') ||
+        window.location.href.startsWith('file:///home/liao/Desktop/Lab/')) {
         document.querySelectorAll('.hide').forEach(ele => {
             ele.className = 'note';
         })

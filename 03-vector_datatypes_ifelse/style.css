@@ -83,7 +83,7 @@ img.half {
 }
 .note::before {
   display: block;
-  content: "Note: ";
+  content: attr(data-tag);
   color: red;
   font-weight: bold;
 }
@@ -106,7 +106,37 @@ img.half {
   code * {
     font-size: 16px !important;
   }
-  #TOC, h1.title, h4.date, .sourceCode + pre {
+  #TOC, .sourceCode + pre {
     display: none !important;
+  }
+  h1 {
+    font-size: 1.8em !important;
+  }
+  h2 {
+    font-size: 1.6em !important;
+  }
+  h3 {
+    font-size: 1.4em !important;
+  }
+  h1.title {
+    margin-top: 0;
+    padding-top: 0;
+    padding-bottom: 5px;
+    font-size: 1.4em !important;
+    text-align: center !important;
+  }
+  h4.date {
+    display: inline !important;
+    position: fixed !important;
+    padding: 0;
+    margin: 0;
+    top: 0 !important;
+    right: 0 !important;
+    font-size: 0.9em !important;
+    color: grey !important;
+    z-index: 0 !important;
+  }
+  a[href]:after {
+    content: "" !important;
   }
 }
