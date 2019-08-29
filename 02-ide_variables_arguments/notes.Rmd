@@ -187,9 +187,14 @@ log(base = 2, 4)
 
 ## 作業內容
 
-- Play with R
+
+1. Named and unnamed arguments assignment in a function (see [this](https://github.com/rlads2019/hw2/blob/master/index.Rmd))
+
+1. Play with R (預備下週的 vector 介紹)
     1. Use **help page** to find: <code>?`:`</code>
     1. Play with sequence, use `sum()`, `mean()`
+
+
 
 ## 作業說明：R Markdown 使用
 
@@ -203,6 +208,7 @@ log(base = 2, 4)
 
 
 (在 RStudio 使用 R Markdown)
+  
 - 使用 RStudio 開啟 R Markdown (`.Rmd`) 時，Rmd 檔會出現在 Source Pane 讓使用者編輯
 
 - 將 R Markdown (`.Rmd`) 輸出 (`knit` )成 HTML 檔 (`.html`):
