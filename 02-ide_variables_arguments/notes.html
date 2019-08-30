@@ -1759,6 +1759,9 @@ div.tocify {
 </div>
 
 
+<!-- 
+Pkg help page
+-->
 <script type="text/javascript">
 window.onload = () => {
     if (window.location.href.startsWith('https://rlads2019.netlify.com/lab/') ||
@@ -1816,7 +1819,8 @@ window.onload = () => {
 <ul>
 <li><p>Console 是執行 R 語言的地方，我們可以透過 R 的指令去設置「工作目錄」</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">setwd</span>(<span class="st">'~/Desktop/week2'</span>)</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="co"># setwd('&lt;path/to/new_working_dir&gt;')</span></a></code></pre></div></li>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="co"># setwd('&lt;path/to/new_working_dir&gt;')</span></a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw">getwd</span>()  <span class="co"># show current directory</span></a></code></pre></div></li>
 <li>Windows 電腦的檔案路徑分隔符號預設使用<strong>反斜線</strong> (<code>\</code>)<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>。在 R 裡面，檔案路徑使用的是<strong>斜線</strong> (<code>/</code>)<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>，而反斜線有其它意義。
 <ul>
 <li>在 Windows 電腦上使用 R 時，
@@ -1835,15 +1839,35 @@ window.onload = () => {
 <div id="r-console" class="section level2">
 <h2>R Console</h2>
 <ul>
-<li><p>Console 是 RStudio 裡面用來和 R 語言溝通的地方，換言之，就是使用者輸入與執行 R 語言的地方</p></li>
+<li>Console 是 RStudio 裡面用來和 R 語言溝通的地方，換言之，就是使用者輸入與執行 R 語言的地方</li>
+</ul>
+<p><span class="hide" data-tag="Demo Flow:">1. Console 輸入 <code>1</code>; 說明回傳 <code>[1] 1</code><br />
+2. <code>[1]</code> 是一個方便使用者閱讀結果的標記，它的目的是作為 index，用以指出其<strong>右方的那個數字</strong>是所有印出來的數值中的第一個<br />
+3. 在這裡我們輸入 <code>1</code> 只會回傳一個數值。但，之後會提到， R 是一種向量式的語言，所以 R 的指令常常會一次印出很多數值。這個時候，這個 index 就能方便使用者知道印出來的數字是第幾個<br />
+4. Console 輸入 <code>11:51</code>; 解釋指令 (結構、目的與功能)</span></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="dv">1</span></a></code></pre></div>
+<pre><code>#&gt; [1] 1</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="co">#&gt; [1] 1</span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="dv">11</span><span class="op">:</span><span class="dv">51</span></a></code></pre></div>
+<pre><code>#&gt;  [1] 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33
+#&gt; [24] 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="co">#&gt; [1] 1 2 3 ....</span></a></code></pre></div>
+<ul>
+<li>輸入指令後，會在 Console 印出 <code>[&lt;num&gt;] &lt;value(s)&gt;</code>。
+<ul>
+<li><code>&lt;value(s)&gt;</code> 是指令所傳回來的數值 (可有一個以上)，e.g. <code>1</code> or <code>1 2 3 4</code></li>
+<li>而 <code>[&lt;num&gt;]</code> 則是一個指標 (位於每橫列的開頭)，用來指示其<strong>右邊第一個值</strong>在所有的值之中的排序，e.g. <code>[1] 11 12 13</code> 代表 <code>11</code> 是第 1 個數值、<code>12</code> 是第 2 個數值；若第一行不足以印出所有的值，則會接著印出第二行: 例如 <code>[16] 26 27 28</code> 代表 <code>26</code> 是第 16 個。</li>
+</ul></li>
+<li><p><code>+</code> and <code>Esc 鍵</code></p></li>
 <li><p>一些簡單的 R 指令</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="dv">3</span> <span class="op">+</span><span class="st"> </span><span class="dv">4</span></a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="dv">3</span> <span class="op">+</span><span class="st"> </span><span class="dv">4</span></a></code></pre></div>
 <pre><code>#&gt; [1] 10</code></pre>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>(<span class="dv">3</span> <span class="op">+</span><span class="st"> </span><span class="dv">4</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>(<span class="dv">3</span> <span class="op">+</span><span class="st"> </span><span class="dv">4</span>)</a></code></pre></div>
 <pre><code>#&gt; [1] 14</code></pre>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="dv">3</span> <span class="op">/</span><span class="st"> </span><span class="dv">2</span></a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="dv">3</span> <span class="op">/</span><span class="st"> </span><span class="dv">2</span></a></code></pre></div>
 <pre><code>#&gt; [1] 1.5</code></pre>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="dv">3</span> <span class="op">^</span><span class="st"> </span><span class="dv">2</span></a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="dv">3</span> <span class="op">^</span><span class="st"> </span><span class="dv">2</span></a></code></pre></div>
 <pre><code>#&gt; [1] 9</code></pre></li>
 </ul>
 </div>
@@ -1854,8 +1878,8 @@ window.onload = () => {
 </ul>
 <!-- First explain with slide, then execute code -->
 <p><span class="hide">先用 slide 講解再執行程式碼</span></p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="dv">3</span> <span class="op">+</span><span class="st"> </span><span class="dv">4</span></a>
-<a class="sourceLine" id="cb10-2" data-line-number="2">x</a></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="dv">3</span> <span class="op">+</span><span class="st"> </span><span class="dv">4</span></a>
+<a class="sourceLine" id="cb15-2" data-line-number="2">x</a></code></pre></div>
 <pre><code>#&gt; [1] 10</code></pre>
 </div>
 <div id="r-" class="section level2">
@@ -1882,21 +1906,13 @@ window.onload = () => {
 <ul>
 <li>函數裡面可以放入另一個函數 (e.g. <code>sqrt(sqrt(16))</code>)，其運算的次序是<strong>由內而外</strong>，先執行最內部的函數，取得回傳值後，再將此回傳值作為外面的函數的輸入值</li>
 </ul>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw">sqrt</span>(<span class="dv">16</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="kw">sqrt</span>(<span class="dv">16</span>)</a></code></pre></div>
 <pre><code>#&gt; [1] 4</code></pre>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1">inner &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="dv">16</span>)</a>
-<a class="sourceLine" id="cb14-2" data-line-number="2"><span class="kw">sqrt</span>(inner)</a></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1">inner &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="dv">16</span>)</a>
+<a class="sourceLine" id="cb19-2" data-line-number="2"><span class="kw">sqrt</span>(inner)</a></code></pre></div>
 <pre><code>#&gt; [1] 2</code></pre>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw">sqrt</span>(<span class="kw">sqrt</span>(<span class="dv">16</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="kw">sqrt</span>(<span class="kw">sqrt</span>(<span class="dv">16</span>))</a></code></pre></div>
 <pre><code>#&gt; [1] 2</code></pre>
-</div>
-<div id="-r-documentation" class="section level2">
-<h2>說明文件 (R Documentation)</h2>
-<ul>
-<li><p>不確定如何使用函數時，可以閱讀該函數的說明文件：</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1">?log</a>
-<a class="sourceLine" id="cb18-2" data-line-number="2"><span class="co"># ?&lt;function_name&gt;</span></a></code></pre></div></li>
-</ul>
 </div>
 <div id="function-arguments" class="section level2">
 <h2>Function Arguments</h2>
@@ -1904,21 +1920,39 @@ window.onload = () => {
 <li>Argument names (Parameter)</li>
 <li>argument position</li>
 </ul>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="kw">log</span>(<span class="dv">4</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1"><span class="kw">log</span>(<span class="dv">4</span>)</a></code></pre></div>
 <pre><code>#&gt; [1] 1.386294</code></pre>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="kw">log</span>(<span class="dv">4</span>, <span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1"><span class="kw">log</span>(<span class="dv">4</span>, <span class="dv">2</span>)</a></code></pre></div>
 <pre><code>#&gt; [1] 2</code></pre>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1"><span class="kw">log</span>(<span class="dt">x =</span> <span class="dv">4</span>, <span class="dt">base =</span> <span class="dv">2</span>)  <span class="co"># Be explicit</span></a></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1"><span class="kw">log</span>(<span class="dt">x =</span> <span class="dv">4</span>, <span class="dt">base =</span> <span class="dv">2</span>)  <span class="co"># Be explicit</span></a></code></pre></div>
 <pre><code>#&gt; [1] 2</code></pre>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1"><span class="co"># If all args are named, order doesn't matter</span></a>
-<a class="sourceLine" id="cb25-2" data-line-number="2"><span class="kw">log</span>(<span class="dt">base =</span> <span class="dv">2</span>, <span class="dt">x =</span> <span class="dv">4</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1"><span class="co"># If all args are named, order doesn't matter</span></a>
+<a class="sourceLine" id="cb29-2" data-line-number="2"><span class="kw">log</span>(<span class="dt">base =</span> <span class="dv">2</span>, <span class="dt">x =</span> <span class="dv">4</span>)</a></code></pre></div>
 <pre><code>#&gt; [1] 2</code></pre>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1"><span class="co"># Mix named and unnamed args:</span></a>
-<a class="sourceLine" id="cb27-2" data-line-number="2"><span class="co"># named args will be assigned first, then</span></a>
-<a class="sourceLine" id="cb27-3" data-line-number="3"><span class="co"># unnamed args will be assigned </span></a>
-<a class="sourceLine" id="cb27-4" data-line-number="4"><span class="co"># based on their positions</span></a>
-<a class="sourceLine" id="cb27-5" data-line-number="5"><span class="kw">log</span>(<span class="dt">base =</span> <span class="dv">2</span>, <span class="dv">4</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1"><span class="co"># Mix named and unnamed args:</span></a>
+<a class="sourceLine" id="cb31-2" data-line-number="2"><span class="co"># named args will be assigned first, then</span></a>
+<a class="sourceLine" id="cb31-3" data-line-number="3"><span class="co"># unnamed args will be assigned </span></a>
+<a class="sourceLine" id="cb31-4" data-line-number="4"><span class="co"># based on their positions</span></a>
+<a class="sourceLine" id="cb31-5" data-line-number="5"><span class="kw">log</span>(<span class="dt">base =</span> <span class="dv">2</span>, <span class="dv">4</span>)</a></code></pre></div>
 <pre><code>#&gt; [1] 2</code></pre>
+</div>
+<div id="-r-documentation" class="section level2">
+<h2>說明文件 (R Documentation)</h2>
+<ul>
+<li><p>不確定如何使用函數時，可以閱讀該函數的說明文件：</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" data-line-number="1">?log</a>
+<a class="sourceLine" id="cb33-2" data-line-number="2"><span class="co"># ?&lt;function_name&gt;</span></a></code></pre></div></li>
+<li>說明文件結構
+<ul>
+<li>Description: 簡短描述函數功能</li>
+<li>Usage: 如何呼叫函數 (有哪些 Arguments)</li>
+<li>Arguments: 每個 Argument 的意義</li>
+<li>Details: 關於函數的詳細描述</li>
+<li>Value: 函數會丟出什麼？ (回傳值)</li>
+<li>Examples: 可直接複製貼上 到 R Console 直接執行的函數使用範例</li>
+</ul>
+<p>建議閱讀步驟：Description &gt; Usage &gt; Arguments &gt; Value &gt; Examples &gt; Details</p></li>
+</ul>
 </div>
 <div class="section level2">
 <h2>作業內容</h2>
@@ -1935,7 +1969,7 @@ window.onload = () => {
 <h2>作業說明：R Markdown 使用</h2>
 <ul>
 <li><p>使用前需先安裝 <code>rmarkdown</code>:</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1"><span class="kw">install.packages</span>(<span class="st">'rmarkdown'</span>)</a></code></pre></div></li>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" data-line-number="1"><span class="kw">install.packages</span>(<span class="st">'rmarkdown'</span>)</a></code></pre></div></li>
 <li><p>R Markdown (<code>.Rmd</code>) 就像上週同學用來寫自我介紹的 Markdown 文件 (<code>.md</code>) 一樣是一種<strong>純文字格式</strong>。撰寫 R Markdown 的語法事實上是 Markdown 的一種擴充： 它新增了一些特殊的語法，讓使用者可以直接在 R Markdown 裡面撰寫程式碼，並透過 R 將這些程式碼的運算結果插入 R Markdown 的輸出文件當中。</p></li>
 </ul>
 <p>(在 RStudio 使用 R Markdown)</p>

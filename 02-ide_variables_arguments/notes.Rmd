@@ -13,6 +13,11 @@ output:
     md_extensions: +implicit_figures
 ---
 
+<!-- 
+Pkg help page
+-->
+
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE,comment = '#>',message = F)
 ```
@@ -76,6 +81,7 @@ window.onload = () => {
             ```r
             setwd('~/Desktop/week2')
             # setwd('<path/to/new_working_dir>')
+            getwd()  # show current directory
             ```
         
         - Windows 電腦的檔案路徑分隔符號預設使用**反斜線** (`\`)[^backslash]。在 R 裡面，檔案路徑使用的是**斜線** (`/`)[^slash]，而反斜線有其它意義。
@@ -93,6 +99,28 @@ window.onload = () => {
 ## R Console
 
 - Console 是 RStudio 裡面用來和 R 語言溝通的地方，換言之，就是使用者輸入與執行 R 語言的地方
+
+[
+1. Console 輸入 `1`; 說明回傳 `[1] 1`  
+2. `[1]` 是一個方便使用者閱讀結果的標記，它的目的是作為 index，用以指出其**右方的那個數字**是所有印出來的數值中的第一個  
+3. 在這裡我們輸入 `1` 只會回傳一個數值。但，之後會提到， R 是一種向量式的語言，所以 R 的指令常常會一次印出很多數值。這個時候，這個 index 就能方便使用者知道印出來的數字是第幾個  
+4. Console 輸入 `11:51`; 解釋指令 (結構、目的與功能)
+]{.hide data-tag="Demo Flow:"}
+
+```{r console-print-index}
+1
+#> [1] 1
+
+11:51
+#> [1] 1 2 3 ....
+```
+
+- 輸入指令後，會在 Console 印出 `[<num>] <value(s)>`。
+    - `<value(s)>` 是指令所傳回來的數值 (可有一個以上)，e.g. `1` or `1 2 3 4`
+    - 而 `[<num>]` 則是一個指標 (位於每橫列的開頭)，用來指示其**右邊第一個值**在所有的值之中的排序，e.g. `[1] 11 12 13` 代表 `11` 是第 1 個數值、`12` 是第 2 個數值；若第一行不足以印出所有的值，則會接著印出第二行: 例如 `[16] 26 27 28` 代表 `26` 是第 16 個。
+
+
+- `+` and `Esc 鍵`
 
 - 一些簡單的 R 指令
 
@@ -153,16 +181,6 @@ sqrt(sqrt(16))
 ```
 
 
-## 說明文件 (R Documentation)
-
-- 不確定如何使用函數時，可以閱讀該函數的說明文件：
-
-    ```{r help}
-    ?log
-    # ?<function_name>
-    ```
-    
-
 ## Function Arguments
 
 - Argument names (Parameter)
@@ -183,6 +201,26 @@ log(base = 2, x = 4)
 # based on their positions
 log(base = 2, 4)
 ```
+
+## 說明文件 (R Documentation)
+
+- 不確定如何使用函數時，可以閱讀該函數的說明文件：
+
+    ```{r help}
+    ?log
+    # ?<function_name>
+    ```
+
+- 說明文件結構
+    - Description: 簡短描述函數功能
+    - Usage: 如何呼叫函數 (有哪些 Arguments)
+    - Arguments: 每個 Argument 的意義
+    - Details: 關於函數的詳細描述
+    - Value: 函數會丟出什麼？ (回傳值)
+    - Examples: 可直接複製貼上 到 R Console 直接執行的函數使用範例
+    
+    建議閱讀步驟：Description > Usage > Arguments > Value > Examples > Details
+
 
 
 ## 作業內容
@@ -208,7 +246,7 @@ log(base = 2, 4)
 
 
 (在 RStudio 使用 R Markdown)
-  
+
 - 使用 RStudio 開啟 R Markdown (`.Rmd`) 時，Rmd 檔會出現在 Source Pane 讓使用者編輯
 
 - 將 R Markdown (`.Rmd`) 輸出 (`knit` )成 HTML 檔 (`.html`):
