@@ -210,7 +210,8 @@ log(base = 2, 4)
 
 - 不確定如何使用函數時，可以閱讀該函數的說明文件：
 
-    ```{r help}
+    ```{r help, error=TRUE}
+    log()  # error message
     ?log
     # ?<function_name>
     ```
