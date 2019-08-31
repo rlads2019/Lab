@@ -139,8 +139,11 @@ window.onload = () => {
 <!-- First explain with slide, then execute code -->
 [先用 slide 講解再執行程式碼]{.hide}
 
-```{r variables}
+```{r variables, results='hold'}
 x <- 2 * 3 + 4
+x
+
+x <- 1
 x
 ```
 
@@ -158,7 +161,8 @@ x
 - `sqrt()` 是一個函數，它會將輸入值 (在圓括號內) 開根號後回傳
 
 <!--  -->
-[使用 assignment 儲存函數回傳值 (呼應前面)，
+[
+使用 assignment 儲存函數回傳值 (呼應前面)，
 藉此引到函數內部可以放入函數  
 ---  
 1. `sqrt(16)`: 括號內是「輸入值」  
@@ -222,18 +226,6 @@ log(base = 2, 4)
     建議閱讀步驟：Description > Usage > Arguments > Value > Examples > Details
 
 
-
-## 作業內容
-
-
-1. Named and unnamed arguments assignment in a function (see [this](https://github.com/rlads2019/hw2/blob/master/index.Rmd))
-
-1. Play with R (預備下週的 vector 介紹)
-    1. Use **help page** to find: <code>?`:`</code>
-    1. Play with sequence, use `sum()`, `mean()`
-
-
-
 ## 作業說明：R Markdown 使用
 
 - 使用前需先安裝 `rmarkdown`:
@@ -244,6 +236,10 @@ log(base = 2, 4)
 
 - R Markdown (`.Rmd`) 就像上週同學用來寫自我介紹的 Markdown 文件 (`.md`) 一樣是一種**純文字格式**。撰寫 R Markdown 的語法事實上是 Markdown 的一種擴充： 它新增了一些特殊的語法，讓使用者可以直接在 R Markdown 裡面撰寫程式碼，並透過 R 將這些程式碼的運算結果插入 R Markdown 的輸出文件當中。
 
+- knitr Code Chunk
+    - 執行：由上至下執行
+    - 後面的 chunk 可以讀取之前的 chunks 產生的變數
+
 
 (在 RStudio 使用 R Markdown)
 
@@ -252,3 +248,5 @@ log(base = 2, 4)
 - 將 R Markdown (`.Rmd`) 輸出 (`knit` )成 HTML 檔 (`.html`):
 
 ![R Markdown document in RStudio.](https://bookdown.org/yihui/rmarkdown/images/hello-rmd.png){.half}
+
+
