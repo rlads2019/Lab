@@ -1,0 +1,253 @@
+---
+title: "熟悉 RStudio、Very Basic R (W2)"
+date: '2019-09-26'
+output:
+  html_document:
+    number_sections: no
+    theme: united
+    highlight: tango
+    toc: yes
+    toc_float:
+      collapse: no
+    css: style.css
+    md_extensions: +implicit_figures
+---
+
+<!-- 
+Pkg help page
+-->
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,comment = '#>',message = F)
+```
+
+```{js echo=FALSE}
+window.onload = () => {
+    if (window.location.href.startsWith('https://rlads2019.netlify.com/lab/') ||
+        window.location.href.startsWith('file:///home/liao/Desktop/Lab/')) {
+        document.querySelectorAll('.hide').forEach(ele => {
+            ele.className = 'note';
+        })
+    }
+}
+```
+
+[今天...]{.hide data-tag="Oppenning"}
+
+<!-- Part 1: RStudio config -->
+[blah blah blah]{.hide data-tag="First Topic: RStudio"}
+
+## 自訂樣式
+
+- RStudio 預設有 3 個區塊 (Pane)，最多可設置 4 個區塊。你可以自行決定這 4 個區塊的位置
+    - `Tools` --> `Global Options...` --> (在左欄選擇) `Pane Layout`
+    - Source, Console, 及 2 個自訂區塊
+
+- 除了區塊的相對位置，也可以設定 RStudio 整體的風格以及程式碼 Syntax Highlighting 的樣式:
+    - `Tools` --> `Global Options...` --> (在左欄選擇) `Appearance`
+
+
+## 編輯器設定
+
+- Source Pane 是撰寫程式碼的地方 (文字編輯器)
+    - 縮排間距：建議使用 space (而非 tab) 作為縮排字元
+    
+        - `Tools` --> `Global Options...` --> (在左欄選擇) `Code` --> (在上方選擇) `Editing` --> 勾選 `Inset spaces for tab`
+
+    - 文字編碼：由於中文字在各作業系統上會有編碼不一致的問題，請**務必**將編碼設定為 `UTF-8`
+    
+        - `Tools` --> `Global Options...` --> (在左欄選擇) `Code` --> (在上方選擇) `Saving` --> `Default text encoding`
+
+
+
+
+## 工作目錄 (Working Directory, a.k.a. Current Directory)
+
+- 打開 RStudio 的第一步就是要設置「工作目錄」的位置。「工作目錄」是當前 R 語言「工作」的資料夾。亦即，若 R 執行時需要讀取外部檔案，或是執行後產出檔案，都會以這個資料夾為準。例如，只要將外部資料 (`foo.txt`) 放在「工作目錄」內，R 就可以直接使用這個資料的檔名當作路徑去存取這個檔案 (i.e. 可使用[相對路徑](https://zh.wikipedia.org/wiki/%E8%B7%AF%E5%BE%84_(%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6)#%E7%BB%9D%E5%AF%B9%E4%B8%8E%E7%9B%B8%E5%AF%B9%E8%B7%AF%E5%BE%84)，之後課程會詳細介紹)。
+
+- RStudio 所在的「工作目錄」顯示於 Console Pane 的標籤下方 (e.g. `~/`)
+
+- 工作目錄的設置方式
+    - RStudio 功能選單
+    
+        `Sessions` --> `Set Working Directory...`  
+        
+        [執行後，提到 Console 裡會出現一串指令: `setwd()`]{.hide}
+
+    - Console
+        - Console 是執行 R 語言的地方，我們可以透過 R 的指令去設置「工作目錄」
+
+            ```r
+            setwd('~/Desktop/week2')
+            # setwd('<path/to/new_working_dir>')
+            getwd()  # show current directory
+            ```
+        
+        - Windows 電腦的檔案路徑分隔符號預設使用**反斜線** (`\`)[^backslash]。在 R 裡面，檔案路徑使用的是**斜線** (`/`)[^slash]，而反斜線有其它意義。
+          - 在 Windows 電腦上使用 R 時，
+            1. 可使用 **2 個反斜線** (`\\`) 作為檔案路徑分隔 (e.g. `C:\\Users\\Desktop`) (直接複製貼上 Windows 的檔案路徑會無效)
+            2. 或使用 R 預設的 **1 個斜線** (`/`) (e.g. `C:/Users/Desktop`)
+
+[^backslash]: 「反斜線鍵」位置位於 `Enter 鍵`上方。
+[^slash]: 「斜線鍵」與「問號鍵」為同個按鍵。
+
+<!-- Part 2: Very Basic R -->
+[(R 四則運算、指派、內建函數)  
+]{.hide data-tag="Second Topic: Very Basic R"}
+
+## R Console
+
+- Console 是 RStudio 裡面用來和 R 語言溝通的地方，換言之，就是使用者輸入與執行 R 語言的地方
+
+[
+1. Console 輸入 `1`; 說明回傳 `[1] 1`  
+2. `[1]` 是一個方便使用者閱讀結果的標記，它的目的是作為 index，用以指出其**右方的那個數字**是所有印出來的數值中的第一個  
+3. 在這裡我們輸入 `1` 只會回傳一個數值。但，之後會提到， R 是一種向量式的語言，所以 R 的指令常常會一次印出很多數值。這個時候，這個 index 就能方便使用者知道印出來的數字是第幾個  
+4. Console 輸入 `11:51`; 解釋指令 (結構、目的與功能)
+]{.hide data-tag="Demo Flow:"}
+
+```{r console-print-index}
+1
+#> [1] 1
+
+11:51
+#> [1] 1 2 3 ....
+```
+
+- 輸入指令後，會在 Console 印出 `[<num>] <value(s)>`。
+    - `<value(s)>` 是指令所傳回來的數值 (可有一個以上)，e.g. `1` or `1 2 3 4`
+    - 而 `[<num>]` 則是一個指標 (位於每橫列的開頭)，用來指示其**右邊第一個值**在所有的值之中的排序，e.g. `[1] 11 12 13` 代表 `11` 是第 1 個數值、`12` 是第 2 個數值；若第一行不足以印出所有的值，則會接著印出第二行: 例如 `[16] 26 27 28` 代表 `26` 是第 16 個。
+
+
+- `+` and `Esc 鍵`
+
+- 一些簡單的 R 指令
+
+    ```{r arithmetic}
+    2 * 3 + 4
+    2 * (3 + 4)
+    
+    3 / 2
+    3 ^ 2
+    ```
+
+## 變數與回傳值
+
+- 要將 R 執行的結果儲存起來，需要使用 `<-` (assignment operator) 指派變數 ，將 `<-` 右邊的程式碼**執行後所回傳的數值**儲存於 `<-` 左邊的變數
+
+<!-- First explain with slide, then execute code -->
+[先用 slide 講解再執行程式碼]{.hide}
+
+```{r variables, results='hold'}
+x <- 2 * 3 + 4
+x
+
+x <- 1
+x
+```
+
+
+## R 內建函數
+
+[
+1. R 函數類比**數學函數**: 輸入值、輸出值  
+2. **Demo**  
+]{.hide data-tag="Flow: "}
+
+- R 裡面的函數就像是我們國高中數學課學到的「函數」。
+    - R 的函數 (通常) 會有一個或多個「輸入值」，稱為「引數 (argument)」；並且在運算完成後，一定會丟出一個「回傳值」
+
+- `sqrt()` 是一個函數，它會將輸入值 (在圓括號內) 開根號後回傳
+
+<!--  -->
+[
+使用 assignment 儲存函數回傳值 (呼應前面)，
+藉此引到函數內部可以放入函數  
+---  
+1. `sqrt(16)`: 括號內是「輸入值」  
+2. (想開兩次根號) `inner <- sqrt(16); inner`  
+3. 提到 Environment Pane 有新變數: `inner`  
+4. 有時你不想儲存每個函數的結果...  
+5. `sqrt(sqrt(16))`  
+6. Explain: 由**內而外**執行
+]{.hide data-tag="Demo Flow:"}
+
+- 函數裡面可以放入另一個函數 (e.g. `sqrt(sqrt(16))`)，其運算的次序是**由內而外**，先執行最內部的函數，取得回傳值後，再將此回傳值作為外面的函數的輸入值
+
+```{r buitin-functions}
+sqrt(16)
+
+inner <- sqrt(16)
+sqrt(inner)
+
+sqrt(sqrt(16))
+```
+
+
+## Function Arguments
+
+- Argument names (Parameter)
+- argument position
+
+
+```{r multiple-arguments, error=TRUE}
+log(4)
+log(4, 2)
+log(x = 4, base = 2)  # Be explicit
+
+# If all args are named, order doesn't matter
+log(base = 2, x = 4)
+
+# Mix named and unnamed args:
+# named args will be assigned first, then
+# unnamed args will be assigned 
+# based on their positions
+log(base = 2, 4)
+```
+
+## 說明文件 (R Documentation)
+
+- 不確定如何使用函數時，可以閱讀該函數的說明文件：
+
+    ```{r help, error=TRUE}
+    log()  # error message
+    ?log
+    # ?<function_name>
+    ```
+
+- 說明文件結構
+    - Description: 簡短描述函數功能
+    - Usage: 如何呼叫函數 (有哪些 Arguments)
+    - Arguments: 每個 Argument 的意義
+    - Details: 關於函數的詳細描述
+    - Value: 函數會丟出什麼？ (回傳值)
+    - Examples: 可直接複製貼上 到 R Console 直接執行的函數使用範例
+    
+    建議閱讀步驟：Description > Usage > Arguments > Value > Examples > Details
+
+
+## 作業說明：R Markdown 使用
+
+- 使用前需先安裝 `rmarkdown`:
+
+    ```r
+    install.packages('rmarkdown')
+    ```
+
+- R Markdown (`.Rmd`) 就像上週同學用來寫自我介紹的 Markdown 文件 (`.md`) 一樣是一種**純文字格式**。撰寫 R Markdown 的語法事實上是 Markdown 的一種擴充： 它新增了一些特殊的語法，讓使用者可以直接在 R Markdown 裡面撰寫程式碼，並透過 R 將這些程式碼的運算結果插入 R Markdown 的輸出文件當中。
+
+- knitr Code Chunk
+    - 執行：由上至下執行
+    - 後面的 chunk 可以讀取之前的 chunks 產生的變數
+
+
+(在 RStudio 使用 R Markdown)
+
+- 使用 RStudio 開啟 R Markdown (`.Rmd`) 時，Rmd 檔會出現在 Source Pane 讓使用者編輯
+
+- 將 R Markdown (`.Rmd`) 輸出 (`knit` )成 HTML 檔 (`.html`):
+
+![R Markdown document in RStudio.](https://bookdown.org/yihui/rmarkdown/images/hello-rmd.png){.half}
+
+

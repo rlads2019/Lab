@@ -84,34 +84,53 @@ x == 2
 ```{r}
 sum(c(T, T, T, F))
 
-x <- c("male", "male", "female", "female", "female")
-sum(x == "male")
+gender <- c("male", "female", "male", "female")
+sum(gender == "male")  # num of male
+mean(gender == "male")  # proportion of male
 ```
 
-## subsetting a vector
+## Subsetting a vector
 
 ### index subsetting
 
 ```{r}
 # z[<integer or integer_vector>]
-z <- LETTERS
-z[1]
-z[1:5]
+a2z <- LETTERS
+a2z[1]
+a2z[1:5]
+a2z[c(1, 3, 5)]
 ```
 
 ### Logical subsetting
 
 ```{r}
 # z[<logical_vector>]
-x <- c(1, 2, 3, 2)
-x[c(FALSE, TRUE, FALSE, TRUE)]
+age <- c(21, 20, 18, 19)
+age[c(FALSE, TRUE, FALSE, TRUE)]
 
 ## Creating logical vectors
-x[1] == 2  # return logical vector of length 1
-x == 2     # return logical vector of length(x)
+age[1] < 20  # return logical vector of length 1
+age < 20     # return logical vector of length(x)
 # Subset vector
-x[x == 2]
+age[age < 20]
 ```
+
+#### Boolean operators
+
+`&`, `|`, `all()`
+
+
+
+### Subsetting with names
+
+```{r}
+age <- c(kai = 40, jessy = 20, sean = 18, yola = 19)
+age
+age['kai'] + 9
+
+age[c('jessy', 'kai')]
+```
+
 
 
 ## Modifying Values in vector
@@ -178,10 +197,31 @@ Note: can use multiple `else if`.
     }
     ```
 
+
 ## Wrap up (build upon if-else):
 
 - ToDo: 想出一個 program 會用到前面的東西
   - `%in%`: combine if-else and vector
+
+
+```{r construct-a-comparitive-sentence}
+name <- c("kai", "jessy", "sean", "yola")
+age <- c(40, 20, 18, 19)
+about <- c("a professor", "a cat lover", "a hacker", "a YouTuber")
+
+draws <- sample(1:4, size = 2)
+if (age[draws[1]] > age[draws[2]]) {
+    comparitive <-  'is older than'
+} else if (age[draws][1] < age[draws][2]) {
+    comparitive <-  'is younger than'
+} else {
+    comparitive <-  'is the same age as'
+}
+roles <- paste0(name[draws], ', ' , about[draws])
+roles
+
+paste0(roles[1], ', ', comparitive, ' ', roles[2], '.')
+```
 
 
 ## 參考資料
