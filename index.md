@@ -88,7 +88,7 @@ table {
     border: 1.6px solid #9c9c9cc9;
 }
 td:nth-child(4+n), td:nth-child(1), td:nth-child(2) {
-    text-align: center
+    text-align: center;
 }
 td {
     padding: 7px 4px;
