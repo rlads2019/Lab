@@ -81,3 +81,19 @@
     - 若被抄襲後果自行負責
     - 應先嘗試找出問題的癥結點，而不是把程式碼直接丟給助教 debug
 
+
+<style>
+table {
+    width: 100%;
+    border: 1.6px solid #9c9c9cc9;
+}
+tr:nth-child(4+n) {
+    text-align: center
+}
+td {
+    padding: 7px 2px;
+    border: 1.6px solid #9c9c9cc9;
+}
+
+</style>
+
