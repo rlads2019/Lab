@@ -87,13 +87,12 @@ table {
     width: 100%;
     border: 1.6px solid #9c9c9cc9;
 }
-td:nth-child(4+n), td:nth-child(1), td:nth-child(2) {
-    text-align: center;
-}
 td {
     padding: 7px 4px;
     border: 1.6px solid #9c9c9cc9;
 }
-
+td:nth-child(1), td:nth-child(2), td:nth-child(n+4) {
+    text-align: center;
+}
 </style>
 
