@@ -41,14 +41,14 @@ window.onload = () => {
 
 ## vector
 
-- 上週實習課使用 R 時，指令的回傳值多半只有「一個」。但 R 其實是一種以**向量**作為基本單位的程式語言，所以對於「一個回傳值」更精確的描述是「一個**長度為 1** 的向量」。
-```{r results='hold'}
-x <- 2
-x
-
-is.vector(x)
-length(x)
-```
+- 上週實習課使用 R 時，指令的回傳值多半只有「一個」。但 R 其實是一種以**向量**作為基本單位的程式語言，所以對於「一個回傳值」更精確的描述應該是「一個**長度為 1** 的向量」。
+    ```{r results='hold'}
+    x <- 2
+    x
+    
+    is.vector(x)
+    length(x)
+    ```
 
 
 - 我們上週簡短提過以 `:` 製造數列的方式 (e.g. `1:10`)。事實上，這個回傳的數列即是一個 vector。另外，由於這個 vector 的每個元素皆是整數，因此這個 vector 屬於 integer vector。我們可以使用 `typeof()` 確認 vector 的類別
@@ -116,49 +116,63 @@ typeof(dbl_vec)
 
 ### logical vector
 
-- `TRUE` or `FALSE`
+- logical vector 的每個元素由 `TRUE` 或 `FALSE` 組成。
 
-- 製造 logical vector:
-    1. 手動輸入：`c()`
-    1. logical tests
-        - logical operators: `==`, `!=`, `>`, `<`, `%in%`  
-        ![Logical Operators](https://img.yongfu.name/rlads/logical-operators.png)
-        - boolean operators: `&`, `|`, `!`, `any()`, `all()`  
-        ![Boolean Operators](https://img.yongfu.name/rlads/boolean-operators.png)
+- 可以使用 `c()` 一項項手動輸入製造 logical vector
+
+- logical vector 的另一個來源則是 logical test 的回傳值：
+    - logical operators: `==`, `!=`, `>`, `<`, `%in%`  
+    ![Logical Operators](https://img.yongfu.name/rlads/logical-operators.png)
+
+- boolean operators (`&`, `|`, `!`, `any()`, `all()`) 可以整合**多個** logical tests  
+![Boolean Operators](https://img.yongfu.name/rlads/boolean-operators.png)
 
 ```{r}
 c(TRUE, FALSE, TRUE)
-1 == 1
 c(1, 2, 3) == c(1, 3, 3)
 
-1 == 1 & 1!= 2
+(1 == 1) & (1!= 2)
 ```
 
 
-## recycling
+## Recycling
+
+- 在 R 裡對 vector 的操作通常是 **element-wise**，亦即，對向量的操作會套用在向量裡的每一個元素上。例如，`c(1, 2, 3) + 2` 會將 vector 裡的每個元素都加上 2。R 作到這點的方式是將長度較短的那個 vector (`2`) 「回收 (recycle)」，亦即，重複向量內的元素使其「拉長」到另一個 vector 的長度；接著再將兩個一樣長的 vector 進行向量式的運算
 
 ```{r}
 x <- c(1, 1, 2, 2)
 
-x == c(2, 2, 2, 2)  # equivalent to...
-x == 2
+# Arithmetic operation
+x + 2  # equivalent to...
+x + c(2, 2, 2, 2)
+
+# Logical operation
+x == 2  # equivalent to...
+x == c(2, 2, 2, 2)
+
+# String operation
+long <- c("a", "b", "c")
+short <- "1"
+paste0("a", "1")
+paste0(long, short)
 ```
-
-- `paste0()`
-
-- element-wise comparison
-
-    ```{r}
-    x <- c(1, 1, 2, 2)
-    
-    x + 2  # equivalent to...
-    x + c(2, 2, 2, 2)
-    ```
 
 
 ## Coercion
 
-![Rules of Coercion](https://rstudio-education.github.io/hopr/images/hopr_0301.png){.half}
+- vector 內的每個元素，其資料類型 (data type) 必須相同。資料類型即是前面提到的 `integer`, `double`, `character`, `logical`。
+
+- 若發生資料類型不一致的情形 (e.g. 將不同資料類型的元素放入 `c()`)，R 會根據某些**規則**，**自動**進行某些資料類型的轉換。這個過程在 R 裡面稱為 Coercion
+    ```{r}
+    c(TRUE, FALSE, 3)      # logical & numeric
+    c(-1, "aa")            # numeric & character
+    c(FALSE, TRUE, "hi!")  # logical & character
+    c(TRUE, 0, "hi!")      # logical & numeric & character
+    ```
+
+
+
+![Rules of Coercion](https://img.yongfu.name/rlads/coercion.png){.half}
 
 - if coercion failed, throw error
 
@@ -202,7 +216,7 @@ age[age < 20]
 ### Subsetting with names
 
 ```{r}
-age <- c(kai = 40, jessy = 20, sean = 18, yola = 19)
+age <- c(kai = 40, jessy = 20, joy = 18, yola = 19)
 age
 age['kai'] + 9
 
@@ -283,7 +297,7 @@ Note: can use multiple `else if`.
 
 
 ```{r construct-a-comparitive-sentence}
-name <- c("kai", "jessy", "sean", "yola")
+name <- c("kai", "jessy", "joy", "yola")
 age <- c(40, 20, 18, 19)
 about <- c("a professor", "a cat lover", "a hacker", "a YouTuber")
 
