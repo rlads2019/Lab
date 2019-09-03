@@ -1914,7 +1914,7 @@ window.onload = () => {
 <h2>Coercion</h2>
 <ul>
 <li><p>vector 內的每個元素，其資料類型 (data type) 必須相同。資料類型即是前面提到的 <code>integer</code>, <code>double</code>, <code>character</code>, <code>logical</code>。</p></li>
-<li><p>若發生資料類型不一致的情形 (e.g. 將不同資料類型的元素放入 <code>c()</code>)，R 會根據某些<strong>規則</strong>，<strong>自動</strong>進行某些資料類型的轉換。這個過程在 R 裡面稱為 Coercion</p>
+<li><p>若發生資料類型不一致的情形 (e.g. 將不同資料類型的元素放入 <code>c()</code>)，R 會根據某些<strong>規則</strong>，<strong>自動</strong>進行資料類型的轉換。這個過程在 R 裡面稱為 Coercion</p>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="dv">3</span>)      <span class="co"># logical &amp; numeric</span></a>
 <a class="sourceLine" id="cb19-2" data-line-number="2"><span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="st">&quot;aa&quot;</span>)            <span class="co"># numeric &amp; character</span></a>
 <a class="sourceLine" id="cb19-3" data-line-number="3"><span class="kw">c</span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="st">&quot;hi!&quot;</span>)  <span class="co"># logical &amp; character</span></a>
@@ -1943,9 +1943,17 @@ window.onload = () => {
 </div>
 <div id="subsetting-a-vector" class="section level2">
 <h2>Subsetting a vector</h2>
+<ul>
+<li>有 3 種方法可用於取出 vector 裡面的元素 (回傳一個新的 vector)
+<ol style="list-style-type: decimal">
+<li>透過提供 vector 中元素的位置次序 (index)</li>
+<li>透過一個與此 vector 等長的 logical vector。在 logical vector 中的相對應位置，以 <code>TRUE</code> 或 <code>FALSE</code> 表示是否保留該位置的元素</li>
+<li>透過提供元素的「名字」(i.e. <code>names</code> 屬性)</li>
+</ol></li>
+</ul>
 <div id="index-subsetting" class="section level3">
 <h3>index subsetting</h3>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1"><span class="co"># z[&lt;integer or integer_vector&gt;]</span></a>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1"><span class="co"># z[&lt;integer_vector&gt;]</span></a>
 <a class="sourceLine" id="cb23-2" data-line-number="2">a2z &lt;-<span class="st"> </span>LETTERS</a>
 <a class="sourceLine" id="cb23-3" data-line-number="3">a2z[<span class="dv">1</span>]</a>
 <a class="sourceLine" id="cb23-4" data-line-number="4">a2z[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>]</a>
@@ -1956,7 +1964,7 @@ window.onload = () => {
 </div>
 <div id="logical-subsetting" class="section level3">
 <h3>Logical subsetting</h3>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1"><span class="co"># z[&lt;logical_vector&gt;]</span></a>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1"><span class="co"># z[&lt;logical_vector of length(z)&gt;]</span></a>
 <a class="sourceLine" id="cb25-2" data-line-number="2">age &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">21</span>, <span class="dv">20</span>, <span class="dv">18</span>, <span class="dv">19</span>)</a>
 <a class="sourceLine" id="cb25-3" data-line-number="3">age[<span class="kw">c</span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>)]</a>
 <a class="sourceLine" id="cb25-4" data-line-number="4"></a>
@@ -1972,11 +1980,14 @@ window.onload = () => {
 </div>
 <div id="subsetting-with-names" class="section level3">
 <h3>Subsetting with names</h3>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1">age &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dt">kai =</span> <span class="dv">40</span>, <span class="dt">jessy =</span> <span class="dv">20</span>, <span class="dt">joy =</span> <span class="dv">18</span>, <span class="dt">yola =</span> <span class="dv">19</span>)</a>
-<a class="sourceLine" id="cb27-2" data-line-number="2">age</a>
-<a class="sourceLine" id="cb27-3" data-line-number="3">age[<span class="st">'kai'</span>] <span class="op">+</span><span class="st"> </span><span class="dv">9</span></a>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1">age &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">40</span>, <span class="dv">20</span>, <span class="dv">18</span>, <span class="dv">19</span>)</a>
+<a class="sourceLine" id="cb27-2" data-line-number="2"><span class="kw">names</span>(age) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;kai&quot;</span>, <span class="st">&quot;jessy&quot;</span>, <span class="st">&quot;joy&quot;</span>, <span class="st">&quot;yola&quot;</span>)</a>
+<a class="sourceLine" id="cb27-3" data-line-number="3"><span class="co"># age &lt;- c(kai = 40, jessy = 20, joy = 18, yola = 19)  # another way of setting names</span></a>
 <a class="sourceLine" id="cb27-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb27-5" data-line-number="5">age[<span class="kw">c</span>(<span class="st">'jessy'</span>, <span class="st">'kai'</span>)]</a></code></pre></div>
+<a class="sourceLine" id="cb27-5" data-line-number="5">age</a>
+<a class="sourceLine" id="cb27-6" data-line-number="6">age[<span class="st">'kai'</span>] <span class="op">+</span><span class="st"> </span><span class="dv">9</span></a>
+<a class="sourceLine" id="cb27-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb27-8" data-line-number="8">age[<span class="kw">c</span>(<span class="st">'jessy'</span>, <span class="st">'kai'</span>)]</a></code></pre></div>
 <pre><code>#&gt;   kai jessy   joy  yola 
 #&gt;    40    20    18    19 
 #&gt; kai 
@@ -1984,59 +1995,61 @@ window.onload = () => {
 #&gt; jessy   kai 
 #&gt;    20    40</code></pre>
 </div>
-</div>
-<div id="modifying-values-in-vector" class="section level2">
-<h2>Modifying Values in vector</h2>
-<ul>
-<li>assignment: <code>x[1] &lt;- 10</code></li>
-</ul>
-</div>
-<div id="vectorization" class="section level2">
-<h2>Vectorization</h2>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1"><span class="co"># weighted mean</span></a>
-<a class="sourceLine" id="cb29-2" data-line-number="2">prob &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span><span class="op">/</span><span class="dv">6</span>, <span class="dv">1</span><span class="op">/</span><span class="dv">6</span>, <span class="dv">1</span><span class="op">/</span><span class="dv">6</span>, <span class="dv">1</span><span class="op">/</span><span class="dv">6</span>, <span class="dv">1</span><span class="op">/</span><span class="dv">6</span>)</a></code></pre></div>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" data-line-number="1">vec1 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</a>
-<a class="sourceLine" id="cb30-2" data-line-number="2">vec2 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">-1</span>, <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb30-3" data-line-number="3">vec1 <span class="op">*</span><span class="st"> </span>vec2</a>
-<a class="sourceLine" id="cb30-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb30-5" data-line-number="5">inner_product &lt;-<span class="st"> </span><span class="kw">sum</span>(vec1 <span class="op">*</span><span class="st"> </span>vec2)</a></code></pre></div>
-<pre><code>#&gt; [1] -1 -2  3</code></pre>
+<div id="modifying-values-in-vector" class="section level3">
+<h3>Modifying Values in vector</h3>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1">a2z &lt;-<span class="st"> </span>LETTERS</a>
+<a class="sourceLine" id="cb29-2" data-line-number="2">a2z[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>)</a>
+<a class="sourceLine" id="cb29-3" data-line-number="3">a2z</a></code></pre></div>
+<pre><code>#&gt;  [1] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;D&quot; &quot;E&quot; &quot;F&quot; &quot;G&quot; &quot;H&quot; &quot;I&quot; &quot;J&quot; &quot;K&quot; &quot;L&quot; &quot;M&quot; &quot;N&quot; &quot;O&quot; &quot;P&quot; &quot;Q&quot;
+#&gt; [18] &quot;R&quot; &quot;S&quot; &quot;T&quot; &quot;U&quot; &quot;V&quot; &quot;W&quot; &quot;X&quot; &quot;Y&quot; &quot;Z&quot;</code></pre>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1">gender &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;m&quot;</span>, <span class="st">&quot;m&quot;</span>, <span class="st">&quot;f&quot;</span>, <span class="st">&quot;f&quot;</span>)</a>
+<a class="sourceLine" id="cb31-2" data-line-number="2">gender[gender <span class="op">==</span><span class="st"> &quot;m&quot;</span>] &lt;-<span class="st"> &quot;male&quot;</span></a>
+<a class="sourceLine" id="cb31-3" data-line-number="3">gender[gender <span class="op">==</span><span class="st"> &quot;f&quot;</span>] &lt;-<span class="st"> &quot;female&quot;</span></a>
+<a class="sourceLine" id="cb31-4" data-line-number="4">gender</a></code></pre></div>
+<pre><code>#&gt; [1] &quot;male&quot;   &quot;male&quot;   &quot;female&quot; &quot;female&quot;</code></pre>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" data-line-number="1"><span class="kw">names</span>(gender) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;john&quot;</span>, <span class="st">&quot;jenny&quot;</span>, <span class="st">&quot;jane&quot;</span>, <span class="st">&quot;kate&quot;</span>)</a>
+<a class="sourceLine" id="cb33-2" data-line-number="2">gender[<span class="st">&quot;john&quot;</span>] &lt;-<span class="st"> &quot;male&quot;</span></a>
+<a class="sourceLine" id="cb33-3" data-line-number="3">gender[<span class="kw">c</span>(<span class="st">&quot;jenny&quot;</span>, <span class="st">&quot;jane&quot;</span>, <span class="st">&quot;kate&quot;</span>)] &lt;-<span class="st"> &quot;female&quot;</span></a>
+<a class="sourceLine" id="cb33-4" data-line-number="4">gender</a></code></pre></div>
+<pre><code>#&gt;     john    jenny     jane     kate 
+#&gt;   &quot;male&quot; &quot;female&quot; &quot;female&quot; &quot;female&quot;</code></pre>
 <hr />
 <!-- 
 Conceptually new topic:
 Add if-else concept and then wrap up
 -->
 </div>
+</div>
 <div id="if-else" class="section level2">
 <h2>if else</h2>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb32-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb32-3" data-line-number="3"><span class="cf">if</span> (x <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) {</a>
-<a class="sourceLine" id="cb32-4" data-line-number="4">    <span class="kw">print</span>(<span class="st">'x is positive'</span>)</a>
-<a class="sourceLine" id="cb32-5" data-line-number="5">} <span class="cf">else</span> {</a>
-<a class="sourceLine" id="cb32-6" data-line-number="6">    <span class="kw">print</span>(<span class="st">'x is not positive'</span>)</a>
-<a class="sourceLine" id="cb32-7" data-line-number="7">}</a></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb35-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb35-3" data-line-number="3"><span class="cf">if</span> (x <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) {</a>
+<a class="sourceLine" id="cb35-4" data-line-number="4">    <span class="kw">print</span>(<span class="st">'x is positive'</span>)</a>
+<a class="sourceLine" id="cb35-5" data-line-number="5">} <span class="cf">else</span> {</a>
+<a class="sourceLine" id="cb35-6" data-line-number="6">    <span class="kw">print</span>(<span class="st">'x is not positive'</span>)</a>
+<a class="sourceLine" id="cb35-7" data-line-number="7">}</a></code></pre></div>
 <pre><code>#&gt; [1] &quot;x is positive&quot;</code></pre>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="dv">-1</span></a>
-<a class="sourceLine" id="cb34-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb34-3" data-line-number="3"><span class="cf">if</span> (x <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) {</a>
-<a class="sourceLine" id="cb34-4" data-line-number="4">    <span class="kw">print</span>(<span class="st">'x is positive'</span>)</a>
-<a class="sourceLine" id="cb34-5" data-line-number="5">} <span class="cf">else</span> <span class="cf">if</span> (x <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>) {</a>
-<a class="sourceLine" id="cb34-6" data-line-number="6">    <span class="kw">print</span>(<span class="st">'x is negative'</span>)</a>
-<a class="sourceLine" id="cb34-7" data-line-number="7">} <span class="cf">else</span> {</a>
-<a class="sourceLine" id="cb34-8" data-line-number="8">    <span class="kw">print</span>(<span class="st">'x is zero'</span>)</a>
-<a class="sourceLine" id="cb34-9" data-line-number="9">}</a></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="dv">-1</span></a>
+<a class="sourceLine" id="cb37-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb37-3" data-line-number="3"><span class="cf">if</span> (x <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) {</a>
+<a class="sourceLine" id="cb37-4" data-line-number="4">    <span class="kw">print</span>(<span class="st">'x is positive'</span>)</a>
+<a class="sourceLine" id="cb37-5" data-line-number="5">} <span class="cf">else</span> <span class="cf">if</span> (x <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>) {</a>
+<a class="sourceLine" id="cb37-6" data-line-number="6">    <span class="kw">print</span>(<span class="st">'x is negative'</span>)</a>
+<a class="sourceLine" id="cb37-7" data-line-number="7">} <span class="cf">else</span> {</a>
+<a class="sourceLine" id="cb37-8" data-line-number="8">    <span class="kw">print</span>(<span class="st">'x is zero'</span>)</a>
+<a class="sourceLine" id="cb37-9" data-line-number="9">}</a></code></pre></div>
 <pre><code>#&gt; [1] &quot;x is negative&quot;</code></pre>
 <p>Note: can use multiple <code>else if</code>.</p>
 <ul>
 <li><p>template</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" data-line-number="1"><span class="cf">if</span> (<span class="op">&lt;</span>condition <span class="dv">1</span><span class="op">&gt;</span>) {</a>
-<a class="sourceLine" id="cb36-2" data-line-number="2">    <span class="op">&lt;</span><span class="st"> </span>do something <span class="op">&gt;</span></a>
-<a class="sourceLine" id="cb36-3" data-line-number="3">} <span class="cf">else</span> <span class="cf">if</span> ( <span class="op">&lt;</span><span class="st"> </span>condition <span class="dv">2</span> <span class="op">&gt;</span><span class="st"> </span>) {</a>
-<a class="sourceLine" id="cb36-4" data-line-number="4">    <span class="op">&lt;</span><span class="st"> </span>do something <span class="op">&gt;</span></a>
-<a class="sourceLine" id="cb36-5" data-line-number="5">} <span class="cf">else</span> {</a>
-<a class="sourceLine" id="cb36-6" data-line-number="6">    <span class="op">&lt;</span><span class="st"> </span>do something <span class="op">&gt;</span></a>
-<a class="sourceLine" id="cb36-7" data-line-number="7">}</a></code></pre></div></li>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" data-line-number="1"><span class="cf">if</span> (<span class="op">&lt;</span>condition <span class="dv">1</span><span class="op">&gt;</span>) {</a>
+<a class="sourceLine" id="cb39-2" data-line-number="2">    <span class="op">&lt;</span><span class="st"> </span>do something <span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb39-3" data-line-number="3">} <span class="cf">else</span> <span class="cf">if</span> ( <span class="op">&lt;</span><span class="st"> </span>condition <span class="dv">2</span> <span class="op">&gt;</span><span class="st"> </span>) {</a>
+<a class="sourceLine" id="cb39-4" data-line-number="4">    <span class="op">&lt;</span><span class="st"> </span>do something <span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb39-5" data-line-number="5">} <span class="cf">else</span> {</a>
+<a class="sourceLine" id="cb39-6" data-line-number="6">    <span class="op">&lt;</span><span class="st"> </span>do something <span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb39-7" data-line-number="7">}</a></code></pre></div></li>
 </ul>
 </div>
 <div id="wrap-up-build-upon-if-else" class="section level2">
@@ -2047,24 +2060,23 @@ Add if-else concept and then wrap up
 <li><code>%in%</code>: combine if-else and vector</li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" data-line-number="1">name &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;kai&quot;</span>, <span class="st">&quot;jessy&quot;</span>, <span class="st">&quot;joy&quot;</span>, <span class="st">&quot;yola&quot;</span>)</a>
-<a class="sourceLine" id="cb37-2" data-line-number="2">age &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">40</span>, <span class="dv">20</span>, <span class="dv">18</span>, <span class="dv">19</span>)</a>
-<a class="sourceLine" id="cb37-3" data-line-number="3">about &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;a professor&quot;</span>, <span class="st">&quot;a cat lover&quot;</span>, <span class="st">&quot;a hacker&quot;</span>, <span class="st">&quot;a YouTuber&quot;</span>)</a>
-<a class="sourceLine" id="cb37-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb37-5" data-line-number="5">draws &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">size =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb37-6" data-line-number="6"><span class="cf">if</span> (age[draws[<span class="dv">1</span>]] <span class="op">&gt;</span><span class="st"> </span>age[draws[<span class="dv">2</span>]]) {</a>
-<a class="sourceLine" id="cb37-7" data-line-number="7">    comparitive &lt;-<span class="st">  'is older than'</span></a>
-<a class="sourceLine" id="cb37-8" data-line-number="8">} <span class="cf">else</span> <span class="cf">if</span> (age[draws][<span class="dv">1</span>] <span class="op">&lt;</span><span class="st"> </span>age[draws][<span class="dv">2</span>]) {</a>
-<a class="sourceLine" id="cb37-9" data-line-number="9">    comparitive &lt;-<span class="st">  'is younger than'</span></a>
-<a class="sourceLine" id="cb37-10" data-line-number="10">} <span class="cf">else</span> {</a>
-<a class="sourceLine" id="cb37-11" data-line-number="11">    comparitive &lt;-<span class="st">  'is the same age as'</span></a>
-<a class="sourceLine" id="cb37-12" data-line-number="12">}</a>
-<a class="sourceLine" id="cb37-13" data-line-number="13">roles &lt;-<span class="st"> </span><span class="kw">paste0</span>(name[draws], <span class="st">', '</span> , about[draws])</a>
-<a class="sourceLine" id="cb37-14" data-line-number="14">roles</a>
-<a class="sourceLine" id="cb37-15" data-line-number="15"></a>
-<a class="sourceLine" id="cb37-16" data-line-number="16"><span class="kw">paste0</span>(roles[<span class="dv">1</span>], <span class="st">', '</span>, comparitive, <span class="st">' '</span>, roles[<span class="dv">2</span>], <span class="st">'.'</span>)</a></code></pre></div>
-<pre><code>#&gt; [1] &quot;joy, a hacker&quot;    &quot;kai, a professor&quot;
-#&gt; [1] &quot;joy, a hacker, is younger than kai, a professor.&quot;</code></pre>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" data-line-number="1">name &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;kai&quot;</span>, <span class="st">&quot;jessy&quot;</span>, <span class="st">&quot;joy&quot;</span>, <span class="st">&quot;yola&quot;</span>)</a>
+<a class="sourceLine" id="cb40-2" data-line-number="2">age &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">40</span>, <span class="dv">20</span>, <span class="dv">18</span>, <span class="dv">19</span>)</a>
+<a class="sourceLine" id="cb40-3" data-line-number="3">about &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;a professor&quot;</span>, <span class="st">&quot;a cat lover&quot;</span>, <span class="st">&quot;a hacker&quot;</span>, <span class="st">&quot;a YouTuber&quot;</span>)</a>
+<a class="sourceLine" id="cb40-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb40-5" data-line-number="5">draws &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">size =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb40-6" data-line-number="6"><span class="cf">if</span> (age[draws[<span class="dv">1</span>]] <span class="op">&gt;</span><span class="st"> </span>age[draws[<span class="dv">2</span>]]) {</a>
+<a class="sourceLine" id="cb40-7" data-line-number="7">    comparitive &lt;-<span class="st">  'is older than'</span></a>
+<a class="sourceLine" id="cb40-8" data-line-number="8">} <span class="cf">else</span> <span class="cf">if</span> (age[draws][<span class="dv">1</span>] <span class="op">&lt;</span><span class="st"> </span>age[draws][<span class="dv">2</span>]) {</a>
+<a class="sourceLine" id="cb40-9" data-line-number="9">    comparitive &lt;-<span class="st">  'is younger than'</span></a>
+<a class="sourceLine" id="cb40-10" data-line-number="10">} <span class="cf">else</span> {</a>
+<a class="sourceLine" id="cb40-11" data-line-number="11">    comparitive &lt;-<span class="st">  'is the same age as'</span></a>
+<a class="sourceLine" id="cb40-12" data-line-number="12">}</a>
+<a class="sourceLine" id="cb40-13" data-line-number="13">roles &lt;-<span class="st"> </span><span class="kw">paste0</span>(name[draws], <span class="st">', '</span> , about[draws])</a>
+<a class="sourceLine" id="cb40-14" data-line-number="14">roles</a></code></pre></div>
+<pre><code>#&gt; [1] &quot;yola, a YouTuber&quot; &quot;kai, a professor&quot;</code></pre>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" data-line-number="1"><span class="kw">paste0</span>(roles[<span class="dv">1</span>], <span class="st">', '</span>, comparitive, <span class="st">' '</span>, roles[<span class="dv">2</span>], <span class="st">'.'</span>)</a></code></pre></div>
+<pre><code>#&gt; [1] &quot;yola, a YouTuber, is younger than kai, a professor.&quot;</code></pre>
 </div>
 <div class="section level2">
 <h2>參考資料</h2>

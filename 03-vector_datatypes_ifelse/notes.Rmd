@@ -16,8 +16,7 @@ output:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE,
                       comment = '#>',
-                      message = F,
-                      results = 'hold')
+                      message = F)
 ```
 
 
@@ -96,7 +95,7 @@ typeof(dbl_vec)
 
 - 除了數字以外，R 也可以儲存**字串 (string)**。character vector 的每個元素皆由一個字串所組成。在 R 裡面，只要是被引號 (quote, `'` 或 `"` 皆可)
 包裹的東西就是字串，放在引號內的可以是任何字元 (e.g. 空白、數字、中文字、英文字母)
-    ```{r}
+    ```{r results='hold'}
     "1.1"  # This is a string (or character vector of length 1), not double
     "你 好！"
     c("1.1", "你 好！")
@@ -127,7 +126,7 @@ typeof(dbl_vec)
 - boolean operators (`&`, `|`, `!`, `any()`, `all()`) 可以整合**多個** logical tests  
 ![Boolean Operators](https://img.yongfu.name/rlads/boolean-operators.png)
 
-```{r}
+```{r  results='hold'}
 c(TRUE, FALSE, TRUE)
 c(1, 2, 3) == c(1, 3, 3)
 
@@ -139,7 +138,7 @@ c(1, 2, 3) == c(1, 3, 3)
 
 - 在 R 裡對 vector 的操作通常是 **element-wise**，亦即，對向量的操作會套用在向量裡的每一個元素上。例如，`c(1, 2, 3) + 2` 會將 vector 裡的每個元素都加上 2。R 作到這點的方式是將長度較短的那個 vector (`2`) 「回收 (recycle)」，亦即，重複向量內的元素使其「拉長」到另一個 vector 的長度；接著再將兩個一樣長的 vector 進行向量式的運算
 
-```{r}
+```{r  results='hold'}
 x <- c(1, 1, 2, 2)
 
 # Arithmetic operation
@@ -162,8 +161,8 @@ paste0(long, short)
 
 - vector 內的每個元素，其資料類型 (data type) 必須相同。資料類型即是前面提到的 `integer`, `double`, `character`, `logical`。
 
-- 若發生資料類型不一致的情形 (e.g. 將不同資料類型的元素放入 `c()`)，R 會根據某些**規則**，**自動**進行某些資料類型的轉換。這個過程在 R 裡面稱為 Coercion
-    ```{r}
+- 若發生資料類型不一致的情形 (e.g. 將不同資料類型的元素放入 `c()`)，R 會根據某些**規則**，**自動**進行資料類型的轉換。這個過程在 R 裡面稱為 Coercion
+    ```{r  results='hold'}
     c(TRUE, FALSE, 3)      # logical & numeric
     c(-1, "aa")            # numeric & character
     c(FALSE, TRUE, "hi!")  # logical & character
@@ -178,7 +177,7 @@ paste0(long, short)
 
 - manual coercion: `as.character()`, `as.logical()`, `as.numeric()`
 
-```{r}
+```{r  results='hold'}
 sum(c(T, T, T, F))
 
 gender <- c("male", "female", "male", "female")
@@ -188,10 +187,16 @@ mean(gender == "male")  # proportion of male
 
 ## Subsetting a vector
 
+- 有 3 種方法可用於取出 vector 裡面的元素 (回傳一個新的 vector)
+    1. 透過提供 vector 中元素的位置次序 (index)
+    2. 透過一個與此 vector 等長的 logical vector。在 logical vector 中的相對應位置，以 `TRUE` 或 `FALSE` 表示是否保留該位置的元素
+    3. 透過提供元素的「名字」(i.e. `names` 屬性)
+
+
 ### index subsetting
 
-```{r}
-# z[<integer or integer_vector>]
+```{r  results='hold'}
+# z[<integer_vector>]
 a2z <- LETTERS
 a2z[1]
 a2z[1:5]
@@ -200,8 +205,8 @@ a2z[c(1, 3, 5)]
 
 ### Logical subsetting
 
-```{r}
-# z[<logical_vector>]
+```{r  results='hold'}
+# z[<logical_vector of length(z)>]
 age <- c(21, 20, 18, 19)
 age[c(FALSE, TRUE, FALSE, TRUE)]
 
@@ -215,36 +220,36 @@ age[age < 20]
 
 ### Subsetting with names
 
-```{r}
-age <- c(kai = 40, jessy = 20, joy = 18, yola = 19)
+```{r results='hold'}
+age <- c(40, 20, 18, 19)
+names(age) <- c("kai", "jessy", "joy", "yola")
+# age <- c(kai = 40, jessy = 20, joy = 18, yola = 19)  # another way of setting names
+
 age
 age['kai'] + 9
 
 age[c('jessy', 'kai')]
 ```
 
-
-
-## Modifying Values in vector
-
-- assignment: `x[1] <- 10`
-
-
-## Vectorization
-
-```{r}
-# weighted mean
-prob <- c(1/6, 1/6, 1/6, 1/6, 1/6)
-```
+### Modifying Values in vector
 
 
 ```{r}
-vec1 <- c(1, 2, 3)
-vec2 <- c(-1, -1, 1)
-vec1 * vec2
+a2z <- LETTERS
+a2z[1:3] <- c("a", "b", "c")
+a2z
 
-inner_product <- sum(vec1 * vec2)
+gender <- c("m", "m", "f", "f")
+gender[gender == "m"] <- "male"
+gender[gender == "f"] <- "female"
+gender
+
+names(gender) <- c("john", "jenny", "jane", "kate")
+gender["john"] <- "male"
+gender[c("jenny", "jane", "kate")] <- "female"
+gender
 ```
+
 
 -----------
 <!-- 
@@ -294,6 +299,7 @@ Note: can use multiple `else if`.
 
 - ToDo: 想出一個 program 會用到前面的東西
   - `%in%`: combine if-else and vector
+
 
 
 ```{r construct-a-comparitive-sentence}
