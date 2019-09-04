@@ -11,14 +11,15 @@
 |   7    |  10/24   | [視覺化：`ggplot2`、`plotly`][s7]            |             |            |           |
 |   8    |  10/31   | [字串處理：正規表達式、`stringr`][s8]          |             |            |           |
 |   9    |  11/07   |               期中考                        |             |            |           |
-|   10    |  11/14   | [中文文本處理：斷詞、詞頻表、語料庫][s10]         |             |            |           |
+|   10    |  11/14   | [中文文本處理：斷詞、詞頻表、語料庫][s10]        |             |            |           |
 |   11    |  11/21   | [API][s11]                                  |             |            |           |
-|   12    |  11/28   |              Guest Lecture                  |             |            |           |
+|   12    |  11/28   |           Guest Lecture                     |             |            |           |
 |   13    |  12/05   | [Web 101: HTML/CSS, GitHub Page][s13]       |             |            |           |
 |   14    |  12/12   | [網頁剖析：`rvest`][s14]                      |             |            |           |
 |   15    |  12/19   |                                             |             |            |           |
 |   16    |  12/26   |                                             |             |            |           |
-|   17    |  01/02   |        [Final Project Presentation?](#)      |             |            |           |
+|   17    |  01/02   |        Final Project Presentation?         |             |            |           |
+|   18    |  01/09   |             期末考週                        |             |            |           |
 
 
 <!-- Block 1: Base R -->
@@ -113,6 +114,10 @@ td {
     border: 1.6px solid #9c9c9cc9;
 }
 td:nth-child(1), td:nth-child(2), td:nth-child(n+4) {
+    text-align: center;
+}
+/* No Lab */
+tr:nth-child(5), tr:nth-child(9), tr:nth-child(12), tr:nth-child(17+n) {
     text-align: center;
 }
 </style>
