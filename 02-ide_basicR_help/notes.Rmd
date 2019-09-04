@@ -1,5 +1,5 @@
 ---
-title: "熟悉 RStudio、Very Basic R (W2)"
+title: "RStudio 設定、Basic R、函數、Help pages (W2)"
 date: '2019-09-19'
 output:
   html_document:
@@ -109,10 +109,7 @@ window.onload = () => {
 
 ```{r console-print-index}
 1
-#> [1] 1
-
 11:51
-#> [1] 1 2 3 ....
 ```
 
 - 輸入指令後，會在 Console 印出 `[<num>] <value(s)>`。
@@ -184,26 +181,66 @@ sqrt(inner)
 sqrt(sqrt(16))
 ```
 
+## 自訂函數
+
+```{r}
+get_area <- function() {
+    area <- 3.14 * 1 * 1
+    return(area)
+}
+get_area()
+
+# Function with argument
+get_area <- function(r) {
+    area <- 3.14 * r * r
+    return(area)
+}
+get_area(2)
+
+# Function with default value
+get_area <- function(r = 1) {
+    area <- 3.14 * r * r
+    return(area)
+}
+get_area()
+```
+
+```{r results='hold'}
+get_area <- function(r) {
+    area <- 3.14 * r * r
+    return(area)
+}
+
+area <- 100
+area
+get_area(1)
+area
+```
+
 
 ## Function Arguments
 
 - Argument names (Parameter)
 - argument position
 
-
 ```{r multiple-arguments, error=TRUE}
-log(4)
-log(4, 2)
-log(x = 4, base = 2)  # Be explicit
+vol <- function(r, height = 1) {
+  volumn <- 3.14 * r * r * height
+  return(volumn)
+}
+
+vol(1)
+vol(1, 2)
+vol(r = 1, height = 2)  # Be explicit
 
 # If all args are named, order doesn't matter
-log(base = 2, x = 4)
+vol(height = 2, r = 1)
 
 # Mix named and unnamed args:
 # named args will be assigned first, then
 # unnamed args will be assigned 
 # based on their positions
-log(base = 2, 4)
+vol(height = 2, 1)
 ```
 
 ## 說明文件 (R Documentation)
