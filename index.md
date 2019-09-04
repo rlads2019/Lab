@@ -117,7 +117,7 @@ td:nth-child(1), td:nth-child(2), td:nth-child(n+4) {
     text-align: center;
 }
 /* No Lab */
-tr:nth-child(5), tr:nth-child(9), tr:nth-child(12), tr:nth-child(17+n) {
+tr:nth-child(5) > td, tr:nth-child(9) > td, tr:nth-child(12) > td, tr:nth-child(17+n) > td {
     text-align: center;
 }
 </style>
