@@ -11,8 +11,6 @@
 |   7    |  10/24   | [視覺化：`ggplot2`、`plotly`][s7]            |             |            |           |
 |   8    |  10/31   | [字串處理：正規表達式、`stringr`][s8]          |             |            |           |
 |   9    |  11/07   |               期中考                        |             |            |           |
-
-<!-- 
 |   10    |  11/14   | [中文文本處理：斷詞、詞頻表、語料庫][s10]         |             |            |           |
 |   11    |  11/21   | [API][s11]                                  |             |            |           |
 |   12    |  11/28   |              Guest Lecture                  |             |            |           |
@@ -20,9 +18,10 @@
 |   14    |  12/12   | [網頁剖析：`rvest`][s14]                      |             |            |           |
 |   15    |  12/19   |                                             |             |            |           |
 |   16    |  12/26   |                                             |             |            |           |
-|   17    |  01/02   |        Final Project Presentation           |             |            |           |
--->
+|   17    |  01/02   |        [Final Project Presentation?](#)      |             |            |           |
 
+
+<!-- Block 1: Base R -->
 [s1]: https://docs.google.com/presentation/d/1wqK0tNB08ccZettohy54OgOdgae77udNeX3-41tm3K0/edit?usp=sharing
 [hw1]: https://github.com/rlads2019/_hw-demo
 
@@ -41,6 +40,7 @@
 [src4]: #
 [hw4]: #
 
+<!-- Block 2：data frame -->
 [s6]: #
 [note6]: #
 [src6]: #
@@ -55,6 +55,27 @@
 [note8]: #
 [src8]: #
 [hw8]: #
+
+<!-- Block 3: 文本處理 -->
+[s10]: #
+[note10]: #
+[src10]: #
+[hw10]: #
+
+[s11]: #
+[note11]: #
+[src11]: #
+[hw11]: #
+
+[s13]: #
+[note13]: #
+[src13]: #
+[hw13]: #
+
+[s14]: #
+[note14]: #
+[src14]: #
+[hw14]: #
 
 
 ## 提問注意事項
@@ -95,4 +116,22 @@ td:nth-child(1), td:nth-child(2), td:nth-child(n+4) {
     text-align: center;
 }
 </style>
+
+<script>
+window.onload = () => {
+    document.querySelectorAll('a').forEach(ele => {
+        if (ele.href == 'https://rlads2019.github.io/lab/#') {
+            ele.style.display = "none";
+        }
+    });
+    
+    function show() {
+        document.querySelectorAll('a').forEach(ele => {
+            if (ele.href == 'https://rlads2019.github.io/lab/#') {
+                ele.style.display = "inline";
+            }
+        });
+    }
+}
+</script>
 
