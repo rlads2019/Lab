@@ -207,6 +207,7 @@ a2z <- LETTERS
 a2z[1]
 a2z[1:5]
 a2z[c(1, 3, 5)]
+a2z[-(1:5)]  # Exclude the first 5 elements
 ```
 
 ### Logical subsetting
@@ -326,29 +327,32 @@ Note: can use multiple `else if`.
 - ToDo: 想出一個 program 會用到前面的東西
   - `%in%`: combine if-else and vector
 
-
-
 ```{r construct-a-comparitive-sentence, results='hold'}
+# Data
 name <- c("kai", "jessy", "joy", "yola")
 age <- c(40, 20, 18, 19)
 about <- c("a professor", "a cat lover", "a hacker", "a YouTuber")
 
+# Randomly draw 2 subjects
 draws <- sample(1:4, size = 2)
-if (age[draws[1]] > age[draws[2]]) {
-    comparitive <-  'is older than'
-} else if (age[draws][1] < age[draws][2]) {
-    comparitive <-  'is younger than'
-} else {
-    comparitive <-  'is the same age as'
-}
-roles <- paste0(name[draws], ', ' , about[draws])
-print(roles)
 
-paste0(roles[1], ', ', comparitive, ' ', roles[2], '.')
+# Find out who is older
+if (age[draws[1]] > age[draws[2]]) {
+    comparitive <- 'is older than'
+} else if (age[draws][1] < age[draws][2]) {
+    comparitive <- 'is younger than'
+} else {
+    comparitive <- 'is the same age as'
+}
+
+# Construct sentence
+roles <- paste0(name[draws], ", " , about[draws])
+print(roles)
+paste0(roles[1], ", ", comparitive, " ", roles[2], ".")
 ```
 
 
-## 參考資料
+## 配合課本
 
 - Hands-on programming with R
   - [R Objects](https://rstudio-education.github.io/hopr/r-objects.html)

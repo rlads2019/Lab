@@ -1957,10 +1957,13 @@ window.onload = () => {
 <a class="sourceLine" id="cb27-2" data-line-number="2">a2z &lt;-<span class="st"> </span>LETTERS</a>
 <a class="sourceLine" id="cb27-3" data-line-number="3">a2z[<span class="dv">1</span>]</a>
 <a class="sourceLine" id="cb27-4" data-line-number="4">a2z[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>]</a>
-<a class="sourceLine" id="cb27-5" data-line-number="5">a2z[<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>)]</a></code></pre></div>
+<a class="sourceLine" id="cb27-5" data-line-number="5">a2z[<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>)]</a>
+<a class="sourceLine" id="cb27-6" data-line-number="6">a2z[<span class="op">-</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)]  <span class="co"># Exclude the first 5 elements</span></a></code></pre></div>
 <pre><code>#&gt; [1] &quot;A&quot;
 #&gt; [1] &quot;A&quot; &quot;B&quot; &quot;C&quot; &quot;D&quot; &quot;E&quot;
-#&gt; [1] &quot;A&quot; &quot;C&quot; &quot;E&quot;</code></pre>
+#&gt; [1] &quot;A&quot; &quot;C&quot; &quot;E&quot;
+#&gt;  [1] &quot;F&quot; &quot;G&quot; &quot;H&quot; &quot;I&quot; &quot;J&quot; &quot;K&quot; &quot;L&quot; &quot;M&quot; &quot;N&quot; &quot;O&quot; &quot;P&quot; &quot;Q&quot; &quot;R&quot; &quot;S&quot; &quot;T&quot; &quot;U&quot; &quot;V&quot;
+#&gt; [18] &quot;W&quot; &quot;X&quot; &quot;Y&quot; &quot;Z&quot;</code></pre>
 </div>
 <div id="logical-subsetting" class="section level3">
 <h3>Logical subsetting</h3>
@@ -2078,27 +2081,32 @@ Add if-else concept and then wrap up
 <li><code>%in%</code>: combine if-else and vector</li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" data-line-number="1">name &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;kai&quot;</span>, <span class="st">&quot;jessy&quot;</span>, <span class="st">&quot;joy&quot;</span>, <span class="st">&quot;yola&quot;</span>)</a>
-<a class="sourceLine" id="cb44-2" data-line-number="2">age &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">40</span>, <span class="dv">20</span>, <span class="dv">18</span>, <span class="dv">19</span>)</a>
-<a class="sourceLine" id="cb44-3" data-line-number="3">about &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;a professor&quot;</span>, <span class="st">&quot;a cat lover&quot;</span>, <span class="st">&quot;a hacker&quot;</span>, <span class="st">&quot;a YouTuber&quot;</span>)</a>
-<a class="sourceLine" id="cb44-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb44-5" data-line-number="5">draws &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">size =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb44-6" data-line-number="6"><span class="cf">if</span> (age[draws[<span class="dv">1</span>]] <span class="op">&gt;</span><span class="st"> </span>age[draws[<span class="dv">2</span>]]) {</a>
-<a class="sourceLine" id="cb44-7" data-line-number="7">    comparitive &lt;-<span class="st">  'is older than'</span></a>
-<a class="sourceLine" id="cb44-8" data-line-number="8">} <span class="cf">else</span> <span class="cf">if</span> (age[draws][<span class="dv">1</span>] <span class="op">&lt;</span><span class="st"> </span>age[draws][<span class="dv">2</span>]) {</a>
-<a class="sourceLine" id="cb44-9" data-line-number="9">    comparitive &lt;-<span class="st">  'is younger than'</span></a>
-<a class="sourceLine" id="cb44-10" data-line-number="10">} <span class="cf">else</span> {</a>
-<a class="sourceLine" id="cb44-11" data-line-number="11">    comparitive &lt;-<span class="st">  'is the same age as'</span></a>
-<a class="sourceLine" id="cb44-12" data-line-number="12">}</a>
-<a class="sourceLine" id="cb44-13" data-line-number="13">roles &lt;-<span class="st"> </span><span class="kw">paste0</span>(name[draws], <span class="st">', '</span> , about[draws])</a>
-<a class="sourceLine" id="cb44-14" data-line-number="14"><span class="kw">print</span>(roles)</a>
-<a class="sourceLine" id="cb44-15" data-line-number="15"></a>
-<a class="sourceLine" id="cb44-16" data-line-number="16"><span class="kw">paste0</span>(roles[<span class="dv">1</span>], <span class="st">', '</span>, comparitive, <span class="st">' '</span>, roles[<span class="dv">2</span>], <span class="st">'.'</span>)</a></code></pre></div>
-<pre><code>#&gt; [1] &quot;yola, a YouTuber&quot; &quot;kai, a professor&quot;
-#&gt; [1] &quot;yola, a YouTuber, is younger than kai, a professor.&quot;</code></pre>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" data-line-number="1"><span class="co"># Data</span></a>
+<a class="sourceLine" id="cb44-2" data-line-number="2">name &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;kai&quot;</span>, <span class="st">&quot;jessy&quot;</span>, <span class="st">&quot;joy&quot;</span>, <span class="st">&quot;yola&quot;</span>)</a>
+<a class="sourceLine" id="cb44-3" data-line-number="3">age &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">40</span>, <span class="dv">20</span>, <span class="dv">18</span>, <span class="dv">19</span>)</a>
+<a class="sourceLine" id="cb44-4" data-line-number="4">about &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;a professor&quot;</span>, <span class="st">&quot;a cat lover&quot;</span>, <span class="st">&quot;a hacker&quot;</span>, <span class="st">&quot;a YouTuber&quot;</span>)</a>
+<a class="sourceLine" id="cb44-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb44-6" data-line-number="6"><span class="co"># Randomly draw 2 subjects</span></a>
+<a class="sourceLine" id="cb44-7" data-line-number="7">draws &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">size =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb44-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb44-9" data-line-number="9"><span class="co"># Find out who is older</span></a>
+<a class="sourceLine" id="cb44-10" data-line-number="10"><span class="cf">if</span> (age[draws[<span class="dv">1</span>]] <span class="op">&gt;</span><span class="st"> </span>age[draws[<span class="dv">2</span>]]) {</a>
+<a class="sourceLine" id="cb44-11" data-line-number="11">    comparitive &lt;-<span class="st"> 'is older than'</span></a>
+<a class="sourceLine" id="cb44-12" data-line-number="12">} <span class="cf">else</span> <span class="cf">if</span> (age[draws][<span class="dv">1</span>] <span class="op">&lt;</span><span class="st"> </span>age[draws][<span class="dv">2</span>]) {</a>
+<a class="sourceLine" id="cb44-13" data-line-number="13">    comparitive &lt;-<span class="st"> 'is younger than'</span></a>
+<a class="sourceLine" id="cb44-14" data-line-number="14">} <span class="cf">else</span> {</a>
+<a class="sourceLine" id="cb44-15" data-line-number="15">    comparitive &lt;-<span class="st"> 'is the same age as'</span></a>
+<a class="sourceLine" id="cb44-16" data-line-number="16">}</a>
+<a class="sourceLine" id="cb44-17" data-line-number="17"></a>
+<a class="sourceLine" id="cb44-18" data-line-number="18"><span class="co"># Construct sentence</span></a>
+<a class="sourceLine" id="cb44-19" data-line-number="19">roles &lt;-<span class="st"> </span><span class="kw">paste0</span>(name[draws], <span class="st">&quot;, &quot;</span> , about[draws])</a>
+<a class="sourceLine" id="cb44-20" data-line-number="20"><span class="kw">print</span>(roles)</a>
+<a class="sourceLine" id="cb44-21" data-line-number="21"><span class="kw">paste0</span>(roles[<span class="dv">1</span>], <span class="st">&quot;, &quot;</span>, comparitive, <span class="st">&quot; &quot;</span>, roles[<span class="dv">2</span>], <span class="st">&quot;.&quot;</span>)</a></code></pre></div>
+<pre><code>#&gt; [1] &quot;yola, a YouTuber&quot;   &quot;jessy, a cat lover&quot;
+#&gt; [1] &quot;yola, a YouTuber, is younger than jessy, a cat lover.&quot;</code></pre>
 </div>
 <div class="section level2">
-<h2>參考資料</h2>
+<h2>配合課本</h2>
 <ul>
 <li>Hands-on programming with R
 <ul>

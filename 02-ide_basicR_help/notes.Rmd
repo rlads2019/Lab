@@ -251,3 +251,8 @@ log(base = 2, 4)
 ![R Markdown document in RStudio.](https://bookdown.org/yihui/rmarkdown/images/hello-rmd.png){.half}
 
 
+## 配合課本
+
+- Hands-on programming with R
+  - [The Very Basics](https://rstudio-education.github.io/hopr/basics.html)
+  - [Packages and Help Pages](https://rstudio-education.github.io/hopr/packages.html)
