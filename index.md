@@ -118,20 +118,23 @@ td:nth-child(1), td:nth-child(2), td:nth-child(n+4) {
 </style>
 
 <script>
-window.onload = () => {
+function show() {
+    document.querySelectorAll('a').forEach(ele => {
+        if (ele.href == 'https://rlads2019.github.io/lab/#') {
+            ele.style.display = "inline";
+        }
+    });
+}
+function hide() {
     document.querySelectorAll('a').forEach(ele => {
         if (ele.href == 'https://rlads2019.github.io/lab/#') {
             ele.style.display = "none";
         }
     });
-    
-    function show() {
-        document.querySelectorAll('a').forEach(ele => {
-            if (ele.href == 'https://rlads2019.github.io/lab/#') {
-                ele.style.display = "inline";
-            }
-        });
-    }
+}
+
+window.onload = () => {
+    hide()
 }
 </script>
 
