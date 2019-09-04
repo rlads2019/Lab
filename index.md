@@ -133,8 +133,8 @@ function hide() {
     });
 }
 
-window.onload = () => {
-    hide()
-}
+document.addEventListener('load', () => {
+    hide();
+})
 </script>
 
