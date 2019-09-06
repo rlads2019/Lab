@@ -95,7 +95,13 @@ img.half {
   font-size: 1.15em;
 }
 
-
+.sourceCode {
+  overflow: auto;
+}
+div.sourceCode + pre {
+  max-height: 400px;
+  overflow-y: auto;
+}
 
 
 @media print {

@@ -1,0 +1,103 @@
+---
+title: "list, loops, data frame (W4)"
+date: '2019-10-03'
+output:
+  html_document:
+    number_sections: no
+    theme: united
+    highlight: tango
+    toc: yes
+    toc_float:
+      collapse: no
+    css: style.css
+    md_extensions: +implicit_figures
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,comment = '#>',message = F)
+```
+
+```{js echo=FALSE}
+window.onload = () => {
+    if (window.location.href.startsWith('https://rlads2019.netlify.com/lab/') ||
+        window.location.href.startsWith('file:///home/liao/Desktop/Lab/')) {
+        document.querySelectorAll('.hide').forEach(ele => {
+            ele.className = 'note';
+        })
+    }
+}
+```
+
+
+## list
+
+- vector 是 R 裡面最「簡單」的資料結構。有時候我們需要比較更複雜的資料結構處理我們遇到的資料，例如，我們或許需要儲存**不同資料類型**或是**具有階層結構**的資料。面對這兩種需求，vector 無能為力，因此需要用到 R 的 list。
+
+- R 可以透過 `list()` 去製造出 list。`list()` 的使用方式很類似用來製造 vector 的 `c()`，但與 `c()` 不同的是，`list()`
+    1. 能使用**不同的資料類型**
+    2. 具有階層結構，亦即，`list()` 裡面可以放入另一個 `list()`
+    
+    ```{r}
+    list(0.1, "Hello", TRUE)
+    
+    list(1.1, list(2.1, "Hello"))
+    ```
+
+### Subsetting
+
+- 通常我們會習慣為 list 加上名字 (`names`)，幫助我們更容易處理這種比較複雜的資料結構
+
+- `[]`: 與 vector 一樣，我們可以透過 `lst[<char vector of names>]`、`lst[<integer vector>]` 或 `lst[<logical vector>]` 去 subset list
+
+    ```{r}
+    yola <- list(age = 20, single = FALSE, tags = c("ig", "selfie"))
+    
+    yola['single']
+    yola[2:3]
+    yola[c(TRUE, FALSE, TRUE)]
+    ```
+
+- 就像 `vec[<some vector>]` 會回傳**一部分的 vector (sub-vector)**；`lst[<some vector>]` 也會回傳**一部分的 list (sub-list)**。換言之，使用 `[]` 時，回傳值的**資料結構不會改變**。
+
+- 我們可以將 list 想像成一列火車，每節車廂是一個長度為 1 的 sub-list，車廂**裡面**是這個 sub-list 儲存的值。欲取得 sub-list，使用的是 `[]`；欲取得 sub-list **裡面的值** (i.e. 脫去外層的 list)，需使用 `[[]]`
+
+    ```{r results='hold'}
+    # 回傳 sub-list
+    typeof(yola["tags"])
+    yola["tags"]
+    
+    # 回傳 list 之內的「值」，在此為一個 char vector
+    typeof(yola[["tags"]])
+    yola[["tags"]]
+    ```
+    - `lst[["<name>"]]` 有另一種更簡便的寫法：`lst$<name>`, e.g. `yola[["tags"]]` 可改寫成 `yola$tags`
+    
+
+![list as a train analogy](https://img.yongfu.name/rlads/list-train.png)
+
+### Wrap up
+
+- 上週我們使用過 3 個長度為 4 的 vector 來儲存關於 4 個人 (`kai`, `jessy`, `joy`, `yola`) 的資料。但使用這種方式儲存資料似乎有些違反直覺，因為它將關於一個人的資訊 (`name`, `age`, `about`) 分開來儲存在 3 個獨立的 vector。
+
+    ```{r}
+    # Data
+    name <- c("kai", "jessy", "joy", "yola")
+    age <- c(40, 20, 18, 19)
+    about <- c("a professor", "a cat lover", "a hacker", "a YouTuber")
+    ```
+
+- 對於這種彼此之間具有關聯的資料，一種更好的方式是將它們**儲存在一起**，因為這不只幫助我們在「程式上」更容易去操弄這筆資料，更讓我們能以「階層組織」去「想像」我們的資料。在 R 裡面，我們能夠使用 `list()` 去製造這種具有「階層性」的資料結構：
+
+    ```{r}
+    kai <- list(name = "kai", age = 40, about = "a professor")
+    jessy <- list(name = "jessy", age = 20, about = "a cat lover")
+    joy <- list(name = "joy", age = 18, about = "a hacker")
+    yola <- list(name = "yola", age = 19, about = "a YouTuber")
+    
+    kai
+    
+    member <- list(kai = kai, jessy = jessy, joy = joy, yola = yola)
+    member
+    ```
+
+
