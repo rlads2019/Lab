@@ -5,7 +5,7 @@
 |   1    |  09/12   | [環境安裝、作業繳交說明][s1]                  |             |            | [🔗][hw1] |
 |   2    |  09/19   | [RStudio 設定、Basic R、函數、Help pages][s2] | [🔗][note2] | [🔗][src2] | [🔗][hw2] |
 |   3    |  09/26   | [Base R (I)：vector、資料類型、條件式][s3]    | [🔗][note3] | [🔗][src3] | [🔗][hw3] |
-|   4    |  10/03   | [Base R (II)：list、迴圈、data frame][s4]   |             |            |           |
+|   4    |  10/03   | [Base R (II)：list、迴圈、data frame][s4]   | [🔗][note4] |            |           |
 |   5    |  10/10   |               國慶日                        |             |            |           |
 |   6    |  10/17   | [資料清理：`tibble`、`dplyr`][s6]            |             |            |           |
 |   7    |  10/24   | [視覺化：`ggplot2`、`plotly`][s7]            |             |            |           |
@@ -36,8 +36,8 @@
 [src3]: ./src/03.zip
 [hw3]: https://github.com/rlads2019/hw3-draft
 
-[s4]: #
-[note4]: #
+[s4]: https://docs.google.com/presentation/d/152Ge5BW6tw4YQz4n_eyvefyIRaPDZ0Z_25WEOn81XaA/edit?usp=sharing
+[note4]: ./notes/04.html
 [src4]: #
 [hw4]: #
 
