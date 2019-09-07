@@ -50,11 +50,11 @@ window.onload = () => {
 - `[]`: 與 vector 一樣，我們可以透過 `lst[<char vector of names>]`、`lst[<integer vector>]` 或 `lst[<logical vector>]` 去 subset list
 
     ```{r}
-    yola <- list(age = 20, single = FALSE, tags = c("ig", "selfie"))
+    ben <- list(age = 20, single = FALSE, tags = c("ig", "selfie"))
     
-    yola['single']
-    yola[2:3]
-    yola[c(TRUE, FALSE, TRUE)]
+    ben['single']
+    ben[2:3]
+    ben[c(TRUE, FALSE, TRUE)]
     ```
 
 - 就像 `vec[<some vector>]` 會回傳**一部分的 vector (sub-vector)**；`lst[<some vector>]` 也會回傳**一部分的 list (sub-list)**。換言之，使用 `[]` 時，回傳值的**資料結構不會改變**。
@@ -63,41 +63,147 @@ window.onload = () => {
 
     ```{r results='hold'}
     # 回傳 sub-list
-    typeof(yola["tags"])
-    yola["tags"]
+    typeof(ben["tags"])
+    ben["tags"]
     
     # 回傳 list 之內的「值」，在此為一個 char vector
-    typeof(yola[["tags"]])
-    yola[["tags"]]
+    typeof(ben[["tags"]])
+    ben[["tags"]]
     ```
-    - `lst[["<name>"]]` 有另一種更簡便的寫法：`lst$<name>`, e.g. `yola[["tags"]]` 可改寫成 `yola$tags`
-    
+    - `lst[["<name>"]]` 有另一種更簡便的寫法：`lst$<name>`, e.g. `ben[["tags"]]` 可改寫成 `ben$tags`
+
 
 ![list as a train analogy](https://img.yongfu.name/rlads/list-train.png)
 
-### Wrap up
 
-- 上週我們使用過 3 個長度為 4 的 vector 來儲存關於 4 個人 (`kai`, `jessy`, `joy`, `yola`) 的資料。但使用這種方式儲存資料似乎有些違反直覺，因為它將關於一個人的資訊 (`name`, `age`, `about`) 分開來儲存在 3 個獨立的 vector。
+### Nested Structure
+
+```{r results='hold'}
+a_lst <- list(name = "ben",
+              info = list(age = 20,
+                          tags = c("ig", "selfie")))
+
+# Get "selfie"
+a_lst[['info']]
+a_lst[['info']][['tags']]
+a_lst[['info']][['tags']][2]
+```
+
+```{r results='hold'}
+# Another way to get "selfie"
+a_lst['info'][[1]]
+a_lst['info'][[1]]['tags'][[1]]
+a_lst['info'][[1]]['tags'][[1]][2]
+```
+
+```{r results='hold'}
+# Yet another way to get "selfie"
+a_lst[[2]]
+a_lst[[2]][[2]]
+a_lst[[2]][[2]][2]
+```
+
+
+
+## for Loops
+
+- 上週介紹的條件式 (if-else) 讓我們可以依據不同狀況執行不同的程式碼，藉此能幫助我們寫出更有彈性的程式。迴圈讓我們能重複執行某一區塊的程式碼，如此就不需要重複寫出相同的程式碼。
+
+- 在 R 裡面有 for 與 while 兩種迴圈。一般而言，在資料分析時非常少會使用到 while 迴圈，因此實習課不作介紹，有興趣的同學可自行參考線上教材或教科書。
+
+- for loop 的結構如下
+
+    ```r
+    for (<變數> in <vector>) {
+        <some code>
+    }
+    ```
+    
+- for loop 會使 `{}` 內的程式碼重複執行數次，其次數等於 `<vector>` 的長度；並且，在第 n 次開始執行 `{}` 內的程式碼前，會將 `<vector>` 裡的第 n 個元素指派給 `<變數>`。所以在第一次迴圈時，可透過 `<變數>` 取得 `<vector>` 中的第一個元素；在第二次迴圈時，可取得 `<vector>` 中的第二個元素；依此類推，最後一次迴圈則可以透過 `<變數>` 取得 `<vector>` 中的最後一個元素。
+
+```{r}
+vec <- c("謝", "老師", "好", "帥")
+  
+for (word in vec) {
+    # Will execute 4 times, 
+    # each time a new value from `vec` will be assigned to `word`
+    print(word)
+}
+```
+
+### for loop 的各種型態
+
+- R 的 for 迴圈本質上的結構是相同的，但因為 R 向量式程式語言的特性，R 的 for 迴圈很容易改寫成其它更方便使用的型態。
+
+1. 有時候我們需要知道**迴圈進行到 `<vector>` 的第幾個元素**，這時候通常會使用 `seq_along(<vector>)` 去製造出與 `<vector>` 等長的整數序列 (e.g. `seq_along(c('a', 'b', 'c'))` 會回傳 `1 2 3`)，如此我們便可知道進行到第幾次迴圈，也可透過 `<vector>[i]` 取得與該次迴圈對映的元素。
+
+    ```{r}
+    vec <- c("謝", "老師", "好", "帥")
+      
+    for (i in seq_along(vec)) {
+        print(paste(i, vec[i]))
+    }
+    
+    vec <- c("謝", "老師", "好", "帥")
+    
+    for (i in seq_along(vec)) {
+        print(vec[i])
+        
+        # Print `?` in the last loop
+        if (i == length(vec)) {
+            print('?')
+        }
+    }
+    ```
+
+2. 我們也可以透過 `names()` 在 for loop 裡使用 `<vector>` 的 names 屬性：
+
+    ```{r}
+    vec <- c(Monday = "rainy", Tuesday = "cloudy", Wednesday = "sunny")
+    
+    for (name in names(vec)) {
+        print(paste0(name, ' was ', vec[name], '.'))
+    }
+    ```
+
+
+
+## Wrap up：for loop 與 list
+
+- 上週我們使用過 3 個長度為 4 的 vector 來儲存關於 4 個人 (`kai`, `jessy`, `joy`, `ben`) 的資料。但使用這種方式儲存資料似乎有些違反直覺，因為它將關於一個人的資訊 (`name`, `age`, `about`) 分開來儲存在 3 個獨立的 vector。
 
     ```{r}
     # Data
-    name <- c("kai", "jessy", "joy", "yola")
+    name <- c("kai", "jessy", "joy", "ben")
     age <- c(40, 20, 18, 19)
     about <- c("a professor", "a cat lover", "a hacker", "a YouTuber")
     ```
 
-- 對於這種彼此之間具有關聯的資料，一種更好的方式是將它們**儲存在一起**，因為這不只幫助我們在「程式上」更容易去操弄這筆資料，更讓我們能以「階層組織」去「想像」我們的資料。在 R 裡面，我們能夠使用 `list()` 去製造這種具有「階層性」的資料結構：
+- 對於這種彼此之間具有關聯的資料，一種更好的方式是將它們**儲存在一起**，因為這不只幫助我們在「程式上」更容易去操弄這筆資料，更讓我們能以「階層組織」去「想像」我們的資料。這裡我們使用 `list` 去改寫上週的資料：
 
     ```{r}
-    kai <- list(name = "kai", age = 40, about = "a professor")
-    jessy <- list(name = "jessy", age = 20, about = "a cat lover")
-    joy <- list(name = "joy", age = 18, about = "a hacker")
-    yola <- list(name = "yola", age = 19, about = "a YouTuber")
+    member <- list(
+        kai = list(age = 40, about = "a professor"),
+        jessy = list(age = 20, about = "a cat lover"),
+        joy = list(age = 18, about = "a hacker"),
+        ben = list(age = 19, about = "a YouTuber")
+    )
     
-    kai
-    
-    member <- list(kai = kai, jessy = jessy, joy = joy, yola = yola)
     member
     ```
 
+    ```{r}
+    for (name in names(member)) {
+        someone <- member[[name]]
+        
+        # 將組成句子的片語儲存於 char vector `phrases`
+        phrases <- c(name, someone$about, "is quite young.")
+        if (someone$age > 35) {
+            phrases[3] <- "should be wise."
+        } 
+        
+        # 在各片語之間插入逗點，形成一個句子
+        print(paste(phrases, collapse = ', '))
+    }
+    ```
 

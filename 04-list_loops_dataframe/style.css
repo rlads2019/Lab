@@ -99,8 +99,9 @@ img.half {
   overflow: auto;
 }
 div.sourceCode + pre {
-  max-height: 400px;
+  max-height: 300px;
   overflow-y: auto;
+  font-size: 0.77em;
 }
 
 

@@ -1485,8 +1485,9 @@ font-size: 1.15em;
 overflow: auto;
 }
 div.sourceCode + pre {
-max-height: 400px;
+max-height: 300px;
 overflow-y: auto;
+font-size: 0.77em;
 }
 @media print {
 html, body {
@@ -1810,18 +1811,18 @@ window.onload = () => {
 <ul>
 <li><p>通常我們會習慣為 list 加上名字 (<code>names</code>)，幫助我們更容易處理這種比較複雜的資料結構</p></li>
 <li><p><code>[]</code>: 與 vector 一樣，我們可以透過 <code>lst[&lt;char vector of names&gt;]</code>、<code>lst[&lt;integer vector&gt;]</code> 或 <code>lst[&lt;logical vector&gt;]</code> 去 subset list</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">yola &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">age =</span> <span class="dv">20</span>, <span class="dt">single =</span> <span class="ot">FALSE</span>, <span class="dt">tags =</span> <span class="kw">c</span>(<span class="st">&quot;ig&quot;</span>, <span class="st">&quot;selfie&quot;</span>))</a>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">ben &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">age =</span> <span class="dv">20</span>, <span class="dt">single =</span> <span class="ot">FALSE</span>, <span class="dt">tags =</span> <span class="kw">c</span>(<span class="st">&quot;ig&quot;</span>, <span class="st">&quot;selfie&quot;</span>))</a>
 <a class="sourceLine" id="cb5-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb5-3" data-line-number="3">yola[<span class="st">'single'</span>]</a></code></pre></div>
+<a class="sourceLine" id="cb5-3" data-line-number="3">ben[<span class="st">'single'</span>]</a></code></pre></div>
 <pre><code>#&gt; $single
 #&gt; [1] FALSE</code></pre>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">yola[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>]</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">ben[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>]</a></code></pre></div>
 <pre><code>#&gt; $single
 #&gt; [1] FALSE
 #&gt; 
 #&gt; $tags
 #&gt; [1] &quot;ig&quot;     &quot;selfie&quot;</code></pre>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">yola[<span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>)]</a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">ben[<span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>)]</a></code></pre></div>
 <pre><code>#&gt; $age
 #&gt; [1] 20
 #&gt; 
@@ -1830,12 +1831,12 @@ window.onload = () => {
 <li><p>就像 <code>vec[&lt;some vector&gt;]</code> 會回傳<strong>一部分的 vector (sub-vector)</strong>；<code>lst[&lt;some vector&gt;]</code> 也會回傳<strong>一部分的 list (sub-list)</strong>。換言之，使用 <code>[]</code> 時，回傳值的<strong>資料結構不會改變</strong>。</p></li>
 <li><p>我們可以將 list 想像成一列火車，每節車廂是一個長度為 1 的 sub-list，車廂<strong>裡面</strong>是這個 sub-list 儲存的值。欲取得 sub-list，使用的是 <code>[]</code>；欲取得 sub-list <strong>裡面的值</strong> (i.e. 脫去外層的 list)，需使用 <code>[[]]</code></p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="co"># 回傳 sub-list</span></a>
-<a class="sourceLine" id="cb11-2" data-line-number="2"><span class="kw">typeof</span>(yola[<span class="st">&quot;tags&quot;</span>])</a>
-<a class="sourceLine" id="cb11-3" data-line-number="3">yola[<span class="st">&quot;tags&quot;</span>]</a>
+<a class="sourceLine" id="cb11-2" data-line-number="2"><span class="kw">typeof</span>(ben[<span class="st">&quot;tags&quot;</span>])</a>
+<a class="sourceLine" id="cb11-3" data-line-number="3">ben[<span class="st">&quot;tags&quot;</span>]</a>
 <a class="sourceLine" id="cb11-4" data-line-number="4"></a>
 <a class="sourceLine" id="cb11-5" data-line-number="5"><span class="co"># 回傳 list 之內的「值」，在此為一個 char vector</span></a>
-<a class="sourceLine" id="cb11-6" data-line-number="6"><span class="kw">typeof</span>(yola[[<span class="st">&quot;tags&quot;</span>]])</a>
-<a class="sourceLine" id="cb11-7" data-line-number="7">yola[[<span class="st">&quot;tags&quot;</span>]]</a></code></pre></div>
+<a class="sourceLine" id="cb11-6" data-line-number="6"><span class="kw">typeof</span>(ben[[<span class="st">&quot;tags&quot;</span>]])</a>
+<a class="sourceLine" id="cb11-7" data-line-number="7">ben[[<span class="st">&quot;tags&quot;</span>]]</a></code></pre></div>
 <pre><code>#&gt; [1] &quot;list&quot;
 #&gt; $tags
 #&gt; [1] &quot;ig&quot;     &quot;selfie&quot;
@@ -1843,7 +1844,7 @@ window.onload = () => {
 #&gt; [1] &quot;character&quot;
 #&gt; [1] &quot;ig&quot;     &quot;selfie&quot;</code></pre>
 <ul>
-<li><code>lst[[&quot;&lt;name&gt;&quot;]]</code> 有另一種更簡便的寫法：<code>lst$&lt;name&gt;</code>, e.g. <code>yola[[&quot;tags&quot;]]</code> 可改寫成 <code>yola$tags</code></li>
+<li><code>lst[[&quot;&lt;name&gt;&quot;]]</code> 有另一種更簡便的寫法：<code>lst$&lt;name&gt;</code>, e.g. <code>ben[[&quot;tags&quot;]]</code> 可改寫成 <code>ben$tags</code></li>
 </ul></li>
 </ul>
 <div class="figure">
@@ -1851,35 +1852,133 @@ window.onload = () => {
 <p class="caption">list as a train analogy</p>
 </div>
 </div>
-<div id="wrap-up" class="section level3">
-<h3>Wrap up</h3>
+<div id="nested-structure" class="section level3">
+<h3>Nested Structure</h3>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">a_lst &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">name =</span> <span class="st">&quot;ben&quot;</span>,</a>
+<a class="sourceLine" id="cb13-2" data-line-number="2">              <span class="dt">info =</span> <span class="kw">list</span>(<span class="dt">age =</span> <span class="dv">20</span>,</a>
+<a class="sourceLine" id="cb13-3" data-line-number="3">                          <span class="dt">tags =</span> <span class="kw">c</span>(<span class="st">&quot;ig&quot;</span>, <span class="st">&quot;selfie&quot;</span>)))</a>
+<a class="sourceLine" id="cb13-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb13-5" data-line-number="5"><span class="co"># Get &quot;selfie&quot;</span></a>
+<a class="sourceLine" id="cb13-6" data-line-number="6">a_lst[[<span class="st">'info'</span>]]</a>
+<a class="sourceLine" id="cb13-7" data-line-number="7">a_lst[[<span class="st">'info'</span>]][[<span class="st">'tags'</span>]]</a>
+<a class="sourceLine" id="cb13-8" data-line-number="8">a_lst[[<span class="st">'info'</span>]][[<span class="st">'tags'</span>]][<span class="dv">2</span>]</a></code></pre></div>
+<pre><code>#&gt; $age
+#&gt; [1] 20
+#&gt; 
+#&gt; $tags
+#&gt; [1] &quot;ig&quot;     &quot;selfie&quot;
+#&gt; 
+#&gt; [1] &quot;ig&quot;     &quot;selfie&quot;
+#&gt; [1] &quot;selfie&quot;</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="co"># Another way to get &quot;selfie&quot;</span></a>
+<a class="sourceLine" id="cb15-2" data-line-number="2">a_lst[<span class="st">'info'</span>][[<span class="dv">1</span>]]</a>
+<a class="sourceLine" id="cb15-3" data-line-number="3">a_lst[<span class="st">'info'</span>][[<span class="dv">1</span>]][<span class="st">'tags'</span>][[<span class="dv">1</span>]]</a>
+<a class="sourceLine" id="cb15-4" data-line-number="4">a_lst[<span class="st">'info'</span>][[<span class="dv">1</span>]][<span class="st">'tags'</span>][[<span class="dv">1</span>]][<span class="dv">2</span>]</a></code></pre></div>
+<pre><code>#&gt; $age
+#&gt; [1] 20
+#&gt; 
+#&gt; $tags
+#&gt; [1] &quot;ig&quot;     &quot;selfie&quot;
+#&gt; 
+#&gt; [1] &quot;ig&quot;     &quot;selfie&quot;
+#&gt; [1] &quot;selfie&quot;</code></pre>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="co"># Yet another way to get &quot;selfie&quot;</span></a>
+<a class="sourceLine" id="cb17-2" data-line-number="2">a_lst[[<span class="dv">2</span>]]</a>
+<a class="sourceLine" id="cb17-3" data-line-number="3">a_lst[[<span class="dv">2</span>]][[<span class="dv">2</span>]]</a>
+<a class="sourceLine" id="cb17-4" data-line-number="4">a_lst[[<span class="dv">2</span>]][[<span class="dv">2</span>]][<span class="dv">2</span>]</a></code></pre></div>
+<pre><code>#&gt; $age
+#&gt; [1] 20
+#&gt; 
+#&gt; $tags
+#&gt; [1] &quot;ig&quot;     &quot;selfie&quot;
+#&gt; 
+#&gt; [1] &quot;ig&quot;     &quot;selfie&quot;
+#&gt; [1] &quot;selfie&quot;</code></pre>
+</div>
+</div>
+<div id="for-loops" class="section level2">
+<h2>for Loops</h2>
 <ul>
-<li><p>上週我們使用過 3 個長度為 4 的 vector 來儲存關於 4 個人 (<code>kai</code>, <code>jessy</code>, <code>joy</code>, <code>yola</code>) 的資料。但使用這種方式儲存資料似乎有些違反直覺，因為它將關於一個人的資訊 (<code>name</code>, <code>age</code>, <code>about</code>) 分開來儲存在 3 個獨立的 vector。</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="co"># Data</span></a>
-<a class="sourceLine" id="cb13-2" data-line-number="2">name &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;kai&quot;</span>, <span class="st">&quot;jessy&quot;</span>, <span class="st">&quot;joy&quot;</span>, <span class="st">&quot;yola&quot;</span>)</a>
-<a class="sourceLine" id="cb13-3" data-line-number="3">age &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">40</span>, <span class="dv">20</span>, <span class="dv">18</span>, <span class="dv">19</span>)</a>
-<a class="sourceLine" id="cb13-4" data-line-number="4">about &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;a professor&quot;</span>, <span class="st">&quot;a cat lover&quot;</span>, <span class="st">&quot;a hacker&quot;</span>, <span class="st">&quot;a YouTuber&quot;</span>)</a></code></pre></div></li>
-<li><p>對於這種彼此之間具有關聯的資料，一種更好的方式是將它們<strong>儲存在一起</strong>，因為這不只幫助我們在「程式上」更容易去操弄這筆資料，更讓我們能以「階層組織」去「想像」我們的資料。在 R 裡面，我們能夠使用 <code>list()</code> 去製造這種具有「階層性」的資料結構：</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1">kai &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">name =</span> <span class="st">&quot;kai&quot;</span>, <span class="dt">age =</span> <span class="dv">40</span>, <span class="dt">about =</span> <span class="st">&quot;a professor&quot;</span>)</a>
-<a class="sourceLine" id="cb14-2" data-line-number="2">jessy &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">name =</span> <span class="st">&quot;jessy&quot;</span>, <span class="dt">age =</span> <span class="dv">20</span>, <span class="dt">about =</span> <span class="st">&quot;a cat lover&quot;</span>)</a>
-<a class="sourceLine" id="cb14-3" data-line-number="3">joy &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">name =</span> <span class="st">&quot;joy&quot;</span>, <span class="dt">age =</span> <span class="dv">18</span>, <span class="dt">about =</span> <span class="st">&quot;a hacker&quot;</span>)</a>
-<a class="sourceLine" id="cb14-4" data-line-number="4">yola &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">name =</span> <span class="st">&quot;yola&quot;</span>, <span class="dt">age =</span> <span class="dv">19</span>, <span class="dt">about =</span> <span class="st">&quot;a YouTuber&quot;</span>)</a>
-<a class="sourceLine" id="cb14-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb14-6" data-line-number="6">kai</a></code></pre></div>
-<pre><code>#&gt; $name
-#&gt; [1] &quot;kai&quot;
-#&gt; 
-#&gt; $age
-#&gt; [1] 40
-#&gt; 
-#&gt; $about
-#&gt; [1] &quot;a professor&quot;</code></pre>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1">member &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">kai =</span> kai, <span class="dt">jessy =</span> jessy, <span class="dt">joy =</span> joy, <span class="dt">yola =</span> yola)</a>
-<a class="sourceLine" id="cb16-2" data-line-number="2">member</a></code></pre></div>
+<li><p>上週介紹的條件式 (if-else) 讓我們可以依據不同狀況執行不同的程式碼，藉此能幫助我們寫出更有彈性的程式。迴圈讓我們能重複執行某一區塊的程式碼，如此就不需要重複寫出相同的程式碼。</p></li>
+<li><p>在 R 裡面有 for 與 while 兩種迴圈。一般而言，在資料分析時非常少會使用到 while 迴圈，因此實習課不作介紹，有興趣的同學可自行參考線上教材或教科書。</p></li>
+<li><p>for loop 的結構如下</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="cf">for</span> (<span class="op">&lt;</span>變數<span class="op">&gt;</span><span class="st"> </span><span class="cf">in</span> <span class="op">&lt;</span>vector<span class="op">&gt;</span>) {</a>
+<a class="sourceLine" id="cb19-2" data-line-number="2">    <span class="op">&lt;</span>some code<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb19-3" data-line-number="3">}</a></code></pre></div></li>
+<li><p>for loop 會使 <code>{}</code> 內的程式碼重複執行數次，其次數等於 <code>&lt;vector&gt;</code> 的長度；並且，在第 n 次開始執行 <code>{}</code> 內的程式碼前，會將 <code>&lt;vector&gt;</code> 裡的第 n 個元素指派給 <code>&lt;變數&gt;</code>。所以在第一次迴圈時，可透過 <code>&lt;變數&gt;</code> 取得 <code>&lt;vector&gt;</code> 中的第一個元素；在第二次迴圈時，可取得 <code>&lt;vector&gt;</code> 中的第二個元素；依此類推，最後一次迴圈則可以透過 <code>&lt;變數&gt;</code> 取得 <code>&lt;vector&gt;</code> 中的最後一個元素。</p></li>
+</ul>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1">vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;謝&quot;</span>, <span class="st">&quot;老師&quot;</span>, <span class="st">&quot;好&quot;</span>, <span class="st">&quot;帥&quot;</span>)</a>
+<a class="sourceLine" id="cb20-2" data-line-number="2">  </a>
+<a class="sourceLine" id="cb20-3" data-line-number="3"><span class="cf">for</span> (word <span class="cf">in</span> vec) {</a>
+<a class="sourceLine" id="cb20-4" data-line-number="4">    <span class="co"># Will execute 4 times, </span></a>
+<a class="sourceLine" id="cb20-5" data-line-number="5">    <span class="co"># each time a new value from `vec` will be assigned to `word`</span></a>
+<a class="sourceLine" id="cb20-6" data-line-number="6">    <span class="kw">print</span>(word)</a>
+<a class="sourceLine" id="cb20-7" data-line-number="7">}</a></code></pre></div>
+<pre><code>#&gt; [1] &quot;謝&quot;
+#&gt; [1] &quot;老師&quot;
+#&gt; [1] &quot;好&quot;
+#&gt; [1] &quot;帥&quot;</code></pre>
+<div id="for-loop-" class="section level3">
+<h3>for loop 的各種型態</h3>
+<ul>
+<li>R 的 for 迴圈本質上的結構是相同的，但因為 R 向量式程式語言的特性，R 的 for 迴圈很容易改寫成其它更方便使用的型態。</li>
+</ul>
+<ol style="list-style-type: decimal">
+<li><p>有時候我們需要知道<strong>迴圈進行到 <code>&lt;vector&gt;</code> 的第幾個元素</strong>，這時候通常會使用 <code>seq_along(&lt;vector&gt;)</code> 去製造出與 <code>&lt;vector&gt;</code> 等長的整數序列 (e.g. <code>seq_along(c('a', 'b', 'c'))</code> 會回傳 <code>1 2 3</code>)，如此我們便可知道進行到第幾次迴圈，也可透過 <code>&lt;vector&gt;[i]</code> 取得與該次迴圈對映的元素。</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1">vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;謝&quot;</span>, <span class="st">&quot;老師&quot;</span>, <span class="st">&quot;好&quot;</span>, <span class="st">&quot;帥&quot;</span>)</a>
+<a class="sourceLine" id="cb22-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb22-3" data-line-number="3"><span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">seq_along</span>(vec)) {</a>
+<a class="sourceLine" id="cb22-4" data-line-number="4">    <span class="kw">print</span>(<span class="kw">paste</span>(i, vec[i]))</a>
+<a class="sourceLine" id="cb22-5" data-line-number="5">}</a></code></pre></div>
+<pre><code>#&gt; [1] &quot;1 謝&quot;
+#&gt; [1] &quot;2 老師&quot;
+#&gt; [1] &quot;3 好&quot;
+#&gt; [1] &quot;4 帥&quot;</code></pre>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1">vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;謝&quot;</span>, <span class="st">&quot;老師&quot;</span>, <span class="st">&quot;好&quot;</span>, <span class="st">&quot;帥&quot;</span>)</a>
+<a class="sourceLine" id="cb24-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb24-3" data-line-number="3"><span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">seq_along</span>(vec)) {</a>
+<a class="sourceLine" id="cb24-4" data-line-number="4">    <span class="kw">print</span>(vec[i])</a>
+<a class="sourceLine" id="cb24-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb24-6" data-line-number="6">    <span class="co"># Print `?` in the last loop</span></a>
+<a class="sourceLine" id="cb24-7" data-line-number="7">    <span class="cf">if</span> (i <span class="op">==</span><span class="st"> </span><span class="kw">length</span>(vec)) {</a>
+<a class="sourceLine" id="cb24-8" data-line-number="8">        <span class="kw">print</span>(<span class="st">'?'</span>)</a>
+<a class="sourceLine" id="cb24-9" data-line-number="9">    }</a>
+<a class="sourceLine" id="cb24-10" data-line-number="10">}</a></code></pre></div>
+<pre><code>#&gt; [1] &quot;謝&quot;
+#&gt; [1] &quot;老師&quot;
+#&gt; [1] &quot;好&quot;
+#&gt; [1] &quot;帥&quot;
+#&gt; [1] &quot;?&quot;</code></pre></li>
+<li><p>我們也可以透過 <code>names()</code> 在 for loop 裡使用 <code>&lt;vector&gt;</code> 的 names 屬性：</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1">vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dt">Monday =</span> <span class="st">&quot;rainy&quot;</span>, <span class="dt">Tuesday =</span> <span class="st">&quot;cloudy&quot;</span>, <span class="dt">Wednesday =</span> <span class="st">&quot;sunny&quot;</span>)</a>
+<a class="sourceLine" id="cb26-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb26-3" data-line-number="3"><span class="cf">for</span> (name <span class="cf">in</span> <span class="kw">names</span>(vec)) {</a>
+<a class="sourceLine" id="cb26-4" data-line-number="4">    <span class="kw">print</span>(<span class="kw">paste0</span>(name, <span class="st">' was '</span>, vec[name], <span class="st">'.'</span>))</a>
+<a class="sourceLine" id="cb26-5" data-line-number="5">}</a></code></pre></div>
+<pre><code>#&gt; [1] &quot;Monday was rainy.&quot;
+#&gt; [1] &quot;Tuesday was cloudy.&quot;
+#&gt; [1] &quot;Wednesday was sunny.&quot;</code></pre></li>
+</ol>
+</div>
+</div>
+<div id="wrap-upfor-loop--list" class="section level2">
+<h2>Wrap up：for loop 與 list</h2>
+<ul>
+<li><p>上週我們使用過 3 個長度為 4 的 vector 來儲存關於 4 個人 (<code>kai</code>, <code>jessy</code>, <code>joy</code>, <code>ben</code>) 的資料。但使用這種方式儲存資料似乎有些違反直覺，因為它將關於一個人的資訊 (<code>name</code>, <code>age</code>, <code>about</code>) 分開來儲存在 3 個獨立的 vector。</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" data-line-number="1"><span class="co"># Data</span></a>
+<a class="sourceLine" id="cb28-2" data-line-number="2">name &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;kai&quot;</span>, <span class="st">&quot;jessy&quot;</span>, <span class="st">&quot;joy&quot;</span>, <span class="st">&quot;ben&quot;</span>)</a>
+<a class="sourceLine" id="cb28-3" data-line-number="3">age &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">40</span>, <span class="dv">20</span>, <span class="dv">18</span>, <span class="dv">19</span>)</a>
+<a class="sourceLine" id="cb28-4" data-line-number="4">about &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;a professor&quot;</span>, <span class="st">&quot;a cat lover&quot;</span>, <span class="st">&quot;a hacker&quot;</span>, <span class="st">&quot;a YouTuber&quot;</span>)</a></code></pre></div></li>
+<li><p>對於這種彼此之間具有關聯的資料，一種更好的方式是將它們<strong>儲存在一起</strong>，因為這不只幫助我們在「程式上」更容易去操弄這筆資料，更讓我們能以「階層組織」去「想像」我們的資料。這裡我們使用 <code>list</code> 去改寫上週的資料：</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1">member &lt;-<span class="st"> </span><span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb29-2" data-line-number="2">    <span class="dt">kai =</span> <span class="kw">list</span>(<span class="dt">age =</span> <span class="dv">40</span>, <span class="dt">about =</span> <span class="st">&quot;a professor&quot;</span>),</a>
+<a class="sourceLine" id="cb29-3" data-line-number="3">    <span class="dt">jessy =</span> <span class="kw">list</span>(<span class="dt">age =</span> <span class="dv">20</span>, <span class="dt">about =</span> <span class="st">&quot;a cat lover&quot;</span>),</a>
+<a class="sourceLine" id="cb29-4" data-line-number="4">    <span class="dt">joy =</span> <span class="kw">list</span>(<span class="dt">age =</span> <span class="dv">18</span>, <span class="dt">about =</span> <span class="st">&quot;a hacker&quot;</span>),</a>
+<a class="sourceLine" id="cb29-5" data-line-number="5">    <span class="dt">ben =</span> <span class="kw">list</span>(<span class="dt">age =</span> <span class="dv">19</span>, <span class="dt">about =</span> <span class="st">&quot;a YouTuber&quot;</span>)</a>
+<a class="sourceLine" id="cb29-6" data-line-number="6">)</a>
+<a class="sourceLine" id="cb29-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb29-8" data-line-number="8">member</a></code></pre></div>
 <pre><code>#&gt; $kai
-#&gt; $kai$name
-#&gt; [1] &quot;kai&quot;
-#&gt; 
 #&gt; $kai$age
 #&gt; [1] 40
 #&gt; 
@@ -1888,9 +1987,6 @@ window.onload = () => {
 #&gt; 
 #&gt; 
 #&gt; $jessy
-#&gt; $jessy$name
-#&gt; [1] &quot;jessy&quot;
-#&gt; 
 #&gt; $jessy$age
 #&gt; [1] 20
 #&gt; 
@@ -1899,9 +1995,6 @@ window.onload = () => {
 #&gt; 
 #&gt; 
 #&gt; $joy
-#&gt; $joy$name
-#&gt; [1] &quot;joy&quot;
-#&gt; 
 #&gt; $joy$age
 #&gt; [1] 18
 #&gt; 
@@ -1909,17 +2002,29 @@ window.onload = () => {
 #&gt; [1] &quot;a hacker&quot;
 #&gt; 
 #&gt; 
-#&gt; $yola
-#&gt; $yola$name
-#&gt; [1] &quot;yola&quot;
-#&gt; 
-#&gt; $yola$age
+#&gt; $ben
+#&gt; $ben$age
 #&gt; [1] 19
 #&gt; 
-#&gt; $yola$about
-#&gt; [1] &quot;a YouTuber&quot;</code></pre></li>
+#&gt; $ben$about
+#&gt; [1] &quot;a YouTuber&quot;</code></pre>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1"><span class="cf">for</span> (name <span class="cf">in</span> <span class="kw">names</span>(member)) {</a>
+<a class="sourceLine" id="cb31-2" data-line-number="2">    someone &lt;-<span class="st"> </span>member[[name]]</a>
+<a class="sourceLine" id="cb31-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb31-4" data-line-number="4">    <span class="co"># 將組成句子的片語儲存於 char vector `phrases`</span></a>
+<a class="sourceLine" id="cb31-5" data-line-number="5">    phrases &lt;-<span class="st"> </span><span class="kw">c</span>(name, someone<span class="op">$</span>about, <span class="st">&quot;is quite young.&quot;</span>)</a>
+<a class="sourceLine" id="cb31-6" data-line-number="6">    <span class="cf">if</span> (someone<span class="op">$</span>age <span class="op">&gt;</span><span class="st"> </span><span class="dv">35</span>) {</a>
+<a class="sourceLine" id="cb31-7" data-line-number="7">        phrases[<span class="dv">3</span>] &lt;-<span class="st"> &quot;should be wise.&quot;</span></a>
+<a class="sourceLine" id="cb31-8" data-line-number="8">    } </a>
+<a class="sourceLine" id="cb31-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb31-10" data-line-number="10">    <span class="co"># 在各片語之間插入逗點，形成一個句子</span></a>
+<a class="sourceLine" id="cb31-11" data-line-number="11">    <span class="kw">print</span>(<span class="kw">paste</span>(phrases, <span class="dt">collapse =</span> <span class="st">', '</span>))</a>
+<a class="sourceLine" id="cb31-12" data-line-number="12">}</a></code></pre></div>
+<pre><code>#&gt; [1] &quot;kai, a professor, should be wise.&quot;
+#&gt; [1] &quot;jessy, a cat lover, is quite young.&quot;
+#&gt; [1] &quot;joy, a hacker, is quite young.&quot;
+#&gt; [1] &quot;ben, a YouTuber, is quite young.&quot;</code></pre></li>
 </ul>
-</div>
 </div>
 
 
