@@ -1622,6 +1622,12 @@ width: 65%;
 margin: 0 auto;
 padding: 0 auto;
 }
+img.eight {
+display: block;
+width: 80%;
+margin: 0 auto;
+padding: 0 auto;
+}
 .caption {
 text-align: center;
 }
@@ -1648,6 +1654,23 @@ div.sourceCode + pre {
 max-height: 300px;
 overflow-y: auto;
 font-size: 0.77em;
+}
+.footnotes {
+margin-top: 60px;
+}
+.footnotes > hr:nth-child(1) {
+display: none;
+}
+.footnotes::before {
+content: "Footnotes";
+display: block;
+font-size: 1.7em;
+font-weight: bold;
+text-align: center;
+font-family: "Alegreya",Georgia,serif;
+}
+.footnotes > ol > li:nth-child(n + 2) {
+margin-top: 1.7em;
 }
 @media print {
 html, body {
@@ -2274,8 +2297,8 @@ Add if-else concept and then wrap up
 <a class="sourceLine" id="cb44-19" data-line-number="19">roles &lt;-<span class="st"> </span><span class="kw">paste0</span>(name[draws], <span class="st">&quot;, &quot;</span> , about[draws])</a>
 <a class="sourceLine" id="cb44-20" data-line-number="20"><span class="kw">print</span>(roles)</a>
 <a class="sourceLine" id="cb44-21" data-line-number="21"><span class="kw">paste0</span>(roles[<span class="dv">1</span>], <span class="st">&quot;, &quot;</span>, comparitive, <span class="st">&quot; &quot;</span>, roles[<span class="dv">2</span>], <span class="st">&quot;.&quot;</span>)</a></code></pre></div>
-<pre><code>#&gt; [1] &quot;yola, a YouTuber&quot; &quot;joy, a hacker&quot;   
-#&gt; [1] &quot;yola, a YouTuber, is older than joy, a hacker.&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;kai, a professor&quot; &quot;joy, a hacker&quot;   
+#&gt; [1] &quot;kai, a professor, is older than joy, a hacker.&quot;</code></pre>
 </div>
 <div class="section level2">
 <h2>配合課本</h2>

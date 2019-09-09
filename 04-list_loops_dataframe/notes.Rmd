@@ -1,5 +1,5 @@
 ---
-title: "list, loops, data frame (W4)"
+title: "List, Loops, Data frame (W4)"
 date: '2019-10-03'
 output:
   html_document:
@@ -8,7 +8,7 @@ output:
     highlight: tango
     toc: yes
     toc_float:
-      collapse: no
+      collapsed: no
     css: style.css
     md_extensions: +implicit_figures
 ---
@@ -77,7 +77,7 @@ window.onload = () => {
     - `lst[["<name>"]]` 有另一種更簡便的寫法：`lst$<name>`, e.g. `ben[["tags"]]` 可改寫成 `ben$tags`
 
 
-![list as a train analogy](https://img.yongfu.name/rlads/list-train.png)
+![list as a train analogy](https://img.yongfu.name/rlads/list-train.png){#list-as-train .eight}
 
 
 ### Nested Structure
@@ -113,7 +113,7 @@ a_lst[[2]][[2]][2]
 
 - 上週介紹的條件式 (if-else) 讓我們可以依據不同狀況執行不同的程式碼，藉此能幫助我們寫出更有彈性的程式。迴圈讓我們能重複執行某一區塊的程式碼，如此就不需要重複寫出相同的程式碼。
 
-- 在 R 裡面有 for 與 while 兩種迴圈。一般而言，在資料分析時非常少會使用到 while 迴圈，因此實習課不作介紹，有興趣的同學可自行參考線上教材或教科書。
+- R 有 for 與 while 迴圈。一般而言，在資料分析時非常少會用到 while 迴圈，因此實習課不作介紹，有興趣的同學可自行參考線上教材或教科書。
 
 - for loop 的結構如下
 
@@ -137,7 +137,7 @@ for (word in vec) {
 
 ### for loop 的各種型態
 
-- R 的 for 迴圈本質上的結構是相同的，但因為 R 向量式程式語言的特性，R 的 for 迴圈很容易改寫成其它更方便使用的型態。
+- R 的 for 只有一種結構：每次疊代將 vector (或 list) 中的一個元素指派給變數 (`<var> in <vector>`)。但因為 R 向量式程式語言的特性，R 的 for 迴圈很容易改寫成其它更方便的型態。
 
 1. 有時候我們需要知道**迴圈進行到 `<vector>` 的第幾個元素**，這時候通常會使用 `seq_along(<vector>)` 去製造出與 `<vector>` 等長的整數序列 (e.g. `seq_along(c('a', 'b', 'c'))` 會回傳 `1 2 3`)，如此我們便可知道進行到第幾次迴圈，也可透過 `<vector>[i]` 取得與該次迴圈對映的元素。
 
@@ -214,27 +214,57 @@ for (word in vec) {
 
 ## data frame
 
-```{r}
-library(tibble)
+- data frame 是 R 語言最具特色的資料結構，它使 R 在**表格式資料**的處理上能力遠勝其它程式語言。
 
-df <- tibble(name = c("kai", "jessy", "joy", "ben"),
-             age  = c(40, 20, 18, 19), 
-             grad = c(FALSE, TRUE, FALSE, TRUE))
-df
-```
+- data frame 是一種二維的資料結構。這種資料結構基本上與我們熟悉的 Excel (或 google 試算表) 非常類似：
+    
+    - ![A data frame looks like an Excel Spreadsheet](https://img.yongfu.name/rlads/spreadsheet.png)
+    
+    - data frame 的每一橫列 (row) 皆是一筆資料 (e.g. 一位受訪者所填的問卷)
+    
+    - data frame 的每一(直)欄 (column) 代表一個變項 (e.g. 問卷上的某個題目)
 
-```{r results='hold'}
-dim(df)    # 形狀 (# of rows, # of columns)
-nrow(df)   # number of rows
-ncol(df)   # number of columns
-names(df)  # name of each column
-```
+---
 
-```r
-View(df)   # view df in RStudio source pane
-```
+![data frame 例子](https://img.yongfu.name/rlads/tibble.png){.half}
+
+- 我們可以使用 `tibble` 套件的 `tibble()`[^whytibble] 建立 data frame。上圖中的 data frame 例子即可由下方的程式碼所建立:
+
+    ```{r}
+    library(tibble)
+    
+    df <- tibble(name = c("kai", "jessy", "joy", "ben"),
+                 age  = c(40, 20, 18, 19), 
+                 grad = c(FALSE, TRUE, FALSE, TRUE))
+    df
+    ```
+    - `tibble()` 裡的每個 vector 對映到 data frame 中的一欄 (column)。因此 data frame 中不同欄的資料類型可能不同，但**每一欄 (變項) 內的資料類型必須相同** (因為 vector 只能儲存相同的資料類型)。
+
+- 下方的指令可用於檢視 data frame 的資訊
+
+    ```{r}
+    nrow(df)   # number of rows
+    ncol(df)   # number of columns
+    dim(df)    # 形狀 (num of rows, num of columns)
+    names(df)  # name of each column
+    tibble::glimpse(df)  # 關於 df 的各種資訊
+    ```
+    
+    ```r
+    View(df)   # view df in RStudio source pane
+    ```
 
 ### Subsetting: returning a data frame
+
+- data frame 的篩選 (subsetting) 與 vector 和 list 類似，差別只在於 data frame 屬於二維的資料結構，因此需要提供 2 個 vector 進行資料的篩選：
+
+    ```null
+    df[<vector 1>, <vector 2>]
+    ```
+    
+    - 在這裡，`<vector 1>` 篩選的是「列 (row)」，亦即，`<vector 1>` 決定要篩選出哪幾個觀察值 (observations)。`<vector 2>` 篩選的則是「欄 (column)」，亦即，`<vector 2>` 決定要篩選出哪些變項 (variables)。
+    
+    - 以這種語法進行篩選，回傳的**一定是 data frame**[^must-be-df]，即使只有篩選出一個值 (e.g. df[1, 1])
 
 ```{r}
 df[2, 1]
@@ -242,21 +272,46 @@ df[2, 1:2]  # df[2, c("name", "age")]
 df[2, ]
 ```
 
-### Subsetting: returning a column (vector)
+### Subsetting: returning a vector
 
-```{r results='hold'}
-df[[2]]
-df[['age']]
-df$age  # 最常見
-```
+- 若想要從 data frame 裡面篩選出 vector (取得「火車車廂」**內**的值)，則要使用[前面提過](#list-as-train)的 `$` 或 `[[]]`:
 
-```{r}
-over19 <- df$age > 19  
-over19  # logical vector of length 4 (num of rows in df)
+    ```null
+    df[["<column_name>"]]
+    df[[<column_index>]]
+    df$<column_name>
+    ```
 
-# subset df with obs. over 19
-df[over19, ]
-# subset df with obs. below or equal 19
-df[!over19, ]  # df[df$age <= 19, ]
-```
+    ```{r results='hold'}
+    df[[2]]
+    df[["age"]]
+    df$age  # 最常見
+    ```
 
+- 篩選 data frame 而回傳 vector 是個很實用的技巧，因為我們可以使用這個回傳的 vector 當作我們進一步篩選 data frame 的依據，例如：
+
+    ```{r}
+    over19 <- df$age > 19  
+    over19
+    
+    # subset df with obs. over 19
+    df[over19, ]
+    
+    # subset df with obs. below or equal 19
+    df[!over19, ]
+    
+    # 合併起來寫 (最常見的寫法，但比較難讀懂)
+    df[df$age > 19, ]
+    ```
+
+- 透過這個技巧，R 能幫助我們快速篩選出需要的資料，例如，我們可以結合 `age` 與 `grad` 兩個變項，篩選出「小於 20 歲且為研究所學生」的 data frame:
+    ```{r}
+    df[(df$age < 20) & (df$grad), ]
+    ```
+
+
+[^whytibble]: R 的內建函數 `data.frame()` 是最常被用於建立 data frame 的函數。`tibble` 套件裡的 `tibble()` 則與 `data.frame()` 的功能幾乎一樣，只是 `tibble()` 更改了 `data.frame()` 裡面常令使用者感到困惑的一些預設行為。
+
+    `tibble` 套件為 [Tidyverse](https://www.tidyverse.org) 套件群的一員，目的是為了解決 base R 眾多函數紛亂不一致的問題 (e.g. 命名不一致、預設行為不一致、類似的函數回傳值不一致等)。
+
+[^must-be-df]: 這只有使用 `tibble` 套件的 `tibble()` 所回傳的 data frame (class 為 `tbl_df`, `tbl` 與 `data.frame`) 才有這種特性。使用 R 的內建函數 `data.frame()` 所建立的 data frame 或是 R 的內建資料集 (class 只有 `data.frame`) 則會根據所篩選出之資料的形狀的不同而回傳不同的資料結構 (有可能是 `data.frame` 或是 `vector`)

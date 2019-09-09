@@ -1,5 +1,5 @@
 ---
-title: "Vectors, Data types, if-else (W3)"
+title: "Vector, Data types, if-else (W3)"
 date: "2019-09-26"
 output:
   html_document:
