@@ -19,6 +19,9 @@ knitr::opts_chunk$set(echo = TRUE,
                       message = F)
 ```
 
+```{r klippy, echo=FALSE, include=TRUE}
+klippy::klippy(position = c('top', 'right'),color = 'darkred')
+```
 
 ```{js echo=FALSE}
 window.onload = () => {

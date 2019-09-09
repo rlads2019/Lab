@@ -17,6 +17,10 @@ output:
 knitr::opts_chunk$set(echo = TRUE,comment = '#>',message = F)
 ```
 
+```{r klippy, echo=FALSE, include=TRUE}
+klippy::klippy(position = c('top', 'right'),color = 'darkred')
+```
+
 ```{js echo=FALSE}
 window.onload = () => {
     if (window.location.href.startsWith('https://rlads2019.netlify.com/lab/') ||
@@ -200,10 +204,59 @@ for (word in vec) {
         phrases <- c(name, someone$about, "is quite young.")
         if (someone$age > 35) {
             phrases[3] <- "should be wise."
-        } 
+        }
         
         # 在各片語之間插入逗點，形成一個句子
         print(paste(phrases, collapse = ', '))
     }
     ```
+
+
+## data frame
+
+```{r}
+library(tibble)
+
+df <- tibble(name = c("kai", "jessy", "joy", "ben"),
+             age  = c(40, 20, 18, 19), 
+             grad = c(FALSE, TRUE, FALSE, TRUE))
+df
+```
+
+```{r results='hold'}
+dim(df)    # 形狀 (# of rows, # of columns)
+nrow(df)   # number of rows
+ncol(df)   # number of columns
+names(df)  # name of each column
+```
+
+```r
+View(df)   # view df in RStudio source pane
+```
+
+### Subsetting: returning a data frame
+
+```{r}
+df[2, 1]
+df[2, 1:2]  # df[2, c("name", "age")]
+df[2, ]
+```
+
+### Subsetting: returning a column (vector)
+
+```{r results='hold'}
+df[[2]]
+df[['age']]
+df$age  # 最常見
+```
+
+```{r}
+over19 <- df$age > 19  
+over19  # logical vector of length 4 (num of rows in df)
+
+# subset df with obs. over 19
+df[over19, ]
+# subset df with obs. below or equal 19
+df[!over19, ]  # df[df$age <= 19, ]
+```
 

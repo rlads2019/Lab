@@ -1,10 +1,10 @@
 ## 實習課進度
 
-| 週數   | 日期     | 課程內容                                    | 筆記        | 原始碼     | 作業      |
+| 週數   | 日期     | 課程內容                                      | 筆記                    | 原始碼          | 作業          |
 |--------|----------|--------------------------------------------|-------------------------|----------------|---------------|
 |   1    |  09/12   | [環境安裝、作業繳交說明][s1]                  |                         |                 | [🔗][hw1]     |
-|   2    |  09/19   | [RStudio 設定、Basic R、函數、Help pages][s2]{:.h} | [🔗][note2]{:.h}  | [🔗][src2]{:.h} | [🔗][hw2]{:.h} |
-|   3    |  09/26   | [Base R (I)：vector、資料類型、條件式][s3]{:.h}     | [🔗][note3]{:.h}  | [🔗][src3]{:.h} | [🔗][hw3]{:.h} |
+|   2    |  09/19   | [RStudio 設定、Basic R、函數、Help pages][s2]{:.h} | [🔗][note2]{:.h}  |                 | [🔗][hw2]{:.h} |
+|   3    |  09/26   | [Base R (I)：vector、資料類型、條件式][s3]{:.h}     | [🔗][note3]{:.h}  |                 | [🔗][hw3]{:.h} |
 |   4    |  10/03   | [Base R (II)：list、迴圈、data frame][s4]{:.h}     | [🔗][note4]{:.h}  |                 |               |
 |   5    |  10/10   |               國慶日                              |                   |                 |               |
 |   6    |  10/17   | [資料清理：`tibble`、`dplyr`][s6]{:.h}             |                   |                 |               |
@@ -28,12 +28,12 @@
 
 [s2]: https://docs.google.com/presentation/d/1mW5SFnIoHYKxZxNXbEy7XntcMVRDMnHRjk7QeAcAhag/edit?usp=sharing
 [note2]: ./notes/02.html
-[src2]: ./src/02.zip
+<!-- [src2]: ./src/02.zip -->
 [hw2]: https://github.com/rlads2019/hw2-draft
 
 [s3]: https://docs.google.com/presentation/d/1nh2lgojcSJ4Ix4870CYoeMm2mqJuLC7xpMjShHFLEKo/edit?usp=sharing
 [note3]: ./notes/03.html
-[src3]: ./src/03.zip
+<!-- [src3]: ./src/03.zip -->
 [hw3]: https://github.com/rlads2019/hw3-draft
 
 [s4]: https://docs.google.com/presentation/d/152Ge5BW6tw4YQz4n_eyvefyIRaPDZ0Z_25WEOn81XaA/edit?usp=sharing

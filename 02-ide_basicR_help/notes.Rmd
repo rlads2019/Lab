@@ -13,13 +13,12 @@ output:
     md_extensions: +implicit_figures
 ---
 
-<!-- 
-Pkg help page
--->
-
-
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE,comment = '#>',message = F)
+```
+
+```{r klippy, echo=FALSE, include=TRUE}
+klippy::klippy(position = c('top', 'right'),color = 'darkred')
 ```
 
 ```{js echo=FALSE}
