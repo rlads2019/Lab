@@ -24,7 +24,7 @@
 
 <!-- Block 1: Base R -->
 [s1]: https://docs.google.com/presentation/d/1wqK0tNB08ccZettohy54OgOdgae77udNeX3-41tm3K0/edit?usp=sharing
-[hw1]: https://github.com/rlads2019/_hw-demo
+[hw1]: https://github.com/rlads2019/hw1
 
 [s2]: https://docs.google.com/presentation/d/1mW5SFnIoHYKxZxNXbEy7XntcMVRDMnHRjk7QeAcAhag/edit?usp=sharing
 [note2]: ./notes/02.html
