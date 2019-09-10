@@ -95,6 +95,7 @@ img.eight {
 }
 .note {
   display: block;
+  margin-bottom: 10px;
   padding-left: 7px;
   border-radius: 5px;
   border: 1.3px solid black;

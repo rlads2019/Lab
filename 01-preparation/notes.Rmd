@@ -1,0 +1,89 @@
+---
+title: "Preparation (W1)"
+date: '2019-09-19'
+output:
+  html_document:
+    number_sections: no
+    theme: united
+    highlight: tango
+    toc: yes
+    toc_float:
+      collapse: no
+    css: style.css
+    md_extensions: +implicit_figures
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,comment = '#>',message = F)
+```
+
+```{r klippy, echo=FALSE, include=TRUE}
+klippy::klippy(position = c('top', 'right'),color = 'darkred')
+```
+
+```{js echo=FALSE}
+window.onload = () => {
+    if (window.location.href.startsWith('https://rlads2019.netlify.com/lab/') ||
+        window.location.href.startsWith('file:///home/liao/Desktop/Lab/')) {
+        document.querySelectorAll('.hide').forEach(ele => {
+            ele.className = 'note';
+        })
+    }
+}
+```
+
+
+
+## 作業繳交
+
+<!-- About GitHub: s9 -->
+<div class="hide" data-tag="About GitHub">
+1. 我們會使用 GitHub 進行作業繳交  
+2. GitHub brief intro  
+    - GitHub 是一個協助程式設計師管理程式碼的服務  
+    - 免費  
+    - 它的功能真的很多，如果你熟悉它的話，它對你的人生幫助會很大  
+    - 但這堂課只是拿 GitHub 來交作業。目的當然是讓大家有機會接觸到 GitHub，但畢竟 GitHub 不是這堂課的重點，而且學習曲線頗高，所以我們不會多做介紹，有興趣的同學可以自行多做探索
+</div>
+
+
+<!-- 作業領取、繳交步驟: s10 -->
+<div class="hide" data-tag="作業領取、繳交步驟">
+1. 接下來說明未來每次實習課作業的領取和繳交方式
+2. 我們的實習課有個網頁 --> 作業連結
+    - 點擊連結進入
+    - 加入我的最愛
+3. (進入網頁後) 馬上看到 `README.md`
+    1. 領取作業  
+    作業繳交：告訴你如何使用 GitHub Desktop 繳交作業、等一下會實際示範如何繳交
+    1. 尋求幫助：(最下方)
+        - 如果寫作業遇到問題時，請不要直接寄信給助教，而是點進 Issues 連結提問
+        - 標題、內文位置
+        - 內文：使用 Markdown 語法協助排版
+</div>
+
+
+<!-- Intro to Markdown -->
+<div class="hide" data-tag="作業一">
+1. (從 Issues 使用 Markdown 延伸) Markdown 語法就是這次作業的主題  
+所以 Markdown 是什麼呢？Markdown 是一種標記式語言。  
+那有些人可能還是不知道標記式語言是什麼
+1. (問大家有使用過 Ceiba 的討論看板) --> 引至 ceiba 標記式語言
+1. Ceiba 標記式語言、HTML 等標記式語言的缺點：影響閱讀
+1. Markdown: "極簡約的標記式語言" (非常簡單、不影響閱讀的標記式語法去排版文件)
+1. (引到作業一) 使用 Markdown 自我介紹
+    - 學習 Markdown: 閱讀說明文件
+    - 線上編輯器：實際試試看 Markdown 並馬上看到它排版好的結果
+</div>
+
+<!-- 作業一繳交示範 -->
+<div class="hide" data-tag="作業一繳交示範">
+1. 實習課網頁 --> Public GitHub Repo
+1. Accept HW (Sign in GitHub)
+1. 前往個人 (Private Repo)
+1. (GitHub Desktop) 將此 repo clone 至你的電腦
+1. (文字編輯器) 編輯 `index.md`
+    - 姓名、lorem ipsum
+1. (GitHub Desktop) commit --> push
+1. 到網頁檢查是否成功
+</div>
