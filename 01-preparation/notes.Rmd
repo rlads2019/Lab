@@ -34,7 +34,9 @@ window.onload = () => {
 
 
 
-## 作業繳交
+# 作業繳交
+
+### About GitHub
 
 <!-- About GitHub: s9 -->
 <div class="hide" data-tag="About GitHub">
@@ -46,6 +48,8 @@ window.onload = () => {
     - 但這堂課只是拿 GitHub 來交作業。目的當然是讓大家有機會接觸到 GitHub，但畢竟 GitHub 不是這堂課的重點，而且學習曲線頗高，所以我們不會多做介紹，有興趣的同學可以自行多做探索
 </div>
 
+
+### 作業領取、繳交步驟
 
 <!-- 作業領取、繳交步驟: s10 -->
 <div class="hide" data-tag="作業領取、繳交步驟">
@@ -63,6 +67,8 @@ window.onload = () => {
 </div>
 
 
+### 作業一
+
 <!-- Intro to Markdown -->
 <div class="hide" data-tag="作業一">
 1. (從 Issues 使用 Markdown 延伸) Markdown 語法就是這次作業的主題  
@@ -75,6 +81,9 @@ window.onload = () => {
     - 學習 Markdown: 閱讀說明文件
     - 線上編輯器：實際試試看 Markdown 並馬上看到它排版好的結果
 </div>
+
+
+# 作業一繳交示範
 
 <!-- 作業一繳交示範 -->
 <div class="hide" data-tag="作業一繳交示範">
