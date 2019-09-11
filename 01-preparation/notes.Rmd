@@ -37,7 +37,9 @@ window.onload = () => {
     - open Ceiba 留言板
 
 <div class="hide" data-tag="Openning">
-- 三件事：安裝 R 與 RStudio、安裝 GitHub Desktop、說明如何繳交第一次的作業
+- 主要的任務：
+    - 協助大家將 R 的使用環境安裝好
+    - 說明實習課的作業繳交機制
 - 做個調查：
     - 已經安裝好 **R 和 RStudio** 的舉手
     - 已經安裝好 **GitHub Desktop** 的舉手
@@ -116,6 +118,7 @@ window.onload = () => {
 <div class="hide" data-tag="作業一繳交示範">
 1. 實習課網頁 --> Public GitHub Repo
 1. Accept HW (Sign in GitHub)
+    - Roster
 1. 前往個人 (Private Repo)
     - Repo 名稱：`hw#-<github 帳號>` 後綴
     - 只有你自己和助教看得到

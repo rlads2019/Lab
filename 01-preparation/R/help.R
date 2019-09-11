@@ -1,2 +1,0 @@
-?sqrt
-# ?<function_name>
