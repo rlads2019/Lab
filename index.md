@@ -112,14 +112,16 @@ table {
 td {
     padding: 6px;
     border: 1.6px solid #9c9c9cc9;
+    text-align: center;
 }
+/*
 td:nth-child(1), td:nth-child(2), td:nth-child(n+4) {
     text-align: center;
 }
-/* No Lab */
 tr:nth-child(5), tr:nth-child(9), tr:nth-child(12), tr:nth-child(n+17) {
     text-align: center;
 }
+*/
 #forkme_banner {
     display: none;
 }
