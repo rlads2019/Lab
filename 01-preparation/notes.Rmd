@@ -32,26 +32,24 @@ window.onload = () => {
 }
 ```
 
-- Prepare: 
-    - Download R, RStudio, GitHub Desktop installations
-    - open Ceiba 留言板
+Prepare: open Ceiba 留言板, 借 GitHub 帳號, [bit.ly/rlads01](http://bit.ly/rlads01)
 
 <div class="hide" data-tag="Openning">
-- 主要的任務：
+1. 主要的任務：
     - 協助大家將 R 的使用環境安裝好
     - 說明實習課的作業繳交機制
-- 做個調查：
+1. 做個調查：
     - 已經安裝好 **R 和 RStudio** 的舉手
     - 已經安裝好 **GitHub Desktop** 的舉手
-- 「還沒安裝好的同學」記住這些剛舉手的同學，如果你們等一下安裝有困難的話，可以就近先尋求這些同學的幫助，因為助教的人數相當有限
+1. 「還沒安裝好的同學」記住這些剛舉手的同學，如果你們等一下安裝有困難的話，可以就近先尋求這些同學的幫助，因為助教的人數相當有限
 
-- 現在就實際來安裝 R 和 RStudio
+(接續 R 安裝) 現在就實際來安裝 R 和 RStudio
 </div>
 
 # 環境安裝
 
-- 安裝好 R:
-    - Windows
+- 安裝好 R: 問題協助說明 (各系統助教分配)
+- 安裝好 RStudio: UTF-8 設定
 
 
 # 作業繳交
@@ -60,7 +58,8 @@ window.onload = () => {
 
 <!-- About GitHub: s9 -->
 <div class="hide" data-tag="About GitHub">
-1. 我們會使用 GitHub 進行作業繳交  
+1. 我們會使用一個叫做 GitHub 的平台進行作業繳交
+    - 安裝 GitHub Desktop 是為了幫助大家更容易使用 GitHub 
 2. GitHub brief intro  
     1. GitHub 是一個協助軟體開發人員管理程式碼的網路服務  
     1. (如果這對你還是很抽象的話，你可以暫時將 GitHub 想像成是一個「在雲端上，備份你檔案的空間」)
@@ -104,9 +103,10 @@ window.onload = () => {
 1. (問大家有使用過 Ceiba 的討論看板) --> 引至 ceiba 標記式語言
 1. Ceiba 標記式語言、HTML 等標記式語言的缺點：影響閱讀
 1. Markdown: 「極簡約」的標記式語言 (非常簡單、不影響閱讀的標記式語法去排版文件)
-1. (引到作業一) 在一份純文字檔裡面，使用 Markdown 語法去撰寫自我介紹 (不用擔心，會給模板)
+1. (引到作業一) 在一份純文字檔裡面，使用 Markdown 語法去撰寫自我介紹
     - 學習 Markdown: 閱讀說明文件
     - 線上編輯器：實際看看看使用 Markdown 編輯後的排版效果
+    - **純文字**、**記事本**：在**電腦上儲存** Markdown (`.md`)
 
 **問大家有問題嗎**
 </div>
