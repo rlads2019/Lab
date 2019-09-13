@@ -108,10 +108,6 @@
 table {
     width: 100%;
     border: 1.6px solid #9c9c9cc9;
-}
-td {
-    padding: 6px;
-    border: 1.6px solid #9c9c9cc9;
     text-align: center;
 }
 /*
