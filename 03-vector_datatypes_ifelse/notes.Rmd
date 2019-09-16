@@ -11,6 +11,8 @@ output:
       collapsed: no
     css: style.css
     md_extensions: +implicit_figures
+    includes:
+       in_header: "../GA.html"
 ---
 
 ```{r setup, include=FALSE}
