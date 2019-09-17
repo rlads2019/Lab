@@ -2534,39 +2534,43 @@ window.onload = () => {
 <h2>Function Arguments</h2>
 <div class="hide" data-tag>
 <ol style="list-style-type: decimal">
-<li>解釋函數 <code>vol()</code>: 跟剛剛類似、2 個 argument <code>null  vol &lt;- function(r, height) {      volumn &lt;- 3.14 * r * r * height      return(volumn)  }</code></li>
+<li><p>解釋函數 <code>vol()</code>: 跟剛剛類似、2 個 argument</p>
+<pre class="null"><code>vol &lt;- function(r, height) {
+    volumn &lt;- 3.14 * r * r * height
+    return(volumn)
+}</code></pre></li>
 <li><code>vol(1, 2)</code></li>
 <li><code>vol(r = 1, height = 2)</code> –&gt; <code>vol(height = 2, r = 1)</code></li>
 <li><code>vol(height = 2, 1)</code></li>
 <li><strong>slide</strong></li>
 </ol>
 </div>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" data-line-number="1">vol &lt;-<span class="st"> </span><span class="cf">function</span>(r, <span class="dt">height =</span> <span class="dv">1</span>) {</a>
-<a class="sourceLine" id="cb34-2" data-line-number="2">    volumn &lt;-<span class="st"> </span><span class="fl">3.14</span> <span class="op">*</span><span class="st"> </span>r <span class="op">*</span><span class="st"> </span>r <span class="op">*</span><span class="st"> </span>height</a>
-<a class="sourceLine" id="cb34-3" data-line-number="3">    <span class="kw">return</span>(volumn)</a>
-<a class="sourceLine" id="cb34-4" data-line-number="4">}</a>
-<a class="sourceLine" id="cb34-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb34-6" data-line-number="6"><span class="kw">vol</span>(<span class="dv">1</span>, <span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" data-line-number="1">vol &lt;-<span class="st"> </span><span class="cf">function</span>(r, <span class="dt">height =</span> <span class="dv">1</span>) {</a>
+<a class="sourceLine" id="cb35-2" data-line-number="2">    volumn &lt;-<span class="st"> </span><span class="fl">3.14</span> <span class="op">*</span><span class="st"> </span>r <span class="op">*</span><span class="st"> </span>r <span class="op">*</span><span class="st"> </span>height</a>
+<a class="sourceLine" id="cb35-3" data-line-number="3">    <span class="kw">return</span>(volumn)</a>
+<a class="sourceLine" id="cb35-4" data-line-number="4">}</a>
+<a class="sourceLine" id="cb35-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb35-6" data-line-number="6"><span class="kw">vol</span>(<span class="dv">1</span>, <span class="dv">2</span>)</a></code></pre></div>
 <pre><code>#&gt; [1] 6.28</code></pre>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" data-line-number="1"><span class="kw">vol</span>(<span class="dt">r =</span> <span class="dv">1</span>, <span class="dt">height =</span> <span class="dv">2</span>)  <span class="co"># Be explicit</span></a></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" data-line-number="1"><span class="kw">vol</span>(<span class="dt">r =</span> <span class="dv">1</span>, <span class="dt">height =</span> <span class="dv">2</span>)  <span class="co"># Be explicit</span></a></code></pre></div>
 <pre><code>#&gt; [1] 6.28</code></pre>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" data-line-number="1"><span class="co"># If all args are named, order doesn't matter</span></a>
-<a class="sourceLine" id="cb38-2" data-line-number="2"><span class="kw">vol</span>(<span class="dt">height =</span> <span class="dv">2</span>, <span class="dt">r =</span> <span class="dv">1</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" data-line-number="1"><span class="co"># If all args are named, order doesn't matter</span></a>
+<a class="sourceLine" id="cb39-2" data-line-number="2"><span class="kw">vol</span>(<span class="dt">height =</span> <span class="dv">2</span>, <span class="dt">r =</span> <span class="dv">1</span>)</a></code></pre></div>
 <pre><code>#&gt; [1] 6.28</code></pre>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" data-line-number="1"><span class="co"># Mix named and unnamed args:</span></a>
-<a class="sourceLine" id="cb40-2" data-line-number="2"><span class="co"># named args will be assigned first, then</span></a>
-<a class="sourceLine" id="cb40-3" data-line-number="3"><span class="co"># unnamed args will be assigned </span></a>
-<a class="sourceLine" id="cb40-4" data-line-number="4"><span class="co"># based on their positions</span></a>
-<a class="sourceLine" id="cb40-5" data-line-number="5"><span class="kw">vol</span>(<span class="dt">height =</span> <span class="dv">2</span>, <span class="dv">1</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" data-line-number="1"><span class="co"># Mix named and unnamed args:</span></a>
+<a class="sourceLine" id="cb41-2" data-line-number="2"><span class="co"># named args will be assigned first, then</span></a>
+<a class="sourceLine" id="cb41-3" data-line-number="3"><span class="co"># unnamed args will be assigned </span></a>
+<a class="sourceLine" id="cb41-4" data-line-number="4"><span class="co"># based on their positions</span></a>
+<a class="sourceLine" id="cb41-5" data-line-number="5"><span class="kw">vol</span>(<span class="dt">height =</span> <span class="dv">2</span>, <span class="dv">1</span>)</a></code></pre></div>
 <pre><code>#&gt; [1] 6.28</code></pre>
 </div>
 <div id="-r-help-page" class="section level2">
 <h2>說明文件 (R Help Page)</h2>
 <ul>
 <li><p>不確定如何使用函數時，可以閱讀該函數的說明文件：</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" data-line-number="1"><span class="kw">log</span>()  <span class="co"># error message</span></a>
-<a class="sourceLine" id="cb42-2" data-line-number="2">?log</a>
-<a class="sourceLine" id="cb42-3" data-line-number="3"><span class="co"># ?&lt;function_name&gt;</span></a></code></pre></div></li>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" data-line-number="1"><span class="kw">log</span>()  <span class="co"># error message</span></a>
+<a class="sourceLine" id="cb43-2" data-line-number="2">?log</a>
+<a class="sourceLine" id="cb43-3" data-line-number="3"><span class="co"># ?&lt;function_name&gt;</span></a></code></pre></div></li>
 <li>說明文件結構
 <ul>
 <li>Description: 簡短描述函數功能</li>
@@ -2583,7 +2587,7 @@ window.onload = () => {
 <h2>作業說明：R Markdown 使用</h2>
 <ul>
 <li><p>使用前需先安裝 <code>rmarkdown</code>:</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" data-line-number="1"><span class="kw">install.packages</span>(<span class="st">'rmarkdown'</span>)</a></code></pre></div></li>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" data-line-number="1"><span class="kw">install.packages</span>(<span class="st">'rmarkdown'</span>)</a></code></pre></div></li>
 <li><p>R Markdown (<code>.Rmd</code>) 就像上週同學用來寫自我介紹的 Markdown 文件 (<code>.md</code>) 一樣是一種<strong>純文字格式</strong>。撰寫 R Markdown 的語法事實上是 Markdown 的一種擴充： 它新增了一些特殊的語法，讓使用者可以直接在 R Markdown 裡面撰寫程式碼，並透過 R 將這些程式碼的運算結果插入 R Markdown 的輸出文件當中。</p></li>
 <li>knitr Code Chunk
 <ul>
