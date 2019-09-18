@@ -34,27 +34,35 @@ window.onload = () => {
 }
 ```
 
-<div class="hide" data-tag="About Markdown (*slide*)">
-- Markdown 輸出 HTML
-    - 不清楚在 RStudio 寫 Markdown 的樣子和上傳到 GitHub 後的樣子不太一樣
-    - 原因是 GitHub 會將上傳的 Markdown 轉換成 HTML，而瀏覽器讀到 HTML 的時候，會將它轉換成你所看到的網頁
-    - 這也是為什麼 Markdown 可以與 HTML 混用的關係，因為 Markdown 它最終會被轉換成 HTML
+<div class="hide" data-tag="About Markdown (slide)">
+- Openning: 開始之前，延續上週作業一的主題，Markdown
 
 (next slide)
 
-- 大家不見得有發覺，但 (我覺得) Markdown 比想像中的難，原因有兩個
-    1. 有些語法隱晦
-    2. 第二個原因則是來自我們對於排版的控制慾
-        - 我們都很習慣使用 Word 來撰寫和排版我們的文章
-        - 久而久之，讓我們對文章的樣式形成一些個人偏好
-           - 例如，有些人就習慣新的段落開頭一定要縮排、標題一定要粗體
-        - 我們自然而然地就將這種對於排版的控制慾帶入 Markdown 裡面
-        - 但 Markdown 它是一種非常簡約的標記式語言，
-            - 所以它只定義了文字的「結構」，像是「標題」、「段落」、「清單」和「圖片」等等
-            - 但是它並未去定義這些「結構」**該長什麼樣子**
-        - 所以，知道 Markdown 可以與 HTML 混用的人，很容易去使用 HTML 的語法當成一個修飾文件「樣式」的工具，例如，段落開頭加入 HTML 的空白字元當作縮排效果
-        - 隨著加入越多的「樣式」，以 Markdown 撰寫的文件就不再是 Markdown，反而比較接近 HTML 文件，這會讓你撰寫 Markdown 文件的過程變得非常痛苦
-        - 所以這邊的困難點在於，Markdown 它無法滿足我們排版的控制慾，如果要滿足這種欲望，必須先學會 HTML 和 CSS，才能在 Markdown 輸出成 HTML 之後，透過 CSS 去控制這份文件的樣式。
+- 為何 Markdown 可以和 HTML 混用？
+    1. 看了大家的作業，有些同學很厲害，知道 Markdown 文件裡面可以使用 HTML
+    1. 有人知道為什麼？
+    1. (答案已經寫在投影片上了) Markdown 要能呈現排版好的樣子，需要先轉換成 HTML，轉換之後，browser 就可以直接閱讀這個 HTML 然後將它轉換成你在螢幕看到的樣子
+
+- 比較隱晦的 Markdown 語法
+    1. Markdown 文件裡面使用 HTML 很方便
+    1. 方便到我們會「忽略」某些事情可以**直接透過 Markdown 完成**，而不需用到 HTML
+    1. 例如很多人在 Markdown 裡面使用 HTML 的 `<br>` tag 去換行，但 Markdown 本身其實就有換行的語法
+    1. (demo)
+    1. 對一些更細微的 markdown 語法有興趣的話，可以參考 (The Two Surprisingly Hard Things about the Otherwise Simple Markdown)
+
+- Markdown is a language, but it has several dialects
+    1. Markdown 事實上應該比大家想得還要來得複雜一點，因為 Markdown 其實不是一個單一明確的語法，市面上其實有**好幾種** markdown 語法
+    1. (click) History: 想知道為什麼會出現這種情況，你可以 History 這個連結
+    1. 最常見的有 3 種：CommonMark, GFM, Pandoc's Markdown
+        1. CommonMark: 最簡單，語法數量最少的 Markdown
+        1. GFM: 
+            - 建立於 CommonMark 之上，再額外新增一些語法
+            - 換言之，GFM 包含了所有 CommonMark 的語法
+        1. Pandoc's Markdown：
+            - 3 者之中語法數量最多樣的一種。
+            - 實習課今天以及之後的作業會使用 R Markdown，而 R Markdown 用到的 Markdown 語法就是 Pandoc's Markdown 的語法。
+            - 寫 R Markdown 遇到問題，需參考 Pandoc's Markdown 的說明文件
 </div>
 
 
@@ -65,14 +73,15 @@ window.onload = () => {
 2. 「資料分析」觀點：
     - 結構化資料：Excel 2 維表格式的資料、R 稱為 data frame --> 介紹套件處理 2 維資料
     - 資料視覺化：ggplot2
-    - 目標：EDA、資料裡面游泳，譬如可以輕鬆地將資料整理成想要的樣子，這樣才能進一步地去跑一些統計和繪圖，幫助你了解資料大致的樣貌,
-    - 衡量標準：能從 google 表單匯出 `.csv` 檔後，不手動觸碰 `.csv` 下，完全使用 R 語言去幫助自己將資料整理成自己想要的樣子
+    - 目標：
+        1. 資料清理
+        1. 探索式資料分析：
+            - 在沒有太多預設的期待之下，去看看你手上這筆資料的樣貌。
+            - 譬如，每個變項的分配，或是不同變項之間的散布圖。
+            - 整理資料和繪圖之間反覆進行，因為要繪製不同的圖，常常需要將資料整理成特定的樣子
+            - 要能具備探索式資料分析的前提是，要能夠「快速輕鬆地將資料整理成你想要的那個樣子」
 3. 「文本分析」觀點：
-    - 從「結構化」移往「非結構化」資料的處理
-    - 字串處理
-    - 中文文本處理
-        - 斷詞
-    - 程式與資料清理技巧，將非結構化的資料轉換成結構化資料
+    - 詳細要做什麼，這邊要看大家那時候的情況，但基本上離不開中文文本處理的大主題
 </div>
 
 <div class="hide" data-tag="今日 Overview">
@@ -83,7 +92,6 @@ window.onload = () => {
         - 今日課程內容都寫在裡面
         - 程式碼
     - 程度好的同學可能看完就想下課，甚至想直接退選
-    - 如果真的退選，候補還沒選上的同學應該會很高興
     - 那如果最後決定留下賺學分的話，協助周遭第一次接觸程式的同學
     - 不只幫同學，也幫自己，甚至幫助教
 </div>
@@ -94,12 +102,12 @@ window.onload = () => {
 <div class="hide" data-tag="自訂樣式與編輯器設定">
 **slide**
 
-- 最上方： Menu bar
-- 左方 R Console: 執行指令
-- 右上 Environment
-- 右下 5 個標籤
+1. 最上方： Menu bar
+1. 左方 R Console: 執行指令
+1. 右上 Environment
+1. 右下 5 個標籤
     - Files: 檔案總管，尋找資料夾和檔案
-- 第四個區塊：編輯純文字檔案
+1. 第四個區塊：編輯純文字檔案
 
 **實際操作 **
 
@@ -107,7 +115,7 @@ window.onload = () => {
 1. Black theme, syntax hightlight
 1. 縮排間距
 
-**5 min**
+**3 min**
 </div>
 
 ## 自訂樣式
@@ -421,9 +429,11 @@ vol(height = 2, 1)
 - 不確定如何使用函數時，可以閱讀該函數的說明文件：
 
     ```r
-    log()  # error message
-    ?log
     # ?<function_name>
+    ?log
+    
+    # ?`<function_name>`: for special functions (e.g. binary operators)
+    ?`+`
     ```
 
 - 說明文件結構

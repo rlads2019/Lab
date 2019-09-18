@@ -29,7 +29,7 @@
 [s2]: https://docs.google.com/presentation/d/1mW5SFnIoHYKxZxNXbEy7XntcMVRDMnHRjk7QeAcAhag/edit?usp=sharing
 [note2]: ./notes/02.html
 <!-- [src2]: ./src/02.zip -->
-[hw2]: https://github.com/rlads2019/hw2-draft
+[hw2]: https://github.com/rlads2019/hw2
 
 [s3]: https://docs.google.com/presentation/d/1nh2lgojcSJ4Ix4870CYoeMm2mqJuLC7xpMjShHFLEKo/edit?usp=sharing
 [note3]: ./notes/03.html
