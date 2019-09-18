@@ -449,6 +449,32 @@ vol(height = 2, 1)
 
 ## 作業說明：R Markdown 使用
 
+<div class='hide' data-tag=''>
+**slide**
+1. openning: last topic; why: tool for hw; link to markdown
+1. intro: the 3 structure of R Markdown
+    - yaml: 
+        - 不屬於 R Markdown 內容的一部分
+        - 控制輸出文件的外觀
+    - Markdown
+    - R Code Chunk (可執行的程式碼區塊)
+        - 將 Rmd 輸出時： R 會先跑過這些可執行的程式碼區塊、儲存執行結果、將結果插入輸出的文件裡面
+
+**Demo**
+1. File > New File > R Markdown...
+    - 視窗：協助編輯 yaml header 的界面
+1. knit to HTML
+1. (wait and ask success)
+1. Explain: 輸出文件時，程式碼區塊**由上至下**執行
+    - get previous results in later code chunks
+    - insert new code chunk
+1. Interactive editing: 剛剛我們是以輸出整份 Rmd 作為介紹，但 RStudio 可以讓你直接在編輯 Rmd 檔的時候就去執行這些 Code chunk。
+
+**3 min**
+</div>
+
+
+
 - 使用前需先安裝 `rmarkdown`:
 
     ```r
