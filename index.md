@@ -108,10 +108,6 @@
 table {
     width: 100%;
     border: 1.6px solid #9c9c9cc9;
-}
-td {
-    padding: 6px;
-    border: 1.6px solid #9c9c9cc9;
     text-align: center;
 }
 /*
@@ -123,6 +119,9 @@ tr:nth-child(5), tr:nth-child(9), tr:nth-child(12), tr:nth-child(n+17) {
 }
 */
 #forkme_banner {
+    display: none;
+}
+.h {
     display: none;
 }
 </style>
