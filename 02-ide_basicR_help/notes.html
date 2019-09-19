@@ -2217,17 +2217,23 @@ window.onload = () => {
 <li>「程式」觀點: 變數指派、函數、條件式、迴圈、資料類型、資料結構</li>
 <li>「資料分析」觀點：
 <ul>
-<li>結構化資料：Excel 2 維表格式的資料、R 稱為 data frame –&gt; 介紹套件處理 2 維資料</li>
+<li>「資料」指的是結構化的資料：
+<ul>
+<li>Excel 二維表格式的資料、R 稱為 data frame</li>
+<li>介紹套件處理 2 維資料</li>
+</ul></li>
 <li>資料視覺化：ggplot2</li>
 <li>目標：
 <ol style="list-style-type: decimal">
-<li>資料清理</li>
+<li>資料清理：
+<ul>
+<li>取得 <code>.csv</code> 檔 &gt; 格式不見得符合需求 &gt; e.g. 跑統計 &gt; 但是跑統計的函數所需的「輸入值的格式」與手上的 <code>.csv</code> 不符 &gt; 要能使用 R 將你手上的這份 csv 整理成你想要的格式</li>
+</ul></li>
 <li>探索式資料分析：
 <ul>
-<li>在沒有太多預設的期待之下，去看看你手上這筆資料的樣貌。</li>
-<li>譬如，每個變項的分配，或是不同變項之間的散布圖。</li>
-<li>整理資料和繪圖之間反覆進行，因為要繪製不同的圖，常常需要將資料整理成特定的樣子</li>
-<li>要能具備探索式資料分析的前提是，要能夠「快速輕鬆地將資料整理成你想要的那個樣子」</li>
+<li>在沒有太多預設的期待之下，使用 R 語言去協助你看看手上這筆資料的大致樣貌。譬如，每個變項的分配，或是不同變項之間的散布圖。</li>
+<li>在這過程中，你會不斷在「整理資料」和「繪圖」之間反覆進行，因為要繪製不同的圖，常常需要將資料整理成特定的樣子</li>
+<li>要能進行探索式資料分析的前提是，要知道如何使用 R 的繪圖套件，並且能夠「快速輕鬆地將資料整理成你想要的那個樣子」</li>
 </ul></li>
 </ol></li>
 </ul></li>
@@ -2603,8 +2609,38 @@ window.onload = () => {
 <div id="r-markdown-" class="section level2">
 <h2>作業說明：R Markdown 使用</h2>
 <div class="hide" data-tag>
-<p><strong>slide</strong> 1. openning: last topic; why: tool for hw; link to markdown 1. intro: the 3 structure of R Markdown - yaml: - 不屬於 R Markdown 內容的一部分 - 控制輸出文件的外觀 - Markdown - R Code Chunk (可執行的程式碼區塊) - 將 Rmd 輸出時： R 會先跑過這些可執行的程式碼區塊、儲存執行結果、將結果插入輸出的文件裡面</p>
-<p><strong>Demo</strong> 1. File &gt; New File &gt; R Markdown… - 視窗：協助編輯 yaml header 的界面 1. knit to HTML 1. (wait and ask success) 1. Explain: 輸出文件時，程式碼區塊<strong>由上至下</strong>執行 - get previous results in later code chunks - insert new code chunk 1. Interactive editing: 剛剛我們是以輸出整份 Rmd 作為介紹，但 RStudio 可以讓你直接在編輯 Rmd 檔的時候就去執行這些 Code chunk。</p>
+<p><strong>slide</strong></p>
+<ol style="list-style-type: decimal">
+<li>openning: last topic; why: tool for hw; link to markdown</li>
+<li>intro: the 3 structure of R Markdown
+<ul>
+<li>yaml:
+<ul>
+<li>不屬於 R Markdown 內容的一部分</li>
+<li>控制輸出文件的外觀</li>
+</ul></li>
+<li>Markdown</li>
+<li>R Code Chunk (可執行的程式碼區塊)
+<ul>
+<li>將 Rmd 輸出時： R 會先跑過這些可執行的程式碼區塊、儲存執行結果、將結果插入輸出的文件裡面</li>
+</ul></li>
+</ul></li>
+</ol>
+<p><strong>Demo</strong></p>
+<ol style="list-style-type: decimal">
+<li>File &gt; New File &gt; R Markdown…
+<ul>
+<li>視窗：協助編輯 yaml header 的界面</li>
+</ul></li>
+<li>knit to HTML</li>
+<li>(wait and ask success)</li>
+<li>Explain: 輸出文件時，程式碼區塊<strong>由上至下</strong>執行
+<ul>
+<li>get previous results in later code chunks</li>
+<li>insert new code chunk</li>
+</ul></li>
+<li>Interactive editing: 剛剛我們是以輸出整份 Rmd 作為介紹，但 RStudio 可以讓你直接在編輯 Rmd 檔的時候就去執行這些 Code chunk。</li>
+</ol>
 <p><strong>3 min</strong></p>
 </div>
 <ul>
