@@ -11,7 +11,6 @@ do
     # remove non-lecture-relavent script
     rm ${dir}/rmd2scripts.R  
     rm ${dir}/notes.Rmd
-    rm ${dir}/notes.html
     rm ${dir}/style.css
     
     
