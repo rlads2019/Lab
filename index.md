@@ -42,8 +42,8 @@
 [hw4]: https://github.com/rlads2019/hw4-draft
 
 <!-- Block 2：data frame -->
-[s6]: #
-[note6]: #
+[s6]: https://docs.google.com/presentation/d/1Kr6aUYoVU9HLJh3vZop7K-egp4TytoOWDPQ9HKHLiJM/edit?usp=sharing
+[note6]: ./notes/06.html
 [src6]: #
 [hw6]: #
 
