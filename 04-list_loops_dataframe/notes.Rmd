@@ -1,5 +1,5 @@
 ---
-title: "List, Loops, Data frame (W4)"
+title: "List, Loops, and Data frame (W4)"
 date: '2019-10-03'
 output:
   html_document:
@@ -44,8 +44,10 @@ window.onload = () => {
     2. 具有階層結構，亦即，`list()` 裡面可以放入另一個 `list()`
     
     ```{r}
-    list(0.1, "Hello", TRUE)
+    list(TRUE, 1:3, "Hello")
+    list('kai' = TRUE, 'joy' = 1:3, 'jess' = "Hello")
     
+    # nested structure
     list(1.1, list(2.1, "Hello"))
     ```
 
@@ -79,7 +81,7 @@ window.onload = () => {
     - `lst[["<name>"]]` 有另一種更簡便的寫法：`lst$<name>`, e.g. `ben[["tags"]]` 可改寫成 `ben$tags`
 
 
-![list as a train analogy](https://img.yongfu.name/rlads/list-train.png){#list-as-train .eight}
+![list as a train analogy](./list_as_train.png){#list-as-train .eight}
 
 
 ### Nested Structure

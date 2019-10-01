@@ -1,0 +1,77 @@
+---
+title: "Data Visualization with ggplot2 (W7)"
+date: '2019-10-24'
+output:
+    html_document:
+        number_sections: no
+        theme: united
+        highlight: tango
+        toc: yes
+        toc_float:
+            collapse: no
+    css: style.css
+    md_extensions: +implicit_figures
+    includes:
+        in_header: "../GA.html"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,comment = '#>',message = F)
+```
+
+```{r klippy, echo=FALSE, include=TRUE}
+klippy::klippy(position = c('top', 'right'),color = 'darkred')
+```
+
+```{js echo=FALSE}
+window.onload = () => {
+    if (window.location.href.startsWith('https://rlads2019.netlify.com/') ||
+        window.location.href.startsWith('file:///home/liao/Desktop/Lab/')) {
+        document.querySelectorAll('.hide').forEach(ele => {
+            ele.className = 'note';
+        })
+    }
+}
+```
+
+## R 的繪圖系統
+
+眾所皆知，R 語言的繪圖能力非常強大。相較其它統計套裝軟體，R 讓使用者能對圖的細部做許多調整，甚至去創造出獨特的圖片 (i.e. 不屬於傳統統計圖範疇內的圖)。
+
+但隨著強大繪圖功能伴隨而來的便是異常複雜的繪圖函數。R 的傳統繪圖系統：base R graphics 與 lattice 套件皆是功能非常強大的繪圖系統，但其學習曲線也相當陡峭，其中一個原因即是圖片繪製時**有太多參數可供調整**。
+
+`ggplot2` 則提出另一種方式去繪製圖片：
+
+## data: `mpg`
+
+```{r}
+library(ggplot2)
+knitr::kable(head(mpg), align = 'c')
+```
+
+- 引擎排氣量 (公升) 與耗油量 (mile / gallon) 關係
+    
+    ```{r}
+    ggplot(data = mpg) +
+        geom_point(mapping = aes(x = displ, y = hwy))
+    ggsave('mpg1.png')
+    ```
+
+
+## Geoms
+
+```{r out.width=c('48%', '48%'), fig.show='hold', fig.align='center'}
+ggplot(mpg) +
+    geom_point(aes(class, hwy))
+ggsave('mpg_class_hwy_point.png', width = 14, height = 12, units = 'cm')
+
+ggplot(mpg) +
+    geom_boxplot(aes(class, hwy))
+ggsave('mpg_class_hwy_boxplot.png', width = 14, height = 12, units = 'cm')
+
+ggplot(mpg) +
+    geom_point(aes(class, hwy, color = drv))
+ggsave('mpg_class_hwy_color.png', width = 16, height = 12, units = 'cm')
+```
+
+

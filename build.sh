@@ -1,12 +1,12 @@
-[[ -d src ]] && rm -r src
+#[[ -d src ]] && rm -r src
 [[ -d notes ]] && rm -r notes
-mkdir src
+#mkdir src
 mkdir notes
 
 for dir in */
 do
     dir=${dir%*/}
-    [[ ${dir} == 'src' || ${dir} == 'notes' ]] && continue
+    [[ ${dir} == "src" || ${dir} == "notes" ]] && continue
     
     # Copy notes.html to notes/
     cp ${dir}/notes.html notes/${dir:0:2}.html
@@ -18,6 +18,7 @@ do
     rm ${dir}/style.css
     
     
-    zip -r src/${dir:0:2}.zip ${dir}
+    #zip -r src/${dir:0:2}.zip ${dir}
     
 done
+

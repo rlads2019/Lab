@@ -277,11 +277,10 @@ mean(gender == "male")  # proportion of male
     a2z
     ```
 
-2. 使用 logical test 篩選出要更改的元素，再修改
+2. 常用的技巧 (改名字)：使用 logical test 篩選出要更改的元素，再修改
 
     ```r
     gender <- c('m', 'f', 'm', 'f')
-    gender[gender == 'm']
 
     # 改名字 1
     gender[gender == 'm'] <- 'male'
@@ -337,7 +336,8 @@ mean(gender == "male")  # proportion of male
     }
     ```
 
-1.  `x <- 1` 皆符合 `x > 0` 與 `x >= 0`
+1.  `x <- 1` 皆符合 `x > 0` 與 `x >= 0`  
+執行完之後，跳出條件式
 
     ```r
     # 跳出條件式
