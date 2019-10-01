@@ -180,28 +180,49 @@ for (word in vec) {
     }
     ```
 
-### `break` & `next`: 迴圈進階控制
+### `break` & `next`: 進階迴圈控制 (有興趣者自行參考)
 
-```{r}
-# 使用 break 跳出整個迴圈
-for (i in 1:10) {
-    if (i == 5) {
-        break
+- 有時候，我們需要對 for loop 有「更多的控制」。前面在 for loop 中使用到條件式即是一個例子。但常常條件式本身的功能並不足夠：執行迴圈時，在符合特定條件下，
+
+  - 有時候我們會希望能**忽略一次迴圈中「所有尚未被執行的程式碼」**，這時就會使用到 `next`:
+    ```{r}
+    # 使用 next '忽略一次' 迴圈
+    for (i in 1:10) {
+        if (i == 5) {
+            print("Skipping print(i) on line 194")
+            next
+        }
+        print(i)
     }
-    print(i)
-}
-```
+    ```
 
-```{r}
-# 使用 next '忽略一次' 迴圈
-for (i in 1:10) {
-    if (i == 5) {
+  - 有時我們需要**跳出整個迴圈**，亦即不再執行 for loop 裡面的程式碼。這時就會使用到 `break`:
+    ```{r}
+    # 使用 break 跳出整個迴圈
+    for (i in 1:10) {
+        if (i == 5) {
+            print("Breaking out the for loop")
+            break
+        }
+        print(i)
+    }
+    ```
+
+#### 實際應用：修改檔案名稱 
+
+下方的程式碼能將[上週作業](https://github.com/rlads2019/hw3)使用到的骰子的圖片重新命名 (並透過 `next` 忽略某些檔案)。有興趣者請下載[此週原始碼](https://rlads2019.github.io/lab/src/04.zip)，裡面有一個相同的資料夾 `dice/`，並且多出了一份檔案 `00_not_an_img.txt`，執行此程式碼前，需將**工作目錄設至 `dice/` 資料夾**。
+
+```r
+for (file in list.files()) {
+    # 忽略 `00_not_an_img.txt` 這個檔案
+    if (file == '00_not_an_img.txt') {
         next
     }
-    print(i)
+    
+    file.rename(from = file, 
+                to = paste0('dice-', file))
 }
 ```
-
 
 
 ## Wrap up：for loop 與 list
@@ -239,7 +260,9 @@ for (i in 1:10) {
         }
         
         # 在各片語之間插入逗點，形成一個句子
-        print(paste(phrases, collapse = ', '))
+        sentence <- paste0(phrases,  collapse = ', ')
+        
+        print(sentence)
     }
     ```
 

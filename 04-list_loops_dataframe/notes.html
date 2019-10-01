@@ -2342,54 +2342,78 @@ window.onload = () => {
 #&gt; [1] &quot;Wednesday was sunny.&quot;</code></pre></li>
 </ol>
 </div>
-<div id="break-next-" class="section level3">
-<h3><code>break</code> &amp; <code>next</code>: 迴圈進階控制</h3>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" data-line-number="1"><span class="co"># 使用 break 跳出整個迴圈</span></a>
+<div id="break-next--" class="section level3">
+<h3><code>break</code> &amp; <code>next</code>: 進階迴圈控制 (有興趣者自行參考)</h3>
+<ul>
+<li><p>有時候，我們需要對 for loop 有「更多的控制」。前面在 for loop 中使用到條件式即是一個例子。但常常條件式本身的功能並不足夠：執行迴圈時，在符合特定條件下，</p>
+<ul>
+<li><p>有時候我們會希望能<strong>忽略一次迴圈中「所有尚未被執行的程式碼」</strong>，這時就會使用到 <code>next</code>:</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" data-line-number="1"><span class="co"># 使用 next '忽略一次' 迴圈</span></a>
 <a class="sourceLine" id="cb32-2" data-line-number="2"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>) {</a>
 <a class="sourceLine" id="cb32-3" data-line-number="3">    <span class="cf">if</span> (i <span class="op">==</span><span class="st"> </span><span class="dv">5</span>) {</a>
-<a class="sourceLine" id="cb32-4" data-line-number="4">        <span class="cf">break</span></a>
-<a class="sourceLine" id="cb32-5" data-line-number="5">    }</a>
-<a class="sourceLine" id="cb32-6" data-line-number="6">    <span class="kw">print</span>(i)</a>
-<a class="sourceLine" id="cb32-7" data-line-number="7">}</a></code></pre></div>
-<pre><code>#&gt; [1] 1
-#&gt; [1] 2
-#&gt; [1] 3
-#&gt; [1] 4</code></pre>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" data-line-number="1"><span class="co"># 使用 next '忽略一次' 迴圈</span></a>
-<a class="sourceLine" id="cb34-2" data-line-number="2"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>) {</a>
-<a class="sourceLine" id="cb34-3" data-line-number="3">    <span class="cf">if</span> (i <span class="op">==</span><span class="st"> </span><span class="dv">5</span>) {</a>
-<a class="sourceLine" id="cb34-4" data-line-number="4">        <span class="cf">next</span></a>
-<a class="sourceLine" id="cb34-5" data-line-number="5">    }</a>
-<a class="sourceLine" id="cb34-6" data-line-number="6">    <span class="kw">print</span>(i)</a>
-<a class="sourceLine" id="cb34-7" data-line-number="7">}</a></code></pre></div>
+<a class="sourceLine" id="cb32-4" data-line-number="4">        <span class="kw">print</span>(<span class="st">&quot;Skipping print(i) on line 194&quot;</span>)</a>
+<a class="sourceLine" id="cb32-5" data-line-number="5">        <span class="cf">next</span></a>
+<a class="sourceLine" id="cb32-6" data-line-number="6">    }</a>
+<a class="sourceLine" id="cb32-7" data-line-number="7">    <span class="kw">print</span>(i)</a>
+<a class="sourceLine" id="cb32-8" data-line-number="8">}</a></code></pre></div>
 <pre><code>#&gt; [1] 1
 #&gt; [1] 2
 #&gt; [1] 3
 #&gt; [1] 4
+#&gt; [1] &quot;Skipping print(i) on line 194&quot;
 #&gt; [1] 6
 #&gt; [1] 7
 #&gt; [1] 8
 #&gt; [1] 9
-#&gt; [1] 10</code></pre>
+#&gt; [1] 10</code></pre></li>
+<li><p>有時我們需要<strong>跳出整個迴圈</strong>，亦即不再執行 for loop 裡面的程式碼。這時就會使用到 <code>break</code>:</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" data-line-number="1"><span class="co"># 使用 break 跳出整個迴圈</span></a>
+<a class="sourceLine" id="cb34-2" data-line-number="2"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>) {</a>
+<a class="sourceLine" id="cb34-3" data-line-number="3">    <span class="cf">if</span> (i <span class="op">==</span><span class="st"> </span><span class="dv">5</span>) {</a>
+<a class="sourceLine" id="cb34-4" data-line-number="4">        <span class="kw">print</span>(<span class="st">&quot;Breaking out the for loop&quot;</span>)</a>
+<a class="sourceLine" id="cb34-5" data-line-number="5">        <span class="cf">break</span></a>
+<a class="sourceLine" id="cb34-6" data-line-number="6">    }</a>
+<a class="sourceLine" id="cb34-7" data-line-number="7">    <span class="kw">print</span>(i)</a>
+<a class="sourceLine" id="cb34-8" data-line-number="8">}</a></code></pre></div>
+<pre><code>#&gt; [1] 1
+#&gt; [1] 2
+#&gt; [1] 3
+#&gt; [1] 4
+#&gt; [1] &quot;Breaking out the for loop&quot;</code></pre></li>
+</ul></li>
+</ul>
+<div class="section level4">
+<h4>實際應用：修改檔案名稱</h4>
+<p>下方的程式碼能將<a href="https://github.com/rlads2019/hw3">上週作業</a>使用到的骰子的圖片重新命名 (並透過 <code>next</code> 忽略某些檔案)。有興趣者請下載<a href="https://rlads2019.github.io/lab/src/04.zip">此週原始碼</a>，裡面有一個相同的資料夾 <code>dice/</code>，並且多出了一份檔案 <code>00_not_an_img.txt</code>，執行此程式碼前，需將<strong>工作目錄設至 <code>dice/</code> 資料夾</strong>。</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" data-line-number="1"><span class="cf">for</span> (file <span class="cf">in</span> <span class="kw">list.files</span>()) {</a>
+<a class="sourceLine" id="cb36-2" data-line-number="2">    <span class="co"># 忽略 `00_not_an_img.txt` 這個檔案</span></a>
+<a class="sourceLine" id="cb36-3" data-line-number="3">    <span class="cf">if</span> (file <span class="op">==</span><span class="st"> '00_not_an_img.txt'</span>) {</a>
+<a class="sourceLine" id="cb36-4" data-line-number="4">        <span class="cf">next</span></a>
+<a class="sourceLine" id="cb36-5" data-line-number="5">    }</a>
+<a class="sourceLine" id="cb36-6" data-line-number="6">    </a>
+<a class="sourceLine" id="cb36-7" data-line-number="7">    <span class="kw">file.rename</span>(<span class="dt">from =</span> file, </a>
+<a class="sourceLine" id="cb36-8" data-line-number="8">                <span class="dt">to =</span> <span class="kw">paste0</span>(<span class="st">'dice-'</span>, file))</a>
+<a class="sourceLine" id="cb36-9" data-line-number="9">}</a></code></pre></div>
+</div>
 </div>
 </div>
 <div id="wrap-upfor-loop--list" class="section level2">
 <h2>Wrap up：for loop 與 list</h2>
 <ul>
 <li><p><a href="https://rlads2019.github.io/lab/notes/03.html#wrap-up">上週</a>我們使用過 3 個長度為 4 的 vector 來儲存關於 4 個人 (<code>kai</code>, <code>jessy</code>, <code>joy</code>, <code>ben</code>) 的資料。但使用這種方式儲存資料似乎有些違反直覺，因為它將關於一個人的資訊 (<code>name</code>, <code>age</code>, <code>about</code>) 分開來儲存在 3 個獨立的 vector。</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" data-line-number="1"><span class="co"># Data</span></a>
-<a class="sourceLine" id="cb36-2" data-line-number="2">name &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;kai&quot;</span>, <span class="st">&quot;jessy&quot;</span>, <span class="st">&quot;joy&quot;</span>, <span class="st">&quot;ben&quot;</span>)</a>
-<a class="sourceLine" id="cb36-3" data-line-number="3">age &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">40</span>, <span class="dv">20</span>, <span class="dv">18</span>, <span class="dv">19</span>)</a>
-<a class="sourceLine" id="cb36-4" data-line-number="4">about &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;a professor&quot;</span>, <span class="st">&quot;a cat lover&quot;</span>, <span class="st">&quot;a hacker&quot;</span>, <span class="st">&quot;a YouTuber&quot;</span>)</a></code></pre></div></li>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" data-line-number="1"><span class="co"># Data</span></a>
+<a class="sourceLine" id="cb37-2" data-line-number="2">name &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;kai&quot;</span>, <span class="st">&quot;jessy&quot;</span>, <span class="st">&quot;joy&quot;</span>, <span class="st">&quot;ben&quot;</span>)</a>
+<a class="sourceLine" id="cb37-3" data-line-number="3">age &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">40</span>, <span class="dv">20</span>, <span class="dv">18</span>, <span class="dv">19</span>)</a>
+<a class="sourceLine" id="cb37-4" data-line-number="4">about &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;a professor&quot;</span>, <span class="st">&quot;a cat lover&quot;</span>, <span class="st">&quot;a hacker&quot;</span>, <span class="st">&quot;a YouTuber&quot;</span>)</a></code></pre></div></li>
 <li><p>對於這種彼此之間具有關聯的資料，一種更好的方式是將它們<strong>儲存在一起</strong>，因為這不只幫助我們在「程式上」更容易去操弄這筆資料，更讓我們能以「階層組織」去「想像」我們的資料。這裡我們使用 <code>list</code> 去改寫上週的資料：</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" data-line-number="1">member &lt;-<span class="st"> </span><span class="kw">list</span>(</a>
-<a class="sourceLine" id="cb37-2" data-line-number="2">    <span class="dt">kai =</span> <span class="kw">list</span>(<span class="dt">age =</span> <span class="dv">40</span>, <span class="dt">about =</span> <span class="st">&quot;a professor&quot;</span>),</a>
-<a class="sourceLine" id="cb37-3" data-line-number="3">    <span class="dt">jessy =</span> <span class="kw">list</span>(<span class="dt">age =</span> <span class="dv">20</span>, <span class="dt">about =</span> <span class="st">&quot;a cat lover&quot;</span>),</a>
-<a class="sourceLine" id="cb37-4" data-line-number="4">    <span class="dt">joy =</span> <span class="kw">list</span>(<span class="dt">age =</span> <span class="dv">18</span>, <span class="dt">about =</span> <span class="st">&quot;a hacker&quot;</span>),</a>
-<a class="sourceLine" id="cb37-5" data-line-number="5">    <span class="dt">ben =</span> <span class="kw">list</span>(<span class="dt">age =</span> <span class="dv">19</span>, <span class="dt">about =</span> <span class="st">&quot;a YouTuber&quot;</span>)</a>
-<a class="sourceLine" id="cb37-6" data-line-number="6">)</a>
-<a class="sourceLine" id="cb37-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb37-8" data-line-number="8">member</a></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" data-line-number="1">member &lt;-<span class="st"> </span><span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb38-2" data-line-number="2">    <span class="dt">kai =</span> <span class="kw">list</span>(<span class="dt">age =</span> <span class="dv">40</span>, <span class="dt">about =</span> <span class="st">&quot;a professor&quot;</span>),</a>
+<a class="sourceLine" id="cb38-3" data-line-number="3">    <span class="dt">jessy =</span> <span class="kw">list</span>(<span class="dt">age =</span> <span class="dv">20</span>, <span class="dt">about =</span> <span class="st">&quot;a cat lover&quot;</span>),</a>
+<a class="sourceLine" id="cb38-4" data-line-number="4">    <span class="dt">joy =</span> <span class="kw">list</span>(<span class="dt">age =</span> <span class="dv">18</span>, <span class="dt">about =</span> <span class="st">&quot;a hacker&quot;</span>),</a>
+<a class="sourceLine" id="cb38-5" data-line-number="5">    <span class="dt">ben =</span> <span class="kw">list</span>(<span class="dt">age =</span> <span class="dv">19</span>, <span class="dt">about =</span> <span class="st">&quot;a YouTuber&quot;</span>)</a>
+<a class="sourceLine" id="cb38-6" data-line-number="6">)</a>
+<a class="sourceLine" id="cb38-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb38-8" data-line-number="8">member</a></code></pre></div>
 <pre><code>#&gt; $kai
 #&gt; $kai$age
 #&gt; [1] 40
@@ -2420,18 +2444,20 @@ window.onload = () => {
 #&gt; 
 #&gt; $ben$about
 #&gt; [1] &quot;a YouTuber&quot;</code></pre>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" data-line-number="1"><span class="cf">for</span> (name <span class="cf">in</span> <span class="kw">names</span>(member)) {</a>
-<a class="sourceLine" id="cb39-2" data-line-number="2">    someone &lt;-<span class="st"> </span>member[[name]]</a>
-<a class="sourceLine" id="cb39-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb39-4" data-line-number="4">    <span class="co"># 將組成句子的片語儲存於 char vector `phrases`</span></a>
-<a class="sourceLine" id="cb39-5" data-line-number="5">    phrases &lt;-<span class="st"> </span><span class="kw">c</span>(name, someone<span class="op">$</span>about, <span class="st">&quot;is quite young.&quot;</span>)</a>
-<a class="sourceLine" id="cb39-6" data-line-number="6">    <span class="cf">if</span> (someone<span class="op">$</span>age <span class="op">&gt;</span><span class="st"> </span><span class="dv">35</span>) {</a>
-<a class="sourceLine" id="cb39-7" data-line-number="7">        phrases[<span class="dv">3</span>] &lt;-<span class="st"> &quot;should be wise.&quot;</span></a>
-<a class="sourceLine" id="cb39-8" data-line-number="8">    }</a>
-<a class="sourceLine" id="cb39-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb39-10" data-line-number="10">    <span class="co"># 在各片語之間插入逗點，形成一個句子</span></a>
-<a class="sourceLine" id="cb39-11" data-line-number="11">    <span class="kw">print</span>(<span class="kw">paste</span>(phrases, <span class="dt">collapse =</span> <span class="st">', '</span>))</a>
-<a class="sourceLine" id="cb39-12" data-line-number="12">}</a></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" data-line-number="1"><span class="cf">for</span> (name <span class="cf">in</span> <span class="kw">names</span>(member)) {</a>
+<a class="sourceLine" id="cb40-2" data-line-number="2">    someone &lt;-<span class="st"> </span>member[[name]]</a>
+<a class="sourceLine" id="cb40-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb40-4" data-line-number="4">    <span class="co"># 將組成句子的片語儲存於 char vector `phrases`</span></a>
+<a class="sourceLine" id="cb40-5" data-line-number="5">    phrases &lt;-<span class="st"> </span><span class="kw">c</span>(name, someone<span class="op">$</span>about, <span class="st">&quot;is quite young.&quot;</span>)</a>
+<a class="sourceLine" id="cb40-6" data-line-number="6">    <span class="cf">if</span> (someone<span class="op">$</span>age <span class="op">&gt;</span><span class="st"> </span><span class="dv">35</span>) {</a>
+<a class="sourceLine" id="cb40-7" data-line-number="7">        phrases[<span class="dv">3</span>] &lt;-<span class="st"> &quot;should be wise.&quot;</span></a>
+<a class="sourceLine" id="cb40-8" data-line-number="8">    }</a>
+<a class="sourceLine" id="cb40-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb40-10" data-line-number="10">    <span class="co"># 在各片語之間插入逗點，形成一個句子</span></a>
+<a class="sourceLine" id="cb40-11" data-line-number="11">    sentence &lt;-<span class="st"> </span><span class="kw">paste0</span>(phrases,  <span class="dt">collapse =</span> <span class="st">', '</span>)</a>
+<a class="sourceLine" id="cb40-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb40-13" data-line-number="13">    <span class="kw">print</span>(sentence)</a>
+<a class="sourceLine" id="cb40-14" data-line-number="14">}</a></code></pre></div>
 <pre><code>#&gt; [1] &quot;kai, a professor, should be wise.&quot;
 #&gt; [1] &quot;jessy, a cat lover, is quite young.&quot;
 #&gt; [1] &quot;joy, a hacker, is quite young.&quot;
@@ -2459,12 +2485,12 @@ window.onload = () => {
 </div>
 <ul>
 <li><p>我們可以使用 <code>tibble</code> 套件的 <code>tibble()</code><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> 建立 data frame。上圖中的 data frame 例子即可由下方的程式碼所建立:</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" data-line-number="1"><span class="kw">library</span>(tibble)</a>
-<a class="sourceLine" id="cb41-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb41-3" data-line-number="3">df &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">name =</span> <span class="kw">c</span>(<span class="st">&quot;kai&quot;</span>, <span class="st">&quot;jessy&quot;</span>, <span class="st">&quot;joy&quot;</span>, <span class="st">&quot;ben&quot;</span>),</a>
-<a class="sourceLine" id="cb41-4" data-line-number="4">             <span class="dt">age  =</span> <span class="kw">c</span>(<span class="dv">40</span>, <span class="dv">20</span>, <span class="dv">18</span>, <span class="dv">19</span>), </a>
-<a class="sourceLine" id="cb41-5" data-line-number="5">             <span class="dt">grad =</span> <span class="kw">c</span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>))</a>
-<a class="sourceLine" id="cb41-6" data-line-number="6">df</a></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" data-line-number="1"><span class="kw">library</span>(tibble)</a>
+<a class="sourceLine" id="cb42-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb42-3" data-line-number="3">df &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">name =</span> <span class="kw">c</span>(<span class="st">&quot;kai&quot;</span>, <span class="st">&quot;jessy&quot;</span>, <span class="st">&quot;joy&quot;</span>, <span class="st">&quot;ben&quot;</span>),</a>
+<a class="sourceLine" id="cb42-4" data-line-number="4">             <span class="dt">age  =</span> <span class="kw">c</span>(<span class="dv">40</span>, <span class="dv">20</span>, <span class="dv">18</span>, <span class="dv">19</span>), </a>
+<a class="sourceLine" id="cb42-5" data-line-number="5">             <span class="dt">grad =</span> <span class="kw">c</span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>))</a>
+<a class="sourceLine" id="cb42-6" data-line-number="6">df</a></code></pre></div>
 <pre><code>#&gt; # A tibble: 4 x 3
 #&gt;   name    age grad 
 #&gt;   &lt;chr&gt; &lt;dbl&gt; &lt;lgl&gt;
@@ -2476,21 +2502,21 @@ window.onload = () => {
 <li><code>tibble()</code> 裡的每個 vector 對映到 data frame 中的一欄 (column)。因此 data frame 中不同欄的資料類型可能不同，但<strong>每一欄 (變項) 內的資料類型必須相同</strong> (因為 vector 只能儲存相同的資料類型)。</li>
 </ul></li>
 <li><p>下方的指令可用於檢視 data frame 的資訊</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" data-line-number="1"><span class="kw">nrow</span>(df)   <span class="co"># number of rows</span></a></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" data-line-number="1"><span class="kw">nrow</span>(df)   <span class="co"># number of rows</span></a></code></pre></div>
 <pre><code>#&gt; [1] 4</code></pre>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" data-line-number="1"><span class="kw">ncol</span>(df)   <span class="co"># number of columns</span></a></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" data-line-number="1"><span class="kw">ncol</span>(df)   <span class="co"># number of columns</span></a></code></pre></div>
 <pre><code>#&gt; [1] 3</code></pre>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" data-line-number="1"><span class="kw">dim</span>(df)    <span class="co"># 形狀 (num of rows, num of columns)</span></a></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" data-line-number="1"><span class="kw">dim</span>(df)    <span class="co"># 形狀 (num of rows, num of columns)</span></a></code></pre></div>
 <pre><code>#&gt; [1] 4 3</code></pre>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" data-line-number="1"><span class="kw">names</span>(df)  <span class="co"># name of each column</span></a></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" data-line-number="1"><span class="kw">names</span>(df)  <span class="co"># name of each column</span></a></code></pre></div>
 <pre><code>#&gt; [1] &quot;name&quot; &quot;age&quot;  &quot;grad&quot;</code></pre>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" data-line-number="1">tibble<span class="op">::</span><span class="kw">glimpse</span>(df)  <span class="co"># 關於 df 的各種資訊</span></a></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" data-line-number="1">tibble<span class="op">::</span><span class="kw">glimpse</span>(df)  <span class="co"># 關於 df 的各種資訊</span></a></code></pre></div>
 <pre><code>#&gt; Observations: 4
 #&gt; Variables: 3
 #&gt; $ name &lt;chr&gt; &quot;kai&quot;, &quot;jessy&quot;, &quot;joy&quot;, &quot;ben&quot;
 #&gt; $ age  &lt;dbl&gt; 40, 20, 18, 19
 #&gt; $ grad &lt;lgl&gt; FALSE, TRUE, FALSE, TRUE</code></pre>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" data-line-number="1"><span class="kw">View</span>(df)   <span class="co"># view df in RStudio source pane</span></a></code></pre></div></li>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" data-line-number="1"><span class="kw">View</span>(df)   <span class="co"># view df in RStudio source pane</span></a></code></pre></div></li>
 </ul>
 <div id="subsetting-returning-a-data-frame" class="section level3">
 <h3>Subsetting: returning a data frame</h3>
@@ -2502,17 +2528,17 @@ window.onload = () => {
 <li><p>以這種語法進行篩選，回傳的<strong>一定是 data frame</strong><a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>，即使只有篩選出一個值 (e.g. df[1, 1])</p></li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" data-line-number="1">df[<span class="dv">2</span>, <span class="dv">1</span>]</a></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb56-1" data-line-number="1">df[<span class="dv">2</span>, <span class="dv">1</span>]</a></code></pre></div>
 <pre><code>#&gt; # A tibble: 1 x 1
 #&gt;   name 
 #&gt;   &lt;chr&gt;
 #&gt; 1 jessy</code></pre>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb57-1" data-line-number="1">df[<span class="dv">2</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]  <span class="co"># df[2, c(&quot;name&quot;, &quot;age&quot;)]</span></a></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" data-line-number="1">df[<span class="dv">2</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]  <span class="co"># df[2, c(&quot;name&quot;, &quot;age&quot;)]</span></a></code></pre></div>
 <pre><code>#&gt; # A tibble: 1 x 2
 #&gt;   name    age
 #&gt;   &lt;chr&gt; &lt;dbl&gt;
 #&gt; 1 jessy    20</code></pre>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb59-1" data-line-number="1">df[<span class="dv">2</span>, ]</a></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" data-line-number="1">df[<span class="dv">2</span>, ]</a></code></pre></div>
 <pre><code>#&gt; # A tibble: 1 x 3
 #&gt;   name    age grad 
 #&gt;   &lt;chr&gt; &lt;dbl&gt; &lt;lgl&gt;
@@ -2525,39 +2551,39 @@ window.onload = () => {
 <pre class="null"><code>df[[&quot;&lt;column_name&gt;&quot;]]
 df[[&lt;column_index&gt;]]
 df$&lt;column_name&gt;</code></pre>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" data-line-number="1">df[[<span class="dv">2</span>]]</a>
-<a class="sourceLine" id="cb62-2" data-line-number="2">df[[<span class="st">&quot;age&quot;</span>]]</a>
-<a class="sourceLine" id="cb62-3" data-line-number="3">df<span class="op">$</span>age  <span class="co"># 最常見</span></a></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb63-1" data-line-number="1">df[[<span class="dv">2</span>]]</a>
+<a class="sourceLine" id="cb63-2" data-line-number="2">df[[<span class="st">&quot;age&quot;</span>]]</a>
+<a class="sourceLine" id="cb63-3" data-line-number="3">df<span class="op">$</span>age  <span class="co"># 最常見</span></a></code></pre></div>
 <pre><code>#&gt; [1] 40 20 18 19
 #&gt; [1] 40 20 18 19
 #&gt; [1] 40 20 18 19</code></pre></li>
 <li><p>篩選 data frame 而回傳 vector 是個很實用的技巧，因為我們可以使用這個回傳的 vector 當作我們進一步篩選 data frame 的依據，例如：</p>
-<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" data-line-number="1">over19 &lt;-<span class="st"> </span>df<span class="op">$</span>age <span class="op">&gt;</span><span class="st"> </span><span class="dv">19</span>  </a>
-<a class="sourceLine" id="cb64-2" data-line-number="2">over19</a></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb65-1" data-line-number="1">over19 &lt;-<span class="st"> </span>df<span class="op">$</span>age <span class="op">&gt;</span><span class="st"> </span><span class="dv">19</span>  </a>
+<a class="sourceLine" id="cb65-2" data-line-number="2">over19</a></code></pre></div>
 <pre><code>#&gt; [1]  TRUE  TRUE FALSE FALSE</code></pre>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" data-line-number="1"><span class="co"># subset df with obs. over 19</span></a>
-<a class="sourceLine" id="cb66-2" data-line-number="2">df[over19, ]</a></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb67-1" data-line-number="1"><span class="co"># subset df with obs. over 19</span></a>
+<a class="sourceLine" id="cb67-2" data-line-number="2">df[over19, ]</a></code></pre></div>
 <pre><code>#&gt; # A tibble: 2 x 3
 #&gt;   name    age grad 
 #&gt;   &lt;chr&gt; &lt;dbl&gt; &lt;lgl&gt;
 #&gt; 1 kai      40 FALSE
 #&gt; 2 jessy    20 TRUE</code></pre>
-<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb68-1" data-line-number="1"><span class="co"># subset df with obs. below or equal 19</span></a>
-<a class="sourceLine" id="cb68-2" data-line-number="2">df[<span class="op">!</span>over19, ]</a></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb69-1" data-line-number="1"><span class="co"># subset df with obs. below or equal 19</span></a>
+<a class="sourceLine" id="cb69-2" data-line-number="2">df[<span class="op">!</span>over19, ]</a></code></pre></div>
 <pre><code>#&gt; # A tibble: 2 x 3
 #&gt;   name    age grad 
 #&gt;   &lt;chr&gt; &lt;dbl&gt; &lt;lgl&gt;
 #&gt; 1 joy      18 FALSE
 #&gt; 2 ben      19 TRUE</code></pre>
-<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb70-1" data-line-number="1"><span class="co"># 合併起來寫 (最常見的寫法，但比較難讀懂)</span></a>
-<a class="sourceLine" id="cb70-2" data-line-number="2">df[df<span class="op">$</span>age <span class="op">&gt;</span><span class="st"> </span><span class="dv">19</span>, ]</a></code></pre></div>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb71-1" data-line-number="1"><span class="co"># 合併起來寫 (最常見的寫法，但比較難讀懂)</span></a>
+<a class="sourceLine" id="cb71-2" data-line-number="2">df[df<span class="op">$</span>age <span class="op">&gt;</span><span class="st"> </span><span class="dv">19</span>, ]</a></code></pre></div>
 <pre><code>#&gt; # A tibble: 2 x 3
 #&gt;   name    age grad 
 #&gt;   &lt;chr&gt; &lt;dbl&gt; &lt;lgl&gt;
 #&gt; 1 kai      40 FALSE
 #&gt; 2 jessy    20 TRUE</code></pre></li>
 <li><p>透過這個技巧，R 能幫助我們快速篩選出需要的資料，例如，我們可以結合 <code>age</code> 與 <code>grad</code> 兩個變項，篩選出「小於 20 歲且為研究所學生」的 data frame:</p>
-<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb72-1" data-line-number="1">df[(df<span class="op">$</span>age <span class="op">&lt;</span><span class="st"> </span><span class="dv">20</span>) <span class="op">&amp;</span><span class="st"> </span>(df<span class="op">$</span>grad), ]</a></code></pre></div>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb73-1" data-line-number="1">df[(df<span class="op">$</span>age <span class="op">&lt;</span><span class="st"> </span><span class="dv">20</span>) <span class="op">&amp;</span><span class="st"> </span>(df<span class="op">$</span>grad), ]</a></code></pre></div>
 <pre><code>#&gt; # A tibble: 1 x 3
 #&gt;   name    age grad 
 #&gt;   &lt;chr&gt; &lt;dbl&gt; &lt;lgl&gt;

@@ -2025,6 +2025,125 @@ window.onload = () => {
 </div>
 <div id="for-loop" class="section level2">
 <h2>for loop</h2>
+<div class="hide" data-tag="For Loop">
+<ol style="list-style-type: decimal">
+<li><p>Basics</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="cf">for</span> (elem <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>) {</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">    <span class="kw">print</span>(elem)</a>
+<a class="sourceLine" id="cb5-3" data-line-number="3">}</a>
+<a class="sourceLine" id="cb5-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>) {</a>
+<a class="sourceLine" id="cb5-6" data-line-number="6">    <span class="kw">print</span>(i)</a>
+<a class="sourceLine" id="cb5-7" data-line-number="7">}</a>
+<a class="sourceLine" id="cb5-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb5-9" data-line-number="9"><span class="co"># Use character vector</span></a>
+<a class="sourceLine" id="cb5-10" data-line-number="10">vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;謝&quot;</span>, <span class="st">&quot;老師&quot;</span>, <span class="st">&quot;好&quot;</span>, <span class="st">&quot;帥&quot;</span>)</a>
+<a class="sourceLine" id="cb5-11" data-line-number="11"><span class="cf">for</span> (word <span class="cf">in</span> vec) {</a>
+<a class="sourceLine" id="cb5-12" data-line-number="12">    <span class="kw">print</span>(word)</a>
+<a class="sourceLine" id="cb5-13" data-line-number="13">}</a>
+<a class="sourceLine" id="cb5-14" data-line-number="14"></a>
+<a class="sourceLine" id="cb5-15" data-line-number="15"><span class="co"># `if` 遇到最後一個字: 帥</span></a>
+<a class="sourceLine" id="cb5-16" data-line-number="16"><span class="cf">for</span> (word <span class="cf">in</span> vec) {</a>
+<a class="sourceLine" id="cb5-17" data-line-number="17">    <span class="kw">print</span>(word)</a>
+<a class="sourceLine" id="cb5-18" data-line-number="18"></a>
+<a class="sourceLine" id="cb5-19" data-line-number="19">    <span class="cf">if</span> (word <span class="op">==</span><span class="st"> &quot;帥&quot;</span>) {</a>
+<a class="sourceLine" id="cb5-20" data-line-number="20">        <span class="kw">print</span>(<span class="st">'真的嗎？'</span>)</a>
+<a class="sourceLine" id="cb5-21" data-line-number="21">    }</a>
+<a class="sourceLine" id="cb5-22" data-line-number="22">}</a></code></pre></div></li>
+<li><p>seq_along</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="co"># seq_along</span></a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">seq_along</span>(vec)) {</a>
+<a class="sourceLine" id="cb6-3" data-line-number="3">    <span class="kw">print</span>(i)</a>
+<a class="sourceLine" id="cb6-4" data-line-number="4">}</a>
+<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">seq_along</span>(vec)) {</a>
+<a class="sourceLine" id="cb6-6" data-line-number="6">    <span class="kw">print</span>(vec[i])</a>
+<a class="sourceLine" id="cb6-7" data-line-number="7">}</a>
+<a class="sourceLine" id="cb6-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb6-9" data-line-number="9"><span class="co"># rewrite 遇到最後一個字</span></a>
+<a class="sourceLine" id="cb6-10" data-line-number="10"><span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">seq_along</span>(vec)) {</a>
+<a class="sourceLine" id="cb6-11" data-line-number="11">    <span class="kw">print</span>(vec[i])</a>
+<a class="sourceLine" id="cb6-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb6-13" data-line-number="13">    <span class="cf">if</span> (i <span class="op">==</span><span class="st"> </span><span class="kw">length</span>(vec)) {</a>
+<a class="sourceLine" id="cb6-14" data-line-number="14">        <span class="kw">print</span>(<span class="st">'真的嗎？'</span>)</a>
+<a class="sourceLine" id="cb6-15" data-line-number="15">    }</a>
+<a class="sourceLine" id="cb6-16" data-line-number="16">}</a></code></pre></div></li>
+<li><p>names</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dt">Monday =</span> <span class="st">&quot;rainy&quot;</span>, <span class="dt">Tuesday =</span> <span class="st">&quot;cloudy&quot;</span>, <span class="dt">Wednesday =</span> <span class="st">&quot;sunny&quot;</span>)</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="kw">names</span>(vec)</a>
+<a class="sourceLine" id="cb7-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb7-4" data-line-number="4"><span class="cf">for</span> (name <span class="cf">in</span> <span class="kw">names</span>(vec)) {</a>
+<a class="sourceLine" id="cb7-5" data-line-number="5">    sentence &lt;-<span class="st"> </span><span class="kw">paste0</span>(name, <span class="st">' was '</span>, vec[name], <span class="st">'.'</span>)</a>
+<a class="sourceLine" id="cb7-6" data-line-number="6">    <span class="kw">print</span>(sentence)</a>
+<a class="sourceLine" id="cb7-7" data-line-number="7">}</a></code></pre></div></li>
+</ol>
+</div>
+<p><strong>3 min</strong></p>
+</div>
+<div id="building-a-for-loop" class="section level2">
+<h2>Building a for loop</h2>
+<div class="hide" data-tag="Wrap up: building a for loop">
+<p><strong>slide</strong>: building a for loop</p>
+<ol style="list-style-type: decimal">
+<li>Always start with <strong>one concrete case</strong></li>
+<li>solve one case and then move on</li>
+</ol>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">member &lt;-<span class="st"> </span><span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb8-2" data-line-number="2">    <span class="dt">kai =</span> <span class="kw">list</span>(<span class="dt">age =</span> <span class="dv">40</span>, <span class="dt">about =</span> <span class="st">&quot;a professor&quot;</span>),</a>
+<a class="sourceLine" id="cb8-3" data-line-number="3">    <span class="dt">jessy =</span> <span class="kw">list</span>(<span class="dt">age =</span> <span class="dv">20</span>, <span class="dt">about =</span> <span class="st">&quot;a cat lover&quot;</span>),</a>
+<a class="sourceLine" id="cb8-4" data-line-number="4">    <span class="dt">joy =</span> <span class="kw">list</span>(<span class="dt">age =</span> <span class="dv">18</span>, <span class="dt">about =</span> <span class="st">&quot;a hacker&quot;</span>),</a>
+<a class="sourceLine" id="cb8-5" data-line-number="5">    <span class="dt">ben =</span> <span class="kw">list</span>(<span class="dt">age =</span> <span class="dv">19</span>, <span class="dt">about =</span> <span class="st">&quot;a YouTuber&quot;</span>)</a>
+<a class="sourceLine" id="cb8-6" data-line-number="6">)</a></code></pre></div>
+<p><strong>Demo</strong></p>
+<ol style="list-style-type: decimal">
+<li><p>觀察 <code>member</code>, 印出一個句子</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">member[[<span class="st">'kai'</span>]]</a>
+<a class="sourceLine" id="cb9-2" data-line-number="2">phrases &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">'kai'</span>, member[[<span class="st">'kai'</span>]]<span class="op">$</span>about, <span class="st">'should be wise.'</span>)</a>
+<a class="sourceLine" id="cb9-3" data-line-number="3">sentence &lt;-<span class="st"> </span><span class="kw">paste</span>(phrases,  <span class="dt">collapse =</span> <span class="st">', '</span>)  <span class="co"># explain collapse</span></a></code></pre></div></li>
+<li><p>抽象化</p>
+<ol style="list-style-type: decimal">
+<li>使用 <code>name</code> 作為 for 變數 –&gt; 將 <code>'kai'</code> 改為 <code>name</code></li>
+</ol>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="cf">for</span> (name <span class="cf">in</span> <span class="kw">names</span>(member)) {</a>
+<a class="sourceLine" id="cb10-2" data-line-number="2">    member[[<span class="st">'kai'</span>]]</a>
+<a class="sourceLine" id="cb10-3" data-line-number="3">    phrases &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">'kai'</span>, member[[<span class="st">'kai'</span>]]<span class="op">$</span>about, <span class="st">'should be wise.'</span>)</a>
+<a class="sourceLine" id="cb10-4" data-line-number="4">    sentence &lt;-<span class="st"> </span><span class="kw">paste</span>(phrases,  <span class="dt">collapse =</span> <span class="st">', '</span>)</a>
+<a class="sourceLine" id="cb10-5" data-line-number="5">}</a></code></pre></div>
+<ol start="2" style="list-style-type: decimal">
+<li>加入 <code>someone</code> –&gt; 印看看</li>
+</ol>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="cf">for</span> (name <span class="cf">in</span> <span class="kw">names</span>(member)) {</a>
+<a class="sourceLine" id="cb11-2" data-line-number="2">    someone &lt;-<span class="st"> </span>member[[name]]  <span class="co"># 加入 someone</span></a>
+<a class="sourceLine" id="cb11-3" data-line-number="3">    phrases &lt;-<span class="st"> </span><span class="kw">c</span>(name, someone<span class="op">$</span>about, <span class="st">'should be wise.'</span>)  <span class="co"># 加入 someone</span></a>
+<a class="sourceLine" id="cb11-4" data-line-number="4">    sentence &lt;-<span class="st"> </span><span class="kw">paste</span>(phrases,  <span class="dt">collapse =</span> <span class="st">', '</span>)</a>
+<a class="sourceLine" id="cb11-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb11-6" data-line-number="6">    <span class="kw">print</span>(sentence)  <span class="co"># print intermediate results</span></a>
+<a class="sourceLine" id="cb11-7" data-line-number="7">}</a></code></pre></div>
+<pre><code>#&gt; [1] &quot;kai, a professor, should be wise.&quot;
+#&gt; [1] &quot;jessy, a cat lover, should be wise.&quot;
+#&gt; [1] &quot;joy, a hacker, should be wise.&quot;
+#&gt; [1] &quot;ben, a YouTuber, should be wise.&quot;</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>加入條件式</li>
+</ol>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="cf">for</span> (name <span class="cf">in</span> <span class="kw">names</span>(member)) {</a>
+<a class="sourceLine" id="cb13-2" data-line-number="2">    someone &lt;-<span class="st"> </span>member[[name]]</a>
+<a class="sourceLine" id="cb13-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb13-4" data-line-number="4">    <span class="co"># Construct phrases from `someone`</span></a>
+<a class="sourceLine" id="cb13-5" data-line-number="5">    phrases &lt;-<span class="st"> </span><span class="kw">c</span>(name, someone<span class="op">$</span>about, <span class="st">'should be wise.'</span>)</a>
+<a class="sourceLine" id="cb13-6" data-line-number="6">    <span class="cf">if</span> (someone<span class="op">$</span>age <span class="op">&lt;</span><span class="st"> </span><span class="dv">35</span>) {</a>
+<a class="sourceLine" id="cb13-7" data-line-number="7">        phrases[<span class="dv">3</span>] &lt;-<span class="st"> 'is quite young.'</span></a>
+<a class="sourceLine" id="cb13-8" data-line-number="8">    }</a>
+<a class="sourceLine" id="cb13-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb13-10" data-line-number="10">    sentence &lt;-<span class="st"> </span><span class="kw">paste</span>(phrases,  <span class="dt">collapse =</span> <span class="st">', '</span>)</a>
+<a class="sourceLine" id="cb13-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb13-12" data-line-number="12">    <span class="kw">print</span>(sentence)</a>
+<a class="sourceLine" id="cb13-13" data-line-number="13">}</a></code></pre></div>
+<pre><code>#&gt; [1] &quot;kai, a professor, should be wise.&quot;
+#&gt; [1] &quot;jessy, a cat lover, is quite young.&quot;
+#&gt; [1] &quot;joy, a hacker, is quite young.&quot;
+#&gt; [1] &quot;ben, a YouTuber, is quite young.&quot;</code></pre></li>
+</ol>
+</div>
 </div>
 
 

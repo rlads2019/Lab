@@ -16,10 +16,12 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE,
+knitr::opts_chunk$set(echo=T,
+                      results = 'hide',
                       comment = '#>',
                       message = F)
 ```
+
 
 
 ```{js echo=FALSE}
@@ -43,7 +45,7 @@ window.onload = () => {
 
 1. Create a list
 
-    ```r
+    ```{r}
     list(20, FALSE, c("ig", "selfie"))
     list(age = 20, single = FALSE, tags = c("ig", "selfie"))
     
@@ -53,7 +55,7 @@ window.onload = () => {
     ```
 2. Subset (篩選)
     
-    ```r
+    ```{r}
     ben <- list(age = 20, single = FALSE, tags = c("ig", "selfie"))
     ben[1:2]
     ben[c(T, F, T)]
@@ -62,7 +64,7 @@ window.onload = () => {
 
     - vector `[]` --> vector; list `[]` --> list; df `[]` --> df
     
-    ```r
+    ```{r}
     ben['tags']
     ben[['tags']]
     ```
@@ -75,7 +77,7 @@ window.onload = () => {
 
 
 <div class="hide" data-tag="Nested Structure">
-```r
+```{r}
 a_lst <- list(name = "ben",
               info = list(age = 20,
                           tags = c("ig", "selfie")))
@@ -96,6 +98,137 @@ a_lst$info$tags[2]
 ## for loop
 
 <div class="hide" data-tag="For Loop">
+1. Basics
 
+    ```{r}
+    for (elem in 1:3) {
+        print(elem)
+    }
+    
+    for (i in 1:5) {
+        print(i)
+    }
+    
+    # Use character vector
+    vec <- c("謝", "老師", "好", "帥")
+    for (word in vec) {
+        print(word)
+    }
+    
+    # `if` 遇到最後一個字: 帥
+    for (word in vec) {
+        print(word)
+        
+        if (word == "帥") {
+            print('真的嗎？')
+        }
+    }
+    ```
+
+2. seq_along
+
+    ```{r}
+    # seq_along
+    for (i in seq_along(vec)) {
+        print(i)
+    }
+    for (i in seq_along(vec)) {
+        print(vec[i])
+    }
+    
+    # rewrite 遇到最後一個字
+    for (i in seq_along(vec)) {
+        print(vec[i])
+        
+        if (i == length(vec)) {
+            print('真的嗎？')
+        }
+    }
+    ```
+
+3. names
+
+    ```{r}
+    vec <- c(Monday = "rainy", Tuesday = "cloudy", Wednesday = "sunny")
+    names(vec)
+
+    for (name in names(vec)) {
+        sentence <- paste0(name, ' was ', vec[name], '.')
+        print(sentence)
+    }
+    ```
 </div>
 
+**3 min**
+
+## Building a for loop
+
+<div class="hide" data-tag="Wrap up: building a for loop">
+
+**slide**: building a for loop
+
+1. Always start with **one concrete case**
+2. solve one case and then move on
+
+```{r echo=T, results = 'hide'}
+member <- list(
+    kai = list(age = 40, about = "a professor"),
+    jessy = list(age = 20, about = "a cat lover"),
+    joy = list(age = 18, about = "a hacker"),
+    ben = list(age = 19, about = "a YouTuber")
+)
+```
+
+**Demo**
+
+1. 觀察 `member`, 印出一個句子
+    
+    ```{r}
+    member[['kai']]
+    phrases <- c('kai', member[['kai']]$about, 'should be wise.')
+    sentence <- paste0(phrases,  collapse = ', ')  # explain collapse
+    ```
+
+2. 抽象化
+
+    1. 使用 `name` 作為 for 變數 --> 將 `'kai'` 改為 `name`
+    
+    ```{r}
+    for (name in names(member)) {
+        member[['kai']]
+        phrases <- c('kai', member[['kai']]$about, 'should be wise.')
+        sentence <- paste0(phrases,  collapse = ', ')
+    }
+    ```
+    
+    2. 加入 `someone` --> 印看看
+  
+    ```{r results = 'show'}
+    for (name in names(member)) {
+        someone <- member[[name]]  # 加入 someone
+        phrases <- c(name, someone$about, 'should be wise.')  # 加入 someone
+        sentence <- paste0(phrases,  collapse = ', ')
+        
+        print(sentence)  # print intermediate results
+    }
+    ```
+    
+    3. 加入條件式
+  
+    ```{r results = 'show'}
+    for (name in names(member)) {
+        someone <- member[[name]]
+        
+        # Construct phrases from `someone`
+        phrases <- c(name, someone$about, 'should be wise.')
+        if (someone$age < 35) {
+            phrases[3] <- 'is quite young.'
+        }
+        
+        sentence <- paste0(phrases,  collapse = ', ')
+        
+        print(sentence)
+    }
+    ```
+
+</div>
