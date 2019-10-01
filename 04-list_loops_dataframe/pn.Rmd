@@ -73,7 +73,6 @@ window.onload = () => {
     - Pop Quiz
 </div>
 
-**3 min**
 
 <div class="hide" data-tag="Nested Structure">
 ```r
@@ -84,9 +83,19 @@ a_lst <- list(name = "ben",
 # Get "selfie"
 a_lst[['info']]
 a_lst[['info']][['tags']]
-a_lst[['info']][['tags']][2]
+a_lst[['info']][['tags']][1]
+
+a_lst$info
+a_lst$info$tags
+a_lst$info$tags[2]
 ```
 </div>
 
+**3 min**
 
+## for loop
+
+<div class="hide" data-tag="For Loop">
+
+</div>
 
