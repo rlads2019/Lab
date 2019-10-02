@@ -230,5 +230,78 @@ member <- list(
         print(sentence)
     }
     ```
+</div>
 
+## Data Frame
+
+<div class="hide" data-tag="Data Frame">
+1. **slide**: 
+  - data frame vs. Excel analogy
+    - read df from csv or construct directly
+  - Construct data frame in R (`tibble` vs `data.frame`)
+
+1. Demo: Construct data frame
+
+  ```r
+  View(df)
+  nrow(df)   # number of rows
+  ncol(df)   # number of columns
+  dim(df)    # 形狀 (num of rows, num of columns)
+  names(df)  # name of each column
+  tibble::glimpse(df)  # 關於 df 的各種資訊  
+  ```
+
+1. **slide**: 從 data frame 篩選出數值 (說明 2 vector)
+
+1. slide, demo alternate
+
+  ```r
+  # slide 1
+  df[2, 1]
+  
+  # slide 2
+  df[2, 1:2]
+  df[2, c("name", "age")]
+  
+  # slide 3
+  df[2, ]
+  ```
+
+1. Their turn
+</div>
+
+**2 min**
+
+<div class="hide" data-tag="Returning a vector">
+
+1. 篩選 vector, list, 或是 data frame:
+  - 使用 `[]` 回傳相同的資料結構
+  - 使用 `[[]]` 脫開 list 或 data frame 的外衣
+
+  ```r
+  df[['age']]
+  df[[2]]
+  df$age
+  ```
+
+2. logical subsetting
+
+    ```r
+    df$age > 19  
+    
+    # subset df with obs. over 19
+    df[df$age > 19, ]
+    
+    # 更複雜的篩選：boolean operator
+    df[(df$age < 20) & (df$grad), ]
+    ```
+
+</div>
+
+
+## 作業繳交
+
+<div class="hide" data-tag="">
+1. 只有寫 R Markdown，沒有輸出成 HTML
+2. 成功輸出，擔心沒有上傳成功
 </div>

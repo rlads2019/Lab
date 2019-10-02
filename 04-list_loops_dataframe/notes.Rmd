@@ -269,7 +269,7 @@ for (file in list.files()) {
 
 ## data frame
 
-- data frame 是 R 語言最具特色的資料結構，它使 R 在**表格式資料**的處理上能力遠勝其它程式語言。
+- data frame 是 R 語言非常重要的資料結構，它造就了 R 強大的**表格式資料**處理能力
 
 - data frame 是一種二維的資料結構。這種資料結構基本上與我們熟悉的 Excel (或 google 試算表) 非常類似：
     
