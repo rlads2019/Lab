@@ -73,8 +73,11 @@ window.onload = () => {
     - Pop Quiz
 </div>
 
-
+`a_lst.R`
 <div class="hide" data-tag="Nested Structure">
+
+- 從 `a_lst` 篩選出 `selfie`
+
 ```{r}
 a_lst <- list(name = "ben",
               info = list(age = 20,
@@ -272,9 +275,6 @@ member <- list(
     ```
 
 1. **slide**: 從 data frame 篩選出數值 (說明 2 vector)
-    - vector `[]` --> vector  
-    list `[]` --> list  
-    df `[]` --> df
 
 1. slide, demo alternate
 
@@ -298,7 +298,6 @@ member <- list(
 <div class="hide" data-tag="Returning a vector">
 
 1. 篩選 vector, list, 或是 data frame:
-    - 使用 `[]` 回傳相同的資料結構
     - 使用 `[[]]` 脫開 list 或 data frame 的外衣
 
       ```r

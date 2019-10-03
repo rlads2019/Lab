@@ -1,9 +1,1 @@
-vec <- c("謝", "老師", "好", "帥", "><")
-
-for (i in seq_along(vec)) {
-    print(vec[i])
-    
-    if (i == length(vec)) {
-        print('Really?')
-    }
-}
+vec <- c("謝", "老師", "好", "帥")

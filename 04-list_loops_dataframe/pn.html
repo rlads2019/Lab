@@ -2005,7 +2005,11 @@ window.onload = () => {
 </ul></li>
 </ol>
 </div>
+<code>a_lst.R</code>
 <div class="hide" data-tag="Nested Structure">
+<ul>
+<li>從 <code>a_lst</code> 篩選出 <code>selfie</code></li>
+</ul>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">a_lst &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">name =</span> <span class="st">&quot;ben&quot;</span>,</a>
 <a class="sourceLine" id="cb4-2" data-line-number="2">              <span class="dt">info =</span> <span class="kw">list</span>(<span class="dt">age =</span> <span class="dv">20</span>,</a>
 <a class="sourceLine" id="cb4-3" data-line-number="3">                          <span class="dt">tags =</span> <span class="kw">c</span>(<span class="st">&quot;ig&quot;</span>, <span class="st">&quot;selfie&quot;</span>)))</a>
@@ -2178,12 +2182,7 @@ $info$tags
 <a class="sourceLine" id="cb17-4" data-line-number="4"><span class="kw">dim</span>(df)    <span class="co"># 形狀 (num of rows, num of columns)</span></a>
 <a class="sourceLine" id="cb17-5" data-line-number="5"><span class="kw">names</span>(df)  <span class="co"># name of each column</span></a>
 <a class="sourceLine" id="cb17-6" data-line-number="6">tibble<span class="op">::</span><span class="kw">glimpse</span>(df)  <span class="co"># 關於 df 的各種資訊  </span></a></code></pre></div></li>
-<li><strong>slide</strong>: 從 data frame 篩選出數值 (說明 2 vector)
-<ul>
-<li>vector <code>[]</code> –&gt; vector<br />
-list <code>[]</code> –&gt; list<br />
-df <code>[]</code> –&gt; df</li>
-</ul></li>
+<li><p><strong>slide</strong>: 從 data frame 篩選出數值 (說明 2 vector)</p></li>
 <li><p>slide, demo alternate</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="co"># slide 1</span></a>
 <a class="sourceLine" id="cb18-2" data-line-number="2">df[<span class="dv">2</span>, <span class="dv">1</span>]</a>
@@ -2202,7 +2201,6 @@ df <code>[]</code> –&gt; df</li>
 <ol style="list-style-type: decimal">
 <li>篩選 vector, list, 或是 data frame:
 <ul>
-<li>使用 <code>[]</code> 回傳相同的資料結構</li>
 <li><p>使用 <code>[[]]</code> 脫開 list 或 data frame 的外衣</p>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1">df[[<span class="st">'age'</span>]]</a>
 <a class="sourceLine" id="cb19-2" data-line-number="2">df[[<span class="dv">2</span>]]</a>
