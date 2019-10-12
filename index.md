@@ -5,10 +5,10 @@
 |   1    |  09/12   | [環境安裝、作業繳交說明][s1]                       |                    |                 | [🔗][hw1]     |
 |   2    |  09/19   | [RStudio 設定、Basic R、函數、Help pages][s2]     | [🔗][note2]       |   [⬇️][src2]    | [🔗][hw2]     |
 |   3    |  09/26   | [Base R (I)：vector、資料類型、條件式][s3]         | [🔗][note3]      |    [⬇️][src3]    | [🔗][hw3]    |
-|   4    |  10/03   | [Base R (II)：list、迴圈、data frame][s4]     | [🔗][note4]     |   [⬇️][src4]   | [🔗][hw4]     |
+|   4    |  10/03   | [Base R (II)：list、迴圈、data frame][s4]         | [🔗][note4]     |   [⬇️][src4]      | [🔗][hw4]     |
 |   5    |  10/10   |               國慶日                              |                   |                 |               |
-|   6    |  10/17   | [資料清理：`tibble`、`dplyr`][s6]{:.h}             |                   |                 |               |
-|   7    |  10/24   | [視覺化：`ggplot2`、`plotly`][s7]{:.h}             |                   |                 |               |
+|   6    |  10/17   | [資料清理：`tibble`、`dplyr`][s6]{:.h}             |  [🔗][note6]      |                 |               |
+|   7    |  10/24   | [視覺化：`ggplot2`、`plotly`][s7]{:.h}             |  [🔗][note7]      |                 |               |
 |   8    |  10/31   | [字串處理：正規表達式、`stringr`][s8]{:.h}           |                   |                 |               |
 |   9    |  11/07   |               期中考                               |                   |                 |               |
 |   10    |  11/14   | [中文文本處理：斷詞、詞頻表、語料庫][s10]{:.h}         |                   |                 |               |
@@ -41,14 +41,14 @@
 [src4]: ./src/04.zip
 [hw4]: https://github.com/rlads2019/hw4
 
-<!-- Block 2：data frame -->
+<!-- Block 2：EDA -->
 [s6]: https://docs.google.com/presentation/d/1Kr6aUYoVU9HLJh3vZop7K-egp4TytoOWDPQ9HKHLiJM/edit?usp=sharing
 [note6]: ./notes/06.html
 [src6]: #
 [hw6]: #
 
-[s7]: #
-[note7]: #
+[s7]: https://docs.google.com/presentation/d/19ZUldqQ4mnqe1KDFq_W0XY9SC9rDGRwhYcH1cAHhjAQ/edit?usp=sharing
+[note7]: ./notes/07.html
 [src7]: #
 [hw7]: #
 

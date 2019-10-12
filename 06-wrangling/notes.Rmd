@@ -23,22 +23,6 @@ knitr::opts_chunk$set(echo = TRUE,comment = '#>',message = F)
 klippy::klippy(position = c('top', 'right'),color = 'darkred')
 ```
 
-```{js echo=FALSE}
-window.onload = () => {
-    if (window.location.href.startsWith('https://rlads2019.netlify.com/') ||
-        window.location.href.startsWith('file:///home/liao/Desktop/Lab/')) {
-        document.querySelectorAll('.hide').forEach(ele => {
-            ele.className = 'note';
-        })
-    }
-}
-```
-
-## ToDo
-
-- NA values
-
-
 ## Why dplyr?
 
 - 上週介紹過篩選 data frame 的方法：`df[<vector 1>, <vector 2>]`。但這種方法有一個缺點：隨著篩選條件越來越多，篩選 data frame 的指令會越來越複雜，變得難以閱讀，例如:
