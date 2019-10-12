@@ -35,7 +35,7 @@ klippy::klippy(position = c('top', 'right'),color = 'darkred')
     df[(df$Species == "setosa") & (df$Sepal.Length < 5.8), c("Species", "Sepal.Width")]
     ```
 
-- 套件 `dplyr` (更精確來說，是整個 `tidyverse` 套件群) 目的就是為了使這個過程變得更加容易：讓處理 data frame 的指令變得直覺易懂。
+- 套件 `dplyr` 目的就是為了使這個過程變得更加容易：讓處理 data frame 的指令變得直覺易懂。
 
 ## 讀取表格式資料 (`.csv`)
 
