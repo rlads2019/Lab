@@ -31,7 +31,7 @@ klippy::klippy(position = c('top', 'right'),color = 'darkred')
     library(tibble)
     df <- as_tibble(iris)
     
-    # How long does it takes to understand the command below?
+    # How long does it take to understand the command below?
     df[(df$Species == "setosa") & (df$Sepal.Length < 5.8), c("Species", "Sepal.Width")]
     ```
 
