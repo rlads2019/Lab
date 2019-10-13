@@ -188,3 +188,13 @@ div.sourceCode + pre {
       color: blue !important;
   }
 }
+
+
+.str_view {
+  max-height: 450px;
+  overflow-x: auto;
+}
+
+.txt {
+  overflow-y: auto;
+}
