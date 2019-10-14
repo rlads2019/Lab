@@ -8,7 +8,7 @@ output:
     highlight: tango
     toc: yes
     toc_float:
-      collapse: no
+      collapsed: no
     css: style.css
     md_extensions: +implicit_figures
     includes:
@@ -218,4 +218,4 @@ ggplot(mpg) +
 
 ## 務必閱讀
 
-- [R for Data Science, Chapter 3: Data visualisation](https://r4ds.had.co.nz/data-visualisation.html)
+- [R for Data Science: Data visualisation](https://r4ds.had.co.nz/data-visualisation.html)

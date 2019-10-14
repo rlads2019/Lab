@@ -2876,7 +2876,27 @@ overflow-x: auto;
 }
 .txt {
 overflow-y: auto;
-}</style>
+}
+.regex-view {
+margin: 1em 0;
+max-height: 400px;
+overflow-y: auto;
+}
+.regex-input {
+display: block;
+border: 0.5px solid rgba(175, 175, 175, 0.726);
+}
+.match, .matched-regex {
+background: rgba(0, 255, 0, 0.37) !important;
+border: 0.5px solid rgba(0, 255, 0, 0.87) !important;
+}
+#show-regex {
+position: fixed;
+bottom: 5px;
+right: 5px;
+font-size: 6px;
+}
+</style>
 
 
 
@@ -3022,6 +3042,12 @@ div.tocify {
   border-radius: 0px;
 }
 
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
 
 </style>
 
@@ -3061,45 +3087,264 @@ div.tocify {
   addClassKlippyTo("pre.r, pre.txt");
   addKlippy('right', 'top', '#8B0000', '1', 'Copy code', 'Copied!');
 </script>
-<div id="character-classes-d-s-s" class="section level2">
-<h2>Character classes: <code>\d</code>, <code>\s</code>, <code>\S</code>, <code>[]</code>, <code>[^]</code></h2>
-<pre class="txt"><code>【賴德剛╱綜合報導】
-大聯盟勞資協議昨獲共識，球團與球員工會將簽署為期5年合約以避免步上封館一途。此次爭議重點之一豪華稅，將由現行門檻1.89億美元(60.7億台幣)調高為1.95億美元(62.6億台幣)，之後每年調漲，至2010年達2.1億美元(67.4億台幣)。
-原勞資協議豪華稅門檻1.89億美元，第1年超過門檻球隊，要繳交超出部分的17.5%稅額，連續第2年則課30%，連續第3年40%，第4年起都是50%。新版協議，第1年稅額調高為20%，第2年不變，第3年起都是50％。
-而在昨天拍板定案之前，若有球隊簽下被原球隊提出合格報價(Qualifying Offer)的球員，必須放棄隔年的首輪選秀權，新版勞資協議刪除條款，讓球隊可保有首輪選秀權。
-
-【副刊中心╱台北報導】
-知名湘菜連鎖餐廳彭園創辦人、人稱「湘菜之神」彭長貴，上月三十日因病辭世。時下許多年輕人或許不識老字號彭園與彭長貴的故事，但大家對左宗棠雞、蜜汁火腿這些耳熟能詳的菜名一定不陌生，因為這些好菜，都是因彭長貴而廣為流傳。
-
-【曾雪蒨╱台中報導】
-一名35歲OL是「3C控」，白天上班打電腦、下班後拚命滑手機和朋友聯誼，一天用3C產品時間逾10小時，長時間下來腰痠背痛，無法入眠，甚至在兩個月前因失眠就醫時，聽到聊天通訊軟體聲響，竟忍不住低頭滑手機看內容，連醫生都搖頭稱「簡直入魔！」所幸經一個月針灸治療合併頸、胸與腰部按壓穴位自我保健，該名OL終能全身放鬆，一覺到天明。
-
-【蔡裕隆╱彰化報導】
-台灣啤酒「台版天兵麥基(JaVale McGee)」周伯勳，昨出戰臺灣銀行，轟出全隊次高、本季個人最高21分，包括生涯首度13罰俱中，第4節決勝期更是6罰得手，幫助台啤擋下台銀從第3節落後18分追到只差5分的反撲，以89比76拿下2連勝。
-
-【韓政燕╱綜合外電報導】
-日本前晚從鹿兒島縣種子島宇宙中心成功發射搭載無人補給太空船「鸛」6號的「H-IIB」號火箭。「鸛」6號此次任務除了替國際太空站補給食品、飲用水和電池等設備，還將進行為期一周的清理太空垃圾實驗，任務完成後之後進入大氣層燃燒殆盡。
-
-【國際中心╱綜合外電報導】
-今年美國總統大選期間，大量假新聞充斥推特、臉書等社交網站，遭質疑扭曲真相，影響選情。臉書前天宣布實驗性新做法，請用戶舉報假新聞，也和第三方查核機構合作，標示出有問題的假新聞。
-
-【鍾裕能╱綜合報導】
-巨人季後簽了陽岱鋼、山口俊、森福允彥共3名自由球員，又網羅前樂天大砲馬基(Casey McGehee)，帶給中央聯盟各隊極大壓力，橫濱監督拉米瑞茲(Alex Ramirez)就嗆老東家：「會不會搶太多人了？」養樂多捕手中村悠平準備LINE給好友們，提前研擬對付陽岱鋼策略。
-</code></pre>
+<div id="regular-expression" class="section level2">
+<h2>Regular Expression (<a href="http://loonkwil.github.io/regexify/">✍️</a>)</h2>
+<div id="basics-.-escape" class="section level3">
+<h3>Basics: <code>.</code>, <code>^</code>, <code>$</code>, <code>|</code>, <code>\</code> (escape)</h3>
+<ul>
+<li><p><code>.</code>: 萬用字元</p>
+<div class="regex-view">
+<code class="regex-input">妹妹.正</code>
+<pre><code>我<span class="matched-regex">妹妹很正</span><br>我<span class="matched-regex">妹妹超正</span><br>我妹妹超級正</code></pre>
+</div>
+<div class="regex-view">
+<code class="regex-input">妹妹..正</code>
+<pre><code>我妹妹很正<br>我妹妹超正<br>我<span class="matched-regex">妹妹超級正</span></code></pre>
+</div></li>
+<li><p><code>^</code>, <code>$</code>: Anchors</p>
+<div class="regex-view">
+<code class="regex-input">^你</code>
+<pre><code><span class="matched-regex"><span class="matched-regex">你</span></span>妹妹很正<br>我妹妹超正<br><span class="matched-regex"><span class="matched-regex">你</span></span>沒有妹妹</code></pre>
+</div>
+<div class="regex-view">
+<code class="regex-input">超正$</code>
+<pre><code>你妹妹很正<br>我妹妹<span class="matched-regex">超正</span><br>你沒有妹妹</code></pre>
+</div></li>
+<li><p><code>()</code>, <code>|</code>: group</p>
+<div class="regex-view">
+<code class="regex-input">gre|ay</code>
+<pre><code><span class="matched-regex">gre</span>y<br>gr<span class="matched-regex">ay</span></code></pre>
+</div>
+<div class="regex-view">
+<code class="regex-input">gr(e|a)y</code>
+<pre><code><span class="matched-regex">grey</span><br><span class="matched-regex">gray</span></code></pre>
+</div>
+<div class="regex-view">
+<code class="regex-input">(很|超|超級)正</code>
+<pre><code>我妹妹<span class="matched-regex">很正</span><br>我妹妹<span class="matched-regex">超正</span><br>我妹妹<span class="matched-regex">超級正</span></code></pre>
+</div></li>
+<li><p><code>\</code>: escape</p>
+<div class="regex-view">
+<code class="regex-input">妹妹超\.級\.正</code>
+<pre><code>我<span class="matched-regex">妹妹超.級.正</span><br>我妹妹超～級～正</code></pre>
+</div></li>
+</ul>
+</div>
+<div id="repetition" class="section level3">
+<h3>Repetition</h3>
+<ul>
+<li><p><code>+</code>, <code>?</code></p>
+<div class="regex-view">
+<code class="regex-input">超+正</code>
+<pre><code>我妹妹<span class="matched-regex">超正</span><br>我妹妹超級正<br>我妹妹<span class="matched-regex">超超超超正</span></code></pre>
+</div>
+<div class="regex-view">
+<code class="regex-input">超級?正</code>
+<pre><code>我妹妹<span class="matched-regex">超正</span><br>我妹妹<span class="matched-regex">超級正</span><br>我妹妹超超超<span class="matched-regex">超正</span></code></pre>
+</div>
+<div class="regex-view">
+<code class="regex-input">超+級?正</code>
+<pre><code>我妹妹<span class="matched-regex">超正</span><br>我妹妹<span class="matched-regex">超級正</span><br>我妹妹<span class="matched-regex">超超超超正</span></code></pre>
+</div></li>
+<li><p><code>{num}</code>, <code>{min,}</code>, <code>{,max}</code>, <code>{min,max}</code></p>
+<div class="regex-view">
+<code class="regex-input">\d{4}-\d{2}-\d{2}</code>
+<pre><code>今天是 <span class="matched-regex">2019-10-31</span><br>今天是 2019-2-10<br>今天是 2019-1-1</code></pre>
+</div>
+<div class="regex-view">
+<code class="regex-input">\d{4}-\d{1,2}-\d{1,2}</code>
+<pre><code>今天是 <span class="matched-regex">2019-10-31</span><br>今天是 <span class="matched-regex">2019-2-10</span><br>今天是 <span class="matched-regex">2019-1-1</span></code></pre>
+</div>
+<div class="regex-view">
+<code class="regex-input">\d{4}-\d{1,}-\d{1,}</code>
+<pre><code>今天是 <span class="matched-regex">2019-1-10</span><br>不存在 <span class="matched-regex">2019-555-555</span></code></pre>
+</div></li>
+</ul>
+</div>
+<div id="character-classes" class="section level3">
+<h3>Character classes</h3>
 <ul>
 <li><p><code>\s</code></p>
-<pre class="regex"><code></code></pre></li>
-<li><p><code>\S</code></p>
-<pre class="regex"><code>【\S+╱\S+報導】</code></pre></li>
-<li><p><code>\d</code></p>
-<pre class="regex"><code>\d+%</code></pre></li>
-<li><p><code>\d</code></p>
-<pre class="regex"><code>[0-9.]+%</code></pre></li>
+<div class="regex-view">
+<code class="regex-input">妹妹\s超正</code>
+<pre><code>我妹妹超正<br>我<span class="matched-regex">妹妹 超正</span><br>我<span class="matched-regex">妹妹  超正</span><br>我妹妹        超正</code></pre>
+</div>
+<div class="regex-view">
+<code class="regex-input">妹妹\s+超正</code>
+<pre><code>我妹妹超正<br>我<span class="matched-regex">妹妹 超正</span><br>我<span class="matched-regex">妹妹 超正</span><br>我<span class="matched-regex">妹妹        超正</span></code></pre>
+</div></li>
+<li><p><code>[]</code></p>
+<div class="regex-view">
+<code class="regex-input">[超很極]正</code>
+<pre><code>我妹妹<span class="matched-regex">超正</span><br>我妹妹<span class="matched-regex">很正</span><br>我妹妹<span class="matched-regex">極正</span><br>我妹妹不正</code></pre>
+</div>
+<div class="regex-view">
+<code class="regex-input">[B-D]1</code>
+<pre><code>A1 <span class="matched-regex">B1</span> <span class="matched-regex">C1</span> <span class="matched-regex">D1</span> E1 F1 G1 H1 I1 J1 K1 L1 M1 N1 O1 P1 Q1 R1 S1 T1 U1 V1 W1 X1 Y1 Z1</code></pre>
+</div>
+<div class="regex-view">
+<code class="regex-input">a[2-5]</code>
+<pre><code>a1 <span class="matched-regex">a2</span> <span class="matched-regex">a3</span> <span class="matched-regex">a4</span> <span class="matched-regex">a5</span> a6 a7 a8 a9 a10</code></pre>
+</div>
+<div class="regex-view">
+<code class="regex-input">a[^2-5]</code>
+<pre><code><span class="matched-regex"><span class="matched-regex">a1</span></span> a2 a3 a4 a5 <span class="matched-regex">a6</span> <span class="matched-regex">a7</span> <span class="matched-regex">a8</span> <span class="matched-regex">a9</span> <span class="matched-regex"><span class="matched-regex">a1</span></span>0</code></pre>
+</div></li>
 </ul>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">library</span>(stringr)</a>
-<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="kw">str_view_all</span>(news, <span class="st">'[0-9.]+%'</span>)</a></code></pre></div>
-<div id="htmlwidget-d566979a4440cd296915" style="width:960px;height:100%;" class="str_view html-widget"></div>
-<script type="application/json" data-for="htmlwidget-d566979a4440cd296915">{"x":{"html":"<ul>\n  <li>【賴德剛╱綜合報導】\n大聯盟勞資協議昨獲共識，球團與球員工會將簽署為期5年合約以避免步上封館一途。此次爭議重點之一豪華稅，將由現行門檻1.89億美元(60.7億台幣)調高為1.95億美元(62.6億台幣)，之後每年調漲，至2010年達2.1億美元(67.4億台幣)。\n原勞資協議豪華稅門檻1.89億美元，第1年超過門檻球隊，要繳交超出部分的<span class='match'>17.5%<\/span>稅額，連續第2年則課<span class='match'>30%<\/span>，連續第3年<span class='match'>40%<\/span>，第4年起都是<span class='match'>50%<\/span>。新版協議，第1年稅額調高為<span class='match'>20%<\/span>，第2年不變，第3年起都是50％。\n而在昨天拍板定案之前，若有球隊簽下被原球隊提出合格報價(Qualifying Offer)的球員，必須放棄隔年的首輪選秀權，新版勞資協議刪除條款，讓球隊可保有首輪選秀權。\n\n【副刊中心╱台北報導】\n知名湘菜連鎖餐廳彭園創辦人、人稱「湘菜之神」彭長貴，上月三十日因病辭世。時下許多年輕人或許不識老字號彭園與彭長貴的故事，但大家對左宗棠雞、蜜汁火腿這些耳熟能詳的菜名一定不陌生，因為這些好菜，都是因彭長貴而廣為流傳。\n\n【曾雪蒨╱台中報導】\n一名35歲OL是「3C控」，白天上班打電腦、下班後拚命滑手機和朋友聯誼，一天用3C產品時間逾10小時，長時間下來腰痠背痛，無法入眠，甚至在兩個月前因失眠就醫時，聽到聊天通訊軟體聲響，竟忍不住低頭滑手機看內容，連醫生都搖頭稱「簡直入魔！」所幸經一個月針灸治療合併頸、胸與腰部按壓穴位自我保健，該名OL終能全身放鬆，一覺到天明。\n\n【蔡裕隆╱彰化報導】\n台灣啤酒「台版天兵麥基(JaVale McGee)」周伯勳，昨出戰臺灣銀行，轟出全隊次高、本季個人最高21分，包括生涯首度13罰俱中，第4節決勝期更是6罰得手，幫助台啤擋下台銀從第3節落後18分追到只差5分的反撲，以89比76拿下2連勝。\n\n【韓政燕╱綜合外電報導】\n日本前晚從鹿兒島縣種子島宇宙中心成功發射搭載無人補給太空船「鸛」6號的「H-IIB」號火箭。「鸛」6號此次任務除了替國際太空站補給食品、飲用水和電池等設備，還將進行為期一周的清理太空垃圾實驗，任務完成後之後進入大氣層燃燒殆盡。\n\n【國際中心╱綜合外電報導】\n今年美國總統大選期間，大量假新聞充斥推特、臉書等社交網站，遭質疑扭曲真相，影響選情。臉書前天宣布實驗性新做法，請用戶舉報假新聞，也和第三方查核機構合作，標示出有問題的假新聞。\n\n【鍾裕能╱綜合報導】\n巨人季後簽了陽岱鋼、山口俊、森福允彥共3名自由球員，又網羅前樂天大砲馬基(Casey McGehee)，帶給中央聯盟各隊極大壓力，橫濱監督拉米瑞茲(Alex Ramirez)就嗆老東家：「會不會搶太多人了？」養樂多捕手中村悠平準備LINE給好友們，提前研擬對付陽岱鋼策略。\n<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="your-turn" class="section level3">
+<h3>Your Turn</h3>
+<ol style="list-style-type: decimal">
+<li><p>找出所有<strong>記者姓名</strong></p>
+<div class="regex-view">
+<code class="regex-input hide">【\w{3}╱\w+報導】</code>
+<pre><code><span class="matched-regex">【賴德剛╱綜合報導】</span><br>大聯盟勞資協議昨獲共識，球團與球員工會將簽署為期5年合約以避免步上封館一途。此次爭議重點之一豪華稅，將由現行門檻1.89億美元(60.7億台幣)調高為1.95億美元(62.6億台幣)，之後每年調漲，至2010年達2.1億美元(67.4億台幣)。<br>原勞資協議豪華稅門檻1.89億美元，第1年超過門檻球隊，要繳交超出部分的17.5%稅額，連續第2年則課30%，連續第3年40%，第4年起都是50%。新版協議，第1年稅額調高為20%，第2年不變，第3年起都是50％。<br>而在昨天拍板定案之前，若有球隊簽下被原球隊提出合格報價(Qualifying Offer)的球員，必須放棄隔年的首輪選秀權，新版勞資協議刪除條款，讓球隊可保有首輪選秀權。<br>【副刊中心╱台北報導】<br>知名湘菜連鎖餐廳彭園創辦人、人稱「湘菜之神」彭長貴，上月三十日因病辭世。時下許多年輕人或許不識老字號彭園與彭長貴的故事，但大家對左宗棠雞、蜜汁火腿這些耳熟能詳的菜名一定不陌生，因為這些好菜，都是因彭長貴而廣為流傳。<br><span class="matched-regex">【曾雪蒨╱台中報導】</span><br>一名35歲OL是「3C控」，白天上班打電腦、下班後拚命滑手機和朋友聯誼，一天用3C產品時間逾10小時，長時間下來腰痠背痛，無法入眠，甚至在兩個月前因失眠就醫時，聽到聊天通訊軟體聲響，竟忍不住低頭滑手機看內容，連醫生都搖頭稱「簡直入魔！」所幸經一個月針灸治療合併頸、胸與腰部按壓穴位自我保健，該名OL終能全身放鬆，一覺到天明。<br><span class="matched-regex">【蔡裕隆╱彰化報導】</span><br>台灣啤酒「台版天兵麥基(JaVale McGee)」周伯勳，昨出戰臺灣銀行，轟出全隊次高、本季個人最高21分，包括生涯首度13罰俱中，第4節決勝期更是6罰得手，幫助台啤擋下台銀從第3節落後18分追到只差5分的反撲，以89比76拿下2連勝。<br><span class="matched-regex">【韓政燕╱綜合外電報導】</span><br>日本前晚從鹿兒島縣種子島宇宙中心成功發射搭載無人補給太空船「鸛」6號的「H-IIB」號火箭。「鸛」6號此次任務除了替國際太空站補給食品、飲用水和電池等設備，還將進行為期一周的清理太空垃圾實驗，任務完成後之後進入大氣層燃燒殆盡。<br>【國際中心╱綜合外電報導】<br>今年美國總統大選期間，大量假新聞充斥推特、臉書等社交網站，遭質疑扭曲真相，影響選情。臉書前天宣布實驗性新做法，請用戶舉報假新聞，也和第三方查核機構合作，標示出有問題的假新聞。<br><span class="matched-regex">【鍾裕能╱綜合報導】</span><br>巨人季後簽了陽岱鋼、山口俊、森福允彥共3名自由球員，又網羅前樂天大砲馬基(Casey McGehee)，帶給中央聯盟各隊極大壓力，橫濱監督拉米瑞茲(Alex Ramirez)就嗆老東家：「會不會搶太多人了？」養樂多捕手中村悠平準備LINE給好友們，提前研擬對付陽岱鋼策略。<br></code></pre>
+</div></li>
+<li><p>找出所有<strong>百分比</strong> (e.g. <code>20%</code>, <code>17.5%</code>)</p>
+<div class="regex-view">
+<code class="regex-input hide">[\d.]+%</code>
+<pre><code>【賴德剛╱綜合報導】<br>大聯盟勞資協議昨獲共識，球團與球員工會將簽署為期5年合約以避免步上封館一途。此次爭議重點之一豪華稅，將由現行門檻1.89億美元(60.7億台幣)調高為1.95億美元(62.6億台幣)，之後每年調漲，至2010年達2.1億美元(67.4億台幣)。<br>原勞資協議豪華稅門檻1.89億美元，第1年超過門檻球隊，要繳交超出部分的<span class="matched-regex">17.5%</span>稅額，連續第2年則課<span class="matched-regex">30%</span>，連續第3年<span class="matched-regex">40%</span>，第4年起都是<span class="matched-regex">50%</span>。新版協議，第1年稅額調高為<span class="matched-regex">20%</span>，第2年不變，第3年起都是50％。<br>而在昨天拍板定案之前，若有球隊簽下被原球隊提出合格報價(Qualifying Offer)的球員，必須放棄隔年的首輪選秀權，新版勞資協議刪除條款，讓球隊可保有首輪選秀權。<br>【副刊中心╱台北報導】<br>知名湘菜連鎖餐廳彭園創辦人、人稱「湘菜之神」彭長貴，上月三十日因病辭世。時下許多年輕人或許不識老字號彭園與彭長貴的故事，但大家對左宗棠雞、蜜汁火腿這些耳熟能詳的菜名一定不陌生，因為這些好菜，都是因彭長貴而廣為流傳。<br>【曾雪蒨╱台中報導】<br>一名35歲OL是「3C控」，白天上班打電腦、下班後拚命滑手機和朋友聯誼，一天用3C產品時間逾10小時，長時間下來腰痠背痛，無法入眠，甚至在兩個月前因失眠就醫時，聽到聊天通訊軟體聲響，竟忍不住低頭滑手機看內容，連醫生都搖頭稱「簡直入魔！」所幸經一個月針灸治療合併頸、胸與腰部按壓穴位自我保健，該名OL終能全身放鬆，一覺到天明。<br>【蔡裕隆╱彰化報導】<br>台灣啤酒「台版天兵麥基(JaVale McGee)」周伯勳，昨出戰臺灣銀行，轟出全隊次高、本季個人最高21分，包括生涯首度13罰俱中，第4節決勝期更是6罰得手，幫助台啤擋下台銀從第3節落後18分追到只差5分的反撲，以89比76拿下2連勝。<br>【韓政燕╱綜合外電報導】<br>日本前晚從鹿兒島縣種子島宇宙中心成功發射搭載無人補給太空船「鸛」6號的「H-IIB」號火箭。「鸛」6號此次任務除了替國際太空站補給食品、飲用水和電池等設備，還將進行為期一周的清理太空垃圾實驗，任務完成後之後進入大氣層燃燒殆盡。<br>【國際中心╱綜合外電報導】<br>今年美國總統大選期間，大量假新聞充斥推特、臉書等社交網站，遭質疑扭曲真相，影響選情。臉書前天宣布實驗性新做法，請用戶舉報假新聞，也和第三方查核機構合作，標示出有問題的假新聞。<br>【鍾裕能╱綜合報導】<br>巨人季後簽了陽岱鋼、山口俊、森福允彥共3名自由球員，又網羅前樂天大砲馬基(Casey McGehee)，帶給中央聯盟各隊極大壓力，橫濱監督拉米瑞茲(Alex Ramirez)就嗆老東家：「會不會搶太多人了？」養樂多捕手中村悠平準備LINE給好友們，提前研擬對付陽岱鋼策略。<br></code></pre>
+</div></li>
+</ol>
+</div>
+<div id="backreference" class="section level3">
+<h3>Backreference</h3>
+<div class="regex-view">
+<code class="regex-input">(.)..\1</code>
+<pre><code><span class="matched-regex">防不勝防</span><br><span class="matched-regex">精益求精</span><br><span class="matched-regex">眉下添眉</span><br><span class="matched-regex">年復一年</span><br>噩噩渾渾<br>沸沸揚揚<br>紛紛攘攘<br>風風雨雨</code></pre>
+</div>
+<div class="regex-view">
+<code class="regex-input">(.)\1(.)\2</code>
+<pre><code>防不勝防<br>精益求精<br>眉下添眉<br>年復一年<br><span class="matched-regex">噩噩渾渾</span><br><span class="matched-regex">沸沸揚揚</span><br><span class="matched-regex">紛紛攘攘</span><br><span class="matched-regex">風風雨雨</span></code></pre>
+</div>
+</div>
+<div id="your-turn-1" class="section level3">
+<h3>Your Turn</h3>
+<div class="regex-view">
+<code class="regex-input hide">一(.{1,2})接著?又?一\1</code>
+<pre><code><span class="matched-regex">一口接一口</span><br><span class="matched-regex">一口接著一口</span><br><span class="matched-regex">一口接著又一口</span><br><span class="matched-regex">一巴掌接著一巴掌</span></code></pre>
+</div>
+</div>
+</div>
+<div id="stringr" class="section level2">
+<h2>stringr</h2>
+<ul>
+<li><p><code>stringr</code> 套件是 tidyverse 裡面用來處理字串的套件，比起 base R 的字串處理函數，<code>stringr</code> 中的函數在命名上相當一致 (<code>str_*</code>)、函數名稱也較「透明」因此比較容易記得。</p></li>
+<li><p>在 R 裡面，Regular Expression 是以<strong>字串</strong>的資料類型 (i.e. <code>character</code>) 去表徵，因此有一點需特別注意：</p>
+<p>若 Regular Expression 裡面出現<strong>反斜線</strong>，在將此 Regex 寫進 R 的函數時，需要在<strong>每一個反斜線之前再加上一個反斜線</strong>:</p>
+<ul>
+<li>Regular Expression: <strong><code>today\.$</code></strong>
+<div class="regex-view">
+<code class="regex-input">today\.$</code>
+<pre><code>It is sunny <span class="matched-regex">today.</span></code></pre>
+</div></li>
+<li><p>Regular Expression in R function: <strong><code>&quot;today\\.$&quot;</code></strong></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(stringr)</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">str_view</span>(<span class="st">&quot;It is sunny today.&quot;</span>, <span class="st">&quot;today</span><span class="ch">\\</span><span class="st">.$&quot;</span>)</a></code></pre></div>
+<div id="htmlwidget-1cf3b35c7a420c9303aa" style="width:960px;height:100%;" class="str_view html-widget"></div>
+    <script type="application/json" data-for="htmlwidget-1cf3b35c7a420c9303aa">{"x":{"html":"<ul>\n  <li>It is sunny <span class='match'>today.<\/span><\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script></li>
+</ul></li>
+</ul>
+<div id="str_detect" class="section level3">
+<h3><code>str_detect()</code></h3>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">str &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;cat&quot;</span>, <span class="st">&quot;bed&quot;</span>, <span class="st">&quot;car&quot;</span>, <span class="st">&quot;Mr.&quot;</span>)</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw">str_detect</span>(str, <span class="st">&quot;a&quot;</span>)</a></code></pre></div>
+<pre><code>#&gt; [1]  TRUE FALSE  TRUE FALSE</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">str_detect</span>(str, <span class="st">&quot;</span><span class="ch">\\</span><span class="st">.&quot;</span>)</a></code></pre></div>
+<pre><code>#&gt; [1] FALSE FALSE FALSE  TRUE</code></pre>
+<ul>
+<li><p><code>str_detect()</code> 可與 <code>[]</code> 或 <code>dplyr::filter()</code> 結合，用來篩選資料：</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">str &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;cat&quot;</span>, <span class="st">&quot;bed&quot;</span>, <span class="st">&quot;car&quot;</span>, <span class="st">&quot;Mr.&quot;</span>)</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2">str[<span class="kw">str_detect</span>(str, <span class="st">&quot;^c&quot;</span>)]</a></code></pre></div>
+<pre><code>#&gt; [1] &quot;cat&quot; &quot;car&quot;</code></pre></li>
+</ul>
+</div>
+<div id="str_match-str_match_all" class="section level3">
+<h3><code>str_match()</code> / <code>str_match_all()</code></h3>
+<ul>
+<li><p><code>str_match()</code> 可從文字裡抓出符合 RegEx 的字串。<code>str_match()</code> 只會抓出 <code>str</code> 每個元素裡<strong>第一個符合的字串</strong>，並且以 <code>matrix</code> 的資料結構回傳：</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">str &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;&quot;</span>, <span class="st">&quot;One two three. Four five six.&quot;</span>, <span class="st">&quot;Seven eight nine.&quot;</span>)</a>
+<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="kw">str_match</span>(str, <span class="st">&quot;(</span><span class="ch">\\</span><span class="st">w+) (</span><span class="ch">\\</span><span class="st">w+) (</span><span class="ch">\\</span><span class="st">w+)&quot;</span>)</a></code></pre></div>
+<pre><code>#&gt;      [,1]               [,2]    [,3]    [,4]   
+#&gt; [1,] NA                 NA      NA      NA     
+#&gt; [2,] &quot;One two three&quot;    &quot;One&quot;   &quot;two&quot;   &quot;three&quot;
+#&gt; [3,] &quot;Seven eight nine&quot; &quot;Seven&quot; &quot;eight&quot; &quot;nine&quot;</code></pre>
+<ul>
+<li>回傳的 matrix 中，
+<ul>
+<li>每列 (row) 對應到 <code>str</code> 中的一個元素。在此，因為 <code>str</code> 長度為 3，因此回傳的 matrix 有 3 列。matrix 的每列代表 <code>str</code> 中每個元素 (字串) 中<strong>第一個</strong>符合 RegEx 的部份。</li>
+<li>第一行 (column) 是<strong>整個 RegEx 抓到的字串</strong>，i.e. 符合 <code>(\w+) (\w+) (\w+)</code> 的字串。後面幾行依序是 RegEx 中，<strong>各個 group</strong> 所抓到的字串，i.e. 各個 <code>()</code> 裡的 RegEx。例如，第二行是第一個 <code>(\w+)</code> 所抓到的內容；第三行則是第二個 <code>(\w+)</code> 所抓到的內容；依此類推。</li>
+</ul></li>
+</ul></li>
+<li><p>若要抓出<strong>所有符合的字串</strong>，需使用 <code>str_match_all()</code><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>。<code>str_match_all()</code> 會抓出 <code>str</code> 每個元素裡<strong>所有符合的字串</strong>，並以 <code>list</code> 的資料結構回傳：</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">str &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;&quot;</span>, <span class="st">&quot;One two three. Four five six.&quot;</span>, <span class="st">&quot;Seven eight nine.&quot;</span>)</a>
+<a class="sourceLine" id="cb10-2" data-line-number="2"><span class="kw">str_match_all</span>(str, <span class="st">&quot;(</span><span class="ch">\\</span><span class="st">w+) (</span><span class="ch">\\</span><span class="st">w+) (</span><span class="ch">\\</span><span class="st">w+)&quot;</span>)</a></code></pre></div>
+<pre><code>#&gt; [[1]]
+#&gt;      [,1] [,2] [,3] [,4]
+#&gt; 
+#&gt; [[2]]
+#&gt;      [,1]            [,2]   [,3]   [,4]   
+#&gt; [1,] &quot;One two three&quot; &quot;One&quot;  &quot;two&quot;  &quot;three&quot;
+#&gt; [2,] &quot;Four five six&quot; &quot;Four&quot; &quot;five&quot; &quot;six&quot;  
+#&gt; 
+#&gt; [[3]]
+#&gt;      [,1]               [,2]    [,3]    [,4]  
+#&gt; [1,] &quot;Seven eight nine&quot; &quot;Seven&quot; &quot;eight&quot; &quot;nine&quot;</code></pre>
+<ul>
+<li>回傳的 list 中，list 的每個元素依序對應到 <code>str</code> 的每個元素。因此，回傳的 list 長度為 2 (與 <code>str</code> 相同)
+<ul>
+<li>list 的每個元素內儲存的是一個 matrix，這個 matrix 的每列 (row) 對應到一個符合 RegEx 的字串。每行 (column) 的意義則與 <code>str_match()</code> 回傳的 matrix 相同。</li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div class="section level2">
+<h2>配合閱讀</h2>
+<ul>
+<li><a href="https://r4ds.had.co.nz/strings.html">R for Data Science: Strings</a></li>
+<li><a href="https://stringr.tidyverse.org/articles/regular-expressions.html">Regular Expression</a></li>
+<li><a href="https://evoldyn.gitlab.io/evomics-2018/ref-sheets/R_strings.pdf">stringr cheatsheet</a></li>
+</ul>
+</div>
+<div class="section level2">
+<h2>相關資源</h2>
+<ul>
+<li><a href="https://regexone.com">Regex One</a>: RegEx 互動式學習</li>
+<li><a href="http://loonkwil.github.io/regexify">RegEx Online Tester</a></li>
+</ul>
+<button id="show-regex" class="button-show">
+show
+</button>
+<script type="text/javascript">
+window.onload = () => {
+  var button = document.querySelector('button#show-regex');
+  button.onclick = function() {
+    
+    if (button.className == 'button-show') {
+        document.querySelectorAll('.hide').forEach(ele => {
+                ele.className = 'regex-input show';
+        })
+      
+        button.className = 'button-hide'
+        button.innerHTML = 'hide'
+      } else if (button.className == 'button-hide') {
+        document.querySelectorAll('.show').forEach(ele => {
+                ele.className = 'regex-input hide';
+        })
+      
+        button.className = 'button-show'
+        button.innerHTML = 'show'
+      }
+    }
+}
+</script>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p><code>stringr</code> 的許多函數，都有兩個版本：<code>str_*()</code> 與 <code>str_*_all()</code><a href="#fnref1" class="footnote-back">↩</a></p></li>
+</ol>
 </div>
 
 
@@ -3148,7 +3393,7 @@ $(document).ready(function ()  {
 
     // establish options
     var options = {
-      selectors: "h1,h2,h3",
+      selectors: "h1,h2,h3,h4",
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {
@@ -3157,7 +3402,7 @@ $(document).ready(function ()  {
       ignoreSelector: ".toc-ignore",
       scrollTo: 0
     };
-    options.showAndHide = true;
+    options.showAndHide = false;
     options.smoothScroll = true;
 
     // tocify

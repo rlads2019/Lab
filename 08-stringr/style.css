@@ -198,3 +198,25 @@ div.sourceCode + pre {
 .txt {
   overflow-y: auto;
 }
+
+.regex-view {
+  margin: 1em 0;
+  max-height: 400px;
+  overflow-y: auto;
+}
+.regex-input {
+  display: block;
+  border: 0.5px solid rgba(175, 175, 175, 0.726);
+}
+
+.match, .matched-regex {
+  background: rgba(0, 255, 0, 0.37) !important;
+  border: 0.5px solid rgba(0, 255, 0, 0.87) !important;
+}
+
+#show-regex {
+  position: fixed;
+  bottom: 5px;
+  right: 5px;
+  font-size: 6px;
+}
