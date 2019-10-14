@@ -1,5 +1,5 @@
 ---
-title: "Strings & Regular Expression (W8)"
+title: "Strings & Regular Expressions (W8)"
 date: '2019-10-31'
 output:
   html_document:

@@ -52,7 +52,7 @@
 [src7]: #
 [hw7]: https://github.com/rlads2019/hw7-draft
 
-[s8]: #
+[s8]: https://docs.google.com/presentation/d/1N5QymDNzjKfHRDK6_kJSESv23fiwvBzO6LBtjIiXMKQ/edit?usp=sharing
 [note8]: ./notes/08.html
 [src8]: #
 [hw8]: https://github.com/rlads2019/hw8-draft
