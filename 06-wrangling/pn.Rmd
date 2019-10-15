@@ -1,0 +1,282 @@
+---
+title: "Data Wrangling with dplyr (W6)"
+date: '2019-10-17'
+output:
+    html_document:
+        number_sections: no
+        theme: united
+        highlight: tango
+        toc: yes
+        toc_float:
+            collapsed: no
+        css: style.css
+        md_extensions: +implicit_figures
+        includes:
+            in_header: "../GA.html"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=T,
+                      results = 'hide',
+                      comment = '#>',
+                      message = F)
+```
+
+```{js echo=FALSE}
+window.onload = () => {
+        document.querySelectorAll('.hide').forEach(ele => {
+            ele.className = 'note';
+        })
+}
+```
+
+## Import Data
+
+<div class="hide" data-tag="slide, demo">
+
+</div>
+
+
+## 資料讀取
+
+## Why `dplyr`?
+
+<div class="hide" data-tag="slide">
+1. 上週已學過使用中括號的方式去篩選 data frame
+2. 已具備基本的資料清理能力
+3. baseR 缺點 --> slide
+4. `dplyr`: 將資料清理的過程，表達成一套線性的流程
+</div>
+
+## isolating data
+
+<div class="hide" data-tag="slide">
+1. 6 個函數
+1. 分兩大類 --> 第一類：從 df 篩選出資料
+1. 簡單介紹 3 個函數的功能
+</div>
+
+
+## `select()`
+
+<div class="hide" data-tag="slide, demo">
+1. **slide**：
+    - 函數 arguments: `df`, 變項名稱
+    - 函數功能：**挑選**出特定變項
+1. **demo**
+    1. Basic structure
+    
+        ```r
+        library(dplyr)
+        select(babynames, name, prop)
+        select(babynames, sex, name)
+        ```
+      
+    1. Helpers: `starts_with()`, `ends_with()`, `contains()`
+    
+        ```r
+        iris_ <- as_tibble(iris)
+        iris_
+        
+        # starts_with()
+        select(iris_, starts_with('Sepal'))
+        
+        # ends_with()
+        select(iris_, ends_with('Width'))
+        
+        # contains()
+        select(iris_, contains('.'))
+        ```
+</div>
+
+## `filter()`
+
+<div class="hide" data-tag="slide, demo">
+1. **slide**：
+    - 函數 argument: `df`, logical test
+    - 函數功能：篩選出符合 logical test 的觀察值
+1. **demo**
+    
+    ```r
+    filter(babynames, name == "Garrett")
+    
+    filter(babynames, (name == "Garrett") & (year < 1885))
+    
+    # Multiple tests in multiple args (與上相同)
+    filter(babynames, name == "Garrett", year < 1885)
+    ```
+</div>
+
+## `arrange()`
+
+<div class="hide" data-tag="slide, demo">
+1. **slide**：
+    - 函數 argument: `df` (提醒：dplyr 函數的結構皆是這樣), 變項名稱
+    - 函數功能：依據變項排序觀察值
+1. **demo**
+    
+    ```r
+    arrange(babynames, n)
+    
+    # 由大至小排序 (降冪)
+    arrange(babynames, desc(n))
+    
+    # Multiple vars: 先依據 var1, 如果 obs var1 一樣，再依據 var2
+    arrange(babynames, year, name)
+    arrange(babynames, name, year)
+    ```
+1. **slide: Your Turn**
+</div>
+
+- **5 min**
+
+## pipe: `%>%`
+
+<div class="hide" data-tag="demo, slide, demo">
+1. **demo**
+    1. 第三題：
+    
+        ```r
+        girls2017 <- filter(babynames, year == 2017, sex == "F")
+        girls2017 <- select(girls2017, name, n)
+        girls2017 <- arrange(girls2017, desc(n))
+        ```
+1. **slide**: 我剛剛寫的 code
+    1. 變數 (`girls2017`) 重複使用
+    1. **The pipe operator**
+1. **demo**: pipe
+    
+    ```r
+    # Eqivalent
+    filter(babynames, year == 2017, sex == "F")
+    babynames %>% filter(year == 2017, sex == "F")
+    ```
+    
+    ```r
+    babynames %>% 
+      filter(year == 2017, sex == "F") %>%
+      select(name, n)
+
+    babynames %>% 
+      filter(year == 2017, sex == "F") %>%
+      select(name, n) %>%
+      arrange(desc(n))
+    ```
+</div>
+
+
+## Deriving information
+
+<div class="hide" data-tag="slide">
+1. 前面 3 個函數：就 `df` 現有的資料去**篩選**或**排序**
+1. 這 3 個函數：
+    - 使用 `mutate()`，根據既有的資料去**製造**出新的變項
+    - 使用 `summarize()` 去**摘要**某些變項，e.g. 某變項的最大值或平均
+    - `group_by()` 與 `summarize()` 合用：先依據某個變項**將觀察值分組**  
+    e.g. 種族，再看各個種族下，某些變項的摘要，例如平均壽命。
+</div>
+
+## `mutate()`
+
+<div class="hide" data-tag="slide, demo">
+1. **slide**：
+    1. 函數 argument:
+        - 使用 pipe 寫法，將 `babynames` pipe 入第一個 argument
+        - `percent = <如何去計算得出這個變項>`
+1. **demo**
+    
+    1. Basic usage
+    
+        ```r
+        babynames %>% 
+          mutate(percent = prop*100)
+          
+        # 覆寫舊變項
+        babynames %>% 
+          mutate(prop = prop*100)
+        
+        # mutate with multiple variables
+        babynames %>% 
+          mutate(percent = prop*100,
+                 percent2 = paste0(percent, '%'))
+        ```
+    
+    1. Helper: `if_else()`
+    
+        ```r
+        babynames %>% 
+          mutate(sex2 = if_else(sex == "F", "female", "male"))
+        ```
+</div>
+
+
+## `summarize()`
+
+<div class="hide" data-tag="slide, demo">
+1. **slide**：
+    1. 特徵：
+        1. 前面的函數回傳的 data frame 「長得」多少和輸入的 data frame 一樣 (多或少幾個變項，少幾個觀察值)
+        1. `summarise()` 回傳的 data frame 長得很不一樣：  
+        變項沒出現過、只有一個 row
+        1. `summarise()` 將輸入之 data frame 的某個變項進行摘要 -->  
+        將摘要結果儲存在新的變項
+        
+
+1. **demo**
+    
+    1. Basic usage
+    
+        ```r
+        babynames %>% 
+          summarise(total = sum(n), max = max(n))
+        ```
+    
+    1. Helper: `n()`, `n_distinct()`
+    
+        ```r
+        babynames %>% 
+          summarise(num_of_rows = n(),
+                    num_of_names = n_distinct(name))
+        ```
+</div>
+
+- **3-5 min**
+
+
+## `group_by()`
+
+<div class="hide" data-tag="slide, demo">
+1. **slide**：
+    1. 匯入資料 --> 長得和投影片一樣
+    1. `group_by()`
+        1. 單純分組，除此之外不會做任何事
+        1. 常和 `summarise()` 合用
+1. **demo**
+    
+    1. Basic usage
+    
+        ```r
+        # 先匯入資料
+        
+        # Basic usage
+        pollution %>% 
+          group_by(city) %>% 
+          summarise(mean = mean(amount), 
+                    sum = sum(amount))
+        
+        # Group by 2 variables
+        pollution %>% 
+          group_by(city, size) %>% 
+          summarise(mean = mean(amount), 
+                    sum = sum(amount))
+        ```
+    
+    1. Helper: `n()`
+    
+        ```r
+        pollution %>% 
+          group_by(city) %>% 
+          summarise(mean = mean(amount), 
+                    count = n())
+        ```
+</div>

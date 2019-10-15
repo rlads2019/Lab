@@ -49,8 +49,6 @@ klippy::klippy(position = c('top', 'right'),color = 'darkred')
     如此便會將外部檔案讀入成 `tibble` (data frame)
 
 
-
-
 ## Functions for "isolating data" in dplyr
 
 - `dplyr` 有 2 個重要的函數可以用來取代上週講過得 `[<vector 1> , <vector 2>]`
@@ -114,11 +112,11 @@ arrange(babynames, n)
 # 由大至小排序 (降冪)
 arrange(babynames, desc(n))
 
-# Order first by `year` then by `n`
-arrange(babynames, year, n)
+# Order first by `year` then by `name`
+arrange(babynames, year, name)
 
-# Order first by `n` then by `year`
-arrange(babynames, n, year)
+# Order first by `name` then by `year`
+arrange(babynames, name, year)
 ```
 
 <div class='hide' data-tag='pipe'>
@@ -149,6 +147,9 @@ arrange(babynames, n, year)
     ```{r results='hold'}
     # Two equivalent expressions
     filter(babynames, year == 2017, sex == "F")
+    
+    cat('\n\n')  # 讓印出結果比較好看
+    
     babynames %>% filter(year == 2017, sex == "F")
     ```
 
@@ -193,7 +194,7 @@ babynames %>% summarise(num_of_rows = n(), num_of_names = n_distinct(name))
 ### `group_by()`: 先分類再摘要
 
 ```{r}
-pollution <- tribble(
+pollution <- tibble::tribble(
        ~city,   ~size, ~amount, 
   "New York", "large",      23,
   "New York", "small",      14,
@@ -205,7 +206,7 @@ pollution <- tribble(
 pollution
 
 pollution %>% 
-    group_by(city) %>% 
+  group_by(city) %>% 
  	summarise(mean = mean(amount), sum = sum(amount))
 ```
 
@@ -213,11 +214,8 @@ pollution %>%
 
 
 ```{r}
-babynames %>% 
-    group_by(sex, name) %>%
-    summarise(total = sum(n))
+pollution %>% 
+  group_by(city, size) %>% 
+  summarise(mean = mean(amount), 
+            sum = sum(amount))
 ```
-
-## Wrap up or Pop quiz
-
-## Tidy Data Frame
