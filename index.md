@@ -125,6 +125,9 @@ tr:nth-child(5), tr:nth-child(9), tr:nth-child(12), tr:nth-child(n+17) {
 .h {
     display: none;
 }
+
+.inner {
+    max-width: 750px;
 </style>
 
 <script>
