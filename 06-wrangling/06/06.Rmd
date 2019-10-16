@@ -1,5 +1,5 @@
 ---
-title: "Data Wrangling with dplyr (W6)"
+title: "Data Transformation with dplyr (W6)"
 date: '2019-10-17'
 output:
   html_document:
@@ -202,7 +202,9 @@ pollution
 
 pollution %>% 
   group_by(city) %>% 
- 	summarise(mean = mean(amount), sum = sum(amount))
+ 	summarise(mean = mean(amount), 
+ 	          sum = sum(amount),
+ 	          count = n())
 ```
 
 ![先將 `pollution` 的觀察值依據變項 `city` 分成 3 組，再各自對 3 組進行摘要 (計算污染量平均與總和) 求得之摘要表。](./img/group_by.png){.half}
@@ -212,5 +214,6 @@ pollution %>%
 pollution %>% 
   group_by(city, size) %>% 
   summarise(mean = mean(amount), 
-            sum = sum(amount))
+            sum = sum(amount),
+ 	          count = n())
 ```

@@ -1,5 +1,5 @@
 ---
-title: "Data Wrangling with dplyr (W6)"
+title: "Data Transformation with dplyr (W6)"
 date: '2019-10-17'
 output:
     html_document:
@@ -30,12 +30,20 @@ window.onload = () => {
 }
 ```
 
-## Import Data
+## Stack Overflow, Mental Model, Learning Resource
 
-<div class="hide" data-tag="slide, demo">
-
+<div class="hide" data-tag="slide">
+1. Solve a problem: 將 6 個概念串連起來
+1. 左邊：一頭霧水  
+右邊：臨門一腳
+1. 使用 stackoverflow 解決問題
+    1. 右邊：頓悟
+    2. 左邊：仍然一頭霧水
+1. 左邊：
+    1. 即使能透過複製貼上 stackoverflow 的程式碼解決當下問題，但因為你本身的概念連結不夠，程式能力並未進步
+    1. stackoverflow 提供的資訊比較「破碎」，無法幫你建立一個良好的 mental model
+    1. 書, 部落格文章：比較「結構化」的學習資源
 </div>
-
 
 ## 資料讀取
 
@@ -214,12 +222,11 @@ window.onload = () => {
 
 <div class="hide" data-tag="slide, demo">
 1. **slide**：
-    1. 特徵：
-        1. 前面的函數回傳的 data frame 「長得」多少和輸入的 data frame 一樣 (多或少幾個變項，少幾個觀察值)
-        1. `summarise()` 回傳的 data frame 長得很不一樣：  
-        變項沒出現過、只有一個 row
-        1. `summarise()` 將輸入之 data frame 的某個變項進行摘要 -->  
-        將摘要結果儲存在新的變項
+    1. 先看下面示意圖:  
+    `summarise()` 回傳的 df 長得不一樣
+    1. 功能：  
+    將 babynames 的變項 n 摘要
+    1. 結構
         
 
 1. **demo**
@@ -240,7 +247,7 @@ window.onload = () => {
         ```
 </div>
 
-- **3-5 min**
+- **3 min**
 
 
 ## `group_by()`
@@ -251,22 +258,16 @@ window.onload = () => {
     1. `group_by()`
         1. 單純分組，除此之外不會做任何事
         1. 常和 `summarise()` 合用
-1. **demo**
+
+1. **demo**: `groupby.R`
     
     1. Basic usage
     
         ```r
         # 先匯入資料
         
-        # Basic usage
         pollution %>% 
           group_by(city) %>% 
-          summarise(mean = mean(amount), 
-                    sum = sum(amount))
-        
-        # Group by 2 variables
-        pollution %>% 
-          group_by(city, size) %>% 
           summarise(mean = mean(amount), 
                     sum = sum(amount))
         ```
@@ -277,6 +278,17 @@ window.onload = () => {
         pollution %>% 
           group_by(city) %>% 
           summarise(mean = mean(amount), 
+                    sum = sum(amount),
+                    count = n())
+        ```
+
+    1. Two variables
+    
+        ```r
+        pollution %>% 
+          group_by(city, size) %>% 
+          summarise(mean = mean(amount), 
+                    sum = sum(amount),
                     count = n())
         ```
 </div>
