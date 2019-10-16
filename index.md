@@ -4,8 +4,8 @@
 |--------|----------|--------------------------------------------|-------------------------|----------------|---------------|
 |   1    |  09/12   | [環境安裝、作業繳交說明][s1]                       |                    |                 | [🔗][hw1]     |
 |   2    |  09/19   | [RStudio 設定、Basic R、函數、Help pages][s2]     | [🔗][note2]       |   [⬇️][src2]    | [🔗][hw2]     |
-|   3    |  09/26   | [Base R (I)：vector、資料類型、條件式][s3]         | [🔗][note3]       |    [⬇️][src3]    | [🔗][hw3]    |
-|   4    |  10/03   | [Base R (II)：list、迴圈、data frame][s4]         | [🔗][note4]      |   [⬇️][src4]      | [🔗][hw4]     |
+|   3    |  09/26   | [Base R (I)：vector、資料類型、條件式][s3]         | [🔗][note3]       |    [⬇️][src3]    | [🔗][hw3] [📝][hw3-s] |
+|   4    |  10/03   | [Base R (II)：list、迴圈、data frame][s4]         | [🔗][note4]      |   [⬇️][src4]      | [🔗][hw4] [📝][hw4-s] |
 |   5    |  10/10   |               國慶日                              |                   |                 |               |
 |   6    |  10/17   | [Data frame 處理：`dplyr`][s6]{:.h}               |  [🔗][note6]{:.h}  | [⬇️][src6]{:.h} | [🔗][hw6]{:.h} |
 |   7    |  10/24   | [視覺化：`ggplot2`][s7]{:.h}                      |  [🔗][note7]{:.h}  |                 | [🔗][hw7]{:.h} |
@@ -35,11 +35,13 @@
 [note3]: ./notes/03.html
 [src3]: ./src/03.zip
 [hw3]: https://github.com/rlads2019/hw3
+[hw3-s]: https://rlads2019.github.io/solv/03/
 
 [s4]: https://docs.google.com/presentation/d/152Ge5BW6tw4YQz4n_eyvefyIRaPDZ0Z_25WEOn81XaA/edit?usp=sharing
 [note4]: ./notes/04.html
 [src4]: ./src/04.zip
 [hw4]: https://github.com/rlads2019/hw4
+[hw4-s]: https://rlads2019.github.io/solv/04/
 
 <!-- Block 2：EDA -->
 [s6]: https://docs.google.com/presentation/d/1Kr6aUYoVU9HLJh3vZop7K-egp4TytoOWDPQ9HKHLiJM/edit?usp=sharing
