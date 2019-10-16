@@ -217,3 +217,8 @@ pollution %>%
             sum = sum(amount),
  	          count = n())
 ```
+
+
+## 配合閱讀
+
+- [R for Data Science: Data transformation ](https://r4ds.had.co.nz/transform.html)
