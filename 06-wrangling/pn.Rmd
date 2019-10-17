@@ -45,21 +45,45 @@ window.onload = () => {
     1. 書, 部落格文章：比較「結構化」的學習資源
 </div>
 
-## 資料讀取
+## Data Import/Export
+
+<div class="hide" data-tag="slide, demo, slide">
+1. **slide**: blue --> Imort data
+    1. 方便的功能：GUI
+    1. 好處：對初學者**直覺**, 同時保留匯入資料的**程式碼**
+    1. 習慣之後，就不用依靠 GUI 界面
+    1. **Next slide**: import data
+        - from text: **base vs readr**
+        - readr 好處：預設行為比較一致
+1. **Demo**: import
+    1. **preview**: 看看 data frame 匯入之後的樣子
+    1. **import options**: 跟 csv 檔的格式有關
+        - **delimiter**: 通常預設是 `comma`
+        - **first row as name**: `csv` 檔的第一行是否要當作 column name
+1. **slide**: export data
+</div>
+
+
 
 ## Why `dplyr`?
 
 <div class="hide" data-tag="slide">
+1. dplyr: 幫助處理 data frame
 1. 上週已學過使用中括號的方式去篩選 data frame
 2. 已具備基本的資料清理能力
-3. baseR 缺點 --> slide
+3. Why dplyr?  
+baseR 缺點 --> slide -- > 看不懂 --> 因為 base R 常將很多事情寫在一塊
+4. 程式碼缺點：**同時做 2 件事**
 4. `dplyr`: 將資料清理的過程，表達成一套線性的流程
+    - 好處：
+        1. 易閱讀 (透過函數名稱，知道對 data frame 做了什麼)  
+        1. 比較好想像處理 data frame 的過程
 </div>
 
 ## isolating data
 
 <div class="hide" data-tag="slide">
-1. 6 個函數
+1. 6 個函數以及 pipe operator
 1. 分兩大類 --> 第一類：從 df 篩選出資料
 1. 簡單介紹 3 個函數的功能
 </div>
@@ -69,8 +93,8 @@ window.onload = () => {
 
 <div class="hide" data-tag="slide, demo">
 1. **slide**：
-    - 函數 arguments: `df`, 變項名稱
     - 函數功能：**挑選**出特定變項
+    - 函數 arguments: `df`, 變項名稱
 1. **demo**
     1. Basic structure
     
@@ -138,6 +162,8 @@ window.onload = () => {
 
 - **5 min**
 
+- Reform Rstudio (two windows)
+
 ## pipe: `%>%`
 
 <div class="hide" data-tag="demo, slide, demo">
@@ -152,6 +178,13 @@ window.onload = () => {
 1. **slide**: 我剛剛寫的 code
     1. 變數 (`girls2017`) 重複使用
     1. **The pipe operator**
+        - 動畫解釋
+        - 透過 pipe 將 dplyr 函數給**串起來**
+        - 前面的 dplyr 函數的第一個 arg 都是 data frame --> 配合 pipe operator
+        - 這樣的話，就可以把 df 從函數的第一個 arg 拉出來寫
+        - 這整串執行：回傳 df
+        - 馬上 pipe 給下一個函數
+        - 
 1. **demo**: pipe
     
     ```r
@@ -256,8 +289,8 @@ window.onload = () => {
 1. **slide**：
     1. 匯入資料 --> 長得和投影片一樣
     1. `group_by()`
+        1. 常和 `summarise()` 合用 
         1. 單純分組，除此之外不會做任何事
-        1. 常和 `summarise()` 合用
 
 1. **demo**: `groupby.R`
     
