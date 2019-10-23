@@ -27,7 +27,7 @@ klippy::klippy(position = c('top', 'right'),color = 'darkred')
 
 眾所皆知，R 語言的繪圖能力非常強大。相較其它統計套裝軟體，R 讓使用者能對圖的細部做許多調整，甚至去創造出獨特的圖片 (i.e. 不屬於傳統統計圖範疇內的圖)。
 
-但隨著強大繪圖功能伴隨而來的便是異常複雜的繪圖函數。傳統的 R 即擁有很厲害的繪圖系統：base R graphics 與 lattice 套件皆是功能非常強大的繪圖系統，但其學習曲線也相當陡峭，因此，實習課僅會介紹 `ggplot2` 這個較新的繪圖系統 (套件)。
+但隨著強大繪圖功能伴隨而來的便是異常複雜的繪圖函數。傳統的 R 即擁有很厲害的繪圖系統：base R graphics 與 lattice 套件皆是功能非常強大的繪圖系統，但其學習曲線也相當陡峭，因此，實習課僅會介紹 `ggplot2` 這個較易上手 (但功能仍相當強大) 的繪圖系統 (套件)。
 
 ## 今天用到的資料: `diamonds`
 
@@ -46,7 +46,7 @@ library(ggplot2)
 diam <- diamonds %>% sample_n(size = 1500)
 ```
 
-## Template
+## Template 1
 
 - 最基本的 ggplot 模板：
 
@@ -59,7 +59,7 @@ diam <- diamonds %>% sample_n(size = 1500)
   
     ![`ggplot()` 的結構](ggplot_labels.png){.half}
 
-## 散布圖 (Scatter plot)
+### 散布圖 (Scatter plot)
 
 - 使用下方程式碼，可繪製出鑽石的**重量 (克拉)** 與**價錢 (美元)** 的關係 (散布圖)
 
@@ -69,26 +69,6 @@ diam <- diamonds %>% sample_n(size = 1500)
     ggplot(data = diam) +
       geom_point(mapping = aes(x = carat, y = price))
     ```
-
-## Mapping: 將資料對應至視覺元素
-
-- 要能繪製統計圖，必須先將抽象的資料 (i.e. data frame) **對應**至實際可見的視覺元素上 (e.g. 位置、形狀、大小、顏色、透明度等) 。不同的統計圖，所需的「資料與視覺元素間的對應關係」就不同。
-
-- 要繪製一個散布圖，我們必須將 data frame 中的一個變項對應至 x 軸、另一個變項對應至 y 軸，以將 data frame 中的每筆觀察值 (抽象資料) 轉換成圖上的一個個點 (視覺元素)
-
-- `geom_*()` 中的參數 `mapping`，即在定義「data frame 中的資料與統計圖上之視覺元素的關係」：
-
-    ```{r}
-    ggplot(data = diam) +
-      geom_point(mapping = aes(x = carat, y = price, color = clarity))
-    ```
-
-    - 在 `aes()` 裡面定義資料與視覺元素間的關係
-        - `x = carat`: 將 `diam` 中的變項 `carat` 對應至散布圖的 x 軸
-        - `y = price`: 將 `diam` 中的變項 `price` 對應至散布圖的 y 軸
-        - `x` 與 `y` 會共同決定一個點的位置
-        - `color = clarity`: 將 `diam` 中的變項 `clarity` 對應至散布圖上**點的顏色**
-
 
 ## 圖層
 
@@ -114,11 +94,34 @@ diam <- diamonds %>% sample_n(size = 1500)
         geom_smooth(mapping = aes(x = carat, y = price))   # 第三層
       ```
 
+
+## Mapping: 將資料對應至視覺屬性
+
+- 要能繪製統計圖，必須先將抽象的資料 (i.e. data frame) **對應**至實際可見的視覺屬性上 (e.g. 位置、形狀、大小、顏色、透明度等) 。不同的統計圖，所需的「資料與視覺屬性間的對應關係」就不同。
+
+- 要繪製一個散布圖，我們必須將 data frame 中的一個變項對應至 x 軸、另一個變項對應至 y 軸，以將 data frame 中的每筆觀察值 (抽象資料) 轉換成圖上的一個個點 (視覺屬性)
+
+- `geom_*()` 中的參數 `mapping`，即在定義「data frame 中的資料與統計圖上之視覺屬性的關係」：
+
+    ```{r}
+    ggplot(data = diam) +
+      geom_point(mapping = aes(x = carat, y = price, color = clarity))
+    ```
+
+    - 在 `aes()` 裡面定義資料與視覺屬性間的關係
+        - `x = carat`: 將 `diam` 中的變項 `carat` 對應至散布圖的 x 軸
+        - `y = price`: 將 `diam` 中的變項 `price` 對應至散布圖的 y 軸
+        - `x` 與 `y` 會共同決定一個點的位置
+        - `color = clarity`: 將 `diam` 中的變項 `clarity` 對應至散布圖上**點的顏色**
+
+![Aesthetic Mappings](mappings.png){.half}
+
+
 ## 長條圖 (Bar chart)
 
 - 概念上，繪製長條圖與繪製散布圖是很不一樣的：
-  - 散布圖上的視覺元素可以**直接對應**到 data frame 裡的資料
-  - 長條圖的視覺元素 (bar 的長度) **無法直接對應**到 data frame 裡的資料。它對應到的是由 data frame 裡的資料**經過彙整的結果**:
+  - 散布圖上的視覺屬性可以**直接對應**到 data frame 裡的資料
+  - 長條圖的視覺屬性 (bar 的長度) **無法直接對應**到 data frame 裡的資料。它對應到的是由 data frame 裡的資料**經過彙整的結果**:
     - x 軸上是某變項裡的**各個類別**組成的
     - y 軸代表各個類別**出現的次數**
 
@@ -134,7 +137,7 @@ diam <- diamonds %>% sample_n(size = 1500)
     ![`geom_bar()`'s default statistical transformation<br>Source: <https://r4ds.had.co.nz/data-visualisation.html#statistical-transformations>](https://d33wubrfki0l68.cloudfront.net/70a3b18a1128c785d8676a48c005ee9b6a23cc00/7283c/images/visualization-stat-bar.png)
 
 
-## Statistical Transformations: `stat`
+## Statistical Transformations
 
 - 有時候，我們**只能拿到已整理好的資料**，換言之，我們無法從 `x` 裡面去計算出裡面各類別的次數 (`count`)，例如 `sum_data` 已儲存著 `cut` 當中各類別的次數 (`count`)：
 
@@ -150,7 +153,7 @@ diam <- diamonds %>% sample_n(size = 1500)
 
 - `geom_bar()` 的 `stat` 預設值是 `"count"`，讓 `geom_bar()` 可以從「對應至 `x` 的變項」計算出此變項裡各類別的次數。
 
-- 若不想自動進行這種計算，而想直接使用 data frame 本身的變項，則可以將 `stat` 設為 `"identity"`，此時便可以在 `mapping` 中將 data frame 的變項對應至長條圖的 y 軸：
+- 若不想自動進行這種計算，而想直接使用 data frame 本身的變項，則可以將 `stat` 設為 `"identity"`，此時便可以在 `mapping` 中**直接**將 data frame 的變項對應至長條圖的 x 軸 與 y 軸：
 
     ```{r out.width=c('49%', '49%'), fig.show='hold', fig.align='none'}
     # stat = "identity"
@@ -173,12 +176,11 @@ diam <- diamonds %>% sample_n(size = 1500)
   - `geom_bar()` 預設 `stat = "count"`，會從對應至 `x` 的變項中計算出該變項各個類別的次數，並將此次數繪於圖上的 y 軸
 
 
-## Position Adjustments: `position`
+## Position Adjustments
+
+- 透過提供第二個 mapping, `fill`, `geom_bar` 能夠將每個長條再依據第二個類別變項進行細分。
 
 ```{r}
-ggplot(data = diam) +
-  geom_bar(aes(x = cut, fill = cut))
-
 ggplot(data = diam) +
   geom_bar(aes(x = cut, fill = clarity))
 ```
@@ -199,6 +201,49 @@ ggplot(data = diam) +
   geom_bar(aes(x = cut, fill = clarity),
            position = "dodge")
 ```
+
+## Template 2
+
+```
+ggplot(data = <DATA>) + 
+  <GEOM_FUNCTION>(
+     mapping = aes(<MAPPINGS>),
+     stat = <STAT>, 
+     position = <POSITION>
+  )
+```
+
+## Facet
+
+- 1 個類別變項
+
+    ```{r}
+    ggplot(data = diam) +
+      geom_point(aes(x = carat, y = price)) +
+      facet_wrap(vars(cut))
+    ```
+
+- 2 個類別變項
+    ```{r}
+    ggplot(data = diam) +
+          geom_point(mapping = aes(x = carat, 
+                                   y = price)) +
+          facet_grid(rows = vars(cut),
+                     cols = vars(clarity))
+    ```
+
+## Template 3
+
+```
+ggplot(data = <DATA>) + 
+  <GEOM_FUNCTION>(
+     mapping = aes(<MAPPINGS>),
+     stat = <STAT>, 
+     position = <POSITION>
+  ) +
+  <FACET_FUNCTION>
+```
+
 
 ## Geoms
 

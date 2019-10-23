@@ -129,7 +129,10 @@ div.sourceCode + pre {
   margin-top: 1.7em;
 }
 
-
+.inline-img {
+  display:inline-block;
+  width:45%
+}
 
 @media print {
   html, body {
