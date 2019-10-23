@@ -31,6 +31,25 @@ window.onload = () => {
 }
 ```
 
+## data: `diamonds`
+
+`diamonds.R`
+
+<div class="hide" data-tag="slide, demo">
+**slide**
+
+1. 介紹 `ggplot2` 內建資料 `diamonds`
+    - row: 一個鑽石
+    - col: 鑽石的屬性
+
+2. 因為 diamonds 很大，電腦速度不夠，所以抽取 1500 筆資料
+
+**demo**
+
+1. 匯入資料：`diamonds.R`
+</div>
+
+
 
 ## Template 1, 圖層
 

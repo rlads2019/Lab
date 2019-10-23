@@ -8,7 +8,7 @@
 |   4    |  10/03   | [Base R (II)：list、迴圈、data frame][s4]         | [🔗][note4]      |   [⬇️][src4]     | [🔗][hw4]    |
 |   5    |  10/10   |               國慶日                              |                   |                 |               |
 |   6    |  10/17   | [Data frame 處理：`dplyr`][s6]                    |  [🔗][note6]      | [⬇️][src6]       | [🔗][hw6]      |
-|   7    |  10/24   | [視覺化：`ggplot2`][s7]{:.h}                      |  [🔗][note7]{:.h}  |                 | [🔗][hw7]{:.h} |
+|   7    |  10/24   | [視覺化：`ggplot2`][s7]{:.h}                      |  [🔗][note7]{:.h}  | [⬇️][src7]{:.h}    | [🔗][hw7]{:.h} |
 |   8    |  10/31   | [字串處理：正規表達式、`stringr`][s8]{:.h}           |   [🔗][note8]{:.h} |                 | [🔗][hw8]{:.h} |
 |   9    |  11/07   |               期中考                               |                   |                 |               |
 |   10    |  11/14   | [中文文本處理：斷詞、詞頻表、語料庫][s10]{:.h}         |                   |                 |               |
@@ -54,7 +54,7 @@
 [s7]: https://docs.google.com/presentation/d/19ZUldqQ4mnqe1KDFq_W0XY9SC9rDGRwhYcH1cAHhjAQ/edit?usp=sharing
 [note7]: ./notes/07.html
 [src7]: ./src/07.zip
-[hw7]: https://github.com/rlads2019/hw7-draft
+[hw7]: https://github.com/rlads2019/hw7
 
 [s8]: https://docs.google.com/presentation/d/1N5QymDNzjKfHRDK6_kJSESv23fiwvBzO6LBtjIiXMKQ/edit?usp=sharing
 [note8]: ./notes/08.html
