@@ -1797,11 +1797,23 @@ window.onload = () => {
 <ul>
 <li>填入 slots 就好</li>
 </ul></li>
-<li><p>繪製散布圖</p></li>
-<li><p>What are the layers doing?</p>
+<li>繪製散布圖
+<ul>
+<li>data</li>
+<li>gemo_point (專門繪製散布圖)</li>
+<li>mapping: <strong>描述</strong>怎麼繪製散布圖
+<ul>
+<li>散布圖有 x，y 軸 –&gt; 將變項對應到這兩軸</li>
+</ul></li>
+</ul></li>
+<li>ggplot 對繪圖的想法
 <ol style="list-style-type: decimal">
-<li><code>ggplot()</code>: 初始化、global-local (<code>data = diam</code> 可被後面的函數「看到」)</li>
-<li><code>geom_point()</code>: 疊上新圖層、專責繪製散布圖</li>
+<li>每個圖片都是由<strong>一層一層的圖層</strong>堆疊起來的 –&gt; 反映在 ggplot 函數上</li>
+<li><code>ggplot()</code>: 初始化 –&gt; 想像繪製抵圖<br />
+提供資訊 –&gt; global (<code>data = diam</code> 可被後面的函數「看到」)</li>
+<li><code>geom_point()</code>:<br />
+專責繪製散布圖的圖層<br />
+在原本的底圖上，<strong>點上</strong>點</li>
 </ol></li>
 </ol>
 <p><strong>demo</strong></p>
@@ -1838,11 +1850,11 @@ window.onload = () => {
 <div class="hide" data-tag="slide">
 <p><strong>slide</strong></p>
 <ol style="list-style-type: decimal">
-<li>Mappings: 抽象資料對應到「實際可見」的視覺屬性<br />
-</li>
-<li><strong>不同 geom function 有不同的 Mapping</strong>
+<li>Mappings: 描述「抽象的資料」與「圖片上實際可見的視覺屬性」之間的<strong>對應關係</strong></li>
+<li><strong>不同 geom function 要定義的 Mapping 就不一樣</strong>
 <ul>
 <li>e.g. 長條圖 (和散布圖長得不一樣 –&gt; Mapping 不同)</li>
+<li>geom_function 的 mapping? –&gt; 看說明文件</li>
 <li>ggplot 難在領域知識：<br />
 要知道如何繪製統計圖前，必須具備基礎統計知識 繪製地圖 –&gt; 經緯座標、地圖投影 知識</li>
 </ul></li>

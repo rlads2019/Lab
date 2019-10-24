@@ -61,11 +61,19 @@ window.onload = () => {
     - 填入 slots 就好
 
 2. 繪製散布圖
-
-3. What are the layers doing?  
+    - data
+    - gemo_point (專門繪製散布圖)
+    - mapping: **描述**怎麼繪製散布圖
+      - 散布圖有 x，y 軸 --> 將變項對應到這兩軸
     
-    1. `ggplot()`: 初始化、global-local (`data = diam` 可被後面的函數「看到」)
-    2. `geom_point()`: 疊上新圖層、專責繪製散布圖
+
+3. ggplot 對繪圖的想法
+    1. 每個圖片都是由**一層一層的圖層**堆疊起來的 --> 反映在 ggplot 函數上
+    1. `ggplot()`: 初始化 --> 想像繪製抵圖  
+    提供資訊 --> global (`data = diam` 可被後面的函數「看到」)
+    1. `geom_point()`:  
+    專責繪製散布圖的圖層  
+    在原本的底圖上，**點上**點
 
 **demo**
 
@@ -121,9 +129,10 @@ window.onload = () => {
 <div class="hide" data-tag="slide">
 **slide**
 
-1. Mappings: 抽象資料對應到「實際可見」的視覺屬性  
-2. **不同 geom function 有不同的 Mapping**
+1. Mappings: 描述「抽象的資料」與「圖片上實際可見的視覺屬性」之間的**對應關係**
+2. **不同 geom function 要定義的 Mapping 就不一樣**
     - e.g. 長條圖 (和散布圖長得不一樣 --> Mapping 不同)
+    - geom_function 的 mapping? --> 看說明文件
     - ggplot 難在領域知識：  
     要知道如何繪製統計圖前，必須具備基礎統計知識
     繪製地圖 --> 經緯座標、地圖投影 知識
