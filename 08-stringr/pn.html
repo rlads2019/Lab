@@ -1855,7 +1855,7 @@ window.onload = () => {
 我妹妹比我還正</code></pre>
 <ol style="list-style-type: decimal">
 <li>開頭：<code>我</code> –&gt; <code>^我</code></li>
-<li>結尾：<code>正$</code> –&gt; <code>正$</code></li>
+<li>結尾：<code>正</code> –&gt; <code>正$</code></li>
 </ol>
 </div>
 <div class="hide" data-tag="Escape">
@@ -1889,9 +1889,7 @@ window.onload = () => {
 今天是 2019-01-01</code></pre>
 <ol style="list-style-type: decimal">
 <li>想抓出日期 –&gt; 引入 <code>\d</code> –&gt; <code>\d\d\d\d-\d\d-\d\d</code></li>
-<li><ul>
-<li>號 <code>\d+-\d+-\d+</code> –&gt; 語料加入 <code>02-3366-3366</code> –&gt; Exact number –&gt; <code>\d{4}-\d{2}-\d{2}</code></li>
-</ul></li>
+<li><code>+</code> 號 <code>\d+-\d+-\d+</code> –&gt; 語料加入 <code>02-3366-3366</code> –&gt; Exact number –&gt; <code>\d{4}-\d{2}-\d{2}</code></li>
 <li>日期格式可以有很多種 –&gt; 刪除語料中的 <code>0</code></li>
 <li>num range <code>\d{4}-\d{1,2}-\d{1,2}</code></li>
 </ol>
@@ -1965,9 +1963,12 @@ a1 a2 a3 a4 a5 a10</code></pre>
 一巴掌接著一巴掌
 
 一口接著一巴掌</code></pre>
-<ul>
+<ol style="list-style-type: decimal">
+<li><code>一口接著一口</code></li>
+<li><code>一(口|巴掌)接著一口</code></li>
+<li><code>一(口|巴掌)接著一(口|巴掌)</code></li>
 <li><code>一(口|巴掌)接著?又?一\1</code></li>
-</ul>
+</ol>
 </div>
 <div id="stringr" class="section level2">
 <h2>Stringr</h2>

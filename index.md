@@ -8,8 +8,8 @@
 |   4    |  10/03   | [Base R (II)：list、迴圈、data frame][s4]         | [🔗][note4]      |   [⬇️][src4]     | [🔗][hw4]    |
 |   5    |  10/10   |               國慶日                              |                   |                 |               |
 |   6    |  10/17   | [Data frame 處理：`dplyr`][s6]                    |  [🔗][note6]      | [⬇️][src6]       | [🔗][hw6]      |
-|   7    |  10/24   | [視覺化：`ggplot2`][s7]                      |  [🔗][note7]  | [⬇️][src7]    | [🔗][hw7] |
-|   8    |  10/31   | [字串處理：正規表達式、`stringr`][s8]{:.h}           |   [🔗][note8]{:.h} |                 | [🔗][hw8]{:.h} |
+|   7    |  10/24   | [視覺化：`ggplot2`][s7]                           |  [🔗][note7]      | [⬇️][src7]       | [🔗][hw7]     |
+|   8    |  10/31   | [字串處理：正規表達式、`stringr`][s8]                |   [🔗][note8]    |                | [🔗][hw8]      |
 |   9    |  11/07   |               期中考                               |                   |                 |               |
 |   10    |  11/14   | [中文文本處理：斷詞、詞頻表、語料庫][s10]{:.h}         |                   |                 |               |
 |   11    |  11/21   | [API][s11]{:.h}                                  |                   |                 |               |
@@ -59,7 +59,7 @@
 [s8]: https://docs.google.com/presentation/d/1N5QymDNzjKfHRDK6_kJSESv23fiwvBzO6LBtjIiXMKQ/edit?usp=sharing
 [note8]: ./notes/08.html
 [src8]: ./src/08.zip
-[hw8]: https://github.com/rlads2019/hw8-draft
+[hw8]: https://github.com/rlads2019/hw8
 
 <!-- Block 3: 文本處理 -->
 [s10]: #
