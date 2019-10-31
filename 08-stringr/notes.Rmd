@@ -269,7 +269,7 @@ str_detect(str, "\\.")
     str_match_all(str, "([a-zA-Z]+) ([a-zA-Z]+) ([a-zA-Z]+)")
     ```
 
-    - 回傳的 list 中，list 的每個元素依序對應到 `str` 的每個元素。因此，回傳的 list 長度為 2 (與 `str` 相同)
+    - 回傳的 list 中，list 的每個元素依序對應到 `str` 的每個元素。因此，回傳的 list 長度為 3 (與 `str` 相同)
       - list 的每個元素內儲存的是一個 matrix，這個 matrix 的每列 (row) 對應到一個符合 RegEx 的字串。每行 (column) 的意義則與 `str_match()` 回傳的 matrix 相同。
 
 
