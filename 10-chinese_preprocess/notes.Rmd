@@ -69,14 +69,12 @@ regex_view <- function(text, pattern, multiline = T, showInput = T) {
   ```{r, results='asis', echo=F}
   regex_view('我妹妹很正
   我妹妹超正
-  我妹妹超級正
-  我妹妹 正',
+  我妹妹超級正',
   '妹妹.正')
               
   regex_view('我妹妹很正
   我妹妹超正
-  我妹妹超級正
-  我妹妹 正',
+  我妹妹超級正',
   '妹妹..正')
   ```
 
@@ -149,12 +147,12 @@ regex_view <- function(text, pattern, multiline = T, showInput = T) {
 
   ```{r, results='asis', echo=F}
   regex_view(c('我妹妹超正', 
-  '1 space: 我妹妹 超正', '1 tab: 我妹妹\t超正', '2 tabs: 我妹妹\t\t超正'), 
-  '妹妹\\s超正', multiline = T)
+  '我妹妹 超正', '我妹妹\t超正', '我妹妹\t\t超正'), 
+  '妹妹\\s超正', multiline = F)
   
   regex_view(c('我妹妹超正', 
   '我妹妹 超正', '我妹妹\t超正', '我妹妹\t\t超正'), 
-  '妹妹\\s+超正', multiline = T)
+  '妹妹\\s+超正', multiline = F)
   ```
 
 - `[]`
@@ -174,6 +172,7 @@ regex_view <- function(text, pattern, multiline = T, showInput = T) {
   'a[^2-5]')
   ```
 
+
 ```{r results='asis', echo=FALSE}
 library(dplyr)
 news <- readLines('corpus/news_first_para.txt') %>%
@@ -185,13 +184,13 @@ news <- readLines('corpus/news_first_para.txt') %>%
 1. 找出所有**記者姓名**
 
     ```{r results='asis', echo=F}
-    regex_view(news, '【.{3}╱.+報導】', showInput = F)
+    regex_view(news, '【\\w{3}╱\\w+報導】', showInput = F)
     ```
 
 1. 找出所有**百分比** (e.g. `20%`, `17.5%`)
 
     ```{r results='asis', echo=F}
-    regex_view(news, '[0-9.]+%', showInput = F)
+    regex_view(news, '[\\d.]+%', showInput = F)
     ```
 
 ### Backreference
@@ -220,7 +219,7 @@ news <- readLines('corpus/news_first_para.txt') %>%
 
 - 在 R 裡面，Regular Expression 是以**字串**的資料類型 (i.e. `character`) 去表徵，因此有一點需特別注意：
   
-  > 若 Regular Expression 裡面出現**反斜線**，則在將此 Regex 寫進 R 的函數時，需要在**每一個反斜線之前再加上一個反斜線**
+  若 Regular Expression 裡面出現**反斜線**，在將此 Regex 寫進 R 的函數時，需要在**每一個反斜線之前再加上一個反斜線**:
   
   -  Regular Expression: **`today\.$`**
     ```{r results='asis', echo=F}
@@ -254,8 +253,8 @@ str_detect(str, "\\.")
 - `str_match()` 可從文字裡抓出符合 RegEx 的字串。`str_match()` 只會抓出 `str` 每個元素裡**第一個符合的字串**，並且以 `matrix` 的資料結構回傳：
     
     ```{r}
-    str <- c("Won't match.", "One two three, four five six.", "Seven eight nine.")
-    str_match(str, "([a-zA-Z]+) ([a-zA-Z]+) ([a-zA-Z]+)")
+    str <- c("", "One two three. Four five six.", "Seven eight nine.")
+    str_match(str, "(\\w+) (\\w+) (\\w+)")
     ```
 
     - 回傳的 matrix 中，
@@ -265,8 +264,8 @@ str_detect(str, "\\.")
 - 若要抓出**所有符合的字串**，需使用 `str_match_all()`[^all]。`str_match_all()` 會抓出 `str` 每個元素裡**所有符合的字串**，並以 `list` 的資料結構回傳：
 
     ```{r}
-    str <- c("Won't match.", "One two three, four five six.", "Seven eight nine.")
-    str_match_all(str, "([a-zA-Z]+) ([a-zA-Z]+) ([a-zA-Z]+)")
+    str <- c("", "One two three. Four five six.", "Seven eight nine.")
+    str_match_all(str, "(\\w+) (\\w+) (\\w+)")
     ```
 
     - 回傳的 list 中，list 的每個元素依序對應到 `str` 的每個元素。因此，回傳的 list 長度為 2 (與 `str` 相同)
