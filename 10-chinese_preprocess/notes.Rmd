@@ -25,36 +25,163 @@ klippy::klippy(position = c('top', 'right'),color = 'darkred', lang=c('r', 'txt'
 ```
 
 
+## 斷詞
+
 ```{r}
 library(jiebaR)
-library(stringr)
+# Without user dict
+seg <- worker()
+txt <- "失業的熊讚陪柯文哲看  銀翼殺手" 
+segment(txt, seg)
 
-fps <- list.files("dcard", full.names = T)
+# With user dict
+seg <- worker(user = "user_dict.txt")
+segment(txt, seg)
+```
 
-titles <- vector("character", length(fps))
-topics <- vector("character", length(fps))
-contents <- vector("character", length(fps))
-for (i in seq_along(fps)) {
-  # Get topic from file name
-  topics[i] <- str_split(basename(fps[i]), "_")[[1]][1]
-  
-  # Read post from file
-  post <- readLines(fps[i])
-  
-  # Get post title (First line of file)
-  titles[i] <- post[1] %>% stringr::str_match("【(\\S+)】") %>% .[1, 2]
+## 用 data frame 建立語料庫
+
+- 我們的目標是將各篇文章進行斷詞，並在斷完詞後，將文章的內容存入另一個**等長**的 character vector 中。同篇文章中，被斷開的詞之間以一個**空白字元**分隔:
+    ```{r segment}
+    library(jiebaR)
     
-  # Segment post
-  seg <- worker(bylines = F, symbol = T)
-  segged <- segment(post, seg)
-  contents[i] <- segged %>% trimws() %>% paste(collapse = " ")
-}
+    # Data: 3 篇文章
+    docs <- c(
+      "弟我大一讀到自己有興趣的科系 但是以後工作機會可能比較少 家人希望我讀理工科 目前的想法是去大二申請雙主修",
+      "第一次看到我表姐使用以為是遮瑕膏，但是她卻跟我說這是一款兼具修復跟遮瑕的眼霜！！ 號稱不用卸妝的保養品QQ",
+      "剛分手的我非常不能接受 心裡一直想 當初答應我的是他 怎麼現在卻因為這件事跟我提分手 但是他沒有把話說死 他說未來的事很難說"
+      )
+    
+    # Initialize jiebaR
+    seg <- worker()
+    
+    docs_segged <- rep("", 3)
+    for (i in seq_along(docs)) {
+      # Segment each element in docs
+      segged <- segment(docs[i], seg)
+      
+      # Collapse the character vector into a string, separated by space
+      docs_segged[i] <- paste0(segged, collapse = " ")
+    }
+    
+    docs_segged
+    ```
+
+- 如此，我們就能使用這個斷完詞的 `docs_segged` 製作 data frame:
+    ```{r corp_df}
+    corp_df <- data.frame(
+      doc_id = seq_along(docs_segged),
+      content = docs_segged,
+      stringsAsFactors = FALSE
+    )
+    
+    knitr::kable(corp_df, align = "c")
+    ```
 
 
-# Combine results in a df
-df <- tibble::tibble(title = titles, topics = topic, content = content)
-df
+## tidytext framework
+
+- `tidytext` 套件是 R 生態圈中比較近期的 text mining 套件，它將 tidyverse 的想法運用到文本資料處理上，換言之，就是使用 data frame 的資料結構去表徵和處理文本資料。
+
+- 使用 `tidytext` 的方法處理文本資料有好有壞。
+    - 好處是使用者能輕易地結合 `dplyr` 與 `ggplot2` 於文本分析中，因而能快速地視覺化文本資料。
+    - 壞處是，在 `tidytext` framework 之下，文章的**內部 (i.e. 詞彙與詞彙之間的) 結構**會消失，因為它對於文本的想法是 [bag-of-words](https://en.wikipedia.org/wiki/Bag-of-words_model)。
+    
+        `tidytext` 所倡導的儲存文本資料的格式是 **one-token-per-document-per-row**，亦即，在一個 data frame 中，每一橫列 (row) 是一篇文章中的一個 token。因此，若有兩篇文章，第一篇被斷成 38 個詞彙，第二篇被斷成 20 個詞彙，則共需要一個 58 列 (row) 的 data frame 來儲存這兩篇文章。
+        
+- 一般而言，tidytext 的架構適合用於**與詞頻有關**的分析，例如，計算文章的 [lexical diversity](https://en.wikipedia.org/wiki/Lexical_diversity) 或是透過情緒詞的詞頻進行情緒分析。
+
+- 透過 `tidytext::unnest_tokens()`，我可以將 `corp_df` 中儲存之 (已斷詞) 文本資料，變成 tidytext format，i.e.，**one-token-per-document-per-row** 的 data frame:
+    ```{r}
+    library(tidytext)
+    library(dplyr)
+    
+    tidy_text_format <- corp_df %>%
+      unnest_tokens(output = word, input = content,
+                    token = "regex", pattern = " ")
+    
+    tidy_text_format
+    ```
+
+
+### 詞頻表
+
+- 可以使用 `dplyr` 的 `group_by()` 與 `summarise()` 計算詞頻表：
+    ```{r}
+    tidy_text_format %>%
+      group_by(word) %>%
+      summarise(n = n()) %>%
+      arrange(desc(n))
+    
+    # Equivalent to ...
+    tidy_text_format %>%
+      count(word) %>%
+      arrange(desc(n))
+    ```
+
+
+- 計算每篇文章的 lexical diversity (type-token ratio)：
+    ```{r}
+    tidy_text_format %>%
+      group_by(doc_id, word) %>%
+      summarise(n = n()) %>%  # Calculate token freq.
+      ungroup() %>%
+      group_by(doc_id) %>%
+      summarise(TTR = n() / sum(n))  # Calculate type/token ratio
+    
+    ```
+
+
+### 視覺化
+
+```{r}
+library(ggplot2)
+tidy_text_format %>%
+  count(word) %>%
+  mutate(word = reorder(word, -n)) %>%  # 依照 n 排序文字
+  top_n(10, n) %>%                      # 取 n 排名前 10 者
+  ggplot() +
+    geom_bar(aes(word, n), stat = "identity")
 ```
 
 
+## quanteda framework
+
+傳統 R 的 text mining 生態圈中，使用的是另一種 (高階) 資料結構儲存文本資料 --- 語料庫 (corpus)。[不同的套件有自己定義 corpus 的方式](https://quanteda.io/articles/pkgdown/comparison.html)，且各自進行文本分析的流程與想法差異頗大。目前最流行、支援最多的兩個套件是 [`quanteda`](https://quanteda.io/index.html) 與 [`tm`](http://tm.r-forge.r-project.org)。其中，`quanteda` 在中文支援以及說明與[教學](https://tutorials.quanteda.io)文件的完整度較高。
+
+下方為 `quanteda` 套件的一些使用範例。欲比較完整地了解 `quanteda`，請閱讀 [quanteda tutorials](https://tutorials.quanteda.io)。
+
+- 使用 `quanteda` 的好處在於它保留了文章的內部結構，例如，可以透過 `quanteda::kwic()` 去檢視特定詞彙或是片語出現的語境。與此同時，`quanteda` 也提供許多 bag-of-words 想法之下的函數。
+- 但 `quanteda` 的缺點在於其內容龐雜，需要一些語料庫語言學的背景知識以及相當的時間摸索才能掌握。
+
+
+```{r}
+library(quanteda)
+
+# 將 data frame 轉換成 Corpus object
+source("helper_func.R")
+quanteda_corpus <- df2qcorp(corp_df, docid_colname = "doc_id", text_colname = "content")
+```
+
+- [Key Word in Context](https://en.wikipedia.org/wiki/Key_Word_in_Context)
+    ```{r}
+    # tokenize the corpus 
+    # (因為已先斷過詞, 使用 "fastestword", 即 空白字元 作為 tokenize 的方式)
+    qcorp_tokens <- tokens(quanteda_corpus, "fastestword")
+    
+    kwic(qcorp_tokens, "我", window = 5, valuetype = "regex") %>%
+      knitr::kable(align = "c")
+    ```
+
+- Lexical Diversity (比較上方 tidytext 詞頻表)
+    ```{r}
+    textstat_lexdiv(qcorp_tokens)
+    ```
+
+
+- 繪製文字雲：
+    ```{r}
+    document_term_matrix <- dfm(quanteda_corpus)
+    textplot_wordcloud(document_term_matrix)
+    ```
 
