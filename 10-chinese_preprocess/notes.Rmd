@@ -27,21 +27,44 @@ klippy::klippy(position = c('top', 'right'),color = 'darkred', lang=c('r', 'txt'
 
 ## 斷詞
 
-```{r}
-library(jiebaR)
-# Without user dict
-seg <- worker()
-txt <- "失業的熊讚陪柯文哲看  銀翼殺手" 
-segment(txt, seg)
+[jieba](https://github.com/fxsjy/jieba) 是一個用於中文斷詞的 (Python) 套件。[`jiebaR`](https://github.com/qinwf/jiebaR) 則是 jieba 的 R 版本。
 
-# With user dict
-seg <- worker(user = "user_dict.txt")
-segment(txt, seg)
-```
+使用 `jiebaR` 進行斷詞只須兩個步驟：
 
-## 用 data frame 建立語料庫
+1. 使用 `worker()` 初始化斷詞設定
+2. 使用 `segment()` 將文字斷詞
 
-- 我們的目標是將各篇文章進行斷詞，並在斷完詞後，將文章的內容存入另一個**等長**的 character vector 中。同篇文章中，被斷開的詞之間以一個**空白字元**分隔:
+- `jiebaR::segment()` 回傳一個 character vector，vector 內的每個元素都是一個被斷出來的詞：
+    ```{r}
+    library(jiebaR)
+    seg <- worker()
+    txt <- "失業的熊讚陪柯文哲看  銀翼殺手" 
+    segment(txt, seg)
+    ```
+
+- `jiebaR` 的斷詞有時會不太精準，尤其是遇到**專有名詞或是特殊詞彙**時，這些詞彙時常會被斷開。若想避免這種情況，可以新增一份自訂辭典 (儲存在一份純文字檔，每個詞佔一行)，例如 [`user_dict.txt`](user_dict.txt) 的內容如下：
+    ```{r echo=FALSE, results='asis'}
+    cat(
+      paste0('\n```\n',
+           paste0(readLines("user_dict.txt"), collapse = '\n'),
+           '\n```\n')
+    )
+    ```
+    
+    如此在 `worker()` 中設定自訂辭典，`jiebaR` 就不會將這些詞彙斷開：
+
+    ```{r}
+    # With user dict
+    seg <- worker(user = "user_dict.txt")
+    segment(txt, seg)
+    ```
+
+
+## 使用 data frame 建立語料庫
+
+我們的目標是建立一個 data frame 儲存文本資料。在這個 data frame 中，每一個 row 代表一篇文章，每個變項 (column) 記錄著該篇文章的某個資訊。根據文本資料的來源，該 data frame 可能會有不同數量的變項，例如，「文章發表日期」、「作者」、「標題」、「主題」等。但最重要的是，此 data frame **至少**需具備**兩個變項** --- 「文章 id」與「(斷完詞的) 文章內文」。下方使用一個簡單的例子 (3 篇文章) 說明如何建立這種 data frame。
+
+- 第一步是將 `docs` 內的各篇文章 (character vector) 進行斷詞，並在斷完詞後，將文章的內容存入另一個**等長**的 character vector 中。同篇文章中，被斷開的詞之間以一個**空白字元**分隔:
     ```{r segment}
     library(jiebaR)
     
@@ -68,14 +91,14 @@ segment(txt, seg)
     ```
 
 - 如此，我們就能使用這個斷完詞的 `docs_segged` 製作 data frame:
-    ```{r corp_df}
-    corp_df <- data.frame(
+    ```{r docs_df}
+    docs_df <- data.frame(
       doc_id = seq_along(docs_segged),
       content = docs_segged,
       stringsAsFactors = FALSE
     )
     
-    knitr::kable(corp_df, align = "c")
+    knitr::kable(docs_df, align = "c")
     ```
 
 
@@ -91,12 +114,12 @@ segment(txt, seg)
         
 - 一般而言，tidytext 的架構適合用於**與詞頻有關**的分析，例如，計算文章的 [lexical diversity](https://en.wikipedia.org/wiki/Lexical_diversity) 或是透過情緒詞的詞頻進行情緒分析。
 
-- 透過 `tidytext::unnest_tokens()`，我可以將 `corp_df` 中儲存之 (已斷詞) 文本資料，變成 tidytext format，i.e.，**one-token-per-document-per-row** 的 data frame:
+- 透過 `tidytext::unnest_tokens()`，我可以將 `docs_df` 中儲存之 (已斷詞) 文本資料，變成 tidytext format，i.e.，**one-token-per-document-per-row** 的 data frame:
     ```{r}
     library(tidytext)
     library(dplyr)
     
-    tidy_text_format <- corp_df %>%
+    tidy_text_format <- docs_df %>%
       unnest_tokens(output = "word", input = "content",
                     token = "regex", pattern = " ")
     
@@ -160,7 +183,7 @@ tidy_text_format %>%
 library(quanteda)
 
 # 將 data frame 轉換成 Corpus object
-quanteda_corpus <- corpus(corp_df, 
+quanteda_corpus <- corpus(docs_df, 
                           docid_field = "doc_id", 
                           text_field = "content")
 ```
