@@ -1,6 +1,6 @@
 library(jiebaR)
-library(stringr)
 
+# Get text file paths
 fps <- list.files("samesex_marriage/txt", full.names = T)
 
 titles <- vector("character", length(fps))
@@ -13,7 +13,7 @@ seg <- worker(user = "samesex_marriage/user_dict.txt")
 
 for (i in seq_along(fps)) {
   # Get topic from file name
-  topics[i] <- str_split(basename(fps[i]), "_")[[1]][1]
+  topics[i] <- strsplit(basename(fps[i]), "_")[[1]][1]
   
   # Read post from file
   post <- readLines(fps[i])

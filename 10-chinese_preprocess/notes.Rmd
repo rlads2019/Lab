@@ -38,7 +38,7 @@ klippy::klippy(position = c('top', 'right'),color = 'darkred', lang=c('r', 'txt'
     ```{r}
     library(jiebaR)
     seg <- worker()
-    txt <- "失業的熊讚陪柯文哲看  銀翼殺手" 
+    txt <- "失業的熊讚陪柯文哲看銀翼殺手" 
     segment(txt, seg)
     ```
 
