@@ -11,7 +11,7 @@
 |   7    |  10/24   | [視覺化：`ggplot2`][s7]                           |  [🔗][note7]      | [⬇️][src7]       | [🔗][hw7]     |
 |   8    |  10/31   | [字串處理：正規表達式、`stringr`][s8]                |   [🔗][note8]    |                | [🔗][hw8]      |
 |   9    |  11/07   |  [期中考](http://bit.ly/rlads1107)                |                   |                 |               |
-|   10    |  11/14   | [中文文本處理：斷詞、詞頻表、語料庫][s10]{:.h}         |                   |                 |               |
+|   10    |  11/14   | [中文文本處理：斷詞、詞頻表、語料庫][s10]{:.h}         |  [🔗][note10]     |  [⬇️][src10]    | [🔗][hw10]    |
 |   11    |  11/21   | [API][s11]{:.h}                                  |                   |                 |               |
 |   12    |  11/28   |           Guest Lecture                          |                   |                 |               |
 |   13    |  12/05   | [Web 101: HTML/CSS, GitHub Pages][s13]{:.h}      |                   |                 |               |
@@ -62,10 +62,10 @@
 [hw8]: https://github.com/rlads2019/hw8
 
 <!-- Block 3: 文本處理 -->
-[s10]: #
-[note10]: #
+[s10]: https://docs.google.com/presentation/d/1YfwAKAJPQRh3_4ejIMHKs93IhmczKU7dSwKbrY51jKk/edit?usp=sharing
+[note10]: ./notes/10.html
 [src10]: #
-[hw10]: #
+[hw10]: https://github.com/rlads2019/hw10
 
 [s11]: #
 [note11]: #
