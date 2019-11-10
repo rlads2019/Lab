@@ -97,7 +97,7 @@ segment(txt, seg)
     library(dplyr)
     
     tidy_text_format <- corp_df %>%
-      unnest_tokens(output = word, input = content,
+      unnest_tokens(output = "word", input = "content",
                     token = "regex", pattern = " ")
     
     tidy_text_format
@@ -159,8 +159,9 @@ tidy_text_format %>%
 library(quanteda)
 
 # 將 data frame 轉換成 Corpus object
-source("helper_func.R")
-quanteda_corpus <- df2qcorp(corp_df, docid_colname = "doc_id", text_colname = "content")
+quanteda_corpus <- corpus(corp_df, 
+                          docid_field = "doc_id", 
+                          text_field = "content")
 ```
 
 - [Key Word in Context](https://en.wikipedia.org/wiki/Key_Word_in_Context)
