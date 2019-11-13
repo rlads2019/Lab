@@ -64,7 +64,7 @@
 <!-- Block 3: 文本處理 -->
 [s10]: https://docs.google.com/presentation/d/1YfwAKAJPQRh3_4ejIMHKs93IhmczKU7dSwKbrY51jKk/edit?usp=sharing
 [note10]: ./notes/10.html
-[src10]: #
+[src10]: ./src/10.zip
 [hw10]: https://github.com/rlads2019/hw10
 
 [s11]: #

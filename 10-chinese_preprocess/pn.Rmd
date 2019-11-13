@@ -1,6 +1,6 @@
 ---
-title: "Data Visualization with ggplot2 (W7)"
-date: '2019-10-24'
+title: "pn: 中文文本資料處理 (W10)"
+date: '2019-11-13'
 output:
     html_document:
         number_sections: no
@@ -31,35 +31,210 @@ window.onload = () => {
 }
 ```
 
-## ggplot: layers of graphics
+## 程式小習慣
+
+## Text Mining Frameworks
+
+<div class="hide" data-tag="Slide">
+1. text mining 在西方世界發展起來 --> 英文文本, 書寫系統 --> 斷詞
+1. flow
+    - 文本資料、Metadata、斷詞
+1. Document data frame
+1. text mining frameworks
+    - tidytext: 
+        - 把一個 document 想像成 Bag-of-words (詞彙之間的次序不重要)
+            - 例如，分析詞頻 --> 計算文件「情緒詞彙」次數，情緒分析
+        - tidyverse --> tidy data frame --> 配合 `dplyr`, `ggplot2` 
+    - 傳統 text mining 的作法 (早於 tidytext 許多)
+        - 許多文本分析的 Model 實作，仰賴傳統 text mining 套件的資料結構
+        - 保留文本當中，詞彙之間的順序和關係
+            - 文本分析時，需要這些 context 的資訊 (想看一些特定的詞彙，會出現在哪一些**語境**當中)
+</div>
+
+## jiebaR, construct document data frame
+
+<div class="hide" data-tag="slide, demo, slide, demo">
+1. jieba: python 中文斷詞套件 --> R 實作
+2. 使用簡單，兩三行程式碼
+
+**demo**
 
 1. 
-    ```{r}
-    ggplot(data = mpg)
-    ```
-2. 
-    ```{r}
-    ggplot(data = mpg) +
-      geom_point(mapping = aes(x = displ, y = hwy))
-    ```
-3.
-    ```{r}
-    ggplot(data = mpg) +
-      geom_point(mapping = aes(x = displ, y = hwy)) +
-      geom_smooth(mapping = aes(x = displ, y = hwy))
+    ```r
+    library(jiebaR)
+    seg <- worker()
+    txt <- "失業的熊讚陪柯文哲看銀翼殺手"
+    segment(txt, seg)
     ```
 
-4.
-    ```{r}
-    ggplot(data = mpg) +
-      geom_smooth(mapping = aes(x = displ, y = hwy)) +
-      geom_point(mapping = aes(x = displ, y = hwy))
-      
+1. `user_dict.txt`
+
+    ```txt
+    熊讚
+    柯文哲
+    銀翼殺手
     ```
 
-## Template
+1. 
 
-![](ggplot_labels.png){.half}
+    ```r
+    library(jiebaR)
+    seg <- worker(user = 'user_dict.txt')
+    txt <- "失業的熊讚陪柯文哲看銀翼殺手"
+    segment(txt, seg)
+    ```
+</div>
 
-## Mappings
+- **2 min**
 
+<div class="hide" data-tag="slide, demo">
+**slide**: 整理成 data frame
+
+1. 錯誤示範 (直接把 `docs` 傳入 segment)
+
+    ```r
+    docs <- c(
+      "蝴蝶和蜜蜂們帶著花朵的蜜糖回來...",
+      "朋友買了一件衣料，綠色的底子帶白色方格...",
+      "每天，天剛亮時，我母親便把我喊醒..."
+      )
+    
+    seg <- worker()
+    segment(docs, seg)
+    ```
+
+1. use for loop
+
+    ```r
+    for (i in seq_along(docs)) {
+        segged <- segment(docs[i], seg)
+        print(segged)
+        cat("\n")
+    }
+    ```
+    
+    ```r
+    for (i in seq_along(docs)) {
+        segged <- segment(docs[i], seg)
+        segged <- paste0(segged, collapse = " ")
+        print(segged)
+        cat("\n")
+    }
+    ```
+    
+    ```r
+    docs_segged <- rep("", length(docs))
+    for (i in seq_along(docs)) {
+        segged <- segment(docs[i], seg)
+        docs_segged[i] <- paste0(segged, collapse = " ")
+    }
+    docs_segged
+    ```
+
+1. Construct data frame
+
+    ```r
+    tibble::tibble(
+        doc_id = seq_along(docs_segged),
+        content = docs_segged,
+    )
+    ```
+</div>
+
+## 語料簡介
+
+<div class="hide" data-tag="import-data, slide">
+
+```r
+docs_df <- readRDS("samesex_marriage.rds")
+```
+
+1. 實驗室學長 --> 觀察同婚議題的支持方與反對方的「語言使用」
+    - 下一代幸福聯盟 vs. 台灣伴侶權益推動聯盟
+1. 變項說明
+</div>
+
+
+## Tidytext framework
+
+<div class="hide" data-tag="slide, demo">
+**slide**
+1. `unnest_tokens()`: Document data frame 轉換成 tidytext 所要求的資料結構
+    - data frame 格式 one-token-per-document-per-row
+        - 一個 token (斷出來的一個詞彙 or 語言單位)，
+        - doc df 有兩篇文章：第一篇斷出 38 個詞彙, 第二篇斷出 20 個詞彙
+1. 轉換成 tidytext 之後 --> 漂亮 df --> dplyr, ggplot2 處理與視覺化
+1. 詞頻表
+
+
+**demo**
+
+1. Convert to tidytext format
+
+    ```r
+    library(tidytext)
+    library(dplyr)
+    library(ggplot2)
+    
+    tidy_text_format <- docs_df %>%
+        unnest_tokens(output = "word", input = "content",
+                      token = "regex", pattern = " ")
+    
+    tidy_text_format %>% select(-title)
+    ```
+
+1. 比較「相同詞彙」分別在這兩個組織裡面出現的次數
+
+    ```r
+    word_freq <- tidy_text_format %>% 
+      group_by(topic, word) %>%
+      summarise(n = n()) %>%
+      arrange(desc(word), topic)
+    
+    # query
+    word_freq %>% filter(word == "同志")
+    word_freq %>% filter(word == "同性戀")
+    word_freq %>% filter(word %in% c("同志", "同性戀"))
+    
+    # Regex
+    library(stringr)
+    word_freq %>% filter(str_detect(word, pattern = "同志"))
+    ```
+
+1. 繪圖
+    
+    ```r
+    word_freq %>% 
+        filter(word %in% c("同志", "同性戀")) %>%
+        ggplot() +
+            geom_bar(aes(topic, n, fill = word), 
+                     stat = "identity", position = "dodge")
+    ```
+</div>
+
+**3 min**
+
+## quanteda framework
+
+<div class="hide" data-tag="slide, demo">
+**slide**
+
+1. `corpus()`, `tokens()`, `kwic()`
+
+**demo**
+
+```r
+# 轉換成 quanteda corpus 格式
+qcorp <- corpus(docs_df, docid_field = "id", text_field = "content")
+
+# Key word in context
+tokens_obj <- tokens(qcorp, "fastestword")
+kwic(tokens_obj, valuetype = "regex", pattern = "同(性戀|志)")
+
+# Add View()
+kwic(tokens_obj, valuetype = "regex", pattern = "同(性戀|志)") %>% View()
+
+# Add window=10
+kwic(tokens_obj, valuetype = "regex", pattern = "同(性戀|志)", window = 10) %>% View()
+```
+</div>

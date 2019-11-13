@@ -92,10 +92,9 @@ klippy::klippy(position = c('top', 'right'),color = 'darkred', lang=c('r', 'txt'
 
 - 如此，我們就能使用這個斷完詞的 `docs_segged` 製作 data frame:
     ```{r docs_df}
-    docs_df <- data.frame(
+    docs_df <- tibble::tibble(
       doc_id = seq_along(docs_segged),
-      content = docs_segged,
-      stringsAsFactors = FALSE
+      content = docs_segged
     )
     
     knitr::kable(docs_df, align = "c")
@@ -114,14 +113,14 @@ klippy::klippy(position = c('top', 'right'),color = 'darkred', lang=c('r', 'txt'
         
 - 一般而言，tidytext 的架構適合用於**與詞頻有關**的分析，例如，計算文章的 [lexical diversity](https://en.wikipedia.org/wiki/Lexical_diversity) 或是透過情緒詞的詞頻進行情緒分析。
 
-- 透過 `tidytext::unnest_tokens()`，我可以將 `docs_df` 中儲存之 (已斷詞) 文本資料，變成 tidytext format，i.e.，**one-token-per-document-per-row** 的 data frame:
+- 透過 `tidytext::unnest_tokens()`，可以將 `docs_df` 中儲存之 (已斷詞) 文本資料，變成 tidytext format，i.e.，**one-token-per-document-per-row** 的 data frame:
     ```{r}
     library(tidytext)
     library(dplyr)
     
     tidy_text_format <- docs_df %>%
       unnest_tokens(output = "word", input = "content",
-                    token = "regex", pattern = " ")
+                    token = "regex", pattern = " ")  # 以空白字元作為 token 分隔依據
     
     tidy_text_format
     ```
