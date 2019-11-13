@@ -1,6 +1,6 @@
 ---
 title: "pn: 中文文本資料處理 (W10)"
-date: '2019-11-13'
+date: '2019-11-14'
 output:
     html_document:
         number_sections: no
@@ -39,6 +39,7 @@ window.onload = () => {
 1. text mining 在西方世界發展起來 --> 英文文本, 書寫系統 --> 斷詞
 1. flow
     - 文本資料、Metadata、斷詞
+    - Document data frame: 好處 --> 轉換成 R 其它 text mining 套件使用的格式
 1. Document data frame
 1. text mining frameworks
     - tidytext: 
@@ -53,7 +54,7 @@ window.onload = () => {
 
 ## jiebaR, construct document data frame
 
-<div class="hide" data-tag="slide, demo, slide, demo">
+<div class="hide" data-tag="slide, demo">
 1. jieba: python 中文斷詞套件 --> R 實作
 2. 使用簡單，兩三行程式碼
 
@@ -141,16 +142,17 @@ window.onload = () => {
     ```
 </div>
 
+- **2 min**
+
 ## 語料簡介
 
-<div class="hide" data-tag="import-data, slide">
+<div class="hide" data-tag="slide">
 
-```r
-docs_df <- readRDS("samesex_marriage.rds")
-```
-
-1. 實驗室學長 --> 觀察同婚議題的支持方與反對方的「語言使用」
-    - 下一代幸福聯盟 vs. 台灣伴侶權益推動聯盟
+1. 實驗室學長爬下來的
+    - 目的：觀察同婚支持方與反對方的「語言使用」
+    - 語料來源：下一代幸福聯盟 vs. 台灣伴侶權益推動聯盟
+        - 這兩個組織的官方網站，把網站上的文章爬下來 -->   
+        我把它斷好詞，整理成 document data frame
 1. 變項說明
 </div>
 
@@ -159,6 +161,7 @@ docs_df <- readRDS("samesex_marriage.rds")
 
 <div class="hide" data-tag="slide, demo">
 **slide**
+
 1. `unnest_tokens()`: Document data frame 轉換成 tidytext 所要求的資料結構
     - data frame 格式 one-token-per-document-per-row
         - 一個 token (斷出來的一個詞彙 or 語言單位)，
@@ -175,6 +178,9 @@ docs_df <- readRDS("samesex_marriage.rds")
     library(tidytext)
     library(dplyr)
     library(ggplot2)
+    
+    # View docs_df
+    glimpse(docs_df)
     
     tidy_text_format <- docs_df %>%
         unnest_tokens(output = "word", input = "content",
@@ -193,12 +199,11 @@ docs_df <- readRDS("samesex_marriage.rds")
     
     # query
     word_freq %>% filter(word == "同志")
-    word_freq %>% filter(word == "同性戀")
     word_freq %>% filter(word %in% c("同志", "同性戀"))
     
     # Regex
     library(stringr)
-    word_freq %>% filter(str_detect(word, pattern = "同志"))
+    word_freq %>% filter(str_detect(word, pattern = "同(志|性戀)"))
     ```
 
 1. 繪圖
@@ -208,7 +213,15 @@ docs_df <- readRDS("samesex_marriage.rds")
         filter(word %in% c("同志", "同性戀")) %>%
         ggplot() +
             geom_bar(aes(topic, n, fill = word), 
-                     stat = "identity", position = "dodge")
+                     stat = "identity")
+    
+    # Position adjustment               
+    word_freq %>% 
+        filter(word %in% c("同志", "同性戀")) %>%
+        ggplot() +
+            geom_bar(aes(topic, n, fill = word), 
+                     stat = "identity", position = "dodge")            
+                     
     ```
 </div>
 
