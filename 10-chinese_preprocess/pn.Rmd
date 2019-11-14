@@ -33,6 +33,30 @@ window.onload = () => {
 
 ## 程式小習慣
 
+<div class="hide" data-tag="slide">
+1. Changing stuff and seeing what happens
+1. (到目前的) 作業都用 Rmd --> 忽略掉使用 Rscript 的好處
+1. 建議寫作業的時候可以開一個 Rscript --> 專心把一題作業寫出來 --> 寫完之後再把程式碼複製到 Rmd
+    - Rscript 好處：在裡面「做實驗」  
+    (e.g., 作業：請勿更動程式碼 --> 盡情的修改程式碼)
+1. 另一件事情是關於「寫程式的流程」
+    1. (寫作業或考試) Rmd 輸出和 RStudio 裡面看到的結果是不一樣的
+    1. (Why) 很多時候，這是因為「先前已經執行過許多程式碼」，  
+    所以 R 會記錄下這些程式碼執行的結果，  
+    這些預先存在的結果，會**影響**你之後在 console 執行程式碼的結果  
+    (最常見的例子是，你在 Console 裡面載入某個 package)
+    1. (How to 避免) 為了避免這種情況，  
+    在寫程式的過程中，要養成「時常將 Environment 清乾淨的習慣」  
+    這樣 (隨時在乾淨的環境下工作) 才比較容易在寫程式的時候找出 bug 在哪  
+    (例如，在 Rscript 裡寫完一題作業的時候，就可以先把 Environment 清掉，這樣在寫下一題的時候，這題的執行結果才不會影響到下一題)
+    1. 快捷鍵
+    1. 流程 (循環)
+
+1. (下載原始碼) 今天實習課的時候，大家就可以試看看這個流程
+    - 實習課原始碼沒有 Rmd 檔，但有一份 Rscript
+</div>
+
+
 ## Text Mining Frameworks
 
 <div class="hide" data-tag="Slide">
@@ -230,6 +254,8 @@ window.onload = () => {
 ## quanteda framework
 
 <div class="hide" data-tag="slide, demo">
+- start from bar chart
+
 **slide**
 
 1. `corpus()`, `tokens()`, `kwic()`

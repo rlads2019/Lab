@@ -28,7 +28,7 @@ library(ggplot2)
 # 轉換成 tidytext 格式
 tidy_text_format <- docs_df %>%
   unnest_tokens(output = "word", input = "content", 
-                token = "regex", pattern = " ")
+                token = "regex", pattern = " ")  # 以空白字元作為 toknenize 依據
 
 # 詞頻表 (按 topic 分類)
 word_freq <- tidy_text_format %>% 
@@ -58,5 +58,5 @@ library(quanteda)
 qcorp <- corpus(docs_df, docid_field = "id", text_field = "content")
 
 # Key word in context
-tokens_obj <- tokens(qcorp, "fastestword")
+tokens_obj <- tokens(qcorp, "fastestword")  # 以空白字元作為 toknenize 依據
 kwic(tokens_obj, pattern = "同(性戀|志)", valuetype = "regex", window = 10)

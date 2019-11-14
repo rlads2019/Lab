@@ -1793,6 +1793,35 @@ window.onload = () => {
 </script>
 <div class="section level2">
 <h2>程式小習慣</h2>
+<div class="hide" data-tag="slide">
+<ol style="list-style-type: decimal">
+<li>Changing stuff and seeing what happens</li>
+<li>(到目前的) 作業都用 Rmd –&gt; 忽略掉使用 Rscript 的好處</li>
+<li>建議寫作業的時候可以開一個 Rscript –&gt; 專心把一題作業寫出來 –&gt; 寫完之後再把程式碼複製到 Rmd
+<ul>
+<li>Rscript 好處：在裡面「做實驗」<br />
+(e.g., 作業：請勿更動程式碼 –&gt; 盡情的修改程式碼)</li>
+</ul></li>
+<li>另一件事情是關於「寫程式的流程」
+<ol style="list-style-type: decimal">
+<li>(寫作業或考試) Rmd 輸出和 RStudio 裡面看到的結果是不一樣的</li>
+<li>(Why) 很多時候，這是因為「先前已經執行過許多程式碼」，<br />
+所以 R 會記錄下這些程式碼執行的結果，<br />
+這些預先存在的結果，會<strong>影響</strong>你之後在 console 執行程式碼的結果<br />
+(最常見的例子是，你在 Console 裡面載入某個 package)</li>
+<li>(How to 避免) 為了避免這種情況，<br />
+在寫程式的過程中，要養成「時常將 Environment 清乾淨的習慣」<br />
+這樣 (隨時在乾淨的環境下工作) 才比較容易在寫程式的時候找出 bug 在哪<br />
+(例如，在 Rscript 裡寫完一題作業的時候，就可以先把 Environment 清掉，這樣在寫下一題的時候，這題的執行結果才不會影響到下一題)</li>
+<li>快捷鍵</li>
+<li>流程 (循環)</li>
+</ol></li>
+<li>(下載原始碼) 今天實習課的時候，大家就可以試看看這個流程
+<ul>
+<li>實習課原始碼沒有 Rmd 檔，但有一份 Rscript</li>
+</ul></li>
+</ol>
+</div>
 </div>
 <div id="text-mining-frameworks" class="section level2">
 <h2>Text Mining Frameworks</h2>
@@ -1975,6 +2004,9 @@ window.onload = () => {
 <div id="quanteda-framework" class="section level2">
 <h2>quanteda framework</h2>
 <div class="hide" data-tag="slide, demo">
+<ul>
+<li>start from bar chart</li>
+</ul>
 <p><strong>slide</strong></p>
 <ol style="list-style-type: decimal">
 <li><code>corpus()</code>, <code>tokens()</code>, <code>kwic()</code></li>
