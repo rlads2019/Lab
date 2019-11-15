@@ -1,0 +1,222 @@
+.rmdcaution, .rmdimportant, .rmdnote, .rmdtip, .rmdwarning {
+  padding: 1em 1em 1em 4em;
+  margin-bottom: 10px;
+  background: #f5f5f5 5px center/3em no-repeat;
+}
+
+p.caption {
+  color: #777;
+  margin-top: 10px;
+}
+p code {
+  white-space: inherit;
+}
+pre {
+  word-break: normal;
+  word-wrap: normal;
+}
+pre code {
+  white-space: inherit;
+}
+p.flushright {
+  text-align: right;
+}
+blockquote > p:last-child {
+  text-align: right;
+}
+blockquote > p:first-child {
+  text-align: inherit;
+}
+.header-section-number {
+  padding-right: .2em;
+  font-weight: 500;
+}
+.level1 .header-section-number {
+  display: inline-block;
+  border-bottom: 3px solid;
+}
+.level1 h1 {
+  border-bottom: 1px solid;
+}
+h1, h2, h3, h4, h5, h6 {
+  padding-top: 0.8em;
+  font-weight: bold;
+}
+h1.title {
+  font-size: 45px;
+  font-weight: 700;
+}
+.smallcaps {
+  font-variant: small-caps;
+}
+.book .book-body .page-wrapper .page-inner section.normal strong {
+  font-weight: 600;
+}
+
+li, p {
+  line-height: 1.6;
+  font-size: 16px;
+  padding-top: 0.5em;
+}
+
+li {
+    padding-top: 0.25em;
+}
+
+h4.date, h4.author {
+  padding-top: 0.0em;
+  font-weight: normal;
+  font-size: 16px;
+}
+
+img.half {
+  display: block;
+  width: 65%;
+  margin: 0 auto;
+  padding: 0 auto;
+}
+img.eight {
+  display: block;
+  width: 80%;
+  margin: 0 auto;
+  padding: 0 auto;
+}
+.caption {
+  text-align: center;
+}
+.hide {
+  display: none !important;
+}
+.note::before {
+  display: block;
+  content: attr(data-tag);
+  color: red;
+  font-weight: bold;
+}
+.note {
+  display: block;
+  margin-bottom: 10px;
+  padding-left: 7px;
+  border-radius: 5px;
+  border: 1.3px solid black;
+  font-size: 1.15em;
+}
+
+.sourceCode {
+  overflow: auto;
+}
+div.sourceCode + pre {
+  max-height: 300px;
+  overflow-y: auto;
+  font-size: 0.77em;
+}
+
+.footnotes {
+  margin-top: 60px;
+}
+.footnotes > hr:nth-child(1) {
+  display: none;
+}
+.footnotes::before {
+  content: "Footnotes";
+  display: block;
+  font-size: 1.7em;
+  font-weight: bold;
+  text-align: center;
+  font-family: "Alegreya",Georgia,serif;
+}
+.footnotes > ol > li:nth-child(n + 2) {
+  margin-top: 1.7em;
+}
+
+
+
+@media print {
+  html, body {
+    width: 210mm !important;
+    height: 297mm !important;
+  }
+  p, li, span, a {
+    font-size: 15px;
+  }
+  code * {
+    font-size: 13px !important;
+  }
+  p > code, li > code,
+  strong > code{
+    color: inherit !important;
+    background-color: rgba(0, 0, 0, 0.07) !important;
+  }
+  pre.sourceCode.r {
+      background: rgba(0, 0, 0, 0.02) !important;
+  }
+  #TOC, .sourceCode + pre {
+    display: none !important;
+  }
+  h1 {
+    font-size: 1.6em !important;
+  }
+  h2 {
+    font-size: 1.45em !important;
+  }
+  h3 {
+    font-size: 1.25em !important;
+  }
+  h1.title {
+    margin-top: 0;
+    padding-top: 0;
+    padding-bottom: 5px;
+    font-size: 1.4em !important;
+    text-align: center !important;
+  }
+  h4.date {
+    display: inline !important;
+    position: fixed !important;
+    padding: 0;
+    margin: 0;
+    top: 0 !important;
+    right: 0 !important;
+    font-size: 0.9em !important;
+    color: grey !important;
+    z-index: 0 !important;
+  }
+  a[href]:after {
+    content: "" !important;
+  }
+  a[href] {
+      text-decoration: underline !important;
+      color: blue !important;
+  }
+}
+
+
+.str_view {
+  max-height: 450px;
+  overflow-x: auto;
+}
+
+.txt {
+  overflow-y: auto;
+}
+
+.regex-view {
+  margin: 1em 0;
+  max-height: 400px;
+  overflow-y: auto;
+}
+.regex-input {
+  display: block;
+  border: 0.5px solid rgba(175, 175, 175, 0.726);
+}
+
+.match, .matched-regex {
+  background: rgba(0, 255, 0, 0.37) !important;
+  border: 0.5px solid rgba(0, 255, 0, 0.87) !important;
+}
+
+#show-regex {
+  position: fixed;
+  bottom: 5px;
+  right: 5px;
+  font-size: 6px;
+}
