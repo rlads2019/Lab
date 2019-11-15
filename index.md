@@ -12,10 +12,10 @@
 |   8    |  10/31   | [字串處理：正規表達式、`stringr`][s8]                |   [🔗][note8]    |                | [🔗][hw8]      |
 |   9    |  11/07   |  [期中考](http://bit.ly/rlads1107)                |                   |                 |               |
 |   10    |  11/14   | [中文文本處理：斷詞、詞頻表、語料庫][s10]             | [🔗][note10]     | [⬇️][src10]      | [🔗][hw10]     |
-|   11    |  11/21   | [API][s11]{:.h}                                  |                   |                 |               |
+|   11    |  11/21   | [從網路擷取資料 (I)：Web API、JSON、`httr`][s11]{:.h} | [🔗][note11]{:.h} | [⬇️][src11]{:.h} | [🔗][hw11]{:.h} |
 |   12    |  11/28   |           Guest Lecture                          |                   |                 |               |
-|   13    |  12/05   | [Web 101: HTML/CSS, GitHub Pages][s13]{:.h}      |                   |                 |               |
-|   14    |  12/12   | [網頁剖析：`rvest`][s14]{:.h}                      |                   |                 |               |
+|   13    |  12/05   | [Web 101：HTML、CSS selector][s13]{:.h}          |                   |                 |               |
+|   14    |  12/12   | [從網路擷取資料 (II)：`rvest` 與網頁剖析][s14]{:.h}  |                  |                 |               |
 |   15    |  12/19   |                                                  |                   |                 |               |
 |   16    |  12/26   |                                                  |                   |                 |               |
 |   17    |  01/02   |                                                  |                   |                 |               |
@@ -67,10 +67,10 @@
 [src10]: ./src/10.zip
 [hw10]: https://github.com/rlads2019/hw10
 
-[s11]: #
-[note11]: #
-[src11]: #
-[hw11]: #
+[s11]: https://docs.google.com/presentation/d/1a2moEimrxinxFozAxtIexBvPZ7zFysLzjOV0H8eKWjs/edit?usp=sharing
+[note11]: ./notes/11.html
+[src11]: ./src/11.zip
+[hw11]: https://github.com/rlads2019/hw11
 
 [s13]: #
 [note13]: #

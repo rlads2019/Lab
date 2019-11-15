@@ -4,7 +4,6 @@ library(jiebaR)
 txt <- "失業的熊讚陪柯文哲看銀翼殺手"
 
 
-
 ######## 建立 document data frame ########
 docs <- c(
   "蝴蝶和蜜蜂們帶著花朵的蜜糖回來了，羊隊和牛群告別了田野回家了，火紅的太陽也滾著火輪子回家了，當街燈亮起來向村莊道過晚安，夏天的夜就輕輕地來了。",
@@ -13,10 +12,8 @@ docs <- c(
   )
 
 
-
 ######## 載入範例資料 ########
 docs_df <- readRDS("samesex_marriage.rds")
-
 
 
 ######## Tidytext framework ########
@@ -48,7 +45,6 @@ word_freq %>%
   ggplot() +
   geom_bar(aes(topic, n, fill = word),
            stat = "identity", position = "dodge")
-
 
 
 ######## quanteda framework ########
