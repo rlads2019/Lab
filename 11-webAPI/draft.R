@@ -31,9 +31,9 @@ exchange <- GET("https://api.exchangeratesapi.io",
 exchange[["status_code"]]
 exchange[["url"]]
 
-# https://api.exchangeratesapi.io/latest?base=USD?start_at=2018-01-01&end_at=2018-09-01
+# https://api.exchangeratesapi.io/history?base=USD?start_at=2018-01-01&end_at=2018-09-01
 exchange <- GET("https://api.exchangeratesapi.io",
-           path = "latest",
+           path = "history",
            query = list(base = "USD",
                         start_at = "2018-01-01",
                         end_at = "2018-09-01"))
