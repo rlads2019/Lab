@@ -1,6 +1,6 @@
 ---
-title: "pn: 中文文本資料處理 (W10)"
-date: '2019-11-14'
+title: "pn: Web API (W11)"
+date: '2019-11-21'
 output:
     html_document:
         number_sections: no
@@ -31,249 +31,134 @@ window.onload = () => {
 }
 ```
 
-## 程式小習慣
+## Openning
+
+<div class="hide" data-tag="Openning">
+1. Text mining --> 從網路取得 (文本) 資料
+1. 2 種方式
+    - 1st: 整理好的 (結構化) 資料，讓你透過程式化的方式直接取得資料 (本週)
+    - 2nd: 網路爬蟲，(在無從取得結構化資料時)，透過剖析網頁裡 HTML 的資訊，抓出想要的資料 (最後一堂實習課)
+1. 在開始之前，介紹一個網路相關的知識 -- HTTP
+</div>
+
+
+## HTTP
 
 <div class="hide" data-tag="slide">
-1. Changing stuff and seeing what happens
-1. (到目前的) 作業都用 Rmd --> 忽略掉使用 Rscript 的好處
-1. 建議寫作業的時候可以開一個 Rscript --> 專心把一題作業寫出來 --> 寫完之後再把程式碼複製到 Rmd
-    - Rscript 好處：在裡面「做實驗」  
-    (e.g., 作業：請勿更動程式碼 --> 盡情的修改程式碼)
-1. 另一件事情是關於「寫程式的流程」
-    1. (寫作業或考試) Rmd 輸出和 RStudio 裡面看到的結果是不一樣的
-    1. (Why) 很多時候，這是因為「先前已經執行過許多程式碼」，  
-    所以 R 會記錄下這些程式碼執行的結果，  
-    這些預先存在的結果，會**影響**你之後在 console 執行程式碼的結果  
-    (最常見的例子是，你在 Console 裡面載入某個 package)
-    1. (How to 避免) 為了避免這種情況，  
-    在寫程式的過程中，要養成「時常將 Environment 清乾淨的習慣」  
-    這樣 (隨時在乾淨的環境下工作) 才比較容易在寫程式的時候找出 bug 在哪  
-    (例如，在 Rscript 裡寫完一題作業的時候，就可以先把 Environment 清掉，這樣在寫下一題的時候，這題的執行結果才不會影響到下一題)
-    1. 快捷鍵
-    1. 流程 (循環)
+1. HTTP 的全名是 Hypertext transfer protocal (不要被這炫炮名字嚇到)
+1. HTTP 是網路上，電腦與電腦 (伺服器) 之間進行溝通時，所遵循的一套規則
+    - 當每一台電腦都 follow 這個規則的時候，它們才能順利的溝通
+1. (flow chart)
+    1. 在瀏覽器輸入 URL
+    1. 瀏覽器就會幫你**向位於這 URL 的伺服器**送出一個 HTTP request  
+    (e.g. `dcard.tw` --> 向 Dcard 的伺服器送出 HTTP request)
+    1. Dcard 的伺服器接收到這個 request 後，
+        1. 就會去「閱讀」這個 request 的內容 (了解這個 request 要幹麻)
+        1. 了解之後，它就會知道你想要什麼東西，然後把這些東西放在 HTTP response 裡面，再傳回你的電腦
+    1. 電腦裡面的瀏覽器在接收到這個 HTTP response 之後
+        - 就會把**儲存在裡面的資訊** (e.g. HTML)，轉換成你在螢幕上所看到的漂亮的網頁
+        - (JSON) 有時候，儲存在 HTTP response 裡面的不是 HTML，而是其它純文字的格式 (例如，JSON)
+            - 這時你就會看到螢幕上，是「原始純文字的樣子」，而非「經過轉換的」網頁的樣子
 
-1. (下載原始碼) 今天實習課的時候，大家就可以試看看這個流程
-    - 實習課原始碼沒有 Rmd 檔，但有一份 Rscript
+1. (HTML vs. JSON)
+    - HTML 與 JSON 是使用網路時，常會遇到的兩種純文字格式
+    - HTML: 
+        - 漂亮的網頁用 HTML 寫成
+        - 換言之，HTML 其實是給「人」看的 -->  
+        HTML 中的許多元素是為了讓「網頁」更漂亮、互動性更強  
+        因此，結構複雜、檔案較大
+    - JSON: 目的是為了提供**結構化的資訊**，方便程式去處理
+        - 所以當伺服器所回傳的是 JSON 格式，代表它希望的是**使用者透過程式與自己互動**
+        - 因此他提供的不是一個漂亮的網頁界面，而是一個 **Web API**，讓使用者可以透過「程式的方式」去取得他所想要的資訊
 </div>
 
 
-## Text Mining Frameworks
+## URL Structure
 
-<div class="hide" data-tag="Slide">
-1. text mining 在西方世界發展起來 --> 英文文本, 書寫系統 --> 斷詞
-1. flow
-    - 文本資料、Metadata、斷詞
-    - Document data frame: 好處 --> 轉換成 R 其它 text mining 套件使用的格式
-1. Document data frame
-1. text mining frameworks
-    - tidytext: 
-        - 把一個 document 想像成 Bag-of-words (詞彙之間的次序不重要)
-            - 例如，分析詞頻 --> 計算文件「情緒詞彙」次數，情緒分析
-        - tidyverse --> tidy data frame --> 配合 `dplyr`, `ggplot2` 
-    - 傳統 text mining 的作法 (早於 tidytext 許多)
-        - 許多文本分析的 Model 實作，仰賴傳統 text mining 套件的資料結構
-        - 保留文本當中，詞彙之間的順序和關係
-            - 文本分析時，需要這些 context 的資訊 (想看一些特定的詞彙，會出現在哪一些**語境**當中)
+<div class="hide" data-tag="Demo with Browser">
+**Foreign Exchange rates API**
+
+1. `/latest`
+1. `/latest?base=USD`
+1. `/latest?base=USD&symbols=CAD,JPY`
+
+- **4 min**: Your Turn
+
+`/history?start_at=2017-01-03&end_at=2017-01-03&base=USD&symbols=JPY`
+
+**URL 結構**
+
+1. 分 3 部份
+    1. Base URL
+    1. Path
+    1. Query string
 </div>
 
-## jiebaR, construct document data frame
+
+## httr
 
 <div class="hide" data-tag="slide, demo">
-1. jieba: python 中文斷詞套件 --> R 實作
-2. 使用簡單，兩三行程式碼
+**slide:** 用 R 跟伺服器互動
 
 **demo**
 
 1. 
-    ```r
-    library(jiebaR)
-    seg <- worker()
-    txt <- "失業的熊讚陪柯文哲看銀翼殺手"
-    segment(txt, seg)
-    ```
-
-1. `user_dict.txt`
-
-    ```txt
-    熊讚
-    柯文哲
-    銀翼殺手
-    ```
-
-1. 
 
     ```r
-    library(jiebaR)
-    seg <- worker(user = 'user_dict.txt')
-    txt <- "失業的熊讚陪柯文哲看銀翼殺手"
-    segment(txt, seg)
-    ```
-</div>
-
-- **2 min**
-
-<div class="hide" data-tag="slide, demo">
-**slide**: 整理成 data frame
-
-1. 錯誤示範 (直接把 `docs` 傳入 segment)
-
-    ```r
-    docs <- c(
-      "蝴蝶和蜜蜂們帶著花朵的蜜糖回來...",
-      "朋友買了一件衣料，綠色的底子帶白色方格...",
-      "每天，天剛亮時，我母親便把我喊醒..."
-      )
-    
-    seg <- worker()
-    segment(docs, seg)
-    ```
-
-1. use for loop
-
-    ```r
-    for (i in seq_along(docs)) {
-        segged <- segment(docs[i], seg)
-        print(segged)
-        cat("\n")
-    }
-    ```
-    
-    ```r
-    for (i in seq_along(docs)) {
-        segged <- segment(docs[i], seg)
-        segged <- paste0(segged, collapse = " ")
-        print(segged)
-        cat("\n")
-    }
-    ```
-    
-    ```r
-    docs_segged <- rep("", length(docs))
-    for (i in seq_along(docs)) {
-        segged <- segment(docs[i], seg)
-        docs_segged[i] <- paste0(segged, collapse = " ")
-    }
-    docs_segged
-    ```
-
-1. Construct data frame
-
-    ```r
-    tibble::tibble(
-        doc_id = seq_along(docs_segged),
-        content = docs_segged,
-    )
-    ```
-</div>
-
-- **2 min**
-
-## 語料簡介
-
-<div class="hide" data-tag="slide">
-
-1. 實驗室學長爬下來的
-    - 目的：觀察同婚支持方與反對方的「語言使用」
-    - 語料來源：下一代幸福聯盟 vs. 台灣伴侶權益推動聯盟
-        - 這兩個組織的官方網站，把網站上的文章爬下來 -->   
-        我把它斷好詞，整理成 document data frame
-1. 變項說明
-</div>
-
-
-## Tidytext framework
-
-<div class="hide" data-tag="slide, demo">
-**slide**
-
-1. `unnest_tokens()`: Document data frame 轉換成 tidytext 所要求的資料結構
-    - data frame 格式 one-token-per-document-per-row
-        - 一個 token (斷出來的一個詞彙 or 語言單位)，
-        - doc df 有兩篇文章：第一篇斷出 38 個詞彙, 第二篇斷出 20 個詞彙
-1. 轉換成 tidytext 之後 --> 漂亮 df --> dplyr, ggplot2 處理與視覺化
-1. 詞頻表
-
-
-**demo**
-
-1. Convert to tidytext format
-
-    ```r
-    library(tidytext)
+    library(httr)
     library(dplyr)
-    library(ggplot2)
     
-    # View docs_df
-    glimpse(docs_df)
+    GET('https://api.exchangeratesapi.io/history?start_at=2017-01-03&end_at=2017-01-03')
     
-    tidy_text_format <- docs_df %>%
-        unnest_tokens(output = "word", input = "content",
-                      token = "regex", pattern = " ")
+    GET('https://api.exchangeratesapi.io/',
+        path = 'history',
+        query = list(start_at = "2017-01-03",
+                     end_at = "2017-01-03")
+        )
     
-    tidy_text_format %>% select(-title)
+    req <- GET('https://api.exchangeratesapi.io/',
+        path = 'history',
+        query = list(start_at = "2017-01-03",
+                     end_at = "2017-01-03")
+        )
     ```
 
-1. 比較「相同詞彙」分別在這兩個組織裡面出現的次數
+1. URL
 
     ```r
-    word_freq <- tidy_text_format %>% 
-      group_by(topic, word) %>%
-      summarise(n = n()) %>%
-      arrange(desc(word), topic)
-    
-    # query
-    word_freq %>% filter(word == "同志")
-    word_freq %>% filter(word %in% c("同志", "同性戀"))
-    
-    # Regex
-    library(stringr)
-    word_freq %>% filter(str_detect(word, pattern = "同(志|性戀)"))
+    req[["url"]]
     ```
 
-1. 繪圖
-    
+1. Status code
+
     ```r
-    word_freq %>% 
-        filter(word %in% c("同志", "同性戀")) %>%
-        ggplot() +
-            geom_bar(aes(topic, n, fill = word), 
-                     stat = "identity")
+    req[["status_code"]]
+    ```
     
-    # Position adjustment               
-    word_freq %>% 
-        filter(word %in% c("同志", "同性戀")) %>%
-        ggplot() +
-            geom_bar(aes(topic, n, fill = word), 
-                     stat = "identity", position = "dodge")            
-                     
+    - 404 Not found: **404** 即是 status code
+    - status code 目的：告訴你 HTTP request 是否成功
+    - status code 以 4** 開頭的，代表失敗, 2** 開頭代表成功
+
+1. content --> parsed R object (not JSON string) --> 引到 JSON
+
+    ```r
+    content(req)
+    
+    content(req, as = "text") %>% cat()
     ```
 </div>
 
-**3 min**
-
-## quanteda framework
+## JSON
 
 <div class="hide" data-tag="slide, demo">
-- start from bar chart
 
-**slide**
-
-1. `corpus()`, `tokens()`, `kwic()`
-
-**demo**
 
 ```r
-# 轉換成 quanteda corpus 格式
-qcorp <- corpus(docs_df, docid_field = "id", text_field = "content")
+json_str = '{
+  ...
+}'
 
-# Key word in context
-tokens_obj <- tokens(qcorp, "fastestword")
-kwic(tokens_obj, valuetype = "regex", pattern = "同(性戀|志)")
-
-# Add View()
-kwic(tokens_obj, valuetype = "regex", pattern = "同(性戀|志)") %>% View()
-
-# Add window=10
-kwic(tokens_obj, valuetype = "regex", pattern = "同(性戀|志)", window = 10) %>% View()
+jsonlite::fromJSON(json_str1, simplifyVector = F)
 ```
 </div>
+

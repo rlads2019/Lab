@@ -75,7 +75,7 @@ klippy::klippy(position = c('top', 'right'),color = 'darkred', lang=c('r', 'txt'
       - `query`: URL 中的 query string。在 `httr::GET()` 中，query 是以 `list` 的資料結構提供。上方的 URL 因為有兩個 key-value pairs，所以 `query` 這個 argument 也由兩個元素 (皆有 name) 組成。
     
 
-- `httr::GET()` 會將 HTTP request 以及接收到的 HTTP response 轉換成 R 的物件。例如，`req[["url"]]` 可以取得 HTTP request 目的地 URL，`req[["status_code"]]` 則可以看到伺服器回傳 (HTTP response) 的訊息 (200 代表 request 成功，4** 通常代表失敗)：
+- `httr::GET()` 會將 HTTP request 以及接收到的 HTTP response 轉換成 R 的物件。例如，`req[["url"]]` 可以取得 HTTP request 目的地 URL，`req[["status_code"]]` 則可以看到 [request 是否成功](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status) (2** 代表 request 成功，4** 代表失敗)：
 
     ```{r}
     req[["url"]]
@@ -92,16 +92,16 @@ klippy::klippy(position = c('top', 'right'),color = 'darkred', lang=c('r', 'txt'
 [^separate-url]: 有時候，我們會需要系統性改變 URL 的某部份 (e.g., 想取得**每年** 1/1 至 2/1 的資料) 以取得所需資料。這時，若不使用 `httr::GET()` 所提供的 `path` 與 `query` 等 argument，就需自己另外以 `paste0()` 等函數製造 URL。這會造成程式變得比較龐大且複雜。
 
 
-#### HTTTP request methods
+#### HTTP request methods
 
-HTTP request 有許多「不同」的種類，稱為 [request methods](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods)。最常見的一種即是 `GET method`，例如在網頁輸入 URL 或是剛剛使用的 `httr::GET()`， 都是在向伺服器發出 `GET` request。`GET` request 的目的是向伺服器**取得**資料。另一種常見的 request method 是 `POST`。`POST` request 的目的是向伺服器**提交**資料，常見的例子是「帳號登入」與「填寫表單」。關於 HTTP request methods 可見 <https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods>。
+HTTP request 有許多不同的「種類」，稱為 [request methods](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods)。最常見的一種即是 `GET method`，例如在網頁輸入 URL 或是剛剛使用的 `httr::GET()`， 都是在向伺服器發出 `GET` request。`GET` request 的目的是向伺服器**取得**資料。另一種常見的 request method 是 `POST`。`POST` request 的目的是向伺服器**提交**資料，常見的例子是「帳號登入」與「填寫表單」。關於 HTTP request methods 可見 <https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods>。
 
 
 ## JSON
 
 - JSON 是一種純文字格式，跟 `.csv` 一樣是用來記錄結構化資訊的一種格式。但 JSON 可以記錄結構複雜許多的資料，因為它可以具有階層 (巢狀) 結構。
 
-- JSON 所記錄的資料，結構上與 R 的 list 非常接近。下圖左邊的 R 程式碼所建立出的 list，其表徵的資料結構，等價於右方的 JSON:
+- JSON 所記錄的資料，結構上與 R 的 list 非常接近。下圖左邊的 R 程式碼所建立出的 list，其所表徵的資料結構等價於右方的 JSON:
     ![](json_v_list.png)
     - 在 R 裡面，可以使用 `jsonlite` 套件協助處理 JSON。例如，`jsonlite::fromJSON()` 可將符合 JSON 格式的字串轉換成 R 的 list (反之，使用 `jsonlite::toJSON()`):
       ```{r}
