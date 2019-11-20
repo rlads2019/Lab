@@ -51,9 +51,9 @@ window.onload = () => {
 1. (flow chart)
     1. 在瀏覽器輸入 URL
     1. 瀏覽器就會幫你**向位於這 URL 的伺服器**送出一個 HTTP request  
-    (e.g. `dcard.tw` --> 向 Dcard 的伺服器送出 HTTP request)
-    1. Dcard 的伺服器接收到這個 request 後，
-        1. 就會去「閱讀」這個 request 的內容 (了解這個 request 要幹麻)
+    (e.g. `google.com` --> 向 Google 的伺服器送出 HTTP request)
+    1. Google 的伺服器接收到這個 request 後，
+        1. 就會去「解讀」這個 request 的內容 (了解這個 request 要幹麻)
         1. 了解之後，它就會知道你想要什麼東西，然後把這些東西放在 HTTP response 裡面，再傳回你的電腦
     1. 電腦裡面的瀏覽器在接收到這個 HTTP response 之後
         - 就會把**儲存在裡面的資訊** (e.g. HTML)，轉換成你在螢幕上所看到的漂亮的網頁
@@ -70,6 +70,9 @@ window.onload = () => {
     - JSON: 目的是為了提供**結構化的資訊**，方便程式去處理
         - 所以當伺服器所回傳的是 JSON 格式，代表它希望的是**使用者透過程式與自己互動**
         - 因此他提供的不是一個漂亮的網頁界面，而是一個 **Web API**，讓使用者可以透過「程式的方式」去取得他所想要的資訊
+    - 回到前面，兩種從網路取得資料的方式
+        - 可以選擇的話，使用 Web API
+            - 處理 HTML 很麻煩、伺服器負擔大
 </div>
 
 
@@ -78,13 +81,24 @@ window.onload = () => {
 <div class="hide" data-tag="Demo with Browser">
 **Foreign Exchange rates API**
 
+1. 進入 API 說明文件
+    - 簡介：JSON 格式
 1. `/latest`
+    - 比較回傳的 JSON (擠成一坨) 與 說明文件的 JSON (漂亮)
 1. `/latest?base=USD`
-1. `/latest?base=USD&symbols=CAD,JPY`
+    - 如果閱讀過說明文件  
+    可以提供給 server 一些額外的資訊，依據這些資訊，server 會回傳不同的東西
+    - 提供額外資訊的方式：在 URL 之後加上 key-value pairs
+        - 在加入這些資訊之前，需要加入一個 **`?`**
+1. `/latest?base=USD&symbols=JPY`
+    - 除了 `base` 之外，還可以提供其它的 parameter
+    - 例如，只關心**美元兌日圓**的匯率
 
-- **4 min**: Your Turn
 
-`/history?start_at=2017-01-03&end_at=2017-01-03&base=USD&symbols=JPY`
+**Your Turn (4 min)**
+
+- `/history?start_at=2017-01-03&end_at=2017-01-03&base=USD&symbols=JPY`
+
 
 **URL 結構**
 
@@ -98,7 +112,10 @@ window.onload = () => {
 ## httr
 
 <div class="hide" data-tag="slide, demo">
-**slide:** 用 R 跟伺服器互動
+**slide:** 
+
+1. 用 R 跟伺服器互動
+1. GET request, POST request 
 
 **demo**
 
@@ -139,19 +156,43 @@ window.onload = () => {
     - status code 目的：告訴你 HTTP request 是否成功
     - status code 以 4** 開頭的，代表失敗, 2** 開頭代表成功
 
-1. content --> parsed R object (not JSON string) --> 引到 JSON
+1. content --> parsed R object (not JSON string)
 
     ```r
     content(req)
     
     content(req, as = "text") %>% cat()
     ```
+
+1. Raw HTML
+
+    ```r
+    rlads <- GET("https://rlads2019.github.io/")
+    # Return raw HTML string
+    content(rlads, as = "text")
+    ```
 </div>
+
+- **3 min**
+
+
 
 ## JSON
 
 <div class="hide" data-tag="slide, demo">
+**slide:** Explain JSON format
 
+1. 花括號內: 無序 key-value pairs
+1. value: 4 types
+1. value: 可以放入「一整個由花括號包裹起來的 key-value pairs」
+    - 階層結構
+1. array
+
+(next slide)
+
+1. 和 R 的 list 很像
+
+**demo**
 
 ```r
 json_str = '{

@@ -1824,10 +1824,10 @@ window.onload = () => {
 <ol style="list-style-type: decimal">
 <li>在瀏覽器輸入 URL</li>
 <li>瀏覽器就會幫你<strong>向位於這 URL 的伺服器</strong>送出一個 HTTP request<br />
-(e.g. <code>dcard.tw</code> –&gt; 向 Dcard 的伺服器送出 HTTP request)</li>
-<li>Dcard 的伺服器接收到這個 request 後，
+(e.g. <code>google.com</code> –&gt; 向 Google 的伺服器送出 HTTP request)</li>
+<li>Google 的伺服器接收到這個 request 後，
 <ol style="list-style-type: decimal">
-<li>就會去「閱讀」這個 request 的內容 (了解這個 request 要幹麻)</li>
+<li>就會去「解讀」這個 request 的內容 (了解這個 request 要幹麻)</li>
 <li>了解之後，它就會知道你想要什麼東西，然後把這些東西放在 HTTP response 裡面，再傳回你的電腦</li>
 </ol></li>
 <li>電腦裡面的瀏覽器在接收到這個 HTTP response 之後
@@ -1854,6 +1854,13 @@ HTML 中的許多元素是為了讓「網頁」更漂亮、互動性更強<br />
 <li>所以當伺服器所回傳的是 JSON 格式，代表它希望的是<strong>使用者透過程式與自己互動</strong></li>
 <li>因此他提供的不是一個漂亮的網頁界面，而是一個 <strong>Web API</strong>，讓使用者可以透過「程式的方式」去取得他所想要的資訊</li>
 </ul></li>
+<li>回到前面，兩種從網路取得資料的方式
+<ul>
+<li>可以選擇的話，使用 Web API
+<ul>
+<li>處理 HTML 很麻煩、伺服器負擔大</li>
+</ul></li>
+</ul></li>
 </ul></li>
 </ol>
 </div>
@@ -1863,14 +1870,33 @@ HTML 中的許多元素是為了讓「網頁」更漂亮、互動性更強<br />
 <div class="hide" data-tag="Demo with Browser">
 <p><strong>Foreign Exchange rates API</strong></p>
 <ol style="list-style-type: decimal">
-<li><code>/latest</code></li>
-<li><code>/latest?base=USD</code></li>
-<li><code>/latest?base=USD&amp;symbols=CAD,JPY</code></li>
-</ol>
+<li>進入 API 說明文件
 <ul>
-<li><strong>4 min</strong>: Your Turn</li>
+<li>簡介：JSON 格式</li>
+</ul></li>
+<li><code>/latest</code>
+<ul>
+<li>比較回傳的 JSON (擠成一坨) 與 說明文件的 JSON (漂亮)</li>
+</ul></li>
+<li><code>/latest?base=USD</code>
+<ul>
+<li>如果閱讀過說明文件<br />
+可以提供給 server 一些額外的資訊，依據這些資訊，server 會回傳不同的東西</li>
+<li>提供額外資訊的方式：在 URL 之後加上 key-value pairs
+<ul>
+<li>在加入這些資訊之前，需要加入一個 <strong><code>?</code></strong></li>
+</ul></li>
+</ul></li>
+<li><code>/latest?base=USD&amp;symbols=JPY</code>
+<ul>
+<li>除了 <code>base</code> 之外，還可以提供其它的 parameter</li>
+<li>例如，只關心<strong>美元兌日圓</strong>的匯率</li>
+</ul></li>
+</ol>
+<p><strong>Your Turn (4 min)</strong></p>
+<ul>
+<li><code>/history?start_at=2017-01-03&amp;end_at=2017-01-03&amp;base=USD&amp;symbols=JPY</code></li>
 </ul>
-<p><code>/history?start_at=2017-01-03&amp;end_at=2017-01-03&amp;base=USD&amp;symbols=JPY</code></p>
 <p><strong>URL 結構</strong></p>
 <ol style="list-style-type: decimal">
 <li>分 3 部份
@@ -1885,7 +1911,11 @@ HTML 中的許多元素是為了讓「網頁」更漂亮、互動性更強<br />
 <div id="httr" class="section level2">
 <h2>httr</h2>
 <div class="hide" data-tag="slide, demo">
-<p><strong>slide:</strong> 用 R 跟伺服器互動</p>
+<p><strong>slide:</strong></p>
+<ol style="list-style-type: decimal">
+<li>用 R 跟伺服器互動</li>
+<li>GET request, POST request</li>
+</ol>
 <p><strong>demo</strong></p>
 <ol style="list-style-type: decimal">
 <li><div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(httr)</a>
@@ -1913,21 +1943,43 @@ HTML 中的許多元素是為了讓「網頁」更漂亮、互動性更強<br />
 <li>status code 目的：告訴你 HTTP request 是否成功</li>
 <li>status code 以 4** 開頭的，代表失敗, 2** 開頭代表成功</li>
 </ul></li>
-<li><p>content –&gt; parsed R object (not JSON string) –&gt; 引到 JSON</p>
+<li><p>content –&gt; parsed R object (not JSON string)</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">content</span>(req)</a>
 <a class="sourceLine" id="cb4-2" data-line-number="2"></a>
 <a class="sourceLine" id="cb4-3" data-line-number="3"><span class="kw">content</span>(req, <span class="dt">as =</span> <span class="st">&quot;text&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">cat</span>()</a></code></pre></div></li>
+<li><p>Raw HTML</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">rlads &lt;-<span class="st"> </span><span class="kw">GET</span>(<span class="st">&quot;https://rlads2019.github.io/&quot;</span>)</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="co"># Return raw HTML string</span></a>
+<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="kw">content</span>(rlads, <span class="dt">as =</span> <span class="st">&quot;text&quot;</span>)</a></code></pre></div></li>
 </ol>
 </div>
+<ul>
+<li><strong>3 min</strong></li>
+</ul>
 </div>
 <div id="json" class="section level2">
 <h2>JSON</h2>
 <div class="hide" data-tag="slide, demo">
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">json_str =<span class="st"> '{</span></a>
-<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="st">  ...</span></a>
-<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="st">}'</span></a>
-<a class="sourceLine" id="cb5-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb5-5" data-line-number="5">jsonlite<span class="op">::</span><span class="kw">fromJSON</span>(json_str1, <span class="dt">simplifyVector =</span> F)</a></code></pre></div>
+<p><strong>slide:</strong> Explain JSON format</p>
+<ol style="list-style-type: decimal">
+<li>花括號內: 無序 key-value pairs</li>
+<li>value: 4 types</li>
+<li>value: 可以放入「一整個由花括號包裹起來的 key-value pairs」
+<ul>
+<li>階層結構</li>
+</ul></li>
+<li>array</li>
+</ol>
+<p>(next slide)</p>
+<ol style="list-style-type: decimal">
+<li>和 R 的 list 很像</li>
+</ol>
+<p><strong>demo</strong></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">json_str =<span class="st"> '{</span></a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="st">  ...</span></a>
+<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="st">}'</span></a>
+<a class="sourceLine" id="cb6-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb6-5" data-line-number="5">jsonlite<span class="op">::</span><span class="kw">fromJSON</span>(json_str1, <span class="dt">simplifyVector =</span> F)</a></code></pre></div>
 </div>
 </div>
 
