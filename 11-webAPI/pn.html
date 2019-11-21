@@ -1933,7 +1933,9 @@ HTML 中的許多元素是為了讓「網頁」更漂亮、互動性更強<br />
 <a class="sourceLine" id="cb1-13" data-line-number="13">    <span class="dt">path =</span> <span class="st">'history'</span>,</a>
 <a class="sourceLine" id="cb1-14" data-line-number="14">    <span class="dt">query =</span> <span class="kw">list</span>(<span class="dt">start_at =</span> <span class="st">&quot;2017-01-03&quot;</span>,</a>
 <a class="sourceLine" id="cb1-15" data-line-number="15">                 <span class="dt">end_at =</span> <span class="st">&quot;2017-01-03&quot;</span>)</a>
-<a class="sourceLine" id="cb1-16" data-line-number="16">    )</a></code></pre></div></li>
+<a class="sourceLine" id="cb1-16" data-line-number="16">    )</a>
+<a class="sourceLine" id="cb1-17" data-line-number="17"></a>
+<a class="sourceLine" id="cb1-18" data-line-number="18"><span class="co"># req is a list (See environment)</span></a></code></pre></div></li>
 <li><p>URL</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">req[[<span class="st">&quot;url&quot;</span>]]</a></code></pre></div></li>
 <li><p>Status code</p>
@@ -1980,6 +1982,9 @@ HTML 中的許多元素是為了讓「網頁」更漂亮、互動性更強<br />
 <a class="sourceLine" id="cb6-3" data-line-number="3"><span class="st">}'</span></a>
 <a class="sourceLine" id="cb6-4" data-line-number="4"></a>
 <a class="sourceLine" id="cb6-5" data-line-number="5">jsonlite<span class="op">::</span><span class="kw">fromJSON</span>(json_str1, <span class="dt">simplifyVector =</span> F)</a></code></pre></div>
+<ul>
+<li>Explain <code>simplifyVector</code></li>
+</ul>
 </div>
 </div>
 

@@ -138,6 +138,8 @@ window.onload = () => {
         query = list(start_at = "2017-01-03",
                      end_at = "2017-01-03")
         )
+    
+    # req is a list (See environment)
     ```
 
 1. URL
@@ -201,5 +203,7 @@ json_str = '{
 
 jsonlite::fromJSON(json_str1, simplifyVector = F)
 ```
+
+- Explain `simplifyVector`
 </div>
 
