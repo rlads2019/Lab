@@ -14,12 +14,12 @@
 |   10    |  11/14   | [中文文本處理：斷詞、詞頻表、語料庫][s10]             | [🔗][note10]     | [⬇️][src10]      | [🔗][hw10]     |
 |   11    |  11/21   | [擷取網路資料 (I)：Web API、JSON、`httr`][s11]     | [🔗][note11]     | [⬇️][src11]      | [🔗][hw11]     |
 |   12    |  11/28   |           Guest Lecture                          |                   |                 |               |
-|   13    |  12/05   | [Web 101：HTML、CSS Selector][s13]{:.h}          |                   |                 |               |
+|   13    |  12/05   | [Web 101：HTML、CSS Selector][s13]{:.h}          | [🔗][note13]{:.h}  | [⬇️][src13]{:.h}  | [🔗][hw13]{:.h} |
 |   14    |  12/12   | [擷取網路資料 (II)：網頁剖析、`rvest`][s14]{:.h}    |                  |                 |               |
 |   15    |  12/19   |                                                  |                   |                 |               |
 |   16    |  12/26   |                                                  |                   |                 |               |
 |   17    |  01/02   |                                                  |                   |                 |               |
-|   18    |  01/09   |             期末考週                              |                   |                 |               |
+|   18    |  01/09   |             Final Project Presentation           |                   |                 |               |
 
 - 作業參考答案請見 <https://rlads2019.github.io/solv/>
 
@@ -72,10 +72,10 @@
 [src11]: ./src/11.zip
 [hw11]: https://github.com/rlads2019/hw11
 
-[s13]: #
-[note13]: #
-[src13]: #
-[hw13]: #
+[s13]: https://docs.google.com/presentation/d/1FNdYrvYS2Qr1_HiGfrSjYZ-_DJ8f-VNPDnk93-wkvqI/edit?usp=sharing
+[note13]: ./notes/13.html
+[src13]: ./src/13.zip
+[hw13]: https://github.com/rlads2019/hw13
 
 [s14]: #
 [note14]: #
