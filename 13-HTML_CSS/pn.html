@@ -1272,6 +1272,96 @@ window.buildTabsets = function(tocID) {
 </script>
 
 
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  { background-color: #f8f8f8; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
 
 
 <style type="text/css">
@@ -1879,6 +1969,7 @@ CSS 是什麼 (裝飾 HTML)</li>
 <h2>Document Object Model</h2>
 <div class="hide" data-tag="slide">
 <ol style="list-style-type: decimal">
+<li>Review: HTML 常見階層結構</li>
 <li>我們通常會將 HTML 的結構想像成一個「樹狀結構」</li>
 <li>所謂的「樹狀結構」，是由一個個節點所組成的，節點之間可以連結起來</li>
 <li>以投影片上的例子來說 (解釋右邊圖片)，
@@ -1891,14 +1982,139 @@ CSS 是什麼 (裝飾 HTML)</li>
 </ol></li>
 <li>將 HTML 想像成這個樹狀結構有許多好處
 <ul>
-<li>CSS</li>
-<li>下週剖析網頁時，需要具備這個概念</li>
+<li>CSS (Linking to CSS)</li>
 </ul></li>
 </ol>
 </div>
 </div>
 <div id="css" class="section level2">
 <h2>CSS</h2>
+<ol style="list-style-type: decimal">
+<li>Intro: 另一種語言</li>
+</ol>
+1:00:00
+<div class="hide" data-tag="06-style0.html">
+<ol style="list-style-type: decimal">
+<li>HTML structure: <code>h1</code>, <code>p</code>
+<ul>
+<li><code>p</code>: paragraph</li>
+</ul></li>
+<li><code>h1</code>: style attribute in <code>h1</code>
+<ul>
+<li>解構：2 CSS property (<code>color:blue;text-align:center;</code>)</li>
+<li>從文字可以猜測：<code>color</code> property 設成 <code>blue</code>, …</li>
+<li>如果用瀏覽器打開，h1 會是<strong>藍色</strong>、<strong>置中</strong>的標題</li>
+</ul></li>
+<li>Open in browser
+<ul>
+<li>Remove <code>style</code> attribute</li>
+<li>Change color (<code>red</code> -&gt; HTML color picker <code>色碼</code> -&gt; back to <code>blue</code>)</li>
+</ul></li>
+<li>Link to <code>style1.html</code>
+<ul>
+<li>不喜歡將 CSS 寫在 HTML tag 裡面 –&gt; 因為 Clutter CSS</li>
+<li><code>&lt;h1 style=&quot;color:blue;text-align:center;&quot;&gt;</code><br />
+<code>&lt;p style=&quot;color:purple;&quot;&gt;</code><br />
+<code>&lt;p style=&quot;color:red;&quot;&gt;</code></li>
+</ul></li>
+</ol>
+</div>
+<div id="link-to-style1.html" class="section level4">
+<h4>Link to <code>style1.html</code></h4>
+<ol style="list-style-type: decimal">
+<li>HTML 負責網頁的內容和結構、CSS 負責樣式，我們不希望兩者被混在一起。</li>
+<li>CSS 提供一些方式，讓我們不用將 CSS 寫在 HTML 裡面 –&gt; <code>style1.html</code></li>
+</ol>
+<div class="hide" data-tag="07-style1.html">
+<ol style="list-style-type: decimal">
+<li>Browser 打開 <code>style1.html</code> -&gt; 跟剛剛的一樣 (blue, center h1)</li>
+<li>原始碼：
+<ul>
+<li><code>body</code> 裡面，沒有 style attribute</li>
+<li><code>head</code> 裡面新增了 <code>&lt;style&gt;&lt;/style&gt;</code>: 告訴 browser，這裡的樣式要套用到整個網頁</li>
+</ul></li>
+<li><code>&lt;style&gt;</code>
+<ul>
+<li><code>h1</code>:
+<ul>
+<li>CSS selector，篩選出網頁中，特定的 HTML 元素</li>
+<li>告訴瀏覽器說，你要為這網頁裡面的<strong>所有 <code>h1</code></strong> 套用樣式</li>
+</ul></li>
+<li><code>{}</code>: color: blue, text-align: center;</li>
+</ul></li>
+<li>(這樣做的好處是)
+<ul>
+<li>Add another <code>h1</code>: <code>&lt;h1&gt;Second&lt;/h1&gt;</code></li>
+<li><code>h1 {color:blue}</code> –&gt; <code>h1 {color:red}</code> (refresh browser)</li>
+</ul></li>
+</ol>
+</div>
+<ul>
+<li><strong>3 min</strong></li>
+</ul>
+</div>
+<div id="new-html-tag-div" class="section level3">
+<h3>New HTML Tag: <code>div</code></h3>
+<div class="hide" data-tag="08-div.html">
+<ol style="list-style-type: decimal">
+<li><code>&lt;div&gt;</code>: 用來將網頁分成一個個「段落」或是「區塊」的 HTML tag</li>
+<li>通常使用 div 來幫助我們<strong>標示</strong>出網頁裡面的特定區段 –&gt; Open in Browser
+<ul>
+<li>style all divs (<code>div {font-size: 24px;}</code>)</li>
+<li>How to style particular div?</li>
+</ul></li>
+<li><p>Add <code>id</code> (give unique name to element)</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode css"><code class="sourceCode css"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="pp">#top</span> {</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">    <span class="kw">font-size</span>: <span class="dv">36px</span>;</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">}</a>
+<a class="sourceLine" id="cb1-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="pp">#middle</span> {</a>
+<a class="sourceLine" id="cb1-6" data-line-number="6">    <span class="kw">font-size</span>: <span class="dv">24px</span>;</a>
+<a class="sourceLine" id="cb1-7" data-line-number="7">}</a>
+<a class="sourceLine" id="cb1-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb1-9" data-line-number="9"><span class="pp">#bottom</span> {</a>
+<a class="sourceLine" id="cb1-10" data-line-number="10">    <span class="kw">font-size</span>: <span class="dv">12px</span>;</a>
+<a class="sourceLine" id="cb1-11" data-line-number="11">}</a></code></pre></div></li>
+</ol>
+</div>
+<div class="hide" data-tag="09-span.html">
+<ol style="list-style-type: decimal">
+<li>(先看 browser)</li>
+<li><code>&lt;span&gt;</code>: 用來標示出一串文字中的某一個區段</li>
+<li>class</li>
+</ol>
+</div>
+<div class="hide" data-tag="10-descendant.html">
+<ol style="list-style-type: decimal">
+<li>Review <code>ol</code>, <code>li</code>
+<ul>
+<li>Nested structure</li>
+<li>Think of it as DOM: <code>&lt;ol&gt;</code> contain 4 pieces</li>
+</ul></li>
+<li>CSS: <code>ol li</code>
+<ul>
+<li>all <code>li</code> inside <code>ol</code></li>
+<li>Open in browser
+<ul>
+<li>all red –&gt; back to src</li>
+</ul></li>
+<li><code>li</code> inside <code>ul</code> is still inside <code>ol</code></li>
+</ul></li>
+<li><p>Add another list (<code>ul</code>, not styled)</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode css"><code class="sourceCode css"><a class="sourceLine" id="cb2-1" data-line-number="1">&lt;ul&gt;</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">    &lt;li&gt;an item&lt;/li&gt;</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3">    &lt;li&gt;another item&lt;/li&gt;</a>
+<a class="sourceLine" id="cb2-4" data-line-number="4">&lt;/ul&gt;</a></code></pre></div></li>
+<li>Child
+<ul>
+<li>可以將 <code>ol</code> 之下的 <code>li</code> 想像成 <code>ol</code> 的兒子<br />
+將 <code>ul</code> 之下的 <code>li</code> 想成 <code>ol</code> 的孫子</li>
+<li>如果我只想 style <code>ol</code> 的兒子，而不是 <code>ol</code> 的孫子</li>
+<li><code>ol &gt; li</code></li>
+</ul></li>
+</ol>
+</div>
+</div>
 </div>
 
 
