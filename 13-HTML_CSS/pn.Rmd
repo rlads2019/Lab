@@ -1,6 +1,6 @@
 ---
-title: "pn: Web API (W11)"
-date: '2019-11-21'
+title: "HTML/CSS"
+date: '2019-12-04'
 output:
     html_document:
         number_sections: no
@@ -34,176 +34,124 @@ window.onload = () => {
 ## Openning
 
 <div class="hide" data-tag="Openning">
-1. Text mining --> 從網路取得 (文本) 資料
-1. 2 種方式
-    - 1st: 整理好的 (結構化) 資料，讓你透過程式化的方式直接取得資料 (本週)
-    - 2nd: 網路爬蟲，(在無從取得結構化資料時)，透過剖析網頁裡 HTML 的資訊，抓出想要的資料 (最後一堂實習課)
-1. 在開始之前，介紹一個網路相關的知識 -- HTTP
+1. 上次實習課：JSON --> 自己爬網頁
+2. 這週：介紹 HTML, 下週 (最後一次)：爬取網頁
+3. HTML 是什麼 (標記式語言，告訴瀏覽器網頁的**結構**，骨架)  
+CSS 是什麼 (裝飾 HTML)
+4. 了解 HTML 最簡單的方式，就是實際**自己動手**透過 HTML 去寫出一個簡單的網頁
 </div>
 
 
-## HTTP
+## HTML
+
+35:45
+<div class="hide" data-tag="01-hello.html">
+1. `<!DOCTYPE html>`: html5 (版本)
+2. 剩下的部份：html tags (starting & ending tag)
+3. `<html>`：
+    - line2: html 文件開始 --> line9 `</html>` 結束
+    - tag 之間：是 html 文件的**內容**
+4. 文件的內容被分成**兩部份**
+    - line3: `<head>`
+        - metadata: 不會顯示在頁面上
+        - `<title>`
+    - line6: `<body>`
+5. summarise: 2 部份
+    - header，裡面的 title 是 「my web page」
+    - body，裡面是 「hello world」
+6. Open in browser
+    - Content: hello world
+    - top: title
+7. Ask question
+</div>
+
+#### Linking to headings
+
+1. 剛剛的例子是非常簡單的 HTML
+    - 我們只介紹 `html`, `head`, `body`
+    - 但 HTML 還可以透過其它的 tag 做到更多事情
+2. 那我們現在來看，怎麼使用 HTML 為網頁製作 headings
+    - 例如，我們想要 HTML 的一開頭就有個大大的標題
+    - 然後在這個大標題之下，有其它比較小的標題
+
+<div class="hide" data-tag="02-headings.html">
+1. 在這個檔案裡面，你可以看到更多其它的 html tag
+1. `<h1>`: line7 是 h1 tag
+    - `h` 指的是標題，`1` 指的是大小
+1. html 有 6 種 heading tags
+    - `h1` 最大, `h6` 最小, `h2345` 的大小介在之間
+    - Review start tag, end tag: 
+        - h1 start tag
+        - 可以看到 h1 至 h6 的規律
+1. Open in bowser
+    - 這是 h1, h2 一直到最下方的 h6
+    - browser 功能：View page source
+        - 和剛剛那份檔案裡的內容一樣
+</div>
+
+**3 min**
+
+#### Linking to lists
+
+1. 現在我們知道怎麼在網頁裡面加入「文字」、「標題」
+2. 那接下來，我可能想在網頁加入更多的東西，例如「項目清單」
+
+<div class="hide" data-tag="03-lists.html">
+1. 兩種項目清單：一種是「沒有次序的」另一種是「有次序的」
+1. Review html structure (doctype -> html -> head -> body)
+1. `<ul>`: unordered list, (start: line8, end: line12)
+    - ul 裡面有 3 個 `li`: list item
+    - HTML tag nests frequently (li 在 ul 裡面，ul 在 body 裡面)
+1. `ol`: ordered list
+    - 也有 3 個 `li`
+1. Open in browser
+    - ol 自動編碼
+        - 增加一個項目 (`<li>Another Item</li>`)
+</div>
+
+#### Linking to images
+
+1. 到目前為止，html 的內容都是文字，有時候我們會想為網頁加入圖片
+
+<div class="hide" data-tag="04-image0.html, 05-image1.html">
+1. 先打開 image (`wolf.jpg`) --> 想要把這張圖片放在 HTML 裡面有
+1. `image0.html`
+    - 跟剛剛的 HTML 很像
+    - line7 有個 `<img>`，這個 tag 和其它的 HTML tag **有一些地方不同**
+        1. 沒有 end tag (其它的有 `body`, `/body`; `title`, `/title`)
+            - 並非所有 html tags 都需要 starting & ending tag
+            - 例如，`img` tag 沒有 end tag，因為你想放入的內容是圖片，所以 img tag 不需要設計 starting tag 和 ending tag 讓你在之間打入文字
+        2. HTML attribute: 在 img tag 後面有個所謂的「html attribute」
+            - 這邊的例子，html attribute 是 `src`  
+            這個 `src` 的目的是告訴 browser 要去哪裡找到這個 img tag 要放入的圖片
+1. Open `image0.html` in browser
+    - big, 原因：`wolf.jpg` 的解析度很高, browser 沒有被告知要如何顯示這張圖片，所以解析度有多大，瀏覽器的頁面就有多大
+1. 修改 `image0.html`
+    - 在 img tag 裡加入更多的 HTML attribute，告訴 browser 要怎麼顯示這張圖片
+    - 增加了 2 個 HTML attribute: `width="560"`, `height="320"`)
+1. Refresh `image0.html` in browser
+    - 修改 height (示範 ratio)
+    - (browser 很聰明) 拿掉 width
+1. Any question
+</div>
+
+**3 min**
+
+## Document Object Model
 
 <div class="hide" data-tag="slide">
-1. HTTP 的全名是 Hypertext transfer protocal (不要被這炫炮名字嚇到)
-1. HTTP 是網路上，電腦與電腦 (伺服器) 之間進行溝通時，所遵循的一套規則
-    - 當每一台電腦都 follow 這個規則的時候，它們才能順利的溝通
-1. (flow chart)
-    1. 在瀏覽器輸入 URL
-    1. 瀏覽器就會幫你**向位於這 URL 的伺服器**送出一個 HTTP request  
-    (e.g. `google.com` --> 向 Google 的伺服器送出 HTTP request)
-    1. Google 的伺服器接收到這個 request 後，
-        1. 就會去「解讀」這個 request 的內容 (了解這個 request 要幹麻)
-        1. 了解之後，它就會知道你想要什麼東西，然後把這些東西放在 HTTP response 裡面，再傳回你的電腦
-    1. 電腦裡面的瀏覽器在接收到這個 HTTP response 之後
-        - 就會把**儲存在裡面的資訊** (e.g. HTML)，轉換成你在螢幕上所看到的漂亮的網頁
-        - (JSON) 有時候，儲存在 HTTP response 裡面的不是 HTML，而是其它純文字的格式 (例如，JSON)
-            - 這時你就會看到螢幕上，是「原始純文字的樣子」，而非「經過轉換的」網頁的樣子
-
-1. (HTML vs. JSON)
-    - HTML 與 JSON 是使用網路時，常會遇到的兩種純文字格式
-    - HTML: 
-        - 漂亮的網頁用 HTML 寫成
-        - 換言之，HTML 其實是給「人」看的 -->  
-        HTML 中的許多元素是為了讓「網頁」更漂亮、互動性更強  
-        因此，結構複雜、檔案較大
-    - JSON: 目的是為了提供**結構化的資訊**，方便程式去處理
-        - 所以當伺服器所回傳的是 JSON 格式，代表它希望的是**使用者透過程式與自己互動**
-        - 因此他提供的不是一個漂亮的網頁界面，而是一個 **Web API**，讓使用者可以透過「程式的方式」去取得他所想要的資訊
-    - 回到前面，兩種從網路取得資料的方式
-        - 可以選擇的話，使用 Web API
-            - 處理 HTML 很麻煩、伺服器負擔大
+1. 我們通常會將 HTML 的結構想像成一個「樹狀結構」
+1. 所謂的「樹狀結構」，是由一個個節點所組成的，節點之間可以連結起來
+1. 以投影片上的例子來說 (解釋右邊圖片)，
+    1. `html` (頂層)： 網頁的所有內容，都存在這裡
+    2. 在 `html` 下面，有 `head`, `body` 這兩個部份
+    3. 在 `head` 裡面，有 `title` (因為整個 title tag 都在 head 裡面  
+    然後，title 裡面，有一串文字「hello」
+    4. 同理，在 body tag 裡面，就是「hello world!」這串文字
+1. 將 HTML 想像成這個樹狀結構有許多好處
+    - CSS
+    - 下週剖析網頁時，需要具備這個概念
 </div>
 
-
-## URL Structure
-
-<div class="hide" data-tag="Demo with Browser">
-**Foreign Exchange rates API**
-
-1. 進入 API 說明文件
-    - 簡介：JSON 格式
-1. `/latest`
-    - 比較回傳的 JSON (擠成一坨) 與 說明文件的 JSON (漂亮)
-1. `/latest?base=USD`
-    - 如果閱讀過說明文件  
-    可以提供給 server 一些額外的資訊，依據這些資訊，server 會回傳不同的東西
-    - 提供額外資訊的方式：在 URL 之後加上 key-value pairs
-        - 在加入這些資訊之前，需要加入一個 **`?`**
-1. `/latest?base=USD&symbols=JPY`
-    - 除了 `base` 之外，還可以提供其它的 parameter
-    - 例如，只關心**美元兌日圓**的匯率
-
-
-**Your Turn (4 min)**
-
-- `/history?start_at=2017-01-03&end_at=2017-01-03&base=USD&symbols=JPY`
-
-
-**URL 結構**
-
-1. 分 3 部份
-    1. Base URL
-    1. Path
-    1. Query string
-</div>
-
-
-## httr
-
-<div class="hide" data-tag="slide, demo">
-**slide:** 
-
-1. 用 R 跟伺服器互動
-1. GET request, POST request 
-
-**demo**
-
-1. 
-
-    ```r
-    library(httr)
-    library(dplyr)
-    
-    GET('https://api.exchangeratesapi.io/history?start_at=2017-01-03&end_at=2017-01-03')
-    
-    GET('https://api.exchangeratesapi.io/',
-        path = 'history',
-        query = list(start_at = "2017-01-03",
-                     end_at = "2017-01-03")
-        )
-    
-    req <- GET('https://api.exchangeratesapi.io/',
-        path = 'history',
-        query = list(start_at = "2017-01-03",
-                     end_at = "2017-01-03")
-        )
-    
-    # req is a list (See environment)
-    ```
-
-1. URL
-
-    ```r
-    req[["url"]]
-    ```
-
-1. Status code
-
-    ```r
-    req[["status_code"]]
-    ```
-    
-    - 404 Not found: **404** 即是 status code
-    - status code 目的：告訴你 HTTP request 是否成功
-    - status code 以 4** 開頭的，代表失敗, 2** 開頭代表成功
-
-1. content --> parsed R object (not JSON string)
-
-    ```r
-    content(req)
-    
-    content(req, as = "text") %>% cat()
-    ```
-
-1. Raw HTML
-
-    ```r
-    rlads <- GET("https://rlads2019.github.io/")
-    # Return raw HTML string
-    content(rlads, as = "text")
-    ```
-</div>
-
-- **3 min**
-
-
-
-## JSON
-
-<div class="hide" data-tag="slide, demo">
-**slide:** Explain JSON format
-
-1. 花括號內: 無序 key-value pairs
-1. value: 4 types
-1. value: 可以放入「一整個由花括號包裹起來的 key-value pairs」
-    - 階層結構
-1. array
-
-(next slide)
-
-1. 和 R 的 list 很像
-
-**demo**
-
-```r
-json_str = '{
-  ...
-}'
-
-jsonlite::fromJSON(json_str1, simplifyVector = F)
-```
-
-- Explain `simplifyVector`
-</div>
+## CSS
 
