@@ -89,7 +89,7 @@ CSS 是什麼 (裝飾 HTML)
         - 和剛剛那份檔案裡的內容一樣
 </div>
 
-**3 min**
+**2 min**
 
 #### Linking to lists
 
@@ -244,10 +244,10 @@ CSS 是什麼 (裝飾 HTML)
     </ul>
     ```
 1. Child
+    - 空白稱為 **descendant selector** (後代) --> 想像「兒子」、「孫子」
     - 可以將 `ol` 之下的 `li` 想像成 `ol` 的兒子  
     將 `ul` 之下的 `li` 想成 `ol` 的孫子
-    - 如果我只想 style `ol` 的兒子，而不是 `ol` 的孫子
-    - `ol > li`
+    - 如果我只想 style `ol` 的兒子，而不是 `ol` 的孫子 --> **child selector**
 </div>
 
 ## GitHub Pages
