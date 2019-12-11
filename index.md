@@ -77,8 +77,7 @@
 [src13]: ./src/13.zip
 [hw13]: https://github.com/rlads2019/hw13
 
-[s14]: #
-[note14]: ./notes/14.html
+[s14]: https://docs.google.com/presentation/d/1SmMIKyum5XKvOKPz7nY6C8XBdoq541zaliY-fENzO4Q/edit?usp=sharing
 [src14]: ./src/14.zip
 
 

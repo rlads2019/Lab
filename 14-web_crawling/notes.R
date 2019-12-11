@@ -1,5 +1,6 @@
 ########## HTTP request ###########
 library(httr)
+# https://rlads2019.github.io/14/imt.html
 req <- GET("https://rlads2019.github.io", path = c("14", "imt.html"))
 req[["status_code"]]
 html <- content(req)

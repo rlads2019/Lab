@@ -1803,10 +1803,15 @@ window.onload = () => {
         })
 }
 </script>
+<ul>
+<li>GitHub 版權, 公開問題</li>
+</ul>
 <div id="openning" class="section level2">
 <h2>Openning</h2>
 <div class="hide" data-tag="Openning">
-
+<ol style="list-style-type: decimal">
+<li>上週 HTML/CSS –&gt; 因為跟網頁剖析 –&gt; 掌握剖析網頁最困難的部份</li>
+</ol>
 </div>
 </div>
 <div id="review-css" class="section level2">
@@ -1856,8 +1861,8 @@ window.onload = () => {
 </ol>
 </div>
 </div>
-<div id="your-turn" class="section level2">
-<h2>Your Turn</h2>
+<div id="your-turn-2-min" class="section level2">
+<h2>Your Turn (2 min)</h2>
 <p><code>imt.html</code>: style web site link</p>
 <ul>
 <li>說明
@@ -1868,8 +1873,7 @@ window.onload = () => {
 <li>不用管其它的，只看最上面</li>
 </ul></li>
 </ul></li>
-<li><p><strong>3 min</strong></p></li>
-<li><p>Explain</p></li>
+<li>Explain</li>
 </ul>
 </div>
 <div id="rvest" class="section level2">
@@ -1881,7 +1885,7 @@ window.onload = () => {
 <a class="sourceLine" id="cb4-2" data-line-number="2"><span class="kw">library</span>(rvest)</a>
 <a class="sourceLine" id="cb4-3" data-line-number="3"></a>
 <a class="sourceLine" id="cb4-4" data-line-number="4">req &lt;-<span class="st"> </span><span class="kw">GET</span>(<span class="st">&quot;https://rlads2019.github.io&quot;</span>, </a>
-<a class="sourceLine" id="cb4-5" data-line-number="5">           <span class="dt">path =</span> <span class="kw">c</span>(<span class="st">&quot;14&quot;</span>, <span class="st">&quot;child3.html&quot;</span>))</a>
+<a class="sourceLine" id="cb4-5" data-line-number="5">           <span class="dt">path =</span> <span class="kw">c</span>(<span class="st">&quot;14&quot;</span>, <span class="st">&quot;imt.html&quot;</span>))</a>
 <a class="sourceLine" id="cb4-6" data-line-number="6">req[[<span class="st">&quot;status_code&quot;</span>]]</a>
 <a class="sourceLine" id="cb4-7" data-line-number="7">html &lt;-<span class="st"> </span><span class="kw">content</span>(req)</a></code></pre></div></li>
 <li><p>rvest basics</p>
@@ -1902,8 +1906,8 @@ window.onload = () => {
 </ol>
 </div>
 </div>
-<div id="your-turn-1" class="section level2">
-<h2>Your Turn</h2>
+<div id="your-turn-3-min" class="section level2">
+<h2>Your Turn (3 min)</h2>
 <p>從你上次的作業抓出「姓名」、「系級」、「學號」 –&gt; 在 R 中變成 3 個字串 (3 chr vectors)</p>
 <ul>
 <li><p>Demo: IVO</p>
@@ -1938,6 +1942,9 @@ window.onload = () => {
 <a class="sourceLine" id="cb7-6" data-line-number="6">html <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">html_nodes</span>(<span class="st">&quot;p.copyright &gt; a&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">html_text</span>()</a>
 <a class="sourceLine" id="cb7-7" data-line-number="7">html <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">html_nodes</span>(<span class="st">&quot;p.copyright &gt; a&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">html_attr</span>(<span class="st">&quot;href&quot;</span>)</a></code></pre></div>
 </div>
+<ul>
+<li><strong>3 min</strong></li>
+</ul>
 </div>
 <div id="-" class="section level2">
 <h2>不必凡事都親自動手 (用別人寫好的套件)</h2>
@@ -1959,29 +1966,39 @@ window.onload = () => {
 <li>R Markdown, GitHub, GitHub Pages</li>
 </ul></li>
 </ul>
-<p>(兩年前，我 3 個期待都無法達成)</p>
+</div>
+<div id="apologies" class="section level2">
+<h2>Apologies</h2>
+<ul>
+<li>資質
 <ol style="list-style-type: decimal">
-<li>(你<strong>不笨</strong>，不要挫折) Lab is hard, 20hr-5hr you are smart</li>
-<li>(如果寫程式很<strong>痛苦</strong>，很抱歉，我是第一次教程式，不太會拿捏，所以給了同學相當大的壓力)
+<li>實習課很難，塞給大家很多東西</li>
+<li>如果過程中很<strong>挫折</strong>，(我很抱歉)，最重要的是：不要覺得自己<strong>笨</strong>或<strong>資質不足</strong></li>
+<li>可以撐到現在，就代表資質是足夠的，甚至比足夠多上許多</li>
+</ol></li>
+<li>樂趣
+<ol style="list-style-type: decimal">
+<li>如果你覺得寫程式很<strong>痛苦</strong>，(一樣，再次跟同學抱歉，我是第一次教程式，許多地方拿捏的不是很好，帶給了一些同學很大的壓力)</li>
+<li>但是如果寫程式的過程中有那麼 <strong>一丁點</strong>、<strong>一瞬間</strong> 的樂趣，希望同學可以努力記下這個感覺</li>
+<li>剛學寫程式最痛苦的時候，但痛苦只會越來越少，樂趣卻會越來越多</li>
+<li>一旦掌握寫程式的樂趣，你們就算是學會寫程式了</li>
+<li>只要你們有樂趣，要掌握程式語言裡面比較技術性的細節，就只是時間的問題而已</li>
+</ol></li>
+<li>期末專案 (掌握樂趣的方式)
+<ol style="list-style-type: decimal">
+<li>這學期剩下的期末專案是個很好的機會。</li>
+<li>因為，大家不是為了學程式而寫程式，而是為了<strong>解決實際問題</strong>而寫程式</li>
+<li>這會比回答作業的問題有趣許多</li>
+<li>這過程中，大家也有可能會遇到自己非常<strong>陌生</strong>的事物
 <ul>
-<li>記得謝老師上課說過：寫程式應該是很快樂的事</li>
-<li>如果你真的覺得過程很痛苦，你可以試試看回想寫程式的過程中有沒有那麼一丁點、一瞬間的快樂</li>
-<li>如果有的話，請努力記住這快樂，因為寫程式的痛苦會過去，而且只會越來越少，但樂趣會越來越多。</li>
-<li>同學可能這學期因為課業壓力太大，無法靜下心來體會寫程式的快樂。但我相信能撐到現在，就代表大家有那個潛力可以發現寫程式的樂趣。</li>
-<li>我覺得「抓到」這個寫程式的樂趣，才是「學會」寫程式的關鍵</li>
-<li>對於學期初沒有程式基礎，但現在還留著的同學，你們已經走過學習寫程式<strong>最辛苦</strong>的階段，接下來的過程應該會越來越有趣</li>
+<li>Don’t be afraid –&gt; 經過一學期的實習課，能力足夠</li>
+<li>只是需要沉下氣來，花些時間了解這東西如何運作</li>
+<li>往往會發現這些東西比想像中的簡單</li>
+<li>看到新的風景 (其它領域的知識、其他人的想法)</li>
 </ul></li>
-<li>這學期剩下的期末專案是個很好的機會。從現在開始，大家不是為了學程式而寫程式，而是為了<strong>解決問題</strong>而寫程式。
-<ul>
-<li>這過程中，大家可能會遇見新的問題，需要接觸許多自己沒看過的東西</li>
-<li>但請不要害怕，我知道大家的基礎很好 (真的，從一些來問問題的同學，我發現你們進步的很快)</li>
-<li>大家會缺乏的不是能力，而是一些自信和勇氣而已</li>
-<li>最後和大家分享一張圖片，這是我當初在學習寫程式的時候，常常會有的一種感覺，我覺得這張 GIF 描繪的很生動
-<ul>
-<li>就是我常常會遇到自己完全不懂、不敢接觸的東西，覺得自己不可能會理解它如何運作。但當我終於深呼吸一口、靜下心來，嘗試去理解這個東西的時候，我常常發現這個東西比我想像中的還來的簡單許多。而且過程中還會有意想不到的收穫。</li>
-</ul></li>
-</ul></li>
-</ol>
+<li>這是我寫程式很大的動力來源</li>
+</ol></li>
+</ul>
 </div>
 
 
