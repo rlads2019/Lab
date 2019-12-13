@@ -11,114 +11,11 @@ output:
       collapse: no
     css: style.css
     md_extensions: +implicit_figures
-    includes:
-       in_header: "../GA.html"
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE,comment = '#>',message = F)
 ```
-
-```{r klippy, echo=FALSE, include=TRUE}
-klippy::klippy(position = c('top', 'right'),color = 'darkred')
-```
-
-```{js echo=FALSE}
-window.onload = () => {
-    if (window.location.href.startsWith('https://rlads2019.netlify.com/') ||
-        window.location.href.startsWith('file:///home/liao/Desktop/Lab/')) {
-        document.querySelectorAll('.hide').forEach(ele => {
-            ele.className = 'note';
-        })
-    }
-}
-```
-
-<div class="hide" data-tag="About Markdown (slide)">
-- Openning: 開始之前，延續上週作業一的主題，Markdown
-
-(next slide)
-
-- 為何 Markdown 可以和 HTML 混用？
-    1. 看了大家的作業，有些同學很厲害，知道 Markdown 文件裡面可以使用 HTML
-    1. 有人知道為什麼？
-    1. (答案已經寫在投影片上了) Markdown 要能呈現排版好的樣子，需要先轉換成 HTML，轉換之後，browser 就可以直接閱讀這個 HTML 然後將它轉換成你在螢幕看到的樣子
-
-- 比較隱晦的 Markdown 語法
-    1. Markdown 文件裡面使用 HTML 很方便
-    1. 方便到我們會「忽略」某些事情可以**直接透過 Markdown 完成**，而不需用到 HTML
-    1. 例如很多人在 Markdown 裡面使用 HTML 的 `<br>` tag 去換行，但 Markdown 本身其實就有換行的語法
-    1. (demo)
-    1. 對一些更細微的 markdown 語法有興趣的話，可以參考 (The Two Surprisingly Hard Things about the Otherwise Simple Markdown)
-
-- Markdown is a language, but it has several dialects
-    1. Markdown 事實上應該比大家想得還要來得複雜一點，因為 Markdown 其實不是一個單一明確的語法，市面上其實有**好幾種** markdown 語法
-    1. (click) History: 想知道為什麼會出現這種情況，你可以 History 這個連結
-    1. 最常見的有 3 種：CommonMark, GFM, Pandoc's Markdown
-        1. CommonMark: 最簡單，語法數量最少的 Markdown
-        1. GFM: 
-            - 建立於 CommonMark 之上，再額外新增一些語法
-            - 換言之，GFM 包含了所有 CommonMark 的語法
-        1. Pandoc's Markdown：
-            - 3 者之中語法數量最多樣的一種。
-            - 實習課今天以及之後的作業會使用 R Markdown，而 R Markdown 用到的 Markdown 語法就是 Pandoc's Markdown 的語法。
-            - 寫 R Markdown 遇到問題，需參考 Pandoc's Markdown 的說明文件
-</div>
-
-
-<div class="hide" data-tag="整學期 Overview">
-3 blocks
-
-1. 「程式」觀點: 變數指派、函數、條件式、迴圈、資料類型、資料結構
-2. 「資料分析」觀點：
-    - 「資料」指的是結構化的資料：
-        - Excel 二維表格式的資料、R 稱為 data frame
-        - 介紹套件處理 2 維資料
-    - 資料視覺化：ggplot2
-    - 目標：
-        1. 資料清理：
-            - 取得 `.csv` 檔 > 格式不見得符合需求 > e.g. 跑統計 > 但是跑統計的函數所需的「輸入值的格式」與手上的 `.csv` 不符 > 要能使用 R 將你手上的這份 csv 整理成你想要的格式 
-        1. 探索式資料分析：
-            - 在沒有太多預設的期待之下，使用 R 語言去協助你看看手上這筆資料的大致樣貌。譬如，每個變項的分配，或是不同變項之間的散布圖。
-            - 在這過程中，你會不斷在「整理資料」和「繪圖」之間反覆進行，因為要繪製不同的圖，常常需要將資料整理成特定的樣子
-            - 要能進行探索式資料分析的前提是，要知道如何使用 R 的繪圖套件，並且能夠「快速輕鬆地將資料整理成你想要的那個樣子」
-3. 「文本分析」觀點：
-    - 詳細要做什麼，這邊要看大家那時候的情況，但基本上離不開中文文本處理的大主題
-</div>
-
-<div class="hide" data-tag="今日 Overview">
-1. 試試水溫、熟悉 R 的環境
-1. 一點點的程式概念
-1. 課程筆記
-    - 快速瀏覽：
-        - 今日課程內容都寫在裡面
-        - 程式碼
-    - 程度好的同學可能看完就想下課，甚至想直接退選
-    - 那如果最後決定留下賺學分的話，協助周遭第一次接觸程式的同學
-    - 不只幫同學，也幫自己，甚至幫助教
-</div>
-
-
-<!-- Part 1: RStudio config -->
-
-<div class="hide" data-tag="自訂樣式與編輯器設定">
-**slide**
-
-1. 最上方： Menu bar
-1. 左方 R Console: 執行指令
-1. 右上 Environment
-1. 右下 5 個標籤
-    - Files: 檔案總管，尋找資料夾和檔案
-1. 第四個區塊：編輯純文字檔案
-
-**實際操作 **
-
-1. 告訴大家如何設定這 4 個區塊的相對位置
-1. Black theme, syntax hightlight
-1. 縮排間距
-
-**3 min**
-</div>
 
 ## 自訂樣式
 
@@ -142,28 +39,7 @@ window.onload = () => {
         - `Tools` --> `Global Options...` --> (在左欄選擇) `Code` --> (在上方選擇) `Saving` --> `Default text encoding`
 
 
-
-
 ## 工作目錄 (Working Directory, a.k.a. Current Directory)
-
-<div class="hide" data-tag="">
-**slide**
-
-1. 工作目錄
-    - 電腦上的一個資料夾
-    - 每次開啟 R，R 需要選定一個資料夾當作它「工作」的地方
-    - 如此，R 才知道，譬如說，在產生新檔案的時候，它預設要將這個檔案放在哪個資料夾
-    - 或是在讀取外部檔案的時後，才知道要在哪個資料夾裡面尋找檔案
-1. Console 旁邊有個檔案路徑，工作目錄所在的位置
-
-**實際示範**
-
-1. RStudio 設置工作目錄 --> Console 上的路徑改變
-1. 提到 R Console 會出現 `setwd()`
-1. `writeLines('content', '2019-09-19-rlads.txt')`
-
-**3 min**
-</div>
 
 - 打開 RStudio 的第一步就是要設置「工作目錄」的位置。「工作目錄」是當前 R 語言「工作」的資料夾。亦即，若 R 執行時需要讀取外部檔案，或是執行後產出檔案，都會以這個資料夾為準。例如，只要將外部資料 (`foo.txt`) 放在「工作目錄」內，R 就可以直接使用這個資料的檔名當作路徑去存取這個檔案 (i.e. 可使用[相對路徑](https://zh.wikipedia.org/wiki/%E8%B7%AF%E5%BE%84_(%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6)#%E7%BB%9D%E5%AF%B9%E4%B8%8E%E7%9B%B8%E5%AF%B9%E8%B7%AF%E5%BE%84)，之後課程會詳細介紹)。
 
@@ -174,8 +50,6 @@ window.onload = () => {
     
         `Sessions` --> `Set Working Directory...`  
         
-        [執行後，提到 Console 裡會出現一串指令: `setwd()`]{.hide}
-
     - Console
         - Console 是執行 R 語言的地方，我們可以透過 R 的指令去設置「工作目錄」
 
@@ -196,47 +70,11 @@ window.onload = () => {
     writeLines('content', '2019-09-19-rlads.txt')
     ```
 
-
 [^backslash]: 「反斜線鍵」位置位於 `Enter 鍵`上方。
 [^slash]: 「斜線鍵」與「問號鍵」為同個按鍵。
 
-<!-- Part 2: Very Basic R -->
 
 ## R Console
-
-<div class="hide" data-tag="R Console 與 變數指派">
-
-**index 的功用**
-
-1. Console 輸入 `1`; 說明印出 `[1] 1`  
-2. `[1]` 是一個方便使用者閱讀結果的標記，它的目的是作為 index，用以指出其**右方的那個數字**是所有印出來的數值中的第一個  
-3. 在這裡我們輸入 `1` 只會回傳一個數值。但，之後會提到， R 是一種向量式的語言，所以 R 的指令常常會一次印出很多數值。這個時候，這個 index 就能方便使用者知道印出來的數字是第幾個  
-4. Console 輸入 `11:51`; 解釋指令 (結構、目的與功能)
-
-**- `+` and `Esc 鍵`**
-
-1. 指令未輸入完成 `11:`
-
-**一些簡單指令**
-
-1. R 有一些簡單的指令，最直覺的就是加減乘除
-    - `2 * 3 + 4`
-    - `2 * (3 + 4)`: 括號改變運算的優先順序
-    - `3 / 2`
-    - `3 ^ 2`
-
-**變數指派 (slide 開始)**
-
-1. 剛剛的指令稍蹤即逝，使用變數將這些指令執行的結果儲存起來
-1. structure: `x <- 2 * 3 + 4`
-    - `<-`: 小於、連字符號 (上排數字鍵，數字 0 的右邊)
-1. 回到 Console 執行 `x <- 2 * 3 + 4`
-1. 執行 `x`
-1. `x <- 1`: 覆寫
-
-**3 min**
-</div>
-
 
 - Console 是 RStudio 裡面用來和 R 語言溝通的界面，換言之，就是使用者輸入與執行 R 語言的地方
 
@@ -275,26 +113,10 @@ x
 
 ## R 內建函數
 
-[
-1. R 函數類比**數學函數**: 輸入值、輸出值  
-2. **Demo**  
-]{.hide data-tag="Flow: "}
-
 - R 裡面的函數就像是我們國高中數學課學到的「函數」。
     - R 的函數 (通常) 會有一個或多個「輸入值」，稱為「引數 (argument)」；並且在運算完成後，一定會丟出一個「回傳值」
 
 - `sqrt()` 是一個函數，它會將輸入值 (在圓括號內) 開根號後回傳
-
-<!--  -->
-<div class="hide" data-tag="Demo Flow">
-1. `sqrt(16)`: 括號內是「輸入值」
-    - 吃 2 個輸入值 --> Error message
-    - Error message: 要習慣去看，看不懂的話再 google
-1. (想開兩次根號) `inner <- sqrt(16); inner; sqrt(inner)`  
-1. 有時你不想儲存每個函數的結果...  
-1. `sqrt(sqrt(16))`  
-1. Explain: 由**內而外**執行
-</div>
 
 - 函數裡面可以放入另一個函數 (e.g. `sqrt(sqrt(16))`)，其運算的次序是**由內而外**，先執行最內部的函數，取得回傳值後，再將此回傳值作為外面的函數的輸入值
 
@@ -318,42 +140,7 @@ sqrt(sqrt(16))
 - 使用快捷鍵 (`Ctrl + Enter`) 或按 Script 右上角的 `Run`，以在 R Console 執行 R Script 中被反白的程式碼
 
 
-
 ## 自訂函數
-
-<div class="hide" data-tag="">
-1. 剛是使用 R 的內建函數，現在教大家怎麼定義自己的函數
-1. 結構：使用 `function()` 去定義函數，`function()` 會回傳函數的「定義」，需要將這個「定義」儲存在一個變數
-
-    ```null
-    f <- function() {
-      return(1)
-    }
-    ```
-    
-    - `f`: 回傳函數的定義  
-      `f()`: 執行函數 --> 執行 `{}` 內的程式碼
-1. 
-    ```null
-    f <- function() {
-      area <- 3.14 * 1 * 1
-      return(area)
-    }
-    ```
-1. 
-    ```null
-    f <- function(r) {
-      area <- 3.14 * r * r
-      return(area)
-    }
-    ```
-    
-    - defaul value
-1. Scope: 函數內的指令不改變函數外的變數
-1. **slide**
-
-**3 min**
-</div>
 
 ```{r}
 get_area <- function() {
@@ -392,20 +179,6 @@ area
 
 ## Function Arguments
 
-<div class='hide' data-tag=''>
-1. 解釋函數 `vol()`: 跟剛剛類似、2 個 argument
-
-    ```null
-    vol <- function(r, height) {
-        volumn <- 3.14 * r * r * height
-        return(volumn)
-    }
-    ```
-1. `vol(1, 2)`
-1. `vol(r = 1, height = 2)` --> `vol(height = 2, r = 1)`
-1. `vol(height = 2, 1)`
-1. **slide**
-</div>
 
 ```{r multiple-arguments, error=TRUE}
 vol <- function(r, height = 1) {
@@ -450,34 +223,6 @@ vol(height = 2, 1)
 
 
 ## 作業說明：R Markdown 使用
-
-<div class='hide' data-tag=''>
-**slide**
-
-1. openning: last topic; why: tool for hw; link to markdown
-1. intro: the 3 structure of R Markdown
-    - yaml: 
-        - 不屬於 R Markdown 內容的一部分
-        - 控制輸出文件的外觀
-    - Markdown
-    - R Code Chunk (可執行的程式碼區塊)
-        - 將 Rmd 輸出時： R 會先跑過這些可執行的程式碼區塊、儲存執行結果、將結果插入輸出的文件裡面
-
-**Demo**
-
-1. File > New File > R Markdown...
-    - 視窗：協助編輯 yaml header 的界面
-1. knit to HTML
-1. (wait and ask success)
-1. Explain: 輸出文件時，程式碼區塊**由上至下**執行
-    - get previous results in later code chunks
-    - insert new code chunk
-1. Interactive editing: 剛剛我們是以輸出整份 Rmd 作為介紹，但 RStudio 可以讓你直接在編輯 Rmd 檔的時候就去執行這些 Code chunk。
-
-**3 min**
-</div>
-
-
 
 - 使用前需先安裝 `rmarkdown`:
 
